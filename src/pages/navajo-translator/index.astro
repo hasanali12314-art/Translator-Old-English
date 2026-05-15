@@ -1,39 +1,55 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ToolPageLayout from '../../components/ToolPageLayout.astro';
 import TranslatorTool from '../../components/TranslatorTool.astro';
+
+const related = [
+  { href: '/rare-languages/', name: 'Rare Languages' },
+  { href: '/sinhala-translator/', name: 'Sinhala' },
+  { href: '/dialect-translator/', name: 'Dialect Converter' },
+];
+
+const examples = [
+  { inputLabel: 'English', outputLabel: 'Navajo (Diné)', input: 'Hello, my friend.', output: "Yá'át'ééh, shik'is." },
+  { inputLabel: 'English', outputLabel: 'Navajo (Diné)', input: 'The land is sacred.', output: "Nizhóní nohookáá' diyin." },
+  { inputLabel: 'English', outputLabel: 'Navajo (Diné)', input: 'Thank you.', output: "Ahéhee'." },
+];
+
+const titleHtml = 'Navajo <span class="gold-text">Converter</span>';
+
 ---
 <Layout title="Navajo Converter — English to Navajo (Diné Bizaad) Free Online" description="Translate English to Navajo (Diné Bizaad) or Navajo to English. Free AI-powered Navajo language converter, culturally respectful." canonical="/navajo-translator/">
-<section class="hero-section"><div class="container">
-  <nav class="breadcrumb" style="margin-bottom:16px"><a href="/translator-old-english/">Home</a><span>›</span><a href="/specialty-translators/">Specialty Translators</a><span>›</span><span>Navajo Converter</span></nav>
-  <a href="/specialty-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px">← Back to Specialty Translators</a>
-  <h1 id="main-heading">Navajo <span class="gold-text">Converter</span></h1>
-  <p class="hero-sub">Translate English to Navajo (Diné Bizaad) — free, culturally respectful, AI-powered translation</p>
-</div></section>
-<section class="section-sm"><div class="container"><TranslatorTool sourceLang="en" targetLang="nv" inputLabel="English" outputLabel="Navajo (Diné Bizaad)" inputPlaceholder="Type or paste your English text here..." outputPlaceholder="Diné Bizaad translation will appear here..." /></div></section>
-<section class="section-sm"><div class="container">
-  <div class="section-heading"><h2>Translation <span class="gold-text">Examples</span></h2></div>
-  <div class="grid-3">
-    {[{e:'Hello, my friend.',n:'Yá\'át\'ééh, shik\'is.'},{e:'The land is sacred.',n:'Nizhóní nohookáá\' diyin.'},{e:'Thank you.',n:'Ahéhee\'.'}].map(ex=>(
-      <div class="example-card"><div class="example-card-section"><div class="example-label">English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Navajo (Diné)</div><div class="example-text" style="color:var(--gold-light)">{ex.n}</div></div></div>
-    ))}
-  </div>
-</div></section>
-<section class="section"><div class="container" style="max-width:800px">
-  <h2 style="margin-bottom:16px">About <span class="gold-text">Navajo (Diné Bizaad)</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8">Navajo (Diné Bizaad) is the most widely spoken Native American language in the United States, with approximately 170,000 speakers primarily in the Navajo Nation spanning Arizona, New Mexico, and Utah. It is a Na-Dené language known for its complex verb morphology and tonal qualities. The Navajo Code Talkers of World War II used the language's complexity as an unbreakable military code. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
-</div></section>
-<section class="section-sm"><div class="container">
-  <div class="section-heading"><h2>Related <span class="gold-text">Tools</span></h2></div>
-  <div class="grid-3">{[{href:'/rare-languages/',n:'Rare Languages'},{href:'/sinhala-translator/',n:'Sinhala'},{href:'/dialect-translator/',n:'Dialect Converter'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600">{r.n}</a>))}</div>
-  <div style="text-align:center;margin-top:24px"><a href="/specialty-translators/" class="btn btn-outline">Back to Specialty Translators</a></div>
-</div></section>
-<section class="section"><div class="container" style="max-width:800px">
-  <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
-  {[{q:'What is the Navajo language?',a:'Navajo (Diné Bizaad) is a Na-Dené language spoken by the Diné people of the American Southwest. It is the most widely spoken Native American language in the US.'},{q:'Can I convert Navajo back to English?',a:'Yes. Use the flip button to translate Navajo text back into English.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per translation.'},{q:'How accurate is the Navajo output?',a:'Navajo is a complex, tonal language. The tool provides reasonable translations for common expressions, with accuracy improving for frequently used phrases.'},{q:'Are the outputs culturally respectful?',a:'Yes. The tool is designed to approach the Navajo language with respect for its cultural significance and the Diné people.'},{q:'Does it work on mobile?',a:'Yes, fully responsive on all devices.'},{q:'Can I use output commercially?',a:'Yes, though commercial use involving Navajo cultural content should be approached with cultural sensitivity.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
-</div></section>
-<section class="section-sm"><div class="container"><div class="cta-banner">
-  <h2 style="margin-bottom:16px">Translate to <span class="gold-text">Navajo</span> Now</h2>
-  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Start Translating</a>
-  <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
-</div></div></section>
+  <ToolPageLayout
+    breadcrumb={[
+      { href: '/translator-old-english/', label: 'Home' },
+      { href: '/specialty-translators/', label: 'Specialty Translators' },
+      { label: 'Navajo Converter' },
+    ]}
+    backLink={{ href: '/specialty-translators/', label: '← Back to Specialty Translators' }}
+    titleHtml={titleHtml}
+    heroSub="Translate English to Navajo (Diné Bizaad) — free, culturally respectful, AI-powered translation"
+    examplesTitle="Translation Examples"
+    examplesSub="Click any card to load it into the translator"
+    examples={examples}
+    related={related}
+    relatedTitle="Related Tools"
+    relatedBack={{ href: '/specialty-translators/', label: 'Back to Specialty Translators' }}
+    ctaTitle='Translate to <span class="gold-text">Navajo</span> Now'
+    ctaSub="Free, instant, culturally respectful Navajo translation"
+    ctaBtn="✦ Start Translating"
+  >
+    <TranslatorTool
+      slot="tool"
+      sourceLang="en"
+      targetLang="nv"
+      inputLabel="English"
+      outputLabel="Navajo (Diné Bizaad)"
+      inputPlaceholder="Type or paste your English text here..."
+      outputPlaceholder="Diné Bizaad translation will appear here..."
+    />
+    <div class="info-block">
+      <h2>About <span class="gold-text">Navajo (Diné Bizaad)</span></h2>
+      <p>Navajo (Diné Bizaad) is the most widely spoken Native American language in the United States, with approximately 170,000 speakers primarily in the Navajo Nation spanning Arizona, New Mexico, and Utah. It is a Na-Dené language known for its complex verb morphology and tonal qualities. The Navajo Code Talkers of World War II used the language's complexity as an unbreakable military code. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
+    </div>
+  </ToolPageLayout>
 </Layout>

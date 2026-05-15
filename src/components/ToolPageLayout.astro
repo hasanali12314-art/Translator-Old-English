@@ -1,0 +1,144 @@
+---
+export interface Example {
+  inputLabel: string;
+  outputLabel: string;
+  input: string;
+  output: string;
+}
+
+export interface RelatedLink {
+  href: string;
+  name: string;
+}
+
+export interface BreadcrumbItem {
+  href?: string;
+  label: string;
+}
+
+export interface Props {
+  heroTag?: string;
+  breadcrumb?: BreadcrumbItem[];
+  backLink?: { href: string; label: string };
+  titleHtml: string;
+  heroSub: string;
+  examplesTitle?: string;
+  examplesSub?: string;
+  examples?: Example[];
+  relatedTitle?: string;
+  related?: RelatedLink[];
+  relatedBack?: { href: string; label: string };
+  ctaTitle?: string;
+  ctaSub?: string;
+  ctaBtn?: string;
+}
+
+const {
+  heroTag = 'Free · AI-Powered · Instant · No Signup',
+  breadcrumb,
+  backLink,
+  titleHtml,
+  heroSub,
+  examplesTitle = 'Quick Examples',
+  examplesSub,
+  examples = [],
+  relatedTitle = 'Related Translators',
+  related = [],
+  relatedBack,
+  ctaTitle = 'Begin Thy Translation',
+  ctaSub = 'Free, instant, AI-powered — no signup required',
+  ctaBtn = '✦ Start Translating',
+} = Astro.props;
+
+const hasExamples = examples.length > 0;
+const hasRelated = related.length > 0;
+---
+
+<div class="container container--page tool-page">
+  <div class="hero hero-section">
+    {breadcrumb && breadcrumb.length > 0 && (
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        {breadcrumb.map((item, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true">›</span>}
+            {item.href ? (
+              <a href={item.href}>{item.label}</a>
+            ) : (
+              <span>{item.label}</span>
+            )}
+          </>
+        ))}
+      </nav>
+    )}
+    {backLink && (
+      <a href={backLink.href} class="tool-page-back btn btn-ghost btn-sm">{backLink.label}</a>
+    )}
+    {heroTag && <div class="hero-tag">{heroTag}</div>}
+    <h1 id="main-heading" set:html={titleHtml} />
+    <p class="hero-sub">{heroSub}</p>
+    <div class="hero-line"></div>
+  </div>
+
+  <slot name="tool" />
+
+  {hasExamples && (
+    <section class="page-section page-section--examples">
+      <div class="sec-head">
+        <h2 class="sec-title">{examplesTitle}</h2>
+        <div class="sec-line"></div>
+      </div>
+      {examplesSub && <p class="sec-sub">{examplesSub}</p>}
+      <div class="ex-grid grid-3">
+        {examples.map((ex) => (
+          <div
+            class="ex-card example-card"
+            role="button"
+            tabindex="0"
+            data-input={ex.input}
+            data-output={ex.output}
+          >
+            <div class="ex-tag example-label">{ex.inputLabel}</div>
+            <div class="ex-modern example-text">{ex.input}</div>
+            <div class="ex-hr"></div>
+            <div class="ex-tag example-label">{ex.outputLabel}</div>
+            <div class="ex-old example-text">{ex.output}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="page-section page-section--guide">
+    <slot />
+
+    {hasRelated && (
+      <div class="info-block">
+        <h3>{relatedTitle}</h3>
+        <div class={`grid-3 related-grid${related.length <= 2 ? ' related-grid--few' : ''}`}>
+          {related.map((r) => (
+            <a href={r.href} class="card related-card">{r.name}</a>
+          ))}
+        </div>
+        {relatedBack && (
+          <p class="tool-page-related-back">
+            <a href={relatedBack.href} class="btn btn-outline">{relatedBack.label}</a>
+          </p>
+        )}
+      </div>
+    )}
+
+    <div class="cta cta-banner">
+      <div class="cta-top"></div>
+      <h2 set:html={ctaTitle} />
+      {ctaSub && <p>{ctaSub}</p>}
+      <a href="#tool-area" class="cta-btn btn btn-primary btn-lg">{ctaBtn}</a>
+      <div class="trust-badges">
+        <div class="badge"><span>♾️</span> Free forever</div>
+        <div class="badge"><span>⚡</span> Instant results</div>
+        <div class="badge"><span>🎯</span> AI-powered accuracy</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src={`${import.meta.env.BASE_URL}tool-page.js`} defer></script>

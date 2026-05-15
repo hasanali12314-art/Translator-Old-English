@@ -1,39 +1,57 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ToolPageLayout from '../../components/ToolPageLayout.astro';
 import TranslatorTool from '../../components/TranslatorTool.astro';
+
+const related = [
+  { href: '/speak-translate/', name: 'Speak Translator' },
+  { href: '/fancy-translator/', name: 'Fancy Text' },
+  { href: '/rare-languages/', name: 'Rare Languages' },
+];
+
+const examples = [
+  { inputLabel: 'Standard Text', outputLabel: 'Dialect Output', input: 'How are you doing today?', output: "Ow's tha doin' today, then?" },
+  { inputLabel: 'Standard Text', outputLabel: 'Dialect Output', input: 'I am going to the shop.', output: "Ah'm ganin' doon tae the shoap." },
+  { inputLabel: 'Standard Text', outputLabel: 'Dialect Output', input: 'That is very good, thank you.', output: "Tha's right champion, ta very much." },
+];
+
+const titleHtml = 'Dialect <span class="gold-text">Converter</span>';
+
 ---
 <Layout title="Dialect Converter — Convert Text to Regional Dialects Free" description="Convert standard English text to regional dialects. Free AI-powered dialect converter tool online." canonical="/dialect-translator/">
-<section class="hero-section"><div class="container">
-  <nav class="breadcrumb" style="margin-bottom:16px"><a href="/translator-old-english/">Home</a><span>›</span><a href="/specialty-translators/">Specialty Translators</a><span>›</span><span>Dialect Converter</span></nav>
-  <a href="/specialty-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px">← Back to Specialty Translators</a>
-  <h1 id="main-heading">Dialect <span class="gold-text">Converter</span></h1>
-  <p class="hero-sub">Convert standard English text into authentic regional dialects — free, instant, AI-powered</p>
-</div></section>
-<section class="section-sm"><div class="container"><TranslatorTool mode="dialect" showDialectDropdown={true} sourceLang="en" targetLang="en" inputLabel="Standard Text" outputLabel="Dialect Output" inputPlaceholder="Type or paste standard English text here..." outputPlaceholder="Your dialect conversion will appear here..." /></div></section>
-<section class="section-sm"><div class="container">
-  <div class="section-heading"><h2>Conversion <span class="gold-text">Examples</span></h2></div>
-  <div class="grid-3">
-    {[{orig:'How are you doing today?',dial:'Ow\'s tha doin\' today, then?'},{orig:'I am going to the shop.',dial:'Ah\'m ganin\' doon tae the shoap.'},{orig:'That is very good, thank you.',dial:'Tha\'s right champion, ta very much.'}].map(ex=>(
-      <div class="example-card"><div class="example-card-section"><div class="example-label">Standard Text</div><div class="example-text">{ex.orig}</div></div><div class="example-card-section"><div class="example-label">Dialect Output</div><div class="example-text" style="color:var(--gold-light)">{ex.dial}</div></div></div>
-    ))}
-  </div>
-</div></section>
-<section class="section"><div class="container" style="max-width:800px">
-  <h2 style="margin-bottom:16px">About <span class="gold-text">Dialect Conversion</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8">The Dialect Converter transforms standard English into regional dialect styles including Northern English, Scottish, Cockney, and others. It is ideal for writers creating authentic dialogue, linguists studying dialect patterns, and creatives adding regional flavour to their content. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
-</div></section>
-<section class="section-sm"><div class="container">
-  <div class="section-heading"><h2>Related <span class="gold-text">Tools</span></h2></div>
-  <div class="grid-3">{[{href:'/speak-translate/',n:'Speak Translator'},{href:'/fancy-translator/',n:'Fancy Text'},{href:'/rare-languages/',n:'Rare Languages'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600">{r.n}</a>))}</div>
-  <div style="text-align:center;margin-top:24px"><a href="/specialty-translators/" class="btn btn-outline">Back to Specialty Translators</a></div>
-</div></section>
-<section class="section"><div class="container" style="max-width:800px">
-  <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
-  {[{q:'Which dialects are supported?',a:'The tool supports a range of English dialects including Northern English, Scottish, Cockney, Yorkshire, Geordie, and others.'},{q:'Can I convert dialect back to standard text?',a:'Yes. Use the flip button to reverse the direction.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per conversion.'},{q:'How accurate is the dialect output?',a:'Good for common dialect features. Regional dialects are complex so some nuances may not be captured perfectly.'},{q:'Can I use it for creative writing?',a:'Yes. This tool is popular for writing authentic dialogue in fiction, scripts, and screenplays.'},{q:'Does it work on mobile?',a:'Yes, fully responsive on all devices.'},{q:'Can I use output commercially?',a:'Yes. All output is free for personal and commercial use.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
-</div></section>
-<section class="section-sm"><div class="container"><div class="cta-banner">
-  <h2 style="margin-bottom:16px">Start <span class="gold-text">Converting Dialects</span></h2>
-  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Convert Now</a>
-  <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
-</div></div></section>
+  <ToolPageLayout
+    breadcrumb={[
+      { href: '/translator-old-english/', label: 'Home' },
+      { href: '/specialty-translators/', label: 'Specialty Translators' },
+      { label: 'Dialect Converter' },
+    ]}
+    backLink={{ href: '/specialty-translators/', label: '← Back to Specialty Translators' }}
+    titleHtml={titleHtml}
+    heroSub="Convert standard English text into authentic regional dialects — free, instant, AI-powered"
+    examplesTitle="Conversion Examples"
+    examplesSub="Click any card to load it into the translator"
+    examples={examples}
+    related={related}
+    relatedTitle="Related Tools"
+    relatedBack={{ href: '/specialty-translators/', label: 'Back to Specialty Translators' }}
+    ctaTitle='Start <span class="gold-text">Converting Dialects</span>'
+    ctaSub="Free, instant, AI-powered dialect conversion"
+    ctaBtn="✦ Convert Now"
+  >
+    <TranslatorTool
+      slot="tool"
+      mode="dialect"
+      showDialectDropdown={true}
+      sourceLang="en"
+      targetLang="en"
+      inputLabel="Standard Text"
+      outputLabel="Dialect Output"
+      inputPlaceholder="Type or paste standard English text here..."
+      outputPlaceholder="Your dialect conversion will appear here..."
+    />
+    <div class="info-block">
+      <h2>About <span class="gold-text">Dialect Conversion</span></h2>
+      <p>The Dialect Converter transforms standard English into regional dialect styles including Northern English, Scottish, Cockney, and others. It is ideal for writers creating authentic dialogue, linguists studying dialect patterns, and creatives adding regional flavour to their content. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
+    </div>
+  </ToolPageLayout>
 </Layout>

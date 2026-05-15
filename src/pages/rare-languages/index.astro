@@ -1,39 +1,56 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ToolPageLayout from '../../components/ToolPageLayout.astro';
 import TranslatorTool from '../../components/TranslatorTool.astro';
+
+const related = [
+  { href: '/sinhala-translator/', name: 'Sinhala' },
+  { href: '/navajo-translator/', name: 'Navajo' },
+  { href: '/dialect-translator/', name: 'Dialect' },
+  { href: '/aramaic-translator/', name: 'Aramaic' },
+];
+
+const examples = [
+  { inputLabel: 'English', outputLabel: 'Rare Language Output', input: 'Hello, how are you?', output: "Kwe kwe, ta'n tel-ula'luktinen? (Mi'kmaq)" },
+  { inputLabel: 'English', outputLabel: 'Rare Language Output', input: 'The sun rises in the east.', output: 'Taiyo wa higashi kara noboru. (Ryukyuan)' },
+  { inputLabel: 'English', outputLabel: 'Rare Language Output', input: 'Thank you for your help.', output: 'Faleminderit për ndihmën tënde. (Aromanian)' },
+];
+
+const titleHtml = 'Rare Language <span class="gold-text">Converter</span>';
+
 ---
 <Layout title="Rare Language Converter — Minority & Endangered Language Translator Free" description="Translate to and from rare, minority, and endangered languages. Free AI-powered rare language converter online." canonical="/rare-languages/">
-<section class="hero-section"><div class="container">
-  <nav class="breadcrumb" style="margin-bottom:16px"><a href="/translator-old-english/">Home</a><span>›</span><a href="/specialty-translators/">Specialty Translators</a><span>›</span><span>Rare Language Converter</span></nav>
-  <a href="/specialty-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px">← Back to Specialty Translators</a>
-  <h1 id="main-heading">Rare Language <span class="gold-text">Converter</span></h1>
-  <p class="hero-sub">Translate to minority, endangered, and rare languages — free, AI-powered, preserving linguistic diversity</p>
-</div></section>
-<section class="section-sm"><div class="container"><TranslatorTool sourceLang="en" targetLang="sw" inputLabel="English" outputLabel="Rare / Minority Language" inputPlaceholder="Type or paste your English text here..." outputPlaceholder="Your rare language translation will appear here..." /></div></section>
-<section class="section-sm"><div class="container">
-  <div class="section-heading"><h2>Conversion <span class="gold-text">Examples</span></h2></div>
-  <div class="grid-3">
-    {[{e:'Hello, how are you?',r:'Kwe kwe, ta\'n tel-ula\'luktinen? (Mi\'kmaq)'},{e:'The sun rises in the east.',r:'Taiyo wa higashi kara noboru. (Ryukyuan)'},{e:'Thank you for your help.',r:'Faleminderit për ndihmën tënde. (Aromanian)'}].map(ex=>(
-      <div class="example-card"><div class="example-card-section"><div class="example-label">English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Rare Language Output</div><div class="example-text" style="color:var(--gold-light)">{ex.r}</div></div></div>
-    ))}
-  </div>
-</div></section>
-<section class="section"><div class="container" style="max-width:800px">
-  <h2 style="margin-bottom:16px">About <span class="gold-text">Rare Languages</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8">The Rare Language Converter provides access to minority, endangered, and lesser-known languages that are underrepresented in standard translation tools. These include indigenous languages, regional languages, and languages with fewer than a million speakers. Preserving access to these languages helps maintain cultural heritage and linguistic diversity. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
-</div></section>
-<section class="section-sm"><div class="container">
-  <div class="section-heading"><h2>Related <span class="gold-text">Tools</span></h2></div>
-  <div class="grid-4">{[{href:'/sinhala-translator/',n:'Sinhala'},{href:'/navajo-translator/',n:'Navajo'},{href:'/dialect-translator/',n:'Dialect'},{href:'/aramaic-translator/',n:'Aramaic'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600">{r.n}</a>))}</div>
-  <div style="text-align:center;margin-top:24px"><a href="/specialty-translators/" class="btn btn-outline">Back to Specialty Translators</a></div>
-</div></section>
-<section class="section"><div class="container" style="max-width:800px">
-  <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
-  {[{q:'Which rare languages are supported?',a:'The tool supports a wide range of minority and endangered languages including Mi\'kmaq, Aromanian, Ryukyuan, Cornish, Manx, Occitan, and others.'},{q:'How accurate are rare language outputs?',a:'Accuracy varies by language. Well-documented minority languages achieve good results; highly endangered languages with limited training data may have more variation.'},{q:'Can I convert both ways?',a:'Yes. Use the flip button to translate rare language text back to English.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per translation.'},{q:'How is this different from the standard language pages?',a:'Standard language pages focus on widely-spoken languages. This page specialises in minority and endangered languages not covered elsewhere.'},{q:'Does it work on mobile?',a:'Yes, fully responsive on all devices.'},{q:'Can I use output commercially?',a:'Yes. All output is free for personal and commercial use.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
-</div></section>
-<section class="section-sm"><div class="container"><div class="cta-banner">
-  <h2 style="margin-bottom:16px">Explore <span class="gold-text">Rare Languages</span></h2>
-  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Start Converting</a>
-  <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
-</div></div></section>
+  <ToolPageLayout
+    breadcrumb={[
+      { href: '/translator-old-english/', label: 'Home' },
+      { href: '/specialty-translators/', label: 'Specialty Translators' },
+      { label: 'Rare Language Converter' },
+    ]}
+    backLink={{ href: '/specialty-translators/', label: '← Back to Specialty Translators' }}
+    titleHtml={titleHtml}
+    heroSub="Translate to minority, endangered, and rare languages — free, AI-powered, preserving linguistic diversity"
+    examplesTitle="Conversion Examples"
+    examplesSub="Click any card to load it into the translator"
+    examples={examples}
+    related={related}
+    relatedTitle="Related Tools"
+    relatedBack={{ href: '/specialty-translators/', label: 'Back to Specialty Translators' }}
+    ctaTitle='Explore <span class="gold-text">Rare Languages</span>'
+    ctaSub="Free, instant minority language translation"
+    ctaBtn="✦ Start Converting"
+  >
+    <TranslatorTool
+      slot="tool"
+      sourceLang="en"
+      targetLang="sw"
+      inputLabel="English"
+      outputLabel="Rare / Minority Language"
+      inputPlaceholder="Type or paste your English text here..."
+      outputPlaceholder="Your rare language translation will appear here..."
+    />
+    <div class="info-block">
+      <h2>About <span class="gold-text">Rare Languages</span></h2>
+      <p>The Rare Language Converter provides access to minority, endangered, and lesser-known languages that are underrepresented in standard translation tools. These include indigenous languages, regional languages, and languages with fewer than a million speakers. Preserving access to these languages helps maintain cultural heritage and linguistic diversity. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
+    </div>
+  </ToolPageLayout>
 </Layout>

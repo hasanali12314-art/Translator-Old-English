@@ -1,40 +1,55 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ToolPageLayout from '../../components/ToolPageLayout.astro';
 import TranslatorTool from '../../components/TranslatorTool.astro';
+
+const related = [
+  { href: '/french-translator/', name: 'French Translator' },
+  { href: '/spanish-translator/', name: 'Spanish Translator' },
+  { href: '/creole-translator/', name: 'Creole Translator' },
+];
+
+const examples = [
+  { inputLabel: 'English', outputLabel: 'German', input: 'Good morning, how can I help you?', output: 'Guten Morgen, wie kann ich Ihnen helfen?' },
+  { inputLabel: 'English', outputLabel: 'German', input: "The train departs at nine o'clock.", output: 'Der Zug fährt um neun Uhr ab.' },
+  { inputLabel: 'English', outputLabel: 'German', input: 'I love hiking in the mountains.', output: 'Ich liebe es, in den Bergen zu wandern.' },
+];
+
+const titleHtml = 'German <span class="gold-text">Translator</span>';
+
 ---
 <Layout title="German Translator — English to German Free Online" description="Translate English to German or German to English instantly. Free AI-powered German translation with compound word support." canonical="/german-translator/">
-<section class="hero-section"><div class="container">
-  <nav class="breadcrumb" style="margin-bottom:16px"><a href="/translator-old-english/">Home</a><span>›</span><a href="/language-translators/">Language Translators</a><span>›</span><span>German Translator</span></nav>
-  <a href="/language-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px">← Back to Language Translators</a>
-  <h1 id="main-heading">German <span class="gold-text">Translator</span></h1>
-  <p class="hero-sub">Translate English to German or German to English — standard Hochdeutsch, free and instant</p>
-</div></section>
-<section class="section-sm"><div class="container"><TranslatorTool sourceLang="en" targetLang="de" inputLabel="English" outputLabel="German" inputPlaceholder="Type or paste your English text here..." outputPlaceholder="Ihre deutsche Übersetzung erscheint hier..." /></div></section>
-<section class="section-sm"><div class="container">
-  <div class="section-heading"><h2>Translation <span class="gold-text">Examples</span></h2></div>
-  <div class="grid-3">
-    {[{e:'Good morning, how can I help you?',g:'Guten Morgen, wie kann ich Ihnen helfen?'},{e:'The train departs at nine o\'clock.',g:'Der Zug fährt um neun Uhr ab.'},{e:'I love hiking in the mountains.',g:'Ich liebe es, in den Bergen zu wandern.'}].map(ex=>(
-      <div class="example-card"><div class="example-card-section"><div class="example-label">English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">German</div><div class="example-text" style="color:var(--gold-light)">{ex.g}</div></div></div>
-    ))}
-  </div>
-</div></section>
-<section class="section"><div class="container" style="max-width:800px">
-  <h2 style="margin-bottom:16px">About <span class="gold-text">German</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:20px">German is spoken by approximately 100 million native speakers and is the most widely spoken language in the European Union. It is the official language of Germany, Austria, Switzerland, Liechtenstein, Luxembourg, and Belgium. German is renowned for its compound words, precise grammar, and contribution to philosophy, science, and literature.</p>
-  <p style="color:var(--text-secondary);line-height:1.8">This translator outputs standard Hochdeutsch and handles German compound words, noun capitalisation, and grammatical cases. Return to <a href="/language-translators/">Language Translators</a>.</p>
-</div></section>
-<section class="section-sm"><div class="container">
-  <div class="section-heading"><h2>Related <span class="gold-text">Translators</span></h2></div>
-  <div class="grid-3">{[{href:'/french-translator/',n:'French'},{href:'/spanish-translator/',n:'Spanish'},{href:'/creole-translator/',n:'Creole'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600">{r.n}</a>))}</div>
-  <div style="text-align:center;margin-top:24px"><a href="/language-translators/" class="btn btn-outline">Browse all Language Translators</a></div>
-</div></section>
-<section class="section"><div class="container" style="max-width:800px">
-  <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
-  {[{q:'Is it standard German (Hochdeutsch)?',a:'Yes. The translator outputs Standard German (Hochdeutsch), the formal written standard used across all German-speaking countries.'},{q:'Can I translate German back to English?',a:'Yes. Use the flip button to reverse the direction.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per translation.'},{q:'Does it work on mobile?',a:'Yes, fully responsive.'},{q:'Can I use translations commercially?',a:'Yes, free for commercial use.'},{q:'How accurate is the German translation?',a:'Very accurate. The AI handles German grammar including noun gender, case endings, and verb conjugations.'},{q:'Does it handle compound German words?',a:'Yes. The AI understands compound nouns like "Donaudampfschifffahrtsgesellschaft" and translates them contextually.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
-</div></section>
-<section class="section-sm"><div class="container"><div class="cta-banner">
-  <h2 style="margin-bottom:16px">Translate to <span class="gold-text">German</span> Now</h2>
-  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Start Translating</a>
-  <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
-</div></div></section>
+  <ToolPageLayout
+    breadcrumb={[
+      { href: '/translator-old-english/', label: 'Home' },
+      { href: '/language-translators/', label: 'Language Translators' },
+      { label: 'German Translator' },
+    ]}
+    backLink={{ href: '/language-translators/', label: '← Back to Language Translators' }}
+    titleHtml={titleHtml}
+    heroSub="Translate English to German or German to English — standard Hochdeutsch, free and instant"
+    examplesTitle="Translation Examples"
+    examplesSub="Click any card to load it into the translator"
+    examples={examples}
+    related={related}
+    relatedBack={{ href: '/language-translators/', label: 'Browse all Language Translators' }}
+    ctaTitle='Translate to <span class="gold-text">German</span> Now'
+    ctaSub="Free, instant, AI-powered German translation"
+    ctaBtn="✦ Start Translating"
+  >
+    <TranslatorTool
+      slot="tool"
+      sourceLang="en"
+      targetLang="de"
+      inputLabel="English"
+      outputLabel="German"
+      inputPlaceholder="Type or paste your English text here..."
+      outputPlaceholder="Ihre deutsche Übersetzung erscheint hier..."
+    />
+    <div class="info-block">
+      <h2>About <span class="gold-text">German</span></h2>
+      <p>German is spoken by approximately 100 million native speakers and is the most widely spoken language in the European Union. It is the official language of Germany, Austria, Switzerland, Liechtenstein, Luxembourg, and Belgium. German is renowned for its compound words, precise grammar, and contribution to philosophy, science, and literature.</p>
+      <p>This translator outputs standard Hochdeutsch and handles German compound words, noun capitalisation, and grammatical cases. Return to <a href="/language-translators/">Language Translators</a>.</p>
+    </div>
+  </ToolPageLayout>
 </Layout>
