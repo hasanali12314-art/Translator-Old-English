@@ -1,5 +1,6 @@
 ---
 import type { TranslateMode } from '../lib/translate';
+import { resolveLangCode } from '../lib/languages';
 
 export interface Props {
   inputLabel?: string;
@@ -69,14 +70,14 @@ const hasLangSelect = sourceLanguages.length > 0 || targetLanguages.length > 0;
       <div>
         <label class="control-label" for="source-lang" style="display:block;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">From</label>
         <select class="select" id="source-lang">
-          {sourceLanguages.map(l => <option value={l.toLowerCase()}>{l}</option>)}
+          {sourceLanguages.map(l => <option value={resolveLangCode(l)} data-label={l}>{l}</option>)}
         </select>
       </div>
       <div style="padding-bottom:4px;"></div>
       <div>
         <label class="control-label" for="target-lang" style="display:block;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">To</label>
         <select class="select" id="target-lang">
-          {targetLanguages.map(l => <option value={l.toLowerCase()}>{l}</option>)}
+          {targetLanguages.map(l => <option value={resolveLangCode(l)} data-label={l}>{l}</option>)}
         </select>
       </div>
     </div>

@@ -11,7 +11,71 @@
 
   function langCode(label) {
     const k = String(label || '').trim().toLowerCase();
-    return LANG[k] || k.split(/[\s(/]/)[0] || 'en';
+    if (LANG[k]) return LANG[k];
+    const partial = Object.keys(LANG).find(function (key) {
+      return key.indexOf(k) === 0 || k.indexOf(key) === 0;
+    });
+    return partial ? LANG[partial] : 'en';
+  }
+
+  /** Guess source language from script when Auto-detect is selected */
+  function detectLang(text) {
+    if (/[\u4e00-\u9fff]/.test(text)) return 'zh-CN';
+    if (/[\u3040-\u30ff]/.test(text)) return 'ja';
+    if (/[\uac00-\ud7af]/.test(text)) return 'ko';
+    if (/[\u0600-\u06ff]/.test(text)) return 'ar';
+    if (/[\u0400-\u04ff]/.test(text)) return 'ru';
+    if (/[\u0900-\u097f]/.test(text)) return 'hi';
+    if (/[\u0e00-\u0e7f]/.test(text)) return 'th';
+    if (/[\u0370-\u03ff]/.test(text)) return 'el';
+    if (/[\u0590-\u05ff]/.test(text)) return 'he';
+    if (/[\u0980-\u09ff]/.test(text)) return 'bn';
+    if (/[\u0b80-\u0bff]/.test(text)) return 'ta';
+    if (/[\u0d80-\u0dff]/.test(text)) return 'si';
+    return 'en';
+  }
+
+  function selectByName(select, name) {
+    if (!select || !name) return null;
+    const want = String(name).trim().toLowerCase();
+    for (let i = 0; i < select.options.length; i++) {
+      const opt = select.options[i];
+      const label = (opt.getAttribute('data-label') || opt.textContent || '').trim().toLowerCase();
+      if (label === want) {
+        select.selectedIndex = i;
+        return opt.value;
+      }
+    }
+    return langCode(name);
+  }
+
+  function applyUrlParams() {
+    const params = new URLSearchParams(window.location.search);
+    const toName = params.get('to');
+    const fromName = params.get('from');
+    if (!toName && !fromName) return;
+
+    document.querySelectorAll('.tool-area').forEach(function (area) {
+      const srcSel = area.querySelector('#source-lang');
+      const tgtSel = area.querySelector('#target-lang');
+      if (!srcSel || !tgtSel) return;
+
+      if (toName) {
+        selectByName(tgtSel, toName);
+        selectByName(srcSel, 'English');
+        area.dataset.sourceLang = 'en';
+        area.dataset.targetLang = tgtSel.value;
+      }
+      if (fromName) {
+        selectByName(srcSel, fromName);
+        selectByName(tgtSel, 'English');
+        area.dataset.sourceLang = srcSel.value;
+        area.dataset.targetLang = 'en';
+      }
+    });
+
+    const tool = document.getElementById('tool-area');
+    if (tool) setTimeout(function () { tool.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
   }
 
   function splitChunks(text) {
@@ -227,13 +291,9 @@
 
       const srcSel = area.querySelector('#source-lang');
       const tgtSel = area.querySelector('#target-lang');
-      if (srcSel && srcSel.value) {
-        source = langCode(srcSel.options[srcSel.selectedIndex].text);
-      }
-      if (tgtSel && tgtSel.value) {
-        target = langCode(tgtSel.options[tgtSel.selectedIndex].text);
-      }
-      if (source === 'auto') source = 'en';
+      if (srcSel && srcSel.value) source = srcSel.value;
+      if (tgtSel && tgtSel.value) target = tgtSel.value;
+      if (source === 'auto') source = detectLang(text);
 
       const styleSel = area.querySelector('#style-select-c');
       const dialectSel = area.querySelector('#dialect-select-c');
@@ -340,6 +400,7 @@
   }
 
   function init() {
+    applyUrlParams();
     document.querySelectorAll('.tool-area').forEach(bindTool);
     bindHomepageTool();
   }

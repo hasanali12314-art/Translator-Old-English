@@ -118,5 +118,9 @@ export const LANGUAGE_CODES: Record<string, string> = {
 
 export function resolveLangCode(name: string): string {
   const key = name.trim().toLowerCase();
-  return LANGUAGE_CODES[key] ?? key.split(/[\s(]/)[0] ?? 'en';
+  if (LANGUAGE_CODES[key]) return LANGUAGE_CODES[key];
+  const partial = Object.keys(LANGUAGE_CODES).find(
+    (k) => k.startsWith(key) || key.startsWith(k.split(' ')[0]),
+  );
+  return partial ? LANGUAGE_CODES[partial] : 'en';
 }
