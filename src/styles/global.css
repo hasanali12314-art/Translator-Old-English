@@ -275,9 +275,8 @@ main { max-width: 920px; margin: 0 auto; }
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  flex-shrink: 1;
+  flex-shrink: 0;
   min-width: 0;
-  max-width: min(280px, 28vw);
 }
 .logo-img {
   width: 36px;
@@ -293,21 +292,50 @@ main { max-width: 920px; margin: 0 auto; }
 .logo-icon { display: none; }
 .logo-text, .logo-main {
   font-family: var(--font-display);
-  font-size: var(--fs-logo-mobile);
   font-weight: 600;
   font-style: normal;
   color: var(--ink);
   letter-spacing: 0.03em;
-  line-height: 1.15;
+  line-height: 1.1;
+  overflow: visible;
+  text-overflow: unset;
+}
+.logo-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  font-size: 14px;
+}
+.logo-line1 {
+  display: block;
+  color: var(--ink);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+.logo-line2 {
+  display: block;
+  white-space: nowrap;
+}
+.logo-line2 em {
+  font-family: var(--font-display);
+  color: var(--gold-lt);
+  font-style: normal;
+  font-weight: 600;
 }
 @media (min-width: 768px) {
-  .logo-text, .logo-main { font-size: var(--fs-logo-desktop); }
+  .logo-main { font-size: var(--fs-logo-mobile); }
 }
-@media (min-width: 1200px) {
-  .site-logo { max-width: 320px; }
+@media (min-width: 1025px) {
+  .logo-main {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.35em;
+    font-size: var(--fs-logo-desktop);
+  }
+  .logo-line1,
+  .logo-line2 {
+    display: inline;
+  }
 }
 .logo-text .logo-dot, .logo-main em {
   font-family: var(--font-display);
@@ -1330,15 +1358,14 @@ main { max-width: 920px; margin: 0 auto; }
     gap: 8px;
   }
   .site-logo {
-    flex: 1;
+    flex: 1 1 auto;
     min-width: 0;
-    overflow: hidden;
+    max-width: calc(100% - 132px);
+    overflow: visible;
   }
   .logo-main {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+    overflow: visible;
+    text-overflow: unset;
   }
   .header-actions {
     gap: 6px;
