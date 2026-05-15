@@ -1,13 +1,14 @@
 /* Translator Old English — medieval manuscript theme */
+/* Single-word family name — minifiers drop quotes and break "IM Fell English" */
 @font-face {
-  font-family: 'IM Fell English';
+  font-family: IMFellEnglish;
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src: url('/fonts/im-fell-english-regular.ttf') format('truetype');
 }
 @font-face {
-  font-family: 'IM Fell English';
+  font-family: IMFellEnglish;
   font-style: italic;
   font-weight: 400;
   font-display: swap;
@@ -33,7 +34,7 @@
   --muted-lt: #5A5245;
   --shadow: rgba(0,0,0,0.5);
   --shadow-gold: rgba(201,168,76,0.2);
-  --font-display: 'IM Fell English', Georgia, 'Times New Roman', serif;
+  --font-display: IMFellEnglish, Georgia, 'Times New Roman', serif;
   --font-body: var(--font-display);
   /* legacy aliases */
   --gold-light: var(--gold-lt);
@@ -209,8 +210,9 @@ main { max-width: 920px; margin: 0 auto; }
   font-family: var(--font-display);
   font-size: clamp(19px, 2.6vw, 24px);
   font-weight: 400;
-  color: var(--gold);
-  letter-spacing: 0.04em;
+  font-style: italic;
+  color: var(--gold-lt);
+  letter-spacing: 0.05em;
   line-height: 1.15;
 }
 .logo-text .logo-dot, .logo-main em { color: var(--gold-lt); font-style: italic; }
@@ -231,7 +233,8 @@ main { max-width: 920px; margin: 0 auto; }
   display: flex; align-items: center; gap: 4px;
   padding: 6px 10px; border-radius: 7px;
   font-family: var(--font-display); font-size: var(--fs-label); font-weight: 400;
-  letter-spacing: 0.03em;
+  font-style: italic;
+  letter-spacing: 0.04em;
   color: var(--muted); background: none; border: none; cursor: pointer;
   text-decoration: none; transition: color 0.2s ease, background 0.2s ease; white-space: nowrap;
 }
@@ -1276,5 +1279,5 @@ input,
 textarea,
 select,
 button {
-  font-family: 'IM Fell English', Georgia, 'Times New Roman', serif;
+  font-family: IMFellEnglish, Georgia, 'Times New Roman', serif;
 }

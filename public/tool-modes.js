@@ -459,7 +459,7 @@
     let fontSize = Math.max(11, Math.min(22, Math.floor(h * 0.72)));
     let drawn = [];
     while (fontSize >= 9) {
-      ctx.font = '400 ' + fontSize + 'px "IM Fell English", Georgia, serif';
+      ctx.font = '400 ' + fontSize + 'px IMFellEnglish, Georgia, serif';
       drawn = wrapCanvasLines(ctx, text, w - 6);
       const totalH = drawn.length * fontSize * 1.22;
       if (totalH <= h + 4) break;
@@ -486,7 +486,7 @@
     let fontSize = Math.max(14, Math.min(22, Math.round(sourceImage.width / 28)));
     let lines = [];
     while (fontSize >= 11) {
-      ctx.font = '400 ' + fontSize + 'px "IM Fell English", Georgia, serif';
+      ctx.font = '400 ' + fontSize + 'px IMFellEnglish, Georgia, serif';
       lines = wrapCanvasLines(ctx, translatedText, maxW);
       if (lines.length * fontSize * 1.28 + pad * 2 <= maxPanelH) break;
       fontSize -= 1;
