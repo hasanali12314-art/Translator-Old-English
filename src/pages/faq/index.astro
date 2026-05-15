@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const faqs=[
+  {cat:'How to Use the Tool',items:[
+    {q:'How do I translate text to Old English?',a:'Paste or type your text into the left input box on the main tool page, select a style from the dropdown (Early, Middle, Ancient, or Simple), then click the Translate button. The result appears instantly on the right.'},
+    {q:'Can I adjust the style of the translation?',a:'Yes. Use the Advanced Settings panel to control formality level, old pronouns (thee/thou), verb endings (-eth, -hath), and archaic vocabulary independently.'},
+  ]},
+  {cat:'Supported Languages & Styles',items:[
+    {q:'What languages does the site support?',a:'The site supports 100+ languages for standard translation and offers dedicated tools for Old English, Latin, Ancient Greek, Aramaic, Egyptian Arabic, Navajo, Sinhala, and more.'},
+    {q:'What is the difference between the four Old English styles?',a:'Early (1500s–1600s) is Shakespeare-era English. Middle (1300s–1400s) is Chaucer\'s era. Ancient (800s–1000s) is Anglo-Saxon/Beowulf era. Simple Old-Style is casual archaic for everyday use.'},
+  ]},
+  {cat:'Translation Accuracy',items:[
+    {q:'How accurate are the translations?',a:'The AI uses context-aware processing rather than word-for-word substitution, resulting in high accuracy for common language pairs. Ancient languages are approximations informed by historical linguistics.'},
+    {q:'Is it suitable for academic use?',a:'It is excellent for research, learning, and creative work. For critical academic or professional submissions, we recommend expert verification.'},
+  ]},
+  {cat:'Character Limits',items:[
+    {q:'What is the character limit per translation?',a:'Each translation supports up to 5,000 characters. For longer texts, split into sections and translate each separately.'},
+    {q:'Is there a daily limit on translations?',a:'No. You can translate as many times as you need, as often as you like, completely free.'},
+  ]},
+  {cat:'History & Local Storage',items:[
+    {q:'Does the tool save my translations?',a:'Yes. Your last 50 translations are automatically saved in your browser\'s local storage. Click the History button in the top bar to view, copy, or delete them.'},
+    {q:'Is my translation history private?',a:'Yes. History is stored only in your browser and is never sent to any server. Clearing your browser data will remove it.'},
+  ]},
+  {cat:'Privacy & Data',items:[
+    {q:'Is my text sent to a server?',a:'Translation requests are processed via an AI API. Only the text you submit for translation is transmitted — no personal data is collected alongside it. See the Privacy Policy for full details.'},
+    {q:'Does the site use cookies?',a:'Yes. Essential cookies for site function, analytics cookies for anonymous usage data, and advertising cookies to support the free service. See the Cookies Policy for details.'},
+  ]},
+  {cat:'Commercial Use',items:[
+    {q:'Can I use translations in commercial projects?',a:'Yes. All translation output is free for use in personal and commercial projects including books, games, films, and marketing materials.'},
+    {q:'Do I need to credit the tool?',a:'Attribution is appreciated but not required for most uses.'},
+  ]},
+  {cat:'Mobile Usage',items:[
+    {q:'Does the site work on mobile?',a:'Yes. The entire site is fully responsive and optimised for smartphones and tablets.'},
+    {q:'Is there a mobile app?',a:'Currently the site is web-only. The mobile-optimised website works on any smartphone browser without needing an app.'},
+  ]},
+];
+---
+<Layout title="FAQ — Frequently Asked Questions About Translation Tools" description="Answers to common questions about Old English translation, supported languages, accuracy, character limits, history, privacy, and commercial use." canonical="/faq/">
+<section class="hero-section"><div class="container">
+  <h1 id="main-heading">Frequently Asked <span class="gold-text">Questions</span></h1>
+  <p class="hero-sub">Everything you need to know about our free translation tools</p>
+</div></section>
+<section class="section"><div class="container" style="max-width:860px;">
+  {faqs.map(cat=>(
+    <div style="margin-bottom:48px;">
+      <h2 style="font-size:1.1rem;margin-bottom:20px;color:var(--gold);">{cat.cat}</h2>
+      {cat.items.map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
+    </div>
+  ))}
+  <div class="divider"></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <a href="/translation-tools/" class="btn btn-outline">All Tools</a>
+    <a href="/blog/" class="btn btn-ghost">Blog</a>
+    <a href="/tools-resources/" class="btn btn-ghost">Back to Resources</a>
+  </div>
+</div></section>
+</Layout>

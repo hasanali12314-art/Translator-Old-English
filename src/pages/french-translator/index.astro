@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TranslatorTool from '../../components/TranslatorTool.astro';
+---
+<Layout title="French Translator — English to French Free Online" description="Translate English to French or French to English instantly. Free AI-powered French translation with accented character support." canonical="/french-translator/">
+<section class="hero-section"><div class="container">
+  <nav class="breadcrumb" style="margin-bottom:16px;"><a href="/translator-old-english/">Home</a><span>›</span><a href="/language-translators/">Language Translators</a><span>›</span><span>French Translator</span></nav>
+  <a href="/language-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Language Translators</a>
+  <h1 id="main-heading">French <span class="gold-text">Translator</span></h1>
+  <p class="hero-sub">Translate English to French or French to English — European &amp; Canadian French, free and instant</p>
+</div></section>
+<section class="section-sm"><div class="container"><TranslatorTool sourceLang="en" targetLang="fr" inputLabel="English" outputLabel="French" inputPlaceholder="Type or paste your English text here..." outputPlaceholder="Votre traduction française apparaîtra ici..." /></div></section>
+<section class="section-sm"><div class="container">
+  <div class="section-heading"><h2>Translation <span class="gold-text">Examples</span></h2></div>
+  <div class="grid-3">
+    {[{e:'Excuse me, where is the museum?',f:'Excusez-moi, où est le musée?'},{e:'I would like a table for two.',f:'Je voudrais une table pour deux.'},{e:'The food here is extraordinary.',f:'La nourriture ici est extraordinaire.'}].map(ex=>(
+      <div class="example-card"><div class="example-card-section"><div class="example-label">English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">French</div><div class="example-text" style="color:var(--gold-light);">{ex.f}</div></div></div>
+    ))}
+  </div>
+</div></section>
+<section class="section"><div class="container" style="max-width:800px;">
+  <h2 style="margin-bottom:16px;">About <span class="gold-text">French</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:20px;">French is spoken by over 300 million people across France, Belgium, Switzerland, Canada, and many African nations. It is one of the six official languages of the United Nations and the language of diplomacy, cuisine, fashion, and art. French uses accented characters (é, è, ê, à, ù, ç) which this translator handles correctly.</p>
+  <p style="color:var(--text-secondary);line-height:1.8;">This tool is ideal for travel to France and Francophone countries, academic writing, business correspondence, and language learning. Return to <a href="/language-translators/">Language Translators</a>.</p>
+</div></section>
+<section class="section-sm"><div class="container">
+  <div class="section-heading"><h2>Related <span class="gold-text">Translators</span></h2></div>
+  <div class="grid-3">{[{href:'/spanish-translator/',n:'Spanish'},{href:'/german-translator/',n:'German'},{href:'/creole-translator/',n:'Creole'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600;font-size:0.9rem;">{r.n}</a>))}</div>
+  <div style="text-align:center;margin-top:24px;"><a href="/language-translators/" class="btn btn-outline">Browse all Language Translators</a></div>
+</div></section>
+<section class="section"><div class="container" style="max-width:800px;">
+  <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
+  {[{q:'Does it support European and Canadian French?',a:'Yes. The translator supports both European (metropolitan) and Canadian French vocabulary and spelling conventions.'},{q:'Can I translate French back to English?',a:'Yes. Use the flip button to reverse the translation direction.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per translation.'},{q:'Does it work on mobile?',a:'Yes, fully responsive on all devices.'},{q:'Can I use translations commercially?',a:'Yes, all output is free for commercial use.'},{q:'How accurate is the French translation?',a:'Very accurate. French is among the best-supported languages in AI translation systems.'},{q:'Does it handle accented characters correctly?',a:'Yes. All French accented characters (é, è, ê, à, ù, ç, etc.) are handled correctly in both input and output.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
+</div></section>
+<section class="section-sm"><div class="container"><div class="cta-banner">
+  <h2 style="margin-bottom:16px;">Translate to <span class="gold-text">French</span> Now</h2>
+  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Start Translating</a>
+  <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
+</div></div></section>
+</Layout>

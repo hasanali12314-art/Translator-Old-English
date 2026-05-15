@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const posts=[
+  {slug:'what-is-old-english',cat:'History',time:6,title:'What Is Old English? A Complete Guide to Anglo-Saxon Language',desc:'Discover the origins, structure, and legacy of Old English — the language of Beowulf and the Anglo-Saxons — and how it evolved into modern English.',date:'12 May 2024'},
+  {slug:'middle-english-vs-old-english',cat:'Grammar',time:5,title:'Middle English vs Old English: Key Differences Explained',desc:'A clear comparison of Old English and Middle English grammar, vocabulary, and historical context — from Beowulf to Chaucer.',date:'8 May 2024'},
+  {slug:'shakespearean-language-guide',cat:'Literature',time:7,title:'The Complete Guide to Shakespearean Language',desc:'Learn the grammar, pronouns, and vocabulary of Early Modern English as used by Shakespeare — and how to write in his style.',date:'4 May 2024'},
+  {slug:'old-english-in-fantasy-writing',cat:'Writing',time:5,title:'How to Use Old English in Fantasy Writing',desc:'A practical guide for fantasy authors on using authentic Old English names, phrases, and dialogue to add historical depth to their worlds.',date:'29 Apr 2024'},
+  {slug:'history-of-english-language',cat:'History',time:8,title:'The History of the English Language: From Anglo-Saxon to Today',desc:'A complete timeline of the English language — from its Germanic roots through Norman conquest, Renaissance expansion, to the global language of today.',date:'24 Apr 2024'},
+  {slug:'old-english-vocabulary',cat:'Vocabulary',time:6,title:'50 Old English Words You Should Know',desc:'Explore 50 fascinating Old English words — from everyday terms to poetic kennings — that reveal how our ancestors saw the world.',date:'19 Apr 2024'},
+  {slug:'beowulf-language-analysis',cat:'Literature',time:9,title:'Beowulf: Language, Style, and Translation Challenges',desc:'An in-depth analysis of the language of Beowulf — its poetic devices, Old English grammar, and the challenges of translating it into modern English.',date:'14 Apr 2024'},
+  {slug:'old-english-grammar-basics',cat:'Grammar',time:7,title:'Old English Grammar Basics: A Beginner\'s Introduction',desc:'A beginner-friendly introduction to Old English grammar — noun cases, verb conjugations, pronouns, and sentence structure.',date:'9 Apr 2024'},
+  {slug:'old-english-for-game-developers',cat:'Translation',time:5,title:'Old English for Game Developers: Names, Spells, and Lore',desc:'How game developers can use Old English authentically for character names, spell systems, item names, and world-building lore.',date:'3 Apr 2024'},
+  {slug:'viking-old-norse-influence',cat:'History',time:6,title:'How Old Norse Shaped the English Language',desc:'The profound influence of Viking Old Norse on English vocabulary, grammar, and place names — and why so many everyday words have Scandinavian roots.',date:'28 Mar 2024'},
+];
+---
+<Layout title="Blog — Old English Language, History & Translation" description="Articles on Old English history, grammar, vocabulary, translation, and linguistics. Free educational content for writers, students, and language enthusiasts." canonical="/blog/">
+<section class="hero-section"><div class="container">
+  <h1 id="main-heading">The <span class="gold-text">Blog</span></h1>
+  <p class="hero-sub">History, grammar, vocabulary, and translation — exploring the English language through time</p>
+</div></section>
+<section class="section"><div class="container">
+  <div class="grid-2">
+    {posts.map(p=>(
+      <a href={`/blog/${p.slug}/`} class="card" style="text-decoration:none;display:block;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <span class="badge badge-gold">{p.cat}</span>
+          <span style="font-size:0.75rem;color:var(--text-muted);">{p.time} min read</span>
+        </div>
+        <h2 style="font-size:1.05rem;margin-bottom:10px;line-height:1.4;">{p.title}</h2>
+        <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:14px;">{p.desc}</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:0.75rem;color:var(--text-muted);">{p.date}</span>
+          <span style="color:var(--gold);font-size:0.82rem;font-weight:600;">Read →</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</div></section>
+</Layout>

@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TranslatorTool from '../../components/TranslatorTool.astro';
+---
+<Layout title="Old English Translator — Anglo-Saxon & Old Norse Translation Free" description="Translate English to Old English (Anglo-Saxon) or Old Norse. Free AI-powered ancient English translation with style and advanced controls." canonical="/old-english/">
+<section class="hero-section"><div class="container">
+  <nav class="breadcrumb" style="margin-bottom:16px;"><a href="/translator-old-english/">Home</a><span>›</span><a href="/ancient-languages/">Ancient Languages</a><span>›</span><span>Old English Translator</span></nav>
+  <a href="/ancient-languages/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Ancient Languages</a>
+  <h1 id="main-heading">Old English <span class="gold-text">Translator</span></h1>
+  <p class="hero-sub">Translate to authentic Anglo-Saxon Old English or Old Norse — free, AI-powered, with style controls</p>
+</div></section>
+<section class="section-sm"><div class="container"><TranslatorTool mode="archaic" sourceLang="en" targetLang="ang" inputLabel="Modern English" outputLabel="Old English / Old Norse" inputPlaceholder="Type or paste your modern English text here..." outputPlaceholder="Þin eald Englisc oþþe Norrœnn here gesewen bið..." showStyleDropdown={true} showAdvanced={true} /></div></section>
+<section class="section-sm"><div class="container">
+  <div class="section-heading"><h2>Translation <span class="gold-text">Examples</span></h2></div>
+  <div class="grid-3">
+    {[{e:'Listen! We have heard of the glory of kings.',o:'Hwæt! We Gardena in geardagum þeodcyninga þrym gefrunon.'},{e:'The warrior was brave and strong.',o:'Se cempa wæs beald ond strang.'},{e:'The sea roared in the storm.',o:'Sæ hlynede on þæm ðumre.'}].map(ex=>(
+      <div class="example-card"><div class="example-card-section"><div class="example-label">Modern English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Old English</div><div class="example-text" style="color:var(--gold-light);">{ex.o}</div></div></div>
+    ))}
+  </div>
+</div></section>
+<section class="section"><div class="container" style="max-width:800px;">
+  <h2 style="margin-bottom:16px;">About <span class="gold-text">Old English & Old Norse</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8;">Old English (Anglo-Saxon) was spoken in England from approximately 450 to 1150 AD. It is a West Germanic language far removed from modern English — closer to modern German or Dutch — and is the language of Beowulf, the Anglo-Saxon Chronicle, and the works of Ælfric. Old Norse, spoken by the Vikings, heavily influenced Old English and shares grammatical features with it.</p>
+</div></section>
+<section class="section-sm"><div class="container">
+  <div class="section-heading"><h2>Related <span class="gold-text">Pages</span></h2></div>
+  <div class="grid-2" style="max-width:500px;margin:0 auto;">{[{href:'/latin-translator/',n:'Latin Translator'},{href:'/aramaic-translator/',n:'Aramaic Translator'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600;">{r.n}</a>))}</div>
+</div></section>
+<section class="section"><div class="container" style="max-width:800px;">
+  <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
+  {[{q:'What is the difference between Old English and Middle English?',a:'Old English (450–1150 AD) is the language of Beowulf — heavily Germanic, with complex inflections. Middle English (1150–1500 AD) is Chaucer\'s language — more recognisable to modern readers but still very different from today.'},{q:'Is Old Norse also supported?',a:'Yes. Select the Ancient style option to access Old Norse-influenced vocabulary and grammatical structures alongside Old English.'},{q:'Can I translate both ways?',a:'Yes. Use the flip button to translate Old English back into modern English.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per translation.'},{q:'How accurate is the Old English translation?',a:'Good approximation. True Old English is a very different language system, so the tool provides historically-informed approximations rather than fully authentic manuscripts.'},{q:'Can I use it for creative writing?',a:'Yes. This tool is ideal for fantasy writing, game development, and historical fiction requiring Old English flavour.'},{q:'Can I use translations commercially?',a:'Yes. All output is free for personal and commercial use.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
+</div></section>
+<section class="section-sm"><div class="container"><div class="cta-banner">
+  <h2 style="margin-bottom:16px;">Translate to <span class="gold-text">Old English</span> Now</h2>
+  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Start Translating</a>
+  <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
+</div></div></section>
+</Layout>

@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const pages=[
+  {href:'/dialect-translator/',icon:'🗣️',name:'Dialect Converter',note:'8 keywords',desc:'Convert standard text to regional dialects'},
+  {href:'/speak-translate/',icon:'🎙️',name:'Speak Translator',note:'18 keywords · voice',desc:'Voice and spoken language translation'},
+  {href:'/fancy-translator/',icon:'✨',name:'Fancy Text Converter',note:'22 keywords · fun',desc:'Stylised and decorative text styles'},
+  {href:'/sinhala-translator/',icon:'🇱🇰',name:'Sinhala Translator',note:'19 keywords',desc:'English to Sinhala translation'},
+  {href:'/rare-languages/',icon:'💎',name:'Rare Language Converter',note:'86 keywords',desc:'Minority and endangered language tools'},
+  {href:'/navajo-translator/',icon:'🪶',name:'Navajo Converter',note:'12 keywords · Native',desc:'Diné Bizaad (Navajo) translation'},
+];
+---
+<Layout title="Specialty Translators — Dialect, Voice, Fancy Text & Rare Languages" description="Discover specialty translation tools: dialect converter, voice translator, fancy text generator, Sinhala, rare languages, and Navajo. Free and AI-powered." canonical="/specialty-translators/">
+<section class="hero-section"><div class="container">
+  <h1 id="main-heading">Specialty <span class="gold-text">Translators</span></h1>
+  <p class="hero-sub">Dialect · Voice · Fun · Rare — unique translation tools beyond the mainstream</p>
+</div></section>
+<section class="section"><div class="container">
+  <div class="section-heading"><h2>All Specialty <span class="gold-text">Tools</span></h2></div>
+  <div class="grid-3">
+    {pages.map(p=>(<a href={p.href} class="card card-gold" style="text-decoration:none;display:block;">
+      <div style="font-size:2.5rem;margin-bottom:12px;">{p.icon}</div>
+      <h3 style="font-size:1rem;margin-bottom:6px;">{p.name}</h3>
+      <div class="badge badge-gold" style="margin-bottom:10px;">{p.note}</div>
+      <p style="font-size:0.85rem;color:var(--text-secondary);">{p.desc}</p>
+      <div style="color:var(--gold);font-size:0.82rem;margin-top:14px;font-weight:600;">Use Tool →</div>
+    </a>))}
+  </div>
+</div></section>
+<section class="section-sm"><div class="container" style="max-width:800px;">
+  <h2 style="margin-bottom:16px;">About <span class="gold-text">Specialty Translation</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8;">Specialty translators go beyond standard language pairs to serve creative, cultural, and linguistic niches. Whether you need to convert text into a regional dialect, generate decorative Unicode text, translate to Navajo, or explore rare minority languages, this section has dedicated tools for every niche. <a href="/translator-old-english/">Return to the homepage</a>.</p>
+</div></section>
+</Layout>

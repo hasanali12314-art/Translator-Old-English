@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TranslatorTool from '../../components/TranslatorTool.astro';
+---
+<Layout title="Greek Translator — English to Greek Free Online" description="Translate English to Greek or Greek to English instantly. Free AI-powered Greek translation, no account needed." canonical="/greek-translator/">
+<section class="hero-section"><div class="container">
+  <nav class="breadcrumb" style="margin-bottom:16px;"><a href="/translator-old-english/">Home</a><span>›</span><a href="/language-translators/">Language Translators</a><span>›</span><span>Greek Translator</span></nav>
+  <a href="/language-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Language Translators</a>
+  <h1 id="main-heading">Greek <span class="gold-text">Translator</span></h1>
+  <p class="hero-sub">Translate English to Modern Greek or Greek to English — free, instant, AI-powered</p>
+</div></section>
+<section class="section-sm"><div class="container"><TranslatorTool sourceLang="en" targetLang="el" inputLabel="English" outputLabel="Greek" inputPlaceholder="Type or paste your English text here..." outputPlaceholder="Your Greek translation will appear here..." /></div></section>
+<section class="section-sm"><div class="container">
+  <div class="section-heading"><h2>Translation <span class="gold-text">Examples</span></h2></div>
+  <div class="grid-3">
+    {[{e:'Good morning, how are you?',g:'Καλημέρα, πώς είστε;'},{e:'The sea is beautiful today.',g:'Η θάλασσα είναι όμορφη σήμερα.'},{e:'I would like a coffee, please.',g:'Θα ήθελα έναν καφέ, παρακαλώ.'}].map(ex=>(
+      <div class="example-card"><div class="example-card-section"><div class="example-label">English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Greek</div><div class="example-text" style="color:var(--gold-light);">{ex.g}</div></div></div>
+    ))}
+  </div>
+</div></section>
+<section class="section"><div class="container" style="max-width:800px;">
+  <h2 style="margin-bottom:16px;">About <span class="gold-text">Greek</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:20px;">Modern Greek is spoken by approximately 13 million people, primarily in Greece and Cyprus. It is a direct descendant of Ancient Greek — one of the world's oldest recorded languages — with an unbroken literary tradition spanning over 3,000 years. Greek has contributed thousands of words to English and other European languages.</p>
+  <p style="color:var(--text-secondary);line-height:1.8;">This translator is ideal for travel to Greece and Cyprus, academic research, business communication, and studying classical texts. For ancient varieties, visit the <a href="/ancient-greek/">Ancient Greek Translator</a>. Return to <a href="/language-translators/">Language Translators</a>.</p>
+</div></section>
+<section class="section-sm"><div class="container">
+  <div class="section-heading"><h2>Related <span class="gold-text">Translators</span></h2></div>
+  <div class="grid-4">
+    {[{href:'/chinese-translator/',n:'Chinese'},{href:'/arabic-translator/',n:'Arabic'},{href:'/spanish-translator/',n:'Spanish'},{href:'/ancient-greek/',n:'Ancient Greek'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600;font-size:0.9rem;">{r.n}</a>))}
+  </div>
+  <div style="text-align:center;margin-top:24px;"><a href="/language-translators/" class="btn btn-outline">Browse all Language Translators</a></div>
+</div></section>
+<section class="section"><div class="container" style="max-width:800px;">
+  <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
+  {[{q:'Is this Modern Greek or Ancient Greek?',a:'This page translates Modern Greek. For Koine and Classical Ancient Greek, visit the Ancient Greek Translator page.'},{q:'Can I translate Greek back to English?',a:'Yes. Use the flip button to reverse the translation direction.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per translation.'},{q:'How accurate is the Greek translation?',a:'Very accurate for Modern Greek. The AI handles the Greek alphabet and grammatical cases correctly.'},{q:'Can I use it for academic work?',a:'Yes, though academic submissions should be verified by a native speaker.'},{q:'Does it work on mobile?',a:'Yes, fully responsive.'},{q:'Can I use translations commercially?',a:'Yes. All output is free for commercial use.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
+</div></section>
+<section class="section-sm"><div class="container"><div class="cta-banner">
+  <h2 style="margin-bottom:16px;">Translate to <span class="gold-text">Greek</span> Now</h2>
+  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Start Translating</a>
+  <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
+</div></div></section>
+</Layout>

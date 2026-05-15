@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const groups=[
+  {title:'Main Pages',pages:[
+    {name:'Translator Old English',href:'/translator-old-english/'},
+    {name:'All Languages',href:'/all-languages/'},
+    {name:'Text Translator',href:'/text-translator/'},
+  ]},
+  {title:'Language Translators',pages:[
+    {name:'Language Translators',href:'/language-translators/'},
+    {name:'Chinese Translator',href:'/chinese-translator/'},
+    {name:'Greek Translator',href:'/greek-translator/'},
+    {name:'Arabic Translator',href:'/arabic-translator/'},
+    {name:'Spanish Translator',href:'/spanish-translator/'},
+    {name:'German Translator',href:'/german-translator/'},
+    {name:'French Translator',href:'/french-translator/'},
+    {name:'Creole Translator',href:'/creole-translator/'},
+  ]},
+  {title:'Ancient Languages',pages:[
+    {name:'Ancient Languages',href:'/ancient-languages/'},
+    {name:'Latin Translator',href:'/latin-translator/'},
+    {name:'Old English Translator',href:'/old-english/'},
+    {name:'Aramaic Translator',href:'/aramaic-translator/'},
+    {name:'Egyptian Arabic Translator',href:'/egyptian-arabic/'},
+    {name:'Ancient Greek Translator',href:'/ancient-greek/'},
+  ]},
+  {title:'Specialty Translators',pages:[
+    {name:'Specialty Translators',href:'/specialty-translators/'},
+    {name:'Dialect Converter',href:'/dialect-translator/'},
+    {name:'Speak Translator',href:'/speak-translate/'},
+    {name:'Fancy Text Converter',href:'/fancy-translator/'},
+    {name:'Sinhala Translator',href:'/sinhala-translator/'},
+    {name:'Rare Language Converter',href:'/rare-languages/'},
+    {name:'Navajo Converter',href:'/navajo-translator/'},
+  ]},
+  {title:'Tools and Resources',pages:[
+    {name:'Tools and Resources',href:'/tools-resources/'},
+    {name:'Translation Tools',href:'/translation-tools/'},
+    {name:'Blog',href:'/blog/'},
+    {name:'FAQ',href:'/faq/'},
+  ]},
+  {title:'Legal and Information',pages:[
+    {name:'About Us',href:'/about-us/'},
+    {name:'Privacy and Legal',href:'/privacy-policy/'},
+    {name:'Terms and Conditions',href:'/terms-and-conditions/'},
+    {name:'Cookies Policy',href:'/cookies/'},
+    {name:'Sitemap',href:'/sitemap/'},
+  ]},
+];
+---
+<Layout title="Sitemap — OldEnglish Translator" description="Complete sitemap of all pages on OldEnglish Translator including language pages, ancient languages, specialty tools, blog, and legal pages." canonical="/sitemap/">
+<section class="hero-section"><div class="container">
+  <h1 id="main-heading">Site <span class="gold-text">Map</span></h1>
+  <p class="hero-sub">All pages on OldEnglish Translator — organised by section</p>
+</div></section>
+<section class="section"><div class="container" style="max-width:900px;">
+  <div class="grid-3">
+    {groups.map(g=>(
+      <div class="card">
+        <h2 style="font-size:0.85rem;font-family:'Cinzel',serif;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">{g.title}</h2>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+          {g.pages.map(p=>(<li><a href={p.href} style="font-size:0.875rem;color:var(--text-secondary);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s;"><span style="color:var(--gold);font-size:0.7rem;">→</span>{p.name}</a></li>))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</div></section>
+</Layout>

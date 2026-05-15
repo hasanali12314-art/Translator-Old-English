@@ -1,0 +1,170 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TranslatorTool from '../../components/TranslatorTool.astro';
+
+const languages = [
+  'Afrikaans','Albanian','Amharic','Arabic','Armenian','Azerbaijani','Basque','Belarusian','Bengali',
+  'Bosnian','Bulgarian','Catalan','Cebuano','Chinese (Simplified)','Chinese (Traditional)','Corsican',
+  'Croatian','Czech','Danish','Dutch','English','Esperanto','Estonian','Finnish','French','Frisian',
+  'Galician','Georgian','German','Greek','Gujarati','Haitian Creole','Hausa','Hawaiian','Hebrew',
+  'Hindi','Hmong','Hungarian','Icelandic','Igbo','Indonesian','Irish','Italian','Japanese','Javanese',
+  'Kannada','Kazakh','Khmer','Korean','Kurdish','Kyrgyz','Lao','Latin','Latvian','Lithuanian',
+  'Luxembourgish','Macedonian','Malagasy','Malay','Malayalam','Maltese','Maori','Marathi','Mongolian',
+  'Myanmar','Nepali','Norwegian','Nyanja','Odia','Pashto','Persian','Polish','Portuguese','Punjabi',
+  'Romanian','Russian','Samoan','Scots Gaelic','Serbian','Sesotho','Shona','Sindhi','Sinhala','Slovak',
+  'Slovenian','Somali','Spanish','Sundanese','Swahili','Swedish','Tagalog','Tajik','Tamil','Telugu',
+  'Thai','Turkish','Ukrainian','Urdu','Uyghur','Uzbek','Vietnamese','Welsh','Xhosa','Yiddish','Yoruba','Zulu'
+];
+const slugMap: Record<string,string> = {
+  'Chinese (Simplified)':'chinese-translator','Chinese (Traditional)':'chinese-translator',
+  'Arabic':'arabic-translator','Spanish':'spanish-translator','Greek':'greek-translator',
+  'German':'german-translator','French':'french-translator','Haitian Creole':'creole-translator',
+};
+function langSlug(l: string): string {
+  return slugMap[l] || '/all-languages/';
+}
+---
+<Layout title="All Language Translator — Translate Any Language Online Free" description="Translate English to any language or any language to English — instant, free, AI-powered. 100+ languages supported." canonical="/all-languages/">
+<section class="hero-section">
+  <div class="container">
+    <nav class="breadcrumb" style="margin-bottom:16px;">
+      <a href="/translator-old-english/">Home</a><span>›</span><span>All Languages Translator</span>
+    </nav>
+    <a href="/translator-old-english/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Home</a>
+    <h1 id="main-heading">All Language <span class="gold-text">Translator</span></h1>
+    <p class="hero-sub">Translate English to any language or any language to English — instant, free, AI-powered</p>
+  </div>
+</section>
+
+<section class="section-sm">
+  <div class="container">
+    <TranslatorTool
+      inputLabel="Source Language"
+      outputLabel="English / Target Language"
+      inputPlaceholder="Type or paste your text here (up to 5000 characters)..."
+      outputPlaceholder="Your translation will appear here..."
+      sourceLanguages={['Auto-detect / Any Language', ...languages]}
+      targetLanguages={['English', ...languages]}
+    />
+  </div>
+</section>
+
+<!-- Examples -->
+<section class="section-sm">
+  <div class="container">
+    <div class="section-heading"><h2>Translation <span class="gold-text">Examples</span></h2></div>
+    <div class="grid-3">
+      {[
+        {from:'Spanish',src:'Buenos días, ¿cómo estás hoy?',eng:'Good morning, how are you today?'},
+        {from:'French',src:'Je t\'aime de tout mon cœur.',eng:'I love you with all my heart.'},
+        {from:'Chinese',src:'今天天气很好。',eng:'The weather is very nice today.'},
+      ].map(ex => (
+        <div class="example-card">
+          <div class="example-card-section">
+            <div class="example-label">{ex.from}</div>
+            <div class="example-text">{ex.src}</div>
+          </div>
+          <div class="example-card-section">
+            <div class="example-label">English</div>
+            <div class="example-text" style="color:var(--gold-light);">{ex.eng}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Languages Directory -->
+<section class="section">
+  <div class="container">
+    <div class="section-heading"><h2>All <span class="gold-text">Supported Languages</span></h2></div>
+    <div class="grid-auto">
+      {languages.map(l => (
+        <a href={`/${langSlug(l)}`} class="card" style="text-align:center;padding:16px;font-size:0.875rem;font-weight:500;text-decoration:none;color:var(--text-secondary);" aria-label={`${l} translator`}>
+          {l}
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Content -->
+<section class="section">
+  <div class="container" style="max-width:800px;">
+    <h2 style="margin-bottom:20px;">Translate Any Language <span class="gold-text">to English</span></h2>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px;">Our all-language translator uses AI to automatically detect the source language and translate it into English. Whether you receive a message in Spanish, a document in Japanese, or a social media post in Arabic, simply paste it in and get an instant English translation.</p>
+
+    <h2 style="margin-bottom:20px;">English to All Languages — <span class="gold-text">Free Online Translator</span></h2>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px;">Switch the direction to translate English into any supported language. This free online translator covers Germanic, Romance, Slavic, Asian, Semitic, and many other language families — all without any account or subscription.</p>
+
+    <h2 style="margin-bottom:20px;">All Language Translator <span class="gold-text">Free and Online</span></h2>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px;">There are no fees, no sign-ups, and no restrictions on how many translations you make. The online translator supports over 100 languages and is accessible from any device — desktop, tablet, or mobile.</p>
+
+    <h2 style="margin-bottom:20px;">How to Use the <span class="gold-text">All Language Translator</span></h2>
+    {['Select your source language or leave it on Auto-detect','Select your target language — default is English','Type or paste your text into the input box (up to 5000 characters)','Click Translate — the result appears instantly','Use the Copy button to copy the result or the toggle to flip the direction'].map((s,i) => (
+      <div style="display:flex;gap:16px;margin-bottom:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);">
+        <span style="font-family:'Cinzel',serif;font-size:1.2rem;font-weight:700;color:var(--gold);opacity:0.5;min-width:28px;">0{i+1}</span>
+        <span style="color:var(--text-secondary);font-size:0.9rem;">{s}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- Related -->
+<section class="section-sm">
+  <div class="container">
+    <div class="section-heading"><h2>Related <span class="gold-text">Pages</span></h2></div>
+    <div class="grid-3">
+      {[
+        {href:'/text-translator/',icon:'📝',title:'Text Translator',desc:'Word and sentence-level translation'},
+        {href:'/translator-old-english/',icon:'⚜️',title:'Old English Translator',desc:'Translate to historical English styles'},
+        {href:'/language-translators/',icon:'🌍',title:'Language Translators',desc:'Browse all individual language pages'},
+      ].map(r => (
+        <a href={r.href} class="card card-gold" style="text-decoration:none;display:block;">
+          <span style="font-size:1.8rem;display:block;margin-bottom:10px;">{r.icon}</span>
+          <h3 style="font-size:1rem;margin-bottom:6px;">{r.title}</h3>
+          <p style="font-size:0.85rem;color:var(--text-secondary);">{r.desc}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container" style="max-width:800px;">
+    <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
+    {[
+      {q:'Can I translate any language to English for free?',a:'Yes. The auto-detect feature identifies the source language automatically, and translation to English is completely free with no limits.'},
+      {q:'How do I translate English to all languages at once?',a:'Select English as the source and switch the target language for each translation. The tool supports 100+ target languages.'},
+      {q:'What is an all language translator?',a:'An all language translator is a tool that supports translation between any combination of languages — not just between two fixed languages.'},
+      {q:'Is the all languages translator free to use?',a:'Completely free. No account, no daily limits, no subscription required.'},
+      {q:'What is the character limit for translation?',a:'Each translation supports up to 5,000 characters. Split longer texts into sections for best results.'},
+      {q:'How do I translate many languages online?',a:'Simply paste your text, select the source and target languages, and click Translate. You can switch target languages and re-translate without clearing your input.'},
+      {q:'Does the tool save my translation history?',a:'Yes. Your last 50 translations are stored in your browser\'s local storage and never sent to any server.'},
+      {q:'Can I use the translations commercially?',a:'Yes. All translations can be used in personal and commercial projects without restriction.'},
+    ].map(f => (
+      <div class="faq-item">
+        <button class="faq-question">{f.q}<span class="faq-icon">+</span></button>
+        <div class="faq-answer">{f.a}</div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-sm">
+  <div class="container">
+    <div class="cta-banner">
+      <h2 style="margin-bottom:16px;">Translate <span class="gold-text">Any Language</span> Now</h2>
+      <p style="color:var(--text-secondary);margin-bottom:32px;">Free, instant, AI-powered — no account needed</p>
+      <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Start Translating</a>
+      <div class="trust-badges">
+        <div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div>
+        <div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div>
+        <div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div>
+      </div>
+    </div>
+  </div>
+</section>
+</Layout>

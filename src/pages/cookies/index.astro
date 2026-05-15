@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const sections=[
+  {title:'What Are Cookies',content:'Cookies are small text files stored on your device by websites you visit. They allow the site to remember your preferences, analyse usage, and deliver relevant advertising.'},
+  {title:'How We Use Cookies',content:'We use three categories of cookies: essential cookies required for the site to function, analytics cookies to understand how visitors use the site, and advertising cookies to support the free service through relevant ads.'},
+  {title:'Essential Cookies',content:'These cookies are required for the site to function correctly. They manage session state, security, and core functionality. They cannot be disabled without breaking the site.'},
+  {title:'Analytics Cookies',content:'Anonymous analytics cookies help us understand how visitors interact with the site — which pages are most visited, how long sessions last, and where visitors come from. This data is aggregated and anonymised.'},
+  {title:'Advertising Cookies',content:'Third-party advertising networks place cookies to serve relevant ads and track ad performance. These help fund the free service. You can opt out via your browser settings or industry opt-out tools.'},
+  {title:'Local Storage',content:'In addition to cookies, we use browser local storage to save your translation history (last 50 entries), your preferred translation style, direction, advanced settings, and theme preference. This data never leaves your device.'},
+  {title:'Managing Your Cookies',content:'You can control and delete cookies through your browser settings. Most browsers allow you to block third-party cookies, clear all cookies, or be notified when a cookie is set. Note that disabling essential cookies may affect site functionality.'},
+  {title:'Third-Party Cookies',content:'Third-party services including Google Analytics and advertising networks may set their own cookies. These are governed by their respective privacy policies. Links to opt-out tools are available on the IAB Europe and NAI websites.'},
+  {title:'Policy Updates',content:'This Cookies Policy may be updated to reflect changes in technology or regulation. We will post updated versions on this page with a revised date.'},
+  {title:'Contact',content:'For questions about our use of cookies, please use the contact details on the Privacy Policy page.'},
+];
+---
+<Layout title="Cookies Policy — OldEnglish Translator" description="How OldEnglish Translator uses cookies and local storage. Essential, analytics, and advertising cookies explained." canonical="/cookies/">
+<section class="hero-section"><div class="container">
+  <h1 id="main-heading">Cookies <span class="gold-text">Policy</span></h1>
+  <p class="hero-sub">How we use cookies and local storage on OldEnglish Translator — last updated May 2024</p>
+</div></section>
+<section class="section"><div class="container" style="max-width:800px;">
+  {sections.map((s,i)=>(<div style="margin-bottom:36px;"><h2 style="font-size:1.1rem;margin-bottom:12px;"><span style="color:var(--gold);margin-right:10px;">{i+1}.</span>{s.title}</h2><p style="color:var(--text-secondary);line-height:1.8;">{s.content}</p></div>))}
+  <div class="divider"></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <a href="/privacy-policy/" class="btn btn-outline">Privacy Policy</a>
+    <a href="/terms-and-conditions/" class="btn btn-ghost">Terms &amp; Conditions</a>
+    <a href="/translator-old-english/" class="btn btn-ghost">Back to Homepage</a>
+  </div>
+</div></section>
+</Layout>

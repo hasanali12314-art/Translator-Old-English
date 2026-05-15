@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const sections=[
+  {title:'What Information Is Collected',content:'We collect two types of information. Information you provide: the text you enter into the translation tool is transmitted to our AI translation API to process your request and is not stored on our servers. Information collected automatically: browser type, device type, IP address, and referral source are collected anonymously for analytics purposes.'},
+  {title:'How Local Browser Storage Is Used',content:'Translation history (your last 50 translations) is stored in your browser\'s local storage only — never sent to our servers. User preferences including selected style, translation direction, and advanced settings are also stored locally. Your theme preference (light or dark mode) is stored in local storage.'},
+  {title:'Cookies and Tracking',content:'We use three types of cookies: Essential cookies required for the site to function correctly. Analytics cookies that collect anonymous usage data to help us improve the site. Advertising cookies placed by third-party ad networks to support the free service. You can manage cookies through your browser settings.'},
+  {title:'How Collected Information Is Used',content:'Information is used to: process and return your translations; improve the translation tools and site performance; display relevant advertising to support the free service; analyse anonymous usage patterns; detect and prevent technical issues; comply with legal obligations.'},
+  {title:'Information Sharing',content:'We share data with: AI translation API providers to process your translation requests; analytics providers (anonymous data only); advertising networks to display ads; hosting providers to serve the website. We do not sell personal data. We may disclose information if required by law.'},
+  {title:'Data Security',content:'We implement industry-standard security measures including HTTPS encryption for all data in transit. Translation text is not retained on our servers after processing. Local browser storage is under your control.'},
+  {title:'Data Retention',content:'Translation text submitted via the tool is not retained on our servers beyond the time required to process and return the result. Analytics data is retained in anonymised form for up to 26 months. Cookie data follows standard browser expiry rules.'},
+  {title:'Your Privacy Rights',content:'You have the right to: access information we hold about you; correct inaccurate data; request deletion of your data; opt out of analytics and advertising cookies; request data portability. To exercise these rights, contact us via the email address below.'},
+  {title:"Children's Privacy",content:'This site is not directed at children under 13. We do not knowingly collect personal data from children. If you believe a child has submitted personal data, please contact us and we will take steps to delete it.'},
+  {title:'International Data Transfers',content:'Your data may be processed in countries outside your own, including the United States. We ensure appropriate safeguards are in place for such transfers in accordance with applicable data protection law.'},
+  {title:'Policy Updates',content:'We may update this Privacy Policy from time to time. The updated policy will be posted on this page with the revision date. Continued use of the site after changes constitutes acceptance of the updated policy.'},
+  {title:'Contact',content:'For privacy enquiries, please email: privacy@oldenglish-translator.com. We aim to respond within 48 hours. EU residents have additional rights under GDPR. California residents have additional rights under CCPA, including the right to know, delete, and opt out of sale of personal information.'},
+];
+---
+<Layout title="Privacy Policy — OldEnglish Translator" description="Privacy policy for OldEnglish Translator. Learn how we collect, use, and protect your data." canonical="/privacy-policy/">
+<section class="hero-section"><div class="container">
+  <h1 id="main-heading">Privacy <span class="gold-text">Policy</span></h1>
+  <p class="hero-sub">How we collect, use, and protect your information — last updated May 2024</p>
+</div></section>
+<section class="section"><div class="container" style="max-width:800px;">
+  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:48px;">This Privacy Policy explains how OldEnglish Translator collects, uses, and protects information when you use our website and translation tools. By using the site, you agree to the practices described in this policy.</p>
+  {sections.map((s,i)=>(<div style="margin-bottom:36px;"><h2 style="font-size:1.1rem;margin-bottom:12px;"><span style="color:var(--gold);margin-right:10px;">{i+1}.</span>{s.title}</h2><p style="color:var(--text-secondary);line-height:1.8;">{s.content}</p></div>))}
+  <div class="divider"></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <a href="/terms-and-conditions/" class="btn btn-outline">Terms & Conditions</a>
+    <a href="/cookies/" class="btn btn-ghost">Cookies Policy</a>
+    <a href="/translator-old-english/" class="btn btn-ghost">Back to Homepage</a>
+  </div>
+</div></section>
+</Layout>

@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TranslatorTool from '../../components/TranslatorTool.astro';
+---
+<Layout title="Fancy Text Generator — Stylised & Decorative Text Converter Free" description="Convert normal text into fancy, stylised, and decorative Unicode text styles. Free online fancy text generator." canonical="/fancy-translator/">
+<section class="hero-section"><div class="container">
+  <nav class="breadcrumb" style="margin-bottom:16px;"><a href="/translator-old-english/">Home</a><span>›</span><a href="/specialty-translators/">Specialty Translators</a><span>›</span><span>Fancy Text Converter</span></nav>
+  <a href="/specialty-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Specialty Translators</a>
+  <h1 id="main-heading">Fancy Text <span class="gold-text">Converter</span></h1>
+  <p class="hero-sub">Transform normal text into stylised, decorative, and fancy Unicode styles — perfect for social media</p>
+</div></section>
+<section class="section-sm"><div class="container"><TranslatorTool mode="fancy" sourceLang="en" targetLang="en" inputLabel="Normal Text" outputLabel="Fancy / Stylised Output" inputPlaceholder="Type your normal text here..." outputPlaceholder="𝓨𝓸𝓾𝓻 𝓯𝓪𝓷𝓬𝔂 𝓽𝓮𝔁𝓽 𝔀𝓲𝓵𝓵 𝓪𝓹𝓹𝓮𝓪𝓻 𝓱𝓮𝓻𝓮..." /></div></section>
+<section class="section-sm"><div class="container">
+  <div class="section-heading"><h2>Style <span class="gold-text">Examples</span></h2></div>
+  <div class="grid-3">
+    {[{orig:'Hello World',fancy:'𝓗𝓮𝓵𝓵𝓸 𝓦𝓸𝓻𝓵𝓭'},{orig:'Hello World',fancy:'ℍ𝕖𝕝𝕝𝕠 𝕎𝕠𝕣𝕝𝕕'},{orig:'Hello World',fancy:'Ĥēłłö Wörłd'}].map(ex=>(
+      <div class="example-card"><div class="example-card-section"><div class="example-label">Normal Text</div><div class="example-text">{ex.orig}</div></div><div class="example-card-section"><div class="example-label">Fancy Output</div><div class="example-text" style="color:var(--gold-light);">{ex.fancy}</div></div></div>
+    ))}
+  </div>
+</div></section>
+<section class="section"><div class="container" style="max-width:800px;">
+  <h2 style="margin-bottom:16px;">About <span class="gold-text">Fancy Text</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8;">The Fancy Text Converter uses Unicode character sets to transform standard text into decorative styles. These work across social media platforms like Instagram, Twitter, TikTok, and Discord. Styles include cursive, bold serif, hollow, strikethrough, and many more. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
+</div></section>
+<section class="section-sm"><div class="container">
+  <div class="section-heading"><h2>Related <span class="gold-text">Tools</span></h2></div>
+  <div class="grid-3">{[{href:'/dialect-translator/',n:'Dialect Converter'},{href:'/speak-translate/',n:'Speak Translator'},{href:'/rare-languages/',n:'Rare Languages'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600;">{r.n}</a>))}</div>
+  <div style="text-align:center;margin-top:24px;"><a href="/specialty-translators/" class="btn btn-outline">Back to Specialty Translators</a></div>
+</div></section>
+<section class="section"><div class="container" style="max-width:800px;">
+  <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
+  {[{q:'What styles are available?',a:'Styles include cursive script, bold serif, double-struck (hollow), italic, fraktur (gothic), strikethrough, and decorative symbol-infused variants.'},{q:'Can I use it for social media posts?',a:'Yes. All output uses standard Unicode characters that display correctly on Instagram, Twitter, TikTok, Discord, and WhatsApp.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per conversion.'},{q:'Does it work on mobile?',a:'Yes, fully responsive on all devices.'},{q:'Can I use output commercially?',a:'Yes. All output is free for personal and commercial use.'},{q:'How many style options are there?',a:'The converter offers 10+ distinct Unicode text styles.'},{q:'Does it support emoji styles?',a:'The tool focuses on Unicode letter styles. Emoji can be added manually to your converted text.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
+</div></section>
+<section class="section-sm"><div class="container"><div class="cta-banner">
+  <h2 style="margin-bottom:16px;">Create <span class="gold-text">Fancy Text</span> Now</h2>
+  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Convert Now</a>
+  <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
+</div></div></section>
+</Layout>

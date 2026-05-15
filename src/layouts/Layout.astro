@@ -1,0 +1,560 @@
+---
+import '../styles/global.css';
+export interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+}
+const { title, description = 'Translate modern English to Old English using AI. Choose from Early, Middle, Ancient, or Simple styles. Free, instant, and historically accurate.', canonical } = Astro.props;
+const base = Astro.url.origin;
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  {canonical && <link rel="canonical" href={`${base}${canonical}`} />}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- History overlay -->
+<div class="history-overlay" id="historyOverlay"></div>
+
+<!-- History side panel -->
+<aside class="history-panel" id="historyPanel" role="complementary" aria-label="Translation history">
+  <div class="history-header">
+    <div>
+      <h3 style="font-size:1.1rem;margin-bottom:4px;">Translation History</h3>
+      <p style="font-size:0.8rem;color:var(--text-muted);">Last 50 translations · stored locally</p>
+    </div>
+    <button class="btn btn-ghost btn-sm" id="closeHistory" aria-label="Close history">✕</button>
+  </div>
+  <div class="history-list" id="historyList">
+    <div class="history-empty">
+      <div style="font-size:2rem;margin-bottom:12px;">📜</div>
+      <p>No translations yet.<br/>Your history will appear here.</p>
+    </div>
+  </div>
+  <div style="padding:16px;border-top:1px solid var(--border);">
+    <button class="btn btn-ghost btn-sm" id="clearAllHistory" style="width:100%;">Clear All History</button>
+  </div>
+</aside>
+
+<!-- HEADER -->
+<header class="site-header" role="banner">
+  <div class="header-inner container">
+    <!-- Logo -->
+    <a href="/translator-old-english/" class="site-logo" id="site-logo">
+      <span class="logo-icon">⚜</span>
+      <span class="logo-text">OldEnglish<span class="logo-dot gold-text">Translator</span></span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="/translator-old-english/" class="nav-link">Home</a></li>
+        <li><a href="/all-languages/" class="nav-link">All Languages</a></li>
+        <li><a href="/text-translator/" class="nav-link">Text Translator</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-link nav-dropdown-btn" aria-haspopup="true">
+            Language Translators <span class="nav-arrow">▾</span>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            <a href="/chinese-translator/" class="dropdown-item" role="menuitem">🀄 Chinese Translator</a>
+            <a href="/spanish-translator/" class="dropdown-item" role="menuitem">🇪🇸 Spanish Translator</a>
+            <a href="/arabic-translator/" class="dropdown-item" role="menuitem">🌙 Arabic Translator</a>
+            <div class="dropdown-divider"></div>
+            <a href="/language-translators/" class="dropdown-item dropdown-see-all" role="menuitem">See All Languages →</a>
+          </div>
+        </li>
+        <li class="nav-dropdown">
+          <button class="nav-link nav-dropdown-btn" aria-haspopup="true">
+            Ancient Languages <span class="nav-arrow">▾</span>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            <a href="/latin-translator/" class="dropdown-item" role="menuitem">🏛 Latin Translator</a>
+            <a href="/old-english/" class="dropdown-item" role="menuitem">⚔ Old English</a>
+            <a href="/ancient-greek/" class="dropdown-item" role="menuitem">🏺 Ancient Greek</a>
+            <div class="dropdown-divider"></div>
+            <a href="/ancient-languages/" class="dropdown-item dropdown-see-all" role="menuitem">See All Ancient →</a>
+          </div>
+        </li>
+        <li class="nav-dropdown">
+          <button class="nav-link nav-dropdown-btn" aria-haspopup="true">
+            Specialty <span class="nav-arrow">▾</span>
+          </button>
+          <div class="dropdown-menu" role="menu">
+            <a href="/dialect-translator/" class="dropdown-item" role="menuitem">🗣 Dialect Converter</a>
+            <a href="/fancy-translator/" class="dropdown-item" role="menuitem">✨ Fancy Text</a>
+            <a href="/rare-languages/" class="dropdown-item" role="menuitem">💎 Rare Languages</a>
+            <div class="dropdown-divider"></div>
+            <a href="/specialty-translators/" class="dropdown-item dropdown-see-all" role="menuitem">See All Specialty →</a>
+          </div>
+        </li>
+        <li><a href="/tools-resources/" class="nav-link">Tools</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header actions -->
+    <div class="header-actions">
+      <button class="icon-btn" id="historyBtn" title="Translation History" aria-label="Open translation history">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </button>
+      <button class="icon-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle light/dark mode">
+        <span class="theme-icon">🌙</span>
+      </button>
+      <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Open mobile menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <nav>
+      <a href="/translator-old-english/" class="mobile-nav-link">Home</a>
+      <a href="/all-languages/" class="mobile-nav-link">All Languages</a>
+      <a href="/text-translator/" class="mobile-nav-link">Text Translator</a>
+      <div class="mobile-nav-group">
+        <span class="mobile-nav-label">Language Translators</span>
+        <a href="/chinese-translator/" class="mobile-nav-sub">Chinese</a>
+        <a href="/spanish-translator/" class="mobile-nav-sub">Spanish</a>
+        <a href="/arabic-translator/" class="mobile-nav-sub">Arabic</a>
+        <a href="/greek-translator/" class="mobile-nav-sub">Greek</a>
+        <a href="/french-translator/" class="mobile-nav-sub">French</a>
+        <a href="/german-translator/" class="mobile-nav-sub">German</a>
+        <a href="/creole-translator/" class="mobile-nav-sub">Creole</a>
+        <a href="/language-translators/" class="mobile-nav-sub" style="color:var(--gold);">See All →</a>
+      </div>
+      <div class="mobile-nav-group">
+        <span class="mobile-nav-label">Ancient Languages</span>
+        <a href="/latin-translator/" class="mobile-nav-sub">Latin</a>
+        <a href="/old-english/" class="mobile-nav-sub">Old English</a>
+        <a href="/ancient-greek/" class="mobile-nav-sub">Ancient Greek</a>
+        <a href="/aramaic-translator/" class="mobile-nav-sub">Aramaic</a>
+        <a href="/ancient-languages/" class="mobile-nav-sub" style="color:var(--gold);">See All →</a>
+      </div>
+      <div class="mobile-nav-group">
+        <span class="mobile-nav-label">Specialty</span>
+        <a href="/dialect-translator/" class="mobile-nav-sub">Dialect Converter</a>
+        <a href="/fancy-translator/" class="mobile-nav-sub">Fancy Text</a>
+        <a href="/rare-languages/" class="mobile-nav-sub">Rare Languages</a>
+        <a href="/specialty-translators/" class="mobile-nav-sub" style="color:var(--gold);">See All →</a>
+      </div>
+      <a href="/tools-resources/" class="mobile-nav-link">Tools & Resources</a>
+      <a href="/blog/" class="mobile-nav-link">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Page content -->
+<main>
+  <slot />
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/translator-old-english/" class="site-logo" style="margin-bottom:16px;display:inline-flex;">
+          <span class="logo-icon">⚜</span>
+          <span class="logo-text">OldEnglish<span class="logo-dot gold-text">Translator</span></span>
+        </a>
+        <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.7;max-width:260px;">
+          Free AI-powered translation between modern English and historical styles — Early, Middle, Ancient, and more.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Languages</h4>
+        <ul>
+          <li><a href="/chinese-translator/">Chinese Translator</a></li>
+          <li><a href="/spanish-translator/">Spanish Translator</a></li>
+          <li><a href="/arabic-translator/">Arabic Translator</a></li>
+          <li><a href="/greek-translator/">Greek Translator</a></li>
+          <li><a href="/french-translator/">French Translator</a></li>
+          <li><a href="/german-translator/">German Translator</a></li>
+          <li><a href="/language-translators/">All Languages →</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Ancient</h4>
+        <ul>
+          <li><a href="/latin-translator/">Latin Translator</a></li>
+          <li><a href="/old-english/">Old English</a></li>
+          <li><a href="/ancient-greek/">Ancient Greek</a></li>
+          <li><a href="/aramaic-translator/">Aramaic</a></li>
+          <li><a href="/egyptian-arabic/">Egyptian Arabic</a></li>
+          <li><a href="/ancient-languages/">All Ancient →</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="/text-translator/">Text Translator</a></li>
+          <li><a href="/all-languages/">All Languages</a></li>
+          <li><a href="/dialect-translator/">Dialect Converter</a></li>
+          <li><a href="/fancy-translator/">Fancy Text</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="/about-us/">About Us</a></li>
+          <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="/terms-and-conditions/">Terms & Conditions</a></li>
+          <li><a href="/cookies/">Cookies Policy</a></li>
+          <li><a href="/sitemap/">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="color:var(--text-muted);font-size:0.85rem;">© 2024 OldEnglish Translator. Free for personal and commercial use.</p>
+      <div style="display:flex;gap:16px;">
+        <a href="/privacy-policy/" style="color:var(--text-muted);font-size:0.85rem;">Privacy</a>
+        <a href="/terms-and-conditions/" style="color:var(--text-muted);font-size:0.85rem;">Terms</a>
+        <a href="/sitemap/" style="color:var(--text-muted);font-size:0.85rem;">Sitemap</a>
+      </div>
+    </div>
+  </div>
+  <!-- SEO Footer Links -->
+  <div class="container">
+    <div class="seo-footer-links">
+      <a href="/translator-old-english/">old english translator</a>
+      <a href="/text-translator/">text translator</a>
+      <a href="/all-languages/">all language translator</a>
+      <a href="/latin-translator/">latin translator</a>
+      <a href="/ancient-greek/">ancient greek translator</a>
+      <a href="/chinese-translator/">chinese translator</a>
+      <a href="/spanish-translator/">spanish translator</a>
+      <a href="/arabic-translator/">arabic translator</a>
+      <a href="/dialect-translator/">dialect converter</a>
+      <a href="/fancy-translator/">fancy text generator</a>
+      <a href="/rare-languages/">rare language translator</a>
+      <a href="/old-english/">old english to modern english</a>
+      <a href="/aramaic-translator/">aramaic translator</a>
+      <a href="/greek-translator/">greek translator</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Hero section */
+  .hero-section {
+    padding: 80px 0 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 400px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge { margin-bottom: 20px; }
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 16px auto 0;
+    line-height: 1.7;
+  }
+  .control-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .tool-controls { margin-bottom: 4px; }
+  /* Header */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  [data-theme="light"] .site-header {
+    background: rgba(245,240,232,0.9);
+  }
+  .header-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .site-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .logo-icon { font-size: 1.4rem; filter: drop-shadow(0 0 8px rgba(201,168,76,0.5)); }
+  .logo-text { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+  .logo-dot { margin-left: 2px; }
+
+  .desktop-nav { flex: 1; display: flex; justify-content: center; }
+  .nav-list { display: flex; align-items: center; gap: 4px; list-style: none; }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+  }
+  .nav-link:hover { color: var(--text-primary); background: var(--surface-2); }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown:hover .dropdown-menu { opacity: 1; pointer-events: all; transform: translateY(0); }
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: var(--ink-2);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    padding: 8px;
+    min-width: 220px;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+    box-shadow: var(--shadow-card);
+    z-index: 200;
+  }
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    text-decoration: none;
+  }
+  .dropdown-item:hover { background: var(--surface-2); color: var(--text-primary); }
+  .dropdown-see-all { color: var(--gold) !important; font-weight: 600; }
+  .dropdown-divider { height: 1px; background: var(--border); margin: 6px 0; }
+  .nav-arrow { font-size: 0.7rem; transition: var(--transition); }
+
+  .header-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0; }
+  .icon-btn {
+    width: 38px; height: 38px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+  }
+  .icon-btn:hover { border-color: var(--border-strong); color: var(--gold); background: var(--gold-glow); }
+  .mobile-menu-btn { display: none; }
+
+  /* Mobile nav */
+  .mobile-nav {
+    display: none;
+    position: absolute;
+    top: var(--header-h);
+    left: 0; right: 0;
+    background: var(--ink-2);
+    border-bottom: 1px solid var(--border);
+    padding: 16px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-card);
+  }
+  .mobile-nav.open { display: block; }
+  .mobile-nav-link {
+    display: block;
+    padding: 12px 16px;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  .mobile-nav-link:hover { background: var(--surface-2); color: var(--gold); }
+  .mobile-nav-group { margin: 8px 0; }
+  .mobile-nav-label {
+    display: block;
+    padding: 8px 16px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .mobile-nav-sub {
+    display: block;
+    padding: 8px 32px;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+  }
+  .mobile-nav-sub:hover { background: var(--surface-2); color: var(--text-primary); }
+
+  /* Footer */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+    padding-top: 60px;
+  }
+  .footer-inner { padding-bottom: 48px; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+  .footer-brand h3 { font-size: 1.1rem; margin-bottom: 12px; }
+  .footer-col h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a { color: var(--text-muted); font-size: 0.875rem; transition: var(--transition); }
+  .footer-col ul a:hover { color: var(--text-primary); }
+  .footer-bottom {
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  @media (max-width: 1024px) {
+    .desktop-nav { display: none; }
+    .mobile-menu-btn { display: flex; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+</style>
+
+<script>
+  // Theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = themeToggle?.querySelector('.theme-icon');
+  const html = document.documentElement;
+  let theme = localStorage.getItem('oe-theme') || 'dark';
+  html.setAttribute('data-theme', theme);
+  if (themeIcon) themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+  themeToggle?.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('oe-theme', theme);
+    if (themeIcon) themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+  });
+
+  // Mobile menu
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  mobileMenuBtn?.addEventListener('click', () => mobileNav?.classList.toggle('open'));
+
+  // History panel
+  const historyBtn = document.getElementById('historyBtn');
+  const historyPanel = document.getElementById('historyPanel');
+  const historyOverlay = document.getElementById('historyOverlay');
+  const closeHistory = document.getElementById('closeHistory');
+  function openHistory() { historyPanel?.classList.add('open'); historyOverlay?.classList.add('open'); renderHistory(); }
+  function closeHistoryPanel() { historyPanel?.classList.remove('open'); historyOverlay?.classList.remove('open'); }
+  historyBtn?.addEventListener('click', openHistory);
+  closeHistory?.addEventListener('click', closeHistoryPanel);
+  historyOverlay?.addEventListener('click', closeHistoryPanel);
+
+  // Render history
+  function renderHistory() {
+    const list = document.getElementById('historyList');
+    if (!list) return;
+    const items: Array<{style:string;input:string;output:string;date:string}> = JSON.parse(localStorage.getItem('oe-history') || '[]');
+    if (!items.length) {
+      list.innerHTML = '<div class="history-empty"><div style="font-size:2rem;margin-bottom:12px;">📜</div><p>No translations yet.<br/>Your history will appear here.</p></div>';
+      return;
+    }
+    list.innerHTML = items.map((item, i) => `
+      <div class="history-item">
+        <div class="history-item-style">${item.style}</div>
+        <div class="history-item-text">${item.input}</div>
+        <div class="history-item-actions">
+          <button class="btn btn-ghost btn-sm" onclick="copyHistory(${i})">Copy</button>
+          <button class="btn btn-ghost btn-sm" onclick="deleteHistory(${i})">Delete</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  (window as any).copyHistory = (i: number) => {
+    const items = JSON.parse(localStorage.getItem('oe-history') || '[]');
+    if (items[i]) navigator.clipboard.writeText(items[i].output || items[i].input);
+  };
+  (window as any).deleteHistory = (i: number) => {
+    const items = JSON.parse(localStorage.getItem('oe-history') || '[]');
+    items.splice(i, 1);
+    localStorage.setItem('oe-history', JSON.stringify(items));
+    renderHistory();
+  };
+
+  document.getElementById('clearAllHistory')?.addEventListener('click', () => {
+    localStorage.removeItem('oe-history');
+    renderHistory();
+  });
+
+  // Save to history (global function)
+  (window as any).saveToHistory = (style: string, input: string, output: string) => {
+    const items: Array<{style:string;input:string;output:string;date:string}> = JSON.parse(localStorage.getItem('oe-history') || '[]');
+    items.unshift({ style, input, output, date: new Date().toISOString() });
+    if (items.length > 50) items.splice(50);
+    localStorage.setItem('oe-history', JSON.stringify(items));
+  };
+
+  // FAQ accordion (global)
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      item?.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>

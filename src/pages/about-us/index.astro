@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="About Us — OldEnglish Translator" description="Learn about OldEnglish Translator — our mission to make historical language accessible to everyone through free AI-powered translation tools." canonical="/about-us/">
+<section class="hero-section"><div class="container">
+  <h1 id="main-heading">About <span class="gold-text">Us</span></h1>
+  <p class="hero-sub">Making historical language accessible to everyone — free, open, and AI-powered</p>
+</div></section>
+<section class="section"><div class="container" style="max-width:800px;">
+  {[
+    {title:'Who We Are',content:'OldEnglish Translator is a specialised language tool platform built by a small team of linguists, developers, and history enthusiasts. We created this site because we believe that historical languages should be accessible to everyone — not just academics or specialists. The project began as a passion project focused on Old English translation and grew into a comprehensive platform covering ancient, rare, and modern languages alike.'},
+    {title:'What We Do',content:'We provide free AI-powered translation tools covering Old English (Early, Middle, and Ancient styles), Latin, Ancient Greek, Aramaic, Egyptian Arabic, and 100+ modern languages. Each tool is designed with historical accuracy and practical usability in mind. Our specialty tools include dialect conversion, rare language translation, and decorative text generation.'},
+    {title:'Our Mission',content:'Our mission is to democratise access to language — historical, ancient, rare, and modern. We believe that the history embedded in language is part of everyone\'s shared human heritage. By making these tools free and accessible, we hope to support writers, students, educators, researchers, and curious learners everywhere.'},
+    {title:'Contact',content:'For enquiries, please refer to the contact details on our Privacy and Legal page. We aim to respond to all messages within 48 hours.'},
+  ].map(s=>(<div style="margin-bottom:48px;"><h2 style="margin-bottom:16px;">{s.title}</h2><p style="color:var(--text-secondary);line-height:1.8;">{s.content}</p></div>))}
+  <div class="divider"></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+    <a href="/privacy-policy/" class="btn btn-outline">Privacy Policy</a>
+    <a href="/faq/" class="btn btn-ghost">FAQ</a>
+    <a href="/translator-old-english/" class="btn btn-ghost">Back to Homepage</a>
+  </div>
+</div></section>
+</Layout>

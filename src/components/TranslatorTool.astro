@@ -1,0 +1,246 @@
+---
+import type { TranslateMode } from '../lib/translate';
+
+export interface Props {
+  inputLabel?: string;
+  outputLabel?: string;
+  inputPlaceholder?: string;
+  outputPlaceholder?: string;
+  showStyleDropdown?: boolean;
+  showAdvanced?: boolean;
+  showDialectDropdown?: boolean;
+  sourceLanguages?: string[];
+  targetLanguages?: string[];
+  sourceLang?: string;
+  targetLang?: string;
+  mode?: TranslateMode;
+}
+const {
+  inputLabel = 'Modern English',
+  outputLabel = 'Translation',
+  inputPlaceholder = 'Type or paste your text here...',
+  outputPlaceholder = 'Your translation will appear here...',
+  showStyleDropdown = false,
+  showAdvanced = false,
+  showDialectDropdown = false,
+  sourceLanguages = [],
+  targetLanguages = [],
+  sourceLang = 'en',
+  targetLang = 'es',
+  mode = 'translate',
+} = Astro.props;
+const hasLangSelect = sourceLanguages.length > 0 || targetLanguages.length > 0;
+---
+
+<div
+  class="tool-area"
+  id="tool-area"
+  data-source-lang={sourceLang}
+  data-target-lang={targetLang}
+  data-mode={mode}
+>
+  {showStyleDropdown && (
+    <div class="tool-controls" style="margin-bottom:16px;">
+      <label class="control-label" for="style-select-c">Translation Style</label>
+      <select class="select" id="style-select-c" style="max-width:340px;margin-top:8px;">
+        <option value="early">📜 Early Style — 1500s to 1600s</option>
+        <option value="middle">⚔️ Middle Style — 1300s to 1400s</option>
+        <option value="ancient">🏛️ Ancient Style — 800s to 1000s</option>
+        <option value="simple">✨ Simple Old-Style — Casual Archaic</option>
+      </select>
+    </div>
+  )}
+
+  {showDialectDropdown && (
+    <div class="tool-controls" style="margin-bottom:16px;">
+      <label class="control-label" for="dialect-select-c">Dialect</label>
+      <select class="select" id="dialect-select-c" style="max-width:340px;margin-top:8px;">
+        <option value="british">🇬🇧 British English</option>
+        <option value="southern">🇺🇸 Southern US</option>
+        <option value="scottish">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scottish</option>
+        <option value="australian">🇦🇺 Australian</option>
+        <option value="irish">🇮🇪 Irish</option>
+      </select>
+    </div>
+  )}
+
+  {hasLangSelect && (
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:end;margin-bottom:16px;">
+      <div>
+        <label class="control-label" for="source-lang" style="display:block;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">From</label>
+        <select class="select" id="source-lang">
+          {sourceLanguages.map(l => <option value={l.toLowerCase()}>{l}</option>)}
+        </select>
+      </div>
+      <div style="padding-bottom:4px;"></div>
+      <div>
+        <label class="control-label" for="target-lang" style="display:block;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">To</label>
+        <select class="select" id="target-lang">
+          {targetLanguages.map(l => <option value={l.toLowerCase()}>{l}</option>)}
+        </select>
+      </div>
+    </div>
+  )}
+
+  {showAdvanced && (
+    <div class="advanced-panel" style="margin-bottom:16px;">
+      <button class="advanced-toggle" id="advancedToggle2">
+        <span>⚙️ Advanced Settings</span>
+        <span id="advancedArrow2" style="transition:transform 0.3s;">▾</span>
+      </button>
+      <div class="advanced-content" id="advancedContent2">
+        <div class="advanced-row">
+          <span class="advanced-label">Formality Level</span>
+          <div style="display:flex;align-items:center;gap:12px;flex:1;max-width:280px;margin-left:24px;">
+            <span style="font-size:0.75rem;color:var(--text-muted);">Casual</span>
+            <input type="range" class="range-slider" min="1" max="5" value="3" style="flex:1;">
+            <span style="font-size:0.75rem;color:var(--text-muted);">Ceremonial</span>
+          </div>
+        </div>
+        <div class="advanced-row">
+          <span class="advanced-label">Old Pronouns (thee/thou)</span>
+          <button class="toggle active" data-toggle="pronouns" role="switch" aria-checked="true"></button>
+        </div>
+        <div class="advanced-row">
+          <span class="advanced-label">Old Verb Endings (-eth, -hath)</span>
+          <button class="toggle active" data-toggle="verbs" role="switch" aria-checked="true"></button>
+        </div>
+        <div class="advanced-row">
+          <span class="advanced-label">Archaic Vocabulary</span>
+          <button class="toggle active" data-toggle="vocab" role="switch" aria-checked="true"></button>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <div class="tool-boxes">
+    <div class="tool-box">
+      <label for="comp-input">{inputLabel}</label>
+      <textarea class="tool-textarea comp-input" id="comp-input" placeholder={inputPlaceholder} maxlength="5000"></textarea>
+      <div class="char-count"><span class="comp-char">0</span> / 5000</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:40px;">
+      <button class="flip-btn comp-flip" title="Flip direction" aria-label="Flip translation direction">⇄</button>
+      <span style="font-size:0.7rem;color:var(--text-muted);margin-top:8px;">Flip</span>
+    </div>
+    <div class="tool-box" style="position:relative;">
+      <label>{outputLabel}</label>
+      <textarea class="tool-textarea comp-output" placeholder={outputPlaceholder} readonly aria-live="polite"></textarea>
+      <p class="comp-error" style="display:none;color:#e57373;font-size:0.8rem;margin-top:8px;"></p>
+      <button class="btn btn-ghost btn-sm comp-copy" style="opacity:0;position:absolute;bottom:44px;right:8px;">📋 Copy</button>
+    </div>
+  </div>
+
+  <div class="tool-actions">
+    <button class="btn btn-ghost comp-clear">✕ Clear</button>
+    <button class="btn btn-primary btn-lg comp-translate">✦ Translate</button>
+  </div>
+</div>
+
+<script>
+  import { translateText, langFromLabel } from '../lib/translate';
+  import type { DialectId } from '../lib/dialect';
+
+  function toggleActive(area: Element, key: string): boolean {
+    const el = area.querySelector(`[data-toggle="${key}"]`);
+    return el?.classList.contains('active') ?? true;
+  }
+
+  document.querySelectorAll('.tool-area').forEach(area => {
+    const root = area as HTMLElement;
+    const inp = area.querySelector('.comp-input') as HTMLTextAreaElement;
+    const out = area.querySelector('.comp-output') as HTMLTextAreaElement;
+    const charEl = area.querySelector('.comp-char');
+    const copyBtn = area.querySelector('.comp-copy') as HTMLButtonElement;
+    const errEl = area.querySelector('.comp-error') as HTMLParagraphElement;
+    const translateBtn = area.querySelector('.comp-translate') as HTMLButtonElement;
+
+    inp?.addEventListener('input', () => { if(charEl) charEl.textContent = String(inp.value.length); });
+
+    area.querySelector('.comp-flip')?.addEventListener('click', () => {
+      const tmp = inp.value; inp.value = out.value; out.value = tmp;
+      const src = root.dataset.sourceLang ?? 'en';
+      const tgt = root.dataset.targetLang ?? 'es';
+      root.dataset.sourceLang = tgt;
+      root.dataset.targetLang = src;
+      const srcSel = area.querySelector('#source-lang') as HTMLSelectElement;
+      const tgtSel = area.querySelector('#target-lang') as HTMLSelectElement;
+      if (srcSel && tgtSel) {
+        const tmpOpt = srcSel.value;
+        srcSel.value = tgtSel.value;
+        tgtSel.value = tmpOpt;
+      }
+      if(charEl) charEl.textContent = String(inp.value.length);
+    });
+
+    area.querySelector('.comp-clear')?.addEventListener('click', () => {
+      inp.value = ''; out.value = '';
+      if(charEl) charEl.textContent = '0';
+      if(copyBtn) copyBtn.style.opacity = '0';
+      if(errEl) errEl.style.display = 'none';
+    });
+
+    area.querySelector('.comp-translate')?.addEventListener('click', async () => {
+      const text = inp.value.trim();
+      if(!text) return;
+
+      const mode = (root.dataset.mode ?? 'translate') as 'translate' | 'archaic' | 'fancy' | 'dialect';
+      let source = root.dataset.sourceLang ?? 'en';
+      let target = root.dataset.targetLang ?? 'es';
+
+      const srcSel = area.querySelector('#source-lang') as HTMLSelectElement;
+      const tgtSel = area.querySelector('#target-lang') as HTMLSelectElement;
+      if (srcSel?.value) source = langFromLabel(srcSel.selectedOptions[0]?.textContent ?? srcSel.value);
+      if (tgtSel?.value) target = langFromLabel(tgtSel.selectedOptions[0]?.textContent ?? tgtSel.value);
+      if (source === 'auto') source = 'en';
+
+      const styleSel = area.querySelector('#style-select-c') as HTMLSelectElement;
+      const dialectSel = area.querySelector('#dialect-select-c') as HTMLSelectElement;
+
+      if(errEl) errEl.style.display = 'none';
+      const prevLabel = translateBtn.textContent;
+      translateBtn.disabled = true;
+      translateBtn.textContent = 'Translating…';
+
+      try {
+        const result = await translateText(text, {
+          sourceLang: source,
+          targetLang: target,
+          mode,
+          style: styleSel?.value ?? 'early',
+          dialect: (dialectSel?.value ?? 'british') as DialectId,
+          usePronouns: toggleActive(area, 'pronouns'),
+          useVerbs: toggleActive(area, 'verbs'),
+          useVocab: toggleActive(area, 'vocab'),
+        });
+        out.value = result;
+        if(copyBtn) copyBtn.style.opacity = '1';
+        (window as any).saveToHistory?.('Translation', text, result);
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : 'Translation failed. Please try again.';
+        if(errEl) { errEl.textContent = msg; errEl.style.display = 'block'; }
+        out.value = '';
+      } finally {
+        translateBtn.disabled = false;
+        translateBtn.textContent = prevLabel ?? '✦ Translate';
+      }
+    });
+
+    copyBtn?.addEventListener('click', () => {
+      navigator.clipboard.writeText(out.value);
+      copyBtn.textContent = '✓ Copied!';
+      setTimeout(() => copyBtn.textContent = '📋 Copy', 2000);
+    });
+
+    area.querySelectorAll('.toggle').forEach(t => {
+      t.addEventListener('click', () => t.classList.toggle('active'));
+    });
+    const advToggle = area.querySelector('#advancedToggle2');
+    const advContent = area.querySelector('#advancedContent2') as HTMLElement;
+    const advArrow = area.querySelector('#advancedArrow2') as HTMLElement;
+    advToggle?.addEventListener('click', () => {
+      const open = advContent?.classList.toggle('open');
+      if(advArrow) advArrow.style.transform = open ? 'rotate(180deg)' : '';
+    });
+  });
+</script>
