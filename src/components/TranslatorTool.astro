@@ -1,6 +1,7 @@
 ---
 import type { TranslateMode } from '../lib/translate';
 import { resolveLangCode } from '../lib/languages';
+import ToolModeTabs from './ToolModeTabs.astro';
 
 export interface Props {
   inputLabel?: string;
@@ -33,6 +34,7 @@ const {
 const hasLangSelect = sourceLanguages.length > 0 || targetLanguages.length > 0;
 ---
 
+<ToolModeTabs>
 <div
   class="tool-area tool-card"
   id="tool-area"
@@ -153,3 +155,4 @@ const hasLangSelect = sourceLanguages.length > 0 || targetLanguages.length > 0;
     <button type="button" class="btn-translate btn btn-primary comp-translate">✦ Translate</button>
   </div>
 </div>
+</ToolModeTabs>

@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ToolModeTabs from '../../components/ToolModeTabs.astro';
 ---
 <Layout
   title="Translator Old English — Free AI Tool (4 Styles: Early, Middle, Ancient & Simple)"
@@ -16,6 +17,7 @@ import Layout from '../../layouts/Layout.astro';
     <div class="hero-line"></div>
   </div>
 
+  <ToolModeTabs>
   <div class="tool-card tool-area" id="tool-area">
     <div class="style-row">
       <div class="field-wrap">
@@ -90,6 +92,7 @@ import Layout from '../../layouts/Layout.astro';
       <button type="button" class="btn-translate" id="translateBtn">✦ Translate</button>
     </div>
   </div>
+  </ToolModeTabs>
 
   <div class="sec-head"><h2 class="sec-title">Quick Examples</h2><div class="sec-line"></div></div>
   <p class="sec-sub">Click any card to load it into the translator</p>

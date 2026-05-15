@@ -1,0 +1,84 @@
+---
+/** Text / Images / Documents tabs — sits directly above the translator tool */
+---
+
+<div class="tool-stack" data-tool-modes>
+  <div class="tool-mode-tabs" role="tablist" aria-label="Input type">
+    <button type="button" class="tool-mode-tab active" role="tab" aria-selected="true" data-mode="text" id="tab-text">
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+        <path d="M5 8h14M5 12h10M5 16h6"/><path d="M16 5l3 3-6 6H9v-3l7-7z"/>
+      </svg>
+      Text
+    </button>
+    <button type="button" class="tool-mode-tab" role="tab" aria-selected="false" data-mode="images" id="tab-images">
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 16l-5-5L9 18"/>
+      </svg>
+      Images
+    </button>
+    <button type="button" class="tool-mode-tab" role="tab" aria-selected="false" data-mode="documents" id="tab-documents">
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+        <path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path d="M14 3v6h6"/>
+      </svg>
+      Documents
+    </button>
+  </div>
+
+  <div class="tool-mode-panels">
+    <!-- Text mode (default translator UI) -->
+    <div class="tool-mode-panel active" data-panel="text" role="tabpanel" aria-labelledby="tab-text">
+      <slot />
+    </div>
+
+    <!-- Images upload -->
+    <div class="tool-mode-panel" data-panel="images" role="tabpanel" aria-labelledby="tab-images" hidden>
+      <div class="tool-card tool-area tool-mode-upload-card">
+        <label class="upload-zone" id="imageUploadZone" for="imageFileInput">
+          <input type="file" id="imageFileInput" class="upload-input" accept=".jpg,.jpeg,.png,.webp,.gif,.svg,image/*" hidden />
+          <div class="format-icons" aria-hidden="true">
+            <span class="format-icon format-jpg"><span class="format-badge">.JPG</span></span>
+            <span class="format-icon format-png"><span class="format-badge">.PNG</span></span>
+            <span class="format-icon format-webp"><span class="format-badge">.WEBP</span></span>
+            <span class="format-icon format-gif"><span class="format-badge">.GIF</span></span>
+            <span class="format-icon format-svg"><span class="format-badge">.SVG</span></span>
+          </div>
+          <p class="upload-title">Upload or drop image to translate</p>
+          <p class="upload-hint">Max. file size <strong>10 MB</strong></p>
+          <p class="upload-file-name" id="imageFileName" hidden></p>
+          <img class="upload-preview" id="imagePreview" alt="" hidden />
+        </label>
+        <div class="actions" style="margin-top:16px">
+          <button type="button" class="btn-clear" data-clear-upload="images">✕ Clear</button>
+          <button type="button" class="btn-translate" id="imageTranslateBtn">✦ Translate Image</button>
+        </div>
+        <p class="upload-note" id="imageUploadNote" hidden role="status"></p>
+      </div>
+    </div>
+
+    <!-- Documents upload -->
+    <div class="tool-mode-panel" data-panel="documents" role="tabpanel" aria-labelledby="tab-documents" hidden>
+      <div class="tool-card tool-area tool-mode-upload-card">
+        <label class="upload-zone" id="docUploadZone" for="docFileInput">
+          <input type="file" id="docFileInput" class="upload-input" accept=".pdf,.doc,.docx,.txt,.md,.srt" hidden />
+          <div class="format-icons" aria-hidden="true">
+            <span class="format-icon format-pdf"><span class="format-badge">.PDF</span></span>
+            <span class="format-icon format-docx"><span class="format-badge">.DOCX</span></span>
+            <span class="format-icon format-txt"><span class="format-badge">.TXT</span></span>
+            <span class="format-icon format-md"><span class="format-badge">.MD</span></span>
+            <span class="format-icon format-srt"><span class="format-badge">.SRT</span></span>
+          </div>
+          <p class="upload-title">Upload or drop document to translate</p>
+          <p class="upload-hint">Max. file size <strong>10 MB</strong></p>
+          <p class="upload-file-name" id="docFileName" hidden></p>
+        </label>
+        <div class="actions" style="margin-top:16px">
+          <button type="button" class="btn-clear" data-clear-upload="documents">✕ Clear</button>
+          <button type="button" class="btn-translate" id="docTranslateBtn">✦ Translate Document</button>
+        </div>
+        <p class="upload-note" id="docUploadNote" hidden role="status"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src={`${import.meta.env.BASE_URL}tool-modes.js`} defer></script>
