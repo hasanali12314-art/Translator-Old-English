@@ -129,17 +129,19 @@ main { max-width: 920px; margin: 0 auto; }
   position: sticky; top: 0; z-index: 200;
   background: var(--bg2);
   border-bottom: 1px solid var(--border-lt);
-  height: var(--header-h);
+  min-height: var(--header-h);
   box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  overflow: visible;
 }
 .header-inner {
-  height: 100%;
+  min-height: var(--header-h);
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 28px;
   display: flex;
   align-items: center;
   gap: 24px;
+  overflow: visible;
 }
 .site-logo {
   display: flex;
@@ -164,37 +166,72 @@ main { max-width: 920px; margin: 0 auto; }
 }
 @media (min-width: 600px) { .logo-sub { display: block; } }
 
-.desktop-nav { flex: 1; display: flex; justify-content: center; }
-.nav-list { display: flex; align-items: center; gap: 2px; list-style: none; }
+.desktop-nav { flex: 1; display: flex; justify-content: center; overflow: visible; }
+.nav-list { display: flex; align-items: center; gap: 2px; list-style: none; overflow: visible; }
 .nav-link {
   display: flex; align-items: center; gap: 4px;
   padding: 6px 10px; border-radius: 7px;
   font-family: var(--font-body); font-size: 13px; font-weight: 500;
   color: var(--muted); background: none; border: none; cursor: pointer;
-  text-decoration: none; transition: var(--transition); white-space: nowrap;
+  text-decoration: none; transition: color 0.2s ease, background 0.2s ease; white-space: nowrap;
 }
-.nav-link:hover { color: var(--gold); background: var(--gold-glow2); }
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link.active {
+  color: var(--gold);
+  background: var(--gold-glow);
+}
 .nav-dropdown { position: relative; }
 .nav-dropdown:hover .dropdown-menu,
 .nav-dropdown:focus-within .dropdown-menu,
 .nav-dropdown.open .dropdown-menu {
-  opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0);
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-dropdown:hover > .nav-dropdown-btn,
+.nav-dropdown:focus-within > .nav-dropdown-btn,
+.nav-dropdown.open > .nav-dropdown-btn,
+.nav-dropdown:has(.dropdown-item.active) > .nav-dropdown-btn {
+  color: var(--gold);
+  background: var(--gold-glow);
 }
 .dropdown-menu {
-  position: absolute; top: calc(100% + 8px); left: 50%;
-  transform: translateX(-50%) translateY(-8px);
+  position: absolute; top: 100%; left: 50%;
+  margin-top: 4px;
+  transform: translateX(-50%) translateY(-4px);
   background: var(--card); border: 1px solid var(--border-lt);
   border-radius: var(--radius-md); padding: 8px; min-width: 220px;
-  opacity: 0; pointer-events: none; transition: var(--transition);
-  box-shadow: var(--shadow-card); z-index: 300;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  box-shadow: var(--shadow-card); z-index: 350;
+}
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
 }
 .dropdown-item {
   display: flex; align-items: center; gap: 8px;
   padding: 9px 12px; border-radius: 6px;
-  font-size: 14px; color: var(--muted); text-decoration: none; transition: var(--transition);
+  font-size: 14px; color: var(--muted); text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease;
 }
-.dropdown-item:hover { background: var(--bg2); color: var(--ink); }
+.dropdown-item:hover,
+.dropdown-item:focus-visible {
+  background: var(--gold-glow);
+  color: var(--gold-lt);
+}
+.dropdown-item.active {
+  background: var(--gold-glow);
+  color: var(--gold);
+  font-weight: 600;
+}
 .dropdown-see-all { color: var(--gold) !important; font-weight: 600; }
+.dropdown-see-all:hover,
+.dropdown-see-all.active { color: var(--gold-lt) !important; }
 .dropdown-divider { height: 1px; background: var(--border); margin: 6px 0; }
 .nav-arrow { font-size: 10px; }
 
@@ -224,7 +261,8 @@ main { max-width: 920px; margin: 0 auto; }
   display: block; padding: 12px 16px; color: var(--ink);
   font-weight: 600; font-size: 15px; border-radius: 6px; text-decoration: none;
 }
-.mobile-nav-link:hover { background: var(--card2); color: var(--gold); }
+.mobile-nav-link:hover,
+.mobile-nav-link.active { background: var(--gold-glow); color: var(--gold); }
 .mobile-nav-label {
   display: block; padding: 8px 16px; font-size: 10px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
@@ -233,8 +271,10 @@ main { max-width: 920px; margin: 0 auto; }
   display: block; padding: 8px 32px; color: var(--muted);
   font-size: 14px; text-decoration: none; border-radius: 6px;
 }
-.mobile-nav-sub:hover { background: var(--card2); color: var(--ink); }
+.mobile-nav-sub:hover,
+.mobile-nav-sub.active { background: var(--gold-glow); color: var(--gold); }
 .mobile-nav-see-all { color: var(--gold) !important; font-weight: 600; }
+.mobile-nav-see-all.active { background: var(--gold-glow); }
 
 /* History panel */
 .history-overlay {
@@ -813,9 +853,39 @@ main { max-width: 920px; margin: 0 auto; }
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
   margin-bottom: 18px;
 }
-.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-.footer-col ul a { color: var(--muted); font-size: 14px; }
-.footer-col ul a:hover { color: var(--ink); }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.footer-col ul a {
+  display: inline-block;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 6px 10px;
+  margin-left: -10px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.footer-col ul a:hover,
+.footer-col ul a:focus-visible {
+  color: var(--gold-lt);
+  background: var(--gold-glow);
+}
+.footer-col ul a.active {
+  color: var(--gold);
+  background: var(--gold-glow);
+  font-weight: 600;
+}
+.footer-bottom a.footer-meta-link {
+  padding: 4px 8px;
+  margin: -4px -8px;
+  border-radius: 6px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.footer-bottom a.footer-meta-link:hover,
+.footer-bottom a.footer-meta-link:focus-visible,
+.footer-bottom a.footer-meta-link.active {
+  color: var(--gold) !important;
+  background: var(--gold-glow);
+}
 .footer-bottom {
   padding-top: 24px; border-top: 1px solid var(--border);
   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;

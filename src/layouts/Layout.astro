@@ -7,6 +7,14 @@ export interface Props {
 }
 const { title, description = 'Translator Old English — translate modern English to Old English using AI. Early, Middle, Ancient, or Simple styles. Free, instant, and historically accurate.', canonical } = Astro.props;
 const base = Astro.url.origin;
+
+function normPath(p: string) {
+  if (!p || p === '/') return '/';
+  return p.endsWith('/') ? p : `${p}/`;
+}
+const currentPath = normPath(Astro.url.pathname);
+const isActive = (href: string) => currentPath === normPath(href);
+const activeClass = (href: string) => (isActive(href) ? 'active' : '');
 ---
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -52,18 +60,18 @@ const base = Astro.url.origin;
 
     <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
       <ul class="nav-list">
-        <li><a href="/translator-old-english/" class="nav-link">Home</a></li>
-        <li><a href="/all-languages/" class="nav-link">All Languages</a></li>
+        <li><a href="/translator-old-english/" class:list={['nav-link', activeClass('/translator-old-english/')]} aria-current={isActive('/translator-old-english/') ? 'page' : undefined}>Home</a></li>
+        <li><a href="/all-languages/" class:list={['nav-link', activeClass('/all-languages/')]} aria-current={isActive('/all-languages/') ? 'page' : undefined}>All Languages</a></li>
         <li class="nav-dropdown">
           <button type="button" class="nav-link nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
             Language Translators <span class="nav-arrow">▾</span>
           </button>
           <div class="dropdown-menu" role="menu">
-            <a href="/chinese-translator/" class="dropdown-item" role="menuitem">🀄 Chinese Translator</a>
-            <a href="/spanish-translator/" class="dropdown-item" role="menuitem">🇪🇸 Spanish Translator</a>
-            <a href="/arabic-translator/" class="dropdown-item" role="menuitem">🌙 Arabic Translator</a>
+            <a href="/chinese-translator/" class:list={['dropdown-item', activeClass('/chinese-translator/')]} role="menuitem" aria-current={isActive('/chinese-translator/') ? 'page' : undefined}>🀄 Chinese Translator</a>
+            <a href="/spanish-translator/" class:list={['dropdown-item', activeClass('/spanish-translator/')]} role="menuitem" aria-current={isActive('/spanish-translator/') ? 'page' : undefined}>🇪🇸 Spanish Translator</a>
+            <a href="/arabic-translator/" class:list={['dropdown-item', activeClass('/arabic-translator/')]} role="menuitem" aria-current={isActive('/arabic-translator/') ? 'page' : undefined}>🌙 Arabic Translator</a>
             <div class="dropdown-divider"></div>
-            <a href="/language-translators/" class="dropdown-item dropdown-see-all" role="menuitem">See All Languages →</a>
+            <a href="/language-translators/" class:list={['dropdown-item', 'dropdown-see-all', activeClass('/language-translators/')]} role="menuitem" aria-current={isActive('/language-translators/') ? 'page' : undefined}>See All Languages →</a>
           </div>
         </li>
         <li class="nav-dropdown">
@@ -71,11 +79,11 @@ const base = Astro.url.origin;
             Ancient Languages <span class="nav-arrow">▾</span>
           </button>
           <div class="dropdown-menu" role="menu">
-            <a href="/latin-translator/" class="dropdown-item" role="menuitem">🏛 Latin Translator</a>
-            <a href="/old-english/" class="dropdown-item" role="menuitem">⚔ Old English</a>
-            <a href="/ancient-greek/" class="dropdown-item" role="menuitem">🏺 Ancient Greek</a>
+            <a href="/latin-translator/" class:list={['dropdown-item', activeClass('/latin-translator/')]} role="menuitem" aria-current={isActive('/latin-translator/') ? 'page' : undefined}>🏛 Latin Translator</a>
+            <a href="/old-english/" class:list={['dropdown-item', activeClass('/old-english/')]} role="menuitem" aria-current={isActive('/old-english/') ? 'page' : undefined}>⚔ Old English</a>
+            <a href="/ancient-greek/" class:list={['dropdown-item', activeClass('/ancient-greek/')]} role="menuitem" aria-current={isActive('/ancient-greek/') ? 'page' : undefined}>🏺 Ancient Greek</a>
             <div class="dropdown-divider"></div>
-            <a href="/ancient-languages/" class="dropdown-item dropdown-see-all" role="menuitem">See All Ancient →</a>
+            <a href="/ancient-languages/" class:list={['dropdown-item', 'dropdown-see-all', activeClass('/ancient-languages/')]} role="menuitem" aria-current={isActive('/ancient-languages/') ? 'page' : undefined}>See All Ancient →</a>
           </div>
         </li>
         <li class="nav-dropdown">
@@ -83,17 +91,17 @@ const base = Astro.url.origin;
             Tools <span class="nav-arrow">▾</span>
           </button>
           <div class="dropdown-menu" role="menu">
-            <a href="/dialect-translator/" class="dropdown-item" role="menuitem">🗣 Dialect Converter</a>
-            <a href="/fancy-translator/" class="dropdown-item" role="menuitem">✨ Fancy Text</a>
-            <a href="/speak-translate/" class="dropdown-item" role="menuitem">🎙 Speak Translator</a>
-            <a href="/sinhala-translator/" class="dropdown-item" role="menuitem">🇱🇰 Sinhala Translator</a>
-            <a href="/rare-languages/" class="dropdown-item" role="menuitem">💎 Rare Languages</a>
-            <a href="/navajo-translator/" class="dropdown-item" role="menuitem">🪶 Navajo Translator</a>
+            <a href="/dialect-translator/" class:list={['dropdown-item', activeClass('/dialect-translator/')]} role="menuitem" aria-current={isActive('/dialect-translator/') ? 'page' : undefined}>🗣 Dialect Converter</a>
+            <a href="/fancy-translator/" class:list={['dropdown-item', activeClass('/fancy-translator/')]} role="menuitem" aria-current={isActive('/fancy-translator/') ? 'page' : undefined}>✨ Fancy Text</a>
+            <a href="/speak-translate/" class:list={['dropdown-item', activeClass('/speak-translate/')]} role="menuitem" aria-current={isActive('/speak-translate/') ? 'page' : undefined}>🎙 Speak Translator</a>
+            <a href="/sinhala-translator/" class:list={['dropdown-item', activeClass('/sinhala-translator/')]} role="menuitem" aria-current={isActive('/sinhala-translator/') ? 'page' : undefined}>🇱🇰 Sinhala Translator</a>
+            <a href="/rare-languages/" class:list={['dropdown-item', activeClass('/rare-languages/')]} role="menuitem" aria-current={isActive('/rare-languages/') ? 'page' : undefined}>💎 Rare Languages</a>
+            <a href="/navajo-translator/" class:list={['dropdown-item', activeClass('/navajo-translator/')]} role="menuitem" aria-current={isActive('/navajo-translator/') ? 'page' : undefined}>🪶 Navajo Translator</a>
             <div class="dropdown-divider"></div>
-            <a href="/tools-resources/" class="dropdown-item dropdown-see-all" role="menuitem">See All Tools →</a>
+            <a href="/tools-resources/" class:list={['dropdown-item', 'dropdown-see-all', activeClass('/tools-resources/')]} role="menuitem" aria-current={isActive('/tools-resources/') ? 'page' : undefined}>See All Tools →</a>
           </div>
         </li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
+        <li><a href="/blog/" class:list={['nav-link', activeClass('/blog/')]} aria-current={isActive('/blog/') ? 'page' : undefined}>Blog</a></li>
       </ul>
     </nav>
 
@@ -113,33 +121,33 @@ const base = Astro.url.origin;
 
   <div class="mobile-nav" id="mobileNav">
     <nav>
-      <a href="/translator-old-english/" class="mobile-nav-link">Home</a>
-      <a href="/all-languages/" class="mobile-nav-link">All Languages</a>
+      <a href="/translator-old-english/" class:list={['mobile-nav-link', activeClass('/translator-old-english/')]}>Home</a>
+      <a href="/all-languages/" class:list={['mobile-nav-link', activeClass('/all-languages/')]}>All Languages</a>
       <div class="mobile-nav-group">
         <span class="mobile-nav-label">Language Translators</span>
-        <a href="/chinese-translator/" class="mobile-nav-sub">Chinese</a>
-        <a href="/spanish-translator/" class="mobile-nav-sub">Spanish</a>
-        <a href="/arabic-translator/" class="mobile-nav-sub">Arabic</a>
-        <a href="/language-translators/" class="mobile-nav-sub mobile-nav-see-all">See All Languages →</a>
+        <a href="/chinese-translator/" class:list={['mobile-nav-sub', activeClass('/chinese-translator/')]}>Chinese</a>
+        <a href="/spanish-translator/" class:list={['mobile-nav-sub', activeClass('/spanish-translator/')]}>Spanish</a>
+        <a href="/arabic-translator/" class:list={['mobile-nav-sub', activeClass('/arabic-translator/')]}>Arabic</a>
+        <a href="/language-translators/" class:list={['mobile-nav-sub', 'mobile-nav-see-all', activeClass('/language-translators/')]}>See All Languages →</a>
       </div>
       <div class="mobile-nav-group">
         <span class="mobile-nav-label">Ancient Languages</span>
-        <a href="/latin-translator/" class="mobile-nav-sub">Latin</a>
-        <a href="/old-english/" class="mobile-nav-sub">Old English</a>
-        <a href="/ancient-greek/" class="mobile-nav-sub">Ancient Greek</a>
-        <a href="/ancient-languages/" class="mobile-nav-sub mobile-nav-see-all">See All Ancient →</a>
+        <a href="/latin-translator/" class:list={['mobile-nav-sub', activeClass('/latin-translator/')]}>Latin</a>
+        <a href="/old-english/" class:list={['mobile-nav-sub', activeClass('/old-english/')]}>Old English</a>
+        <a href="/ancient-greek/" class:list={['mobile-nav-sub', activeClass('/ancient-greek/')]}>Ancient Greek</a>
+        <a href="/ancient-languages/" class:list={['mobile-nav-sub', 'mobile-nav-see-all', activeClass('/ancient-languages/')]}>See All Ancient →</a>
       </div>
       <div class="mobile-nav-group">
         <span class="mobile-nav-label">Tools</span>
-        <a href="/dialect-translator/" class="mobile-nav-sub">Dialect Converter</a>
-        <a href="/fancy-translator/" class="mobile-nav-sub">Fancy Text</a>
-        <a href="/speak-translate/" class="mobile-nav-sub">Speak Translator</a>
-        <a href="/sinhala-translator/" class="mobile-nav-sub">Sinhala</a>
-        <a href="/rare-languages/" class="mobile-nav-sub">Rare Languages</a>
-        <a href="/navajo-translator/" class="mobile-nav-sub">Navajo</a>
-        <a href="/tools-resources/" class="mobile-nav-sub mobile-nav-see-all">See All Tools →</a>
+        <a href="/dialect-translator/" class:list={['mobile-nav-sub', activeClass('/dialect-translator/')]}>Dialect Converter</a>
+        <a href="/fancy-translator/" class:list={['mobile-nav-sub', activeClass('/fancy-translator/')]}>Fancy Text</a>
+        <a href="/speak-translate/" class:list={['mobile-nav-sub', activeClass('/speak-translate/')]}>Speak Translator</a>
+        <a href="/sinhala-translator/" class:list={['mobile-nav-sub', activeClass('/sinhala-translator/')]}>Sinhala</a>
+        <a href="/rare-languages/" class:list={['mobile-nav-sub', activeClass('/rare-languages/')]}>Rare Languages</a>
+        <a href="/navajo-translator/" class:list={['mobile-nav-sub', activeClass('/navajo-translator/')]}>Navajo</a>
+        <a href="/tools-resources/" class:list={['mobile-nav-sub', 'mobile-nav-see-all', activeClass('/tools-resources/')]}>See All Tools →</a>
       </div>
-      <a href="/blog/" class="mobile-nav-link">Blog</a>
+      <a href="/blog/" class:list={['mobile-nav-link', activeClass('/blog/')]}>Blog</a>
     </nav>
   </div>
 </header>
@@ -162,51 +170,51 @@ const base = Astro.url.origin;
       <div class="footer-col">
         <h4>Languages</h4>
         <ul>
-          <li><a href="/chinese-translator/">Chinese Translator</a></li>
-          <li><a href="/spanish-translator/">Spanish Translator</a></li>
-          <li><a href="/arabic-translator/">Arabic Translator</a></li>
-          <li><a href="/language-translators/">See All Languages →</a></li>
+          <li><a href="/chinese-translator/" class:list={[activeClass('/chinese-translator/')]} aria-current={isActive('/chinese-translator/') ? 'page' : undefined}>Chinese Translator</a></li>
+          <li><a href="/spanish-translator/" class:list={[activeClass('/spanish-translator/')]} aria-current={isActive('/spanish-translator/') ? 'page' : undefined}>Spanish Translator</a></li>
+          <li><a href="/arabic-translator/" class:list={[activeClass('/arabic-translator/')]} aria-current={isActive('/arabic-translator/') ? 'page' : undefined}>Arabic Translator</a></li>
+          <li><a href="/language-translators/" class:list={[activeClass('/language-translators/')]} aria-current={isActive('/language-translators/') ? 'page' : undefined}>See All Languages →</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Ancient</h4>
         <ul>
-          <li><a href="/latin-translator/">Latin Translator</a></li>
-          <li><a href="/old-english/">Old English</a></li>
-          <li><a href="/ancient-greek/">Ancient Greek</a></li>
-          <li><a href="/ancient-languages/">See All Ancient →</a></li>
+          <li><a href="/latin-translator/" class:list={[activeClass('/latin-translator/')]} aria-current={isActive('/latin-translator/') ? 'page' : undefined}>Latin Translator</a></li>
+          <li><a href="/old-english/" class:list={[activeClass('/old-english/')]} aria-current={isActive('/old-english/') ? 'page' : undefined}>Old English</a></li>
+          <li><a href="/ancient-greek/" class:list={[activeClass('/ancient-greek/')]} aria-current={isActive('/ancient-greek/') ? 'page' : undefined}>Ancient Greek</a></li>
+          <li><a href="/ancient-languages/" class:list={[activeClass('/ancient-languages/')]} aria-current={isActive('/ancient-languages/') ? 'page' : undefined}>See All Ancient →</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Tools</h4>
         <ul>
-          <li><a href="/dialect-translator/">Dialect Converter</a></li>
-          <li><a href="/fancy-translator/">Fancy Text</a></li>
-          <li><a href="/speak-translate/">Speak Translator</a></li>
-          <li><a href="/sinhala-translator/">Sinhala Translator</a></li>
-          <li><a href="/rare-languages/">Rare Languages</a></li>
-          <li><a href="/navajo-translator/">Navajo Translator</a></li>
-          <li><a href="/tools-resources/">See All Tools →</a></li>
+          <li><a href="/dialect-translator/" class:list={[activeClass('/dialect-translator/')]} aria-current={isActive('/dialect-translator/') ? 'page' : undefined}>Dialect Converter</a></li>
+          <li><a href="/fancy-translator/" class:list={[activeClass('/fancy-translator/')]} aria-current={isActive('/fancy-translator/') ? 'page' : undefined}>Fancy Text</a></li>
+          <li><a href="/speak-translate/" class:list={[activeClass('/speak-translate/')]} aria-current={isActive('/speak-translate/') ? 'page' : undefined}>Speak Translator</a></li>
+          <li><a href="/sinhala-translator/" class:list={[activeClass('/sinhala-translator/')]} aria-current={isActive('/sinhala-translator/') ? 'page' : undefined}>Sinhala Translator</a></li>
+          <li><a href="/rare-languages/" class:list={[activeClass('/rare-languages/')]} aria-current={isActive('/rare-languages/') ? 'page' : undefined}>Rare Languages</a></li>
+          <li><a href="/navajo-translator/" class:list={[activeClass('/navajo-translator/')]} aria-current={isActive('/navajo-translator/') ? 'page' : undefined}>Navajo Translator</a></li>
+          <li><a href="/tools-resources/" class:list={[activeClass('/tools-resources/')]} aria-current={isActive('/tools-resources/') ? 'page' : undefined}>See All Tools →</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Legal</h4>
         <ul>
-          <li><a href="/about-us/">About Us</a></li>
-          <li><a href="/blog/">Blog</a></li>
-          <li><a href="/privacy-policy/">Privacy Policy</a></li>
-          <li><a href="/terms-and-conditions/">Terms & Conditions</a></li>
-          <li><a href="/cookies/">Cookies Policy</a></li>
-          <li><a href="/sitemap/">Sitemap</a></li>
+          <li><a href="/about-us/" class:list={[activeClass('/about-us/')]} aria-current={isActive('/about-us/') ? 'page' : undefined}>About Us</a></li>
+          <li><a href="/blog/" class:list={[activeClass('/blog/')]} aria-current={isActive('/blog/') ? 'page' : undefined}>Blog</a></li>
+          <li><a href="/privacy-policy/" class:list={[activeClass('/privacy-policy/')]} aria-current={isActive('/privacy-policy/') ? 'page' : undefined}>Privacy Policy</a></li>
+          <li><a href="/terms-and-conditions/" class:list={[activeClass('/terms-and-conditions/')]} aria-current={isActive('/terms-and-conditions/') ? 'page' : undefined}>Terms & Conditions</a></li>
+          <li><a href="/cookies/" class:list={[activeClass('/cookies/')]} aria-current={isActive('/cookies/') ? 'page' : undefined}>Cookies Policy</a></li>
+          <li><a href="/sitemap/" class:list={[activeClass('/sitemap/')]} aria-current={isActive('/sitemap/') ? 'page' : undefined}>Sitemap</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p class="text-sm" style="color:var(--text-muted);">© 2026 Translator Old English. Free for personal and commercial use.</p>
       <div class="text-sm" style="display:flex;gap:16px;">
-        <a href="/privacy-policy/" style="color:var(--text-muted);">Privacy</a>
-        <a href="/terms-and-conditions/" style="color:var(--text-muted);">Terms</a>
-        <a href="/sitemap/" style="color:var(--text-muted);">Sitemap</a>
+        <a href="/privacy-policy/" class:list={['footer-meta-link', activeClass('/privacy-policy/')]} style="color:var(--text-muted);">Privacy</a>
+        <a href="/terms-and-conditions/" class:list={['footer-meta-link', activeClass('/terms-and-conditions/')]} style="color:var(--text-muted);">Terms</a>
+        <a href="/sitemap/" class:list={['footer-meta-link', activeClass('/sitemap/')]} style="color:var(--text-muted);">Sitemap</a>
       </div>
     </div>
   </div>
@@ -228,6 +236,7 @@ const base = Astro.url.origin;
 
   document.querySelectorAll('.nav-dropdown').forEach((dropdown) => {
     const btn = dropdown.querySelector('.nav-dropdown-btn');
+    dropdown.addEventListener('click', (e) => e.stopPropagation());
     btn?.addEventListener('click', (e) => {
       e.stopPropagation();
       const open = dropdown.classList.toggle('open');
