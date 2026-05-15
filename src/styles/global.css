@@ -1,5 +1,4 @@
 /* Translator Old English — medieval manuscript theme */
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
 
 :root {
   --bg: #0E0E0E;
@@ -20,8 +19,8 @@
   --muted-lt: #5A5245;
   --shadow: rgba(0,0,0,0.5);
   --shadow-gold: rgba(201,168,76,0.2);
-  --font-display: 'IM Fell English', Georgia, serif;
-  --font-body: 'Crimson Pro', Georgia, serif;
+  --font-display: 'IM Fell English', Georgia, 'Times New Roman', serif;
+  --font-body: var(--font-display);
   /* legacy aliases */
   --gold-light: var(--gold-lt);
   --gold-dark: var(--gold-dim);
@@ -84,7 +83,18 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { font-size: 16px; scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); -webkit-font-smoothing: antialiased; }
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 12px);
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-display);
+}
+
+/* Form controls default to system UI font — force manuscript face everywhere */
+button, input, select, textarea, optgroup {
+  font-family: inherit;
+}
 
 body {
   font-family: var(--font-display);
@@ -134,6 +144,14 @@ main { max-width: 920px; margin: 0 auto; }
 .section-sm { padding: 44px 0; }
 
 /* Header */
+.site-header,
+.site-footer,
+.desktop-nav,
+.mobile-nav,
+.history-panel {
+  font-family: var(--font-display);
+}
+
 .site-header {
   position: sticky; top: 0; z-index: 200;
   background: var(--bg2);
@@ -382,7 +400,7 @@ main { max-width: 920px; margin: 0 auto; }
   width: 100%; padding: 12px 48px 12px 14px;
   border: 1px solid var(--border-lt); border-radius: 8px;
   background: var(--bg2); color: var(--ink2);
-  font-family: var(--font-body); font-size: var(--fs-base); line-height: 1.6;
+  font-family: var(--font-display); font-size: var(--fs-base); line-height: 1.6;
 }
 .speech-bridge-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; align-items: center; }
 .speech-bridge-hint { font-size: var(--fs-label); color: var(--muted); font-style: italic; flex: 1; min-width: 140px; }
@@ -697,7 +715,7 @@ main { max-width: 920px; margin: 0 auto; }
   flex: 1; min-height: 190px; padding: 14px 16px;
   border: none; outline: none; resize: none;
   background: var(--card); color: var(--ink2);
-  font-family: var(--font-body); font-size: var(--fs-base); line-height: var(--lh-base);
+  font-family: var(--font-display); font-size: var(--fs-base); line-height: var(--lh-base);
   width: 100%; transition: background 0.2s;
 }
 .tool-textarea::placeholder, .comp-input::placeholder { color: var(--muted-lt); font-style: italic; }
