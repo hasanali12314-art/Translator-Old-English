@@ -91,6 +91,8 @@
   --fs-logo-mobile: 17px;
   --fs-logo-desktop: 25px;
   --fs-label: 13px;
+  --fs-nav: 12px;
+  --fs-nav-sub: 14px;
   --fs-body: 15px;
   --fs-h3-h4: 19px;
   --fs-section: 21px;
@@ -319,7 +321,7 @@ main { max-width: 920px; margin: 0 auto; }
 .nav-link {
   display: flex; align-items: center; gap: 4px;
   padding: 6px 10px; border-radius: 7px;
-  font-family: var(--font-display); font-size: var(--fs-label); font-weight: 500;
+  font-family: var(--font-display); font-size: var(--fs-nav); font-weight: 500;
   font-style: normal;
   letter-spacing: 0.06em;
   color: var(--muted); background: none; border: none; cursor: pointer;
@@ -367,7 +369,7 @@ main { max-width: 920px; margin: 0 auto; }
   display: flex; align-items: center; gap: 8px;
   padding: 9px 12px; border-radius: 6px;
   font-family: var(--font-display);
-  font-size: var(--fs-secondary); color: var(--muted); text-decoration: none;
+  font-size: var(--fs-nav-sub); color: var(--muted); text-decoration: none;
   letter-spacing: 0.02em;
   transition: color 0.2s ease, background 0.2s ease;
 }
@@ -393,7 +395,7 @@ main { max-width: 920px; margin: 0 auto; }
   padding: 0 12px; height: 32px;
   border: 1px solid var(--border-lt); border-radius: 7px;
   background: transparent; color: var(--muted);
-  font-family: var(--font-display); font-size: var(--fs-label);
+  font-family: var(--font-display); font-size: var(--fs-nav);
   letter-spacing: 0.02em;
   cursor: pointer; transition: var(--transition);
 }
@@ -413,7 +415,7 @@ main { max-width: 920px; margin: 0 auto; }
 .mobile-nav-link {
   display: block; padding: 12px 16px; color: var(--ink);
   font-family: var(--font-display);
-  font-weight: 400; font-size: var(--fs-base); letter-spacing: 0.02em;
+  font-weight: 400; font-size: var(--fs-nav-sub); letter-spacing: 0.02em;
   border-radius: 6px; text-decoration: none;
 }
 .mobile-nav-link:hover,
@@ -421,13 +423,13 @@ main { max-width: 920px; margin: 0 auto; }
 .mobile-nav-label {
   display: block; padding: 8px 16px;
   font-family: var(--font-display);
-  font-size: var(--fs-label); font-weight: 400;
+  font-size: var(--fs-nav); font-weight: 400;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
 }
 .mobile-nav-sub {
   display: block; padding: 8px 32px; color: var(--muted);
   font-family: var(--font-display);
-  font-size: var(--fs-secondary); letter-spacing: 0.02em;
+  font-size: var(--fs-nav-sub); letter-spacing: 0.02em;
   text-decoration: none; border-radius: 6px;
 }
 .mobile-nav-sub:hover,
