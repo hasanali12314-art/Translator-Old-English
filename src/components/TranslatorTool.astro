@@ -151,7 +151,12 @@ const hasLangSelect = sourceLanguages.length > 0 || targetLanguages.length > 0;
           <span class="trans-lang">{inputLabel}</span>
           <span class="char-ct char-count"><span class="comp-char">0</span> / 5000</span>
         </div>
-        <textarea class="tool-textarea comp-input" id="comp-input" placeholder={inputPlaceholder} maxlength="5000" aria-label="Input text"></textarea>
+        <div class="textarea-wrap">
+          <textarea class="tool-textarea comp-input" id="comp-input" placeholder={inputPlaceholder} maxlength="5000" aria-label="Input text"></textarea>
+          <button type="button" class="mic-btn" data-speech-btn data-speech-for="comp-input" aria-label="Start voice input" title="Speak to type">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg>
+          </button>
+        </div>
       </div>
       <div class="trans-mid">
         <button type="button" class="swap-btn flip-btn comp-flip" title="Flip direction" aria-label="Flip translation direction">⇄</button>

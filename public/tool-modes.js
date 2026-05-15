@@ -144,6 +144,26 @@
         note.textContent = 'Image received: “' + file.name + '”. Switch to Text mode to paste extracted text, or full image OCR translation is coming soon.';
       }
     });
+
+    const speechTa = stack.querySelector('#imageSpeechText');
+    const speechApply = stack.querySelector('#imageSpeechApply');
+    speechApply?.addEventListener('click', function () {
+      const text = speechTa && speechTa.value.trim();
+      if (!text) {
+        if (note) {
+          note.hidden = false;
+          note.style.color = '#c04040';
+          note.textContent = 'Speak or type some text first, then tap “Use in Text Translator”.';
+        }
+        return;
+      }
+      if (window.fillMainTextInput) window.fillMainTextInput(text, stack);
+      if (note) {
+        note.hidden = false;
+        note.style.color = 'var(--gold)';
+        note.textContent = 'Text loaded. Click Translate in Text mode.';
+      }
+    });
   }
 
   function setupDocUpload(stack) {

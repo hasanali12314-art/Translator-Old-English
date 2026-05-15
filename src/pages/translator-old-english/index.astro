@@ -213,7 +213,12 @@ const orgSchema = {
             <span class="trans-lang" id="inLabel">Modern English</span>
             <span class="char-ct"><span id="charCount">0</span> / 5000</span>
           </div>
-          <textarea id="input-text" placeholder="Enter your modern text here..." maxlength="5000" aria-label="Input text"></textarea>
+          <div class="textarea-wrap">
+            <textarea id="input-text" placeholder="Enter your modern text here..." maxlength="5000" aria-label="Input text"></textarea>
+            <button type="button" class="mic-btn" data-speech-btn data-speech-for="input-text" aria-label="Start voice input" title="Speak to type">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg>
+            </button>
+          </div>
         </div>
         <div class="trans-mid">
           <button type="button" class="swap-btn" id="flipBtn" title="Flip direction" aria-label="Flip translation direction">⇄</button>
@@ -239,6 +244,7 @@ const orgSchema = {
   </div>
   </ToolModeTabs>
 
+  <section class="page-section page-section--examples">
   <div class="sec-head"><h2 class="sec-title">Quick Examples</h2><div class="sec-line"></div></div>
   <p class="sec-sub">Click any card to load it into the <strong>old english sentence translator</strong></p>
   <div class="ex-grid grid-3">
@@ -250,13 +256,15 @@ const orgSchema = {
       <div class="ex-card example-card" data-modern={ex.m} data-old={ex.o} role="button" tabindex="0">
         <div class="ex-tag example-label">Modern</div>
         <div class="ex-modern example-text">{ex.m}</div>
-        <div class="ex-hr" style="height:1px;background:var(--border);margin:10px 0"></div>
+        <div class="ex-hr"></div>
         <div class="ex-tag example-label">Old English</div>
         <div class="ex-old example-text">{ex.o}</div>
       </div>
     ))}
   </div>
+  </section>
 
+  <section class="page-section page-section--styles">
   <div class="sec-head"><h2 class="sec-title">Choose Your Translation Style</h2><div class="sec-line"></div></div>
   <p class="sec-sub">Four distinct historical periods — each with its own character. Whether you need an <strong>early modern english translator</strong> or a <strong>middle english translator</strong>, we have you covered.</p>
   <div class="sc-grid grid-4">
@@ -274,6 +282,7 @@ const orgSchema = {
       </div>
     ))}
   </div>
+  </section>
 
   <div class="info-block">
     <h2>Old English Translator — Complete Guide</h2>
