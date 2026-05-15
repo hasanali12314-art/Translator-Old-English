@@ -294,8 +294,6 @@ import Layout from '../../layouts/Layout.astro';
 </section>
 
 <script>
-  import { translateText } from '../../lib/translate';
-
   // Character counter
   const inputText = document.getElementById('input-text') as HTMLTextAreaElement;
   const charCount = document.getElementById('charCount');
@@ -337,41 +335,6 @@ import Layout from '../../layouts/Layout.astro';
     if (charCount) charCount.textContent = '0';
     const copyBtn = document.getElementById('copyBtn');
     if (copyBtn) copyBtn.style.opacity = '0';
-  });
-
-  // Translate
-  document.getElementById('translateBtn')?.addEventListener('click', async () => {
-    const inp = (document.getElementById('input-text') as HTMLTextAreaElement).value.trim();
-    if (!inp) return;
-    const style = (document.getElementById('style-select') as HTMLSelectElement).value;
-    const styleMap: Record<string,string> = {early:'Early (1500s)',middle:'Middle (1300s)',ancient:'Ancient (800s)',simple:'Simple Old-Style'};
-    const out = document.getElementById('output-text') as HTMLTextAreaElement;
-    const btn = document.getElementById('translateBtn') as HTMLButtonElement;
-    const pronouns = document.getElementById('pronounToggle')?.classList.contains('active') ?? true;
-    const verbs = document.getElementById('verbToggle')?.classList.contains('active') ?? true;
-    const vocab = document.getElementById('vocabToggle')?.classList.contains('active') ?? true;
-    btn.disabled = true;
-    const prev = btn.textContent;
-    btn.textContent = 'Translating…';
-    try {
-      out.value = await translateText(inp, {
-        mode: 'archaic',
-        sourceLang: 'en',
-        targetLang: 'ang',
-        style,
-        usePronouns: pronouns,
-        useVerbs: verbs,
-        useVocab: vocab,
-      });
-      const copyBtn = document.getElementById('copyBtn');
-      if (copyBtn) copyBtn.style.opacity = '1';
-      (window as any).saveToHistory?.(styleMap[style] || style, inp, out.value);
-    } catch {
-      out.value = 'Translation failed. Please try again.';
-    } finally {
-      btn.disabled = false;
-      btn.textContent = prev ?? '✦ Translate';
-    }
   });
 
   // Copy

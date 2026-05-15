@@ -126,10 +126,11 @@ const hasLangSelect = sourceLanguages.length > 0 || targetLanguages.length > 0;
     <div class="tool-box" style="position:relative;">
       <label>{outputLabel}</label>
       <textarea class="tool-textarea comp-output" placeholder={outputPlaceholder} readonly aria-live="polite"></textarea>
-      <p class="comp-error" style="display:none;color:#e57373;font-size:0.8rem;margin-top:8px;"></p>
       <button class="btn btn-ghost btn-sm comp-copy" style="opacity:0;position:absolute;bottom:44px;right:8px;">📋 Copy</button>
     </div>
   </div>
+
+  <p class="comp-error" role="alert" style="display:none;color:#e57373;font-size:0.85rem;margin:12px 0 0;padding:10px 14px;background:rgba(229,115,115,0.12);border:1px solid rgba(229,115,115,0.3);border-radius:8px;"></p>
 
   <div class="tool-actions">
     <button class="btn btn-ghost comp-clear">✕ Clear</button>
@@ -137,110 +138,3 @@ const hasLangSelect = sourceLanguages.length > 0 || targetLanguages.length > 0;
   </div>
 </div>
 
-<script>
-  import { translateText, langFromLabel } from '../lib/translate';
-  import type { DialectId } from '../lib/dialect';
-
-  function toggleActive(area: Element, key: string): boolean {
-    const el = area.querySelector(`[data-toggle="${key}"]`);
-    return el?.classList.contains('active') ?? true;
-  }
-
-  document.querySelectorAll('.tool-area').forEach(area => {
-    const root = area as HTMLElement;
-    const inp = area.querySelector('.comp-input') as HTMLTextAreaElement;
-    const out = area.querySelector('.comp-output') as HTMLTextAreaElement;
-    const charEl = area.querySelector('.comp-char');
-    const copyBtn = area.querySelector('.comp-copy') as HTMLButtonElement;
-    const errEl = area.querySelector('.comp-error') as HTMLParagraphElement;
-    const translateBtn = area.querySelector('.comp-translate') as HTMLButtonElement;
-
-    inp?.addEventListener('input', () => { if(charEl) charEl.textContent = String(inp.value.length); });
-
-    area.querySelector('.comp-flip')?.addEventListener('click', () => {
-      const tmp = inp.value; inp.value = out.value; out.value = tmp;
-      const src = root.dataset.sourceLang ?? 'en';
-      const tgt = root.dataset.targetLang ?? 'es';
-      root.dataset.sourceLang = tgt;
-      root.dataset.targetLang = src;
-      const srcSel = area.querySelector('#source-lang') as HTMLSelectElement;
-      const tgtSel = area.querySelector('#target-lang') as HTMLSelectElement;
-      if (srcSel && tgtSel) {
-        const tmpOpt = srcSel.value;
-        srcSel.value = tgtSel.value;
-        tgtSel.value = tmpOpt;
-      }
-      if(charEl) charEl.textContent = String(inp.value.length);
-    });
-
-    area.querySelector('.comp-clear')?.addEventListener('click', () => {
-      inp.value = ''; out.value = '';
-      if(charEl) charEl.textContent = '0';
-      if(copyBtn) copyBtn.style.opacity = '0';
-      if(errEl) errEl.style.display = 'none';
-    });
-
-    area.querySelector('.comp-translate')?.addEventListener('click', async () => {
-      const text = inp.value.trim();
-      if(!text) return;
-
-      const mode = (root.dataset.mode ?? 'translate') as 'translate' | 'archaic' | 'fancy' | 'dialect';
-      let source = root.dataset.sourceLang ?? 'en';
-      let target = root.dataset.targetLang ?? 'es';
-
-      const srcSel = area.querySelector('#source-lang') as HTMLSelectElement;
-      const tgtSel = area.querySelector('#target-lang') as HTMLSelectElement;
-      if (srcSel?.value) source = langFromLabel(srcSel.selectedOptions[0]?.textContent ?? srcSel.value);
-      if (tgtSel?.value) target = langFromLabel(tgtSel.selectedOptions[0]?.textContent ?? tgtSel.value);
-      if (source === 'auto') source = 'en';
-
-      const styleSel = area.querySelector('#style-select-c') as HTMLSelectElement;
-      const dialectSel = area.querySelector('#dialect-select-c') as HTMLSelectElement;
-
-      if(errEl) errEl.style.display = 'none';
-      const prevLabel = translateBtn.textContent;
-      translateBtn.disabled = true;
-      translateBtn.textContent = 'Translating…';
-
-      try {
-        const result = await translateText(text, {
-          sourceLang: source,
-          targetLang: target,
-          mode,
-          style: styleSel?.value ?? 'early',
-          dialect: (dialectSel?.value ?? 'british') as DialectId,
-          usePronouns: toggleActive(area, 'pronouns'),
-          useVerbs: toggleActive(area, 'verbs'),
-          useVocab: toggleActive(area, 'vocab'),
-        });
-        out.value = result;
-        if(copyBtn) copyBtn.style.opacity = '1';
-        (window as any).saveToHistory?.('Translation', text, result);
-      } catch (e) {
-        const msg = e instanceof Error ? e.message : 'Translation failed. Please try again.';
-        if(errEl) { errEl.textContent = msg; errEl.style.display = 'block'; }
-        out.value = '';
-      } finally {
-        translateBtn.disabled = false;
-        translateBtn.textContent = prevLabel ?? '✦ Translate';
-      }
-    });
-
-    copyBtn?.addEventListener('click', () => {
-      navigator.clipboard.writeText(out.value);
-      copyBtn.textContent = '✓ Copied!';
-      setTimeout(() => copyBtn.textContent = '📋 Copy', 2000);
-    });
-
-    area.querySelectorAll('.toggle').forEach(t => {
-      t.addEventListener('click', () => t.classList.toggle('active'));
-    });
-    const advToggle = area.querySelector('#advancedToggle2');
-    const advContent = area.querySelector('#advancedContent2') as HTMLElement;
-    const advArrow = area.querySelector('#advancedArrow2') as HTMLElement;
-    advToggle?.addEventListener('click', () => {
-      const open = advContent?.classList.toggle('open');
-      if(advArrow) advArrow.style.transform = open ? 'rotate(180deg)' : '';
-    });
-  });
-</script>
