@@ -139,7 +139,6 @@
 [data-theme="dark"] main .hero-section .hero-sub {
   color: #ffffff !important;
 }
-[data-theme="dark"] main .sec-title,
 [data-theme="dark"] main .sec-sub,
 [data-theme="dark"] main .section-heading p {
   color: #ffffff !important;
@@ -170,8 +169,6 @@
 [data-theme="dark"] main .user-desc {
   color: #ffffff !important;
 }
-[data-theme="dark"] main .info-block h2,
-[data-theme="dark"] main .info-block h3,
 [data-theme="dark"] main .info-block p,
 [data-theme="dark"] main .info-block li,
 [data-theme="dark"] main .info-block ul {
