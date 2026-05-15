@@ -374,12 +374,12 @@ const orgSchema = {
 
   <div class="info-block">
     <h2>Old English Translator — Frequently Asked Questions</h2>
-    <div class="faq" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="faq">
       {faqItems.map(f => (
-        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <button type="button" class="faq-question faq-q" itemprop="name">{f.q} <span class="faq-icon">+</span></button>
-          <div class="faq-answer faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <span itemprop="text">{f.a}</span>
+        <div class="faq-item">
+          <button type="button" class="faq-question faq-q">{f.q} <span class="faq-icon">+</span></button>
+          <div class="faq-answer faq-a">
+            <span>{f.a}</span>
           </div>
         </div>
       ))}
