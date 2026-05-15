@@ -23,6 +23,8 @@ const homeActiveClass = () => (isHome ? 'active' : '');
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
   <meta name="description" content={description} />
   <title>{title}</title>
   {canonical && <link rel="canonical" href={`${base}${canonical}`} />}
@@ -56,6 +58,7 @@ const homeActiveClass = () => (isHome ? 'active' : '');
 <header class="site-header" role="banner">
   <div class="header-inner container">
     <a href="/" class="site-logo" id="site-logo">
+      <img src="/logo-icon.png" alt="Translator Old English logo" class="logo-img" width="36" height="36" />
       <span class="logo-main">Translator <em>Old English</em></span>
       <span class="logo-sub">Free AI-powered archaic language tool</span>
     </a>

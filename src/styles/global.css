@@ -145,9 +145,23 @@ main { max-width: 920px; margin: 0 auto; }
 }
 .site-logo {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
   flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.logo-text-wrap {
+  display: flex;
+  flex-direction: column;
 }
 .logo-icon { display: none; }
 .logo-text, .logo-main {
