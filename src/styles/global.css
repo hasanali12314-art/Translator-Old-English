@@ -1429,8 +1429,9 @@ main { max-width: 920px; margin: 0 auto; }
   /* Homepage mobile: hero + mode tabs visible without scrolling up */
   .page-home.container--page { padding-top: 8px; }
   .page-home .hero-section { padding: 4px 0 2px; }
+  .page-home .hero-badge .badge,
   .page-home .hero-tag {
-    margin-bottom: 6px;
+    margin-bottom: 6px !important;
     padding: 4px 12px;
     font-size: 10px;
     line-height: 1.35;

@@ -245,6 +245,11 @@ const homeActiveClass = () => (isHome ? 'active' : '');
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     const scrollHomeTop = () => window.scrollTo(0, 0);
     scrollHomeTop();
+    requestAnimationFrame(() => {
+      scrollHomeTop();
+      requestAnimationFrame(scrollHomeTop);
+    });
+    window.addEventListener('load', scrollHomeTop);
     window.addEventListener('pageshow', (e) => { if (e.persisted) scrollHomeTop(); });
   }
 

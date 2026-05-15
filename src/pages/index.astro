@@ -402,17 +402,6 @@ const orgSchema = {
 </div>
 
 <script>
-  if (window.matchMedia('(max-width: 768px)').matches) {
-    requestAnimationFrame(() => {
-      const tool = document.getElementById('tool-area');
-      if (!tool) return;
-      const top = tool.getBoundingClientRect().top;
-      if (top > window.innerHeight * 0.25) {
-        tool.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  }
-
   const inputText = document.getElementById('input-text') as HTMLTextAreaElement;
   const charCount = document.getElementById('charCount');
   inputText?.addEventListener('input', () => {
