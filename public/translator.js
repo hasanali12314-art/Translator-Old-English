@@ -276,7 +276,7 @@
         inp.value = '';
         out.value = '';
         if (charEl) charEl.textContent = '0';
-        if (copyBtn) copyBtn.style.opacity = '0';
+        if (copyBtn) { copyBtn.style.opacity = '0'; copyBtn.classList.remove('show'); }
         if (errEl) errEl.style.display = 'none';
       });
     }
@@ -316,7 +316,7 @@
         });
         out.value = result;
         out.removeAttribute('placeholder');
-        if (copyBtn) copyBtn.style.opacity = '1';
+        if (copyBtn) { copyBtn.style.opacity = '1'; copyBtn.classList.add('show'); }
         if (window.saveToHistory) window.saveToHistory('Translation', text, result);
       } catch (e) {
         const msg = (e && e.message) ? e.message : 'Translation failed. Check your connection or disable ad blockers.';
@@ -350,7 +350,8 @@
     if (advToggle && advContent) {
       advToggle.addEventListener('click', function () {
         const open = advContent.classList.toggle('open');
-        if (advArrow) advArrow.style.transform = open ? 'rotate(180deg)' : '';
+        advToggle.classList.toggle('open', open);
+        if (advArrow) advArrow.style.transform = open ? 'rotate(90deg)' : '';
       });
     }
   }
@@ -387,7 +388,7 @@
         });
         out.value = result;
         const copyBtn = document.getElementById('copyBtn');
-        if (copyBtn) copyBtn.style.opacity = '1';
+        if (copyBtn) { copyBtn.style.opacity = '1'; copyBtn.classList.add('show'); }
         if (window.saveToHistory) window.saveToHistory(style, text, result);
       } catch (e) {
         out.value = '';

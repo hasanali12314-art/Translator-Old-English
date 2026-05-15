@@ -34,48 +34,51 @@ const hasLangSelect = sourceLanguages.length > 0 || targetLanguages.length > 0;
 ---
 
 <div
-  class="tool-area"
+  class="tool-area tool-card"
   id="tool-area"
   data-source-lang={sourceLang}
   data-target-lang={targetLang}
   data-mode={mode}
 >
   {showStyleDropdown && (
-    <div class="tool-controls" style="margin-bottom:16px">
-      <label class="control-label" for="style-select-c">Translation Style</label>
-      <select class="select" id="style-select-c" style="max-width:340px;margin-top:8px">
-        <option value="early">📜 Early Style — 1500s to 1600s</option>
-        <option value="middle">⚔️ Middle Style — 1300s to 1400s</option>
-        <option value="ancient">🏛️ Ancient Style — 800s to 1000s</option>
-        <option value="simple">✨ Simple Old-Style — Casual Archaic</option>
-      </select>
+    <div class="style-row tool-controls">
+      <div class="field-wrap">
+        <label class="field-label" for="style-select-c">Translation Style</label>
+        <select class="select" id="style-select-c">
+          <option value="early">🎭 Shakespeare Style — Early Modern English (1500s–1600s)</option>
+          <option value="middle">📜 Medieval Style — Middle English (1300s–1400s)</option>
+          <option value="ancient">⚔️ Anglo-Saxon — True Old English (800s–1000s)</option>
+          <option value="simple">✨ Archaic Simplified — Easy thee/thou style</option>
+        </select>
+      </div>
     </div>
   )}
 
   {showDialectDropdown && (
-    <div class="tool-controls" style="margin-bottom:16px">
-      <label class="control-label" for="dialect-select-c">Dialect</label>
-      <select class="select" id="dialect-select-c" style="max-width:340px;margin-top:8px">
-        <option value="british">🇬🇧 British English</option>
-        <option value="southern">🇺🇸 Southern US</option>
-        <option value="scottish">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scottish</option>
-        <option value="australian">🇦🇺 Australian</option>
-        <option value="irish">🇮🇪 Irish</option>
-      </select>
+    <div class="style-row tool-controls">
+      <div class="field-wrap">
+        <label class="field-label" for="dialect-select-c">Dialect</label>
+        <select class="select" id="dialect-select-c">
+          <option value="british">🇬🇧 British English</option>
+          <option value="southern">🇺🇸 Southern US</option>
+          <option value="scottish">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scottish</option>
+          <option value="australian">🇦🇺 Australian</option>
+          <option value="irish">🇮🇪 Irish</option>
+        </select>
+      </div>
     </div>
   )}
 
   {hasLangSelect && (
-    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:end;margin-bottom:16px">
-      <div>
-        <label class="control-label" for="source-lang" style="display:block;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">From</label>
+    <div class="style-row" style="margin-bottom:18px">
+      <div class="field-wrap">
+        <label class="field-label" for="source-lang">From</label>
         <select class="select" id="source-lang">
           {sourceLanguages.map(l => <option value={resolveLangCode(l)} data-label={l}>{l}</option>)}
         </select>
       </div>
-      <div style="padding-bottom:4px"></div>
-      <div>
-        <label class="control-label" for="target-lang" style="display:block;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">To</label>
+      <div class="field-wrap">
+        <label class="field-label" for="target-lang">To</label>
         <select class="select" id="target-lang">
           {targetLanguages.map(l => <option value={resolveLangCode(l)} data-label={l}>{l}</option>)}
         </select>
@@ -84,58 +87,69 @@ const hasLangSelect = sourceLanguages.length > 0 || targetLanguages.length > 0;
   )}
 
   {showAdvanced && (
-    <div class="advanced-panel" style="margin-bottom:16px">
-      <button class="advanced-toggle" id="advancedToggle2">
-        <span>⚙️ Advanced Settings</span>
-        <span id="advancedArrow2" style="transition:transform 0.3s">▾</span>
+    <div class="advanced-panel">
+      <button type="button" class="advanced-toggle adv-btn" id="advancedToggle2" aria-expanded="false">
+        ⚙ Advanced <span class="adv-chevron" id="advancedArrow2">›</span>
       </button>
-      <div class="advanced-content" id="advancedContent2">
-        <div class="advanced-row">
-          <span class="advanced-label">Formality Level</span>
-          <div style="display:flex;align-items:center;gap:12px;flex:1;max-width:280px;margin-left:24px">
-            <span style="color:var(--text-muted)">Casual</span>
-            <input type="range" class="range-slider" min="1" max="5" value="3" style="flex:1">
-            <span style="color:var(--text-muted)">Ceremonial</span>
+      <div class="advanced-content adv-panel" id="advancedContent2">
+        <div class="adv-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+          <div class="adv-item">
+            <label>Formality Level</label>
+            <input type="range" class="range-slider" min="1" max="5" value="3" style="width:100%;margin-top:8px">
+            <div class="range-labels" style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted-lt);margin-top:3px">
+              <span>Casual</span><span>Ceremonial</span>
+            </div>
           </div>
-        </div>
-        <div class="advanced-row">
-          <span class="advanced-label">Old Pronouns (thee/thou)</span>
-          <button class="toggle active" data-toggle="pronouns" role="switch" aria-checked="true"></button>
-        </div>
-        <div class="advanced-row">
-          <span class="advanced-label">Old Verb Endings (-eth, -hath)</span>
-          <button class="toggle active" data-toggle="verbs" role="switch" aria-checked="true"></button>
-        </div>
-        <div class="advanced-row">
-          <span class="advanced-label">Archaic Vocabulary</span>
-          <button class="toggle active" data-toggle="vocab" role="switch" aria-checked="true"></button>
+          <div class="adv-item">
+            <div class="adv-row advanced-row">
+              <label>Old Pronouns (thee/thou)</label>
+              <button type="button" class="toggle active" data-toggle="pronouns" role="switch" aria-checked="true"></button>
+            </div>
+          </div>
+          <div class="adv-item">
+            <div class="adv-row advanced-row">
+              <label>Old Verb Endings (-eth, -hath)</label>
+              <button type="button" class="toggle active" data-toggle="verbs" role="switch" aria-checked="true"></button>
+            </div>
+          </div>
+          <div class="adv-item">
+            <div class="adv-row advanced-row">
+              <label>Archaic Vocabulary</label>
+              <button type="button" class="toggle active" data-toggle="vocab" role="switch" aria-checked="true"></button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   )}
 
-  <div class="tool-boxes">
-    <div class="tool-box">
-      <label for="comp-input">{inputLabel}</label>
-      <textarea class="tool-textarea comp-input" id="comp-input" placeholder={inputPlaceholder} maxlength="5000"></textarea>
-      <div class="char-count"><span class="comp-char">0</span> / 5000</div>
-    </div>
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:40px">
-      <button class="flip-btn comp-flip" title="Flip direction" aria-label="Flip translation direction">⇄</button>
-      <span style="color:var(--text-muted);margin-top:8px">Flip</span>
-    </div>
-    <div class="tool-box" style="position:relative">
-      <label>{outputLabel}</label>
-      <textarea class="tool-textarea comp-output" placeholder={outputPlaceholder} readonly aria-live="polite"></textarea>
-      <button class="btn btn-ghost btn-sm comp-copy" style="opacity:0;position:absolute;bottom:44px;right:8px">📋 Copy</button>
+  <div class="boxes tool-boxes">
+    <div class="trans-row" style="display:contents">
+      <div class="trans-side tool-box">
+        <div class="trans-top">
+          <span class="trans-lang">{inputLabel}</span>
+          <span class="char-ct char-count"><span class="comp-char">0</span> / 5000</span>
+        </div>
+        <textarea class="tool-textarea comp-input" id="comp-input" placeholder={inputPlaceholder} maxlength="5000" aria-label="Input text"></textarea>
+      </div>
+      <div class="trans-mid">
+        <button type="button" class="swap-btn flip-btn comp-flip" title="Flip direction" aria-label="Flip translation direction">⇄</button>
+        <span class="flip-lbl">Flip</span>
+      </div>
+      <div class="trans-side trans-out tool-box" style="position:relative">
+        <div class="trans-top">
+          <span class="trans-lang">{outputLabel}</span>
+          <button type="button" class="copy-btn comp-copy" style="opacity:0">⎘ Copy</button>
+        </div>
+        <textarea class="tool-textarea comp-output" placeholder={outputPlaceholder} readonly aria-live="polite"></textarea>
+      </div>
     </div>
   </div>
 
-  <p class="comp-error" role="alert" style="display:none;color:#e57373;margin:12px 0 0;padding:10px 14px;background:rgba(229,115,115,0.12);border:1px solid rgba(229,115,115,0.3);border-radius:8px"></p>
+  <p class="comp-error" role="alert" style="display:none"></p>
 
-  <div class="tool-actions">
-    <button class="btn btn-ghost comp-clear">✕ Clear</button>
-    <button class="btn btn-primary btn-lg comp-translate">✦ Translate</button>
+  <div class="actions tool-actions">
+    <button type="button" class="btn-clear btn btn-ghost comp-clear">✕ Clear</button>
+    <button type="button" class="btn-translate btn btn-primary comp-translate">✦ Translate</button>
   </div>
 </div>
-

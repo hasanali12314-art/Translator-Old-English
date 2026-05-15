@@ -7,295 +7,246 @@ import Layout from '../../layouts/Layout.astro';
   canonical="/translator-old-english/"
 >
 
-<!-- Hero -->
-<section class="hero-section">
-  <div class="container">
-    <div class="hero-badge"><span class="badge badge-gold">✦ AI-Powered · No Signup</span></div>
-    <h1 id="main-heading">Translator Old English — Turn Modern Text Into Authentic Archaic English Free</h1>
-    <p class="hero-sub">Choose Early (1500s), Middle (1300s), Ancient (800s), or Simple style — up to 5,000 characters, instant results</p>
+<div class="container" style="padding-top:44px;padding-bottom:80px">
+
+  <div class="hero hero-section">
+    <div class="hero-tag">Free · <span>AI-Powered</span> · Instant · No Signup</div>
+    <h1 id="main-heading">Translator <em>Old English</em></h1>
+    <p class="hero-sub">Transform modern text into authentic archaic English — four historical styles, free forever</p>
+    <div class="hero-line"></div>
   </div>
-</section>
 
-<!-- TOOL AREA -->
-<section class="section-sm" id="tool-area">
-  <div class="container">
-    <div class="tool-area">
-      <!-- Style Selector -->
-      <div class="tool-controls">
-        <div class="control-group">
-          <label class="control-label" for="style-select">Translation Style</label>
-          <select class="select" id="style-select" style="max-width:340px">
-            <option value="early">📜 Early Style — 1500s to 1600s</option>
-            <option value="middle">⚔️ Middle Style — 1300s to 1400s</option>
-            <option value="ancient">🏛️ Ancient Style — 800s to 1000s</option>
-            <option value="simple">✨ Simple Old-Style — Casual Archaic</option>
-          </select>
-        </div>
+  <div class="tool-card tool-area" id="tool-area">
+    <div class="style-row">
+      <div class="field-wrap">
+        <label class="field-label" for="style-select">Translation Style</label>
+        <select class="select" id="style-select">
+          <option value="early">🎭 Shakespeare Style — Early Modern English (1500s–1600s)</option>
+          <option value="middle">📜 Medieval Style — Middle English (1300s–1400s)</option>
+          <option value="ancient">⚔️ Anglo-Saxon — True Old English (800s–1000s)</option>
+          <option value="simple">✨ Archaic Simplified — Easy thee/thou style</option>
+        </select>
       </div>
+      <button type="button" class="adv-btn" id="advancedToggle" aria-expanded="false">
+        ⚙ Advanced <span class="adv-chevron" id="advancedArrow">›</span>
+      </button>
+    </div>
 
-      <!-- Advanced Panel -->
-      <div class="advanced-panel" style="margin-top:16px">
-        <button class="advanced-toggle" id="advancedToggle" aria-expanded="false">
-          <span>⚙️ Advanced Settings</span>
-          <span id="advancedArrow" style="transition:transform 0.3s">▾</span>
-        </button>
-        <div class="advanced-content" id="advancedContent">
-          <div class="advanced-row">
-            <span class="advanced-label">Formality Level</span>
-            <div style="display:flex;align-items:center;gap:12px;flex:1;max-width:280px;margin-left:24px">
-              <span style="color:var(--text-muted)">Casual</span>
-              <input type="range" class="range-slider" id="formalitySlider" min="1" max="5" value="3" style="flex:1">
-              <span style="color:var(--text-muted)">Ceremonial</span>
-            </div>
+    <div class="adv-panel advanced-content" id="advancedContent">
+      <div class="adv-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+        <div class="adv-item">
+          <label>Formality Level</label>
+          <input type="range" class="range-slider" id="formalitySlider" min="1" max="5" value="3" style="width:100%;margin-top:8px">
+          <div class="range-labels" style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted-lt);margin-top:3px">
+            <span>Casual</span><span>Ceremonial</span>
           </div>
-          <div class="advanced-row">
-            <span class="advanced-label">Old Pronouns (thee/thou)</span>
-            <button class="toggle active" id="pronounToggle" role="switch" aria-checked="true"></button>
+        </div>
+        <div class="adv-item">
+          <div class="adv-row">
+            <label>Old Pronouns (thee/thou)</label>
+            <button type="button" class="toggle active" id="pronounToggle" role="switch" aria-checked="true"></button>
           </div>
-          <div class="advanced-row">
-            <span class="advanced-label">Old Verb Endings (-eth, -hath)</span>
-            <button class="toggle active" id="verbToggle" role="switch" aria-checked="true"></button>
+        </div>
+        <div class="adv-item">
+          <div class="adv-row">
+            <label>Old Verb Endings (-eth, -hath)</label>
+            <button type="button" class="toggle active" id="verbToggle" role="switch" aria-checked="true"></button>
           </div>
-          <div class="advanced-row">
-            <span class="advanced-label">Archaic Vocabulary</span>
-            <button class="toggle active" id="vocabToggle" role="switch" aria-checked="true"></button>
+        </div>
+        <div class="adv-item">
+          <div class="adv-row">
+            <label>Archaic Vocabulary</label>
+            <button type="button" class="toggle active" id="vocabToggle" role="switch" aria-checked="true"></button>
           </div>
         </div>
       </div>
-
-      <!-- Translation Boxes -->
-      <div class="tool-boxes">
-        <div class="tool-box">
-          <label for="input-text">Modern English</label>
-          <textarea class="tool-textarea" id="input-text" placeholder="Type or paste your modern English text here..." maxlength="5000" aria-label="Input text"></textarea>
-          <div class="char-count"><span id="charCount">0</span> / 5000</div>
-        </div>
-
-        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:40px">
-          <button class="flip-btn" id="flipBtn" title="Flip direction" aria-label="Flip translation direction">⇄</button>
-          <span style="color:var(--text-muted);margin-top:8px;text-align:center">Flip</span>
-        </div>
-
-        <div class="tool-box" style="position:relative">
-          <label>Old English</label>
-          <textarea class="tool-textarea" id="output-text" placeholder="Your Old English translation will appear here..." readonly aria-label="Translation output" aria-live="polite"></textarea>
-          <button class="btn btn-ghost btn-sm copy-btn-overlay" id="copyBtn" style="opacity:0;position:absolute;bottom:44px;right:8px" aria-label="Copy translation">📋 Copy</button>
-        </div>
-      </div>
-
-      <!-- Actions -->
-      <div class="tool-actions">
-        <button class="btn btn-ghost" id="clearBtn">✕ Clear</button>
-        <button class="btn btn-primary btn-lg" id="translateBtn">✦ Translate</button>
-      </div>
     </div>
-  </div>
-</section>
 
-<!-- EXAMPLES -->
-<section class="section-sm">
-  <div class="container">
-    <div class="section-heading">
-      <h2>Translation <span class="gold-text">Examples</span></h2>
-    </div>
-    <div class="grid-3">
-      {[
-        {modern:'Good morning, how are you today?', old:'Goode morgen, how farest thou this day?'},
-        {modern:'I love you with all my heart.', old:'I doe love thee with all mine heart.'},
-        {modern:'The king commands his army to march.', old:'The kynge commandeth his hoste to marche forth.'},
-      ].map(ex => (
-        <div class="example-card">
-          <div class="example-card-section">
-            <div class="example-label">Modern</div>
-            <div class="example-text">{ex.modern}</div>
+    <div class="boxes">
+      <div class="trans-row" style="display:contents">
+        <div class="trans-side">
+          <div class="trans-top">
+            <span class="trans-lang" id="inLabel">Modern English</span>
+            <span class="char-ct"><span id="charCount">0</span> / 5000</span>
           </div>
-          <div class="example-card-section">
-            <div class="example-label">Old English</div>
-            <div class="example-text" style="color:var(--gold-light)">{ex.old}</div>
-          </div>
+          <textarea id="input-text" placeholder="Enter your modern text here..." maxlength="5000" aria-label="Input text"></textarea>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-<!-- STYLE CARDS -->
-<section class="section-sm">
-  <div class="container">
-    <div class="section-heading">
-      <h2>Translator Old English — Choose From 4 Historical Styles</h2>
-    </div>
-    <div class="grid-4">
-      {[
-        {icon:'📜',name:'Early Style',period:'1500s – 1600s',desc:"Shakespeare's era. Thee, thou, doth and -eth endings. The language of the King James Bible and Elizabethan literature."},
-        {icon:'⚔️',name:'Middle Style',period:'1300s – 1400s',desc:'Chaucer\'s Middle English. Richer archaic vocabulary, older grammatical structures, and a distinctly medieval tone.'},
-        {icon:'🏛️',name:'Ancient Style',period:'800s – 1000s',desc:'Old English at its most ancient. Highly structured, runic in feel — the language of Beowulf and Anglo-Saxon manuscripts.'},
-        {icon:'✨',name:'Simple Old-Style',period:'Casual Archaic',desc:'An accessible, easy-to-read archaic flavour. Perfect for social media, games, or casual creative writing.'},
-      ].map(s => (
-        <div class="card card-gold" style="text-align:center">
-          <div style="margin-bottom:12px">{s.icon}</div>
-          <h3 style="margin-bottom:4px">{s.name}</h3>
-          <div class="badge badge-gold" style="margin:8px auto">{s.period}</div>
-          <p style="color:var(--text-secondary);margin-top:12px;line-height:1.6">{s.desc}</p>
+        <div class="trans-mid">
+          <button type="button" class="swap-btn" id="flipBtn" title="Flip direction" aria-label="Flip translation direction">⇄</button>
+          <span class="flip-lbl">Flip</span>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-<!-- INFO SECTION -->
-<section class="section">
-  <div class="container">
-    <!-- What it does -->
-    <div style="max-width:800px;margin:0 auto 64px">
-      <h2 style="margin-bottom:16px">What Makes Translator Old English Different From Other Tools?</h2>
-      <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:32px">
-        Translator Old English turns any modern text into authentic archaic English instantly — not simple word swaps. Choose Early (1500s), Middle (1300s), Ancient (800s), or Simple style. Free, AI-powered, no signup, up to 5,000 characters per translation.
-      </p>
-      <div class="grid-2">
-        {[
-          {icon:'🔄',title:'Bidirectional Translation',desc:'Translate modern to old or old to modern with a single click'},
-          {icon:'📚',title:'Multiple Historical Styles',desc:'Four distinct periods covering 1,200 years of English history'},
-          {icon:'🤖',title:'AI Context-Aware',desc:'Understands meaning, not just individual words'},
-          {icon:'⚙️',title:'Customisable Output',desc:'Control formality, pronouns, verb endings, and vocabulary'},
-        ].map(f => (
-          <div style="display:flex;gap:16px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)">
-            <span>{f.icon}</span>
-            <div>
-              <h4 style="margin-bottom:4px">{f.title}</h4>
-              <p style="color:var(--text-secondary)">{f.desc}</p>
-            </div>
+        <div class="trans-side trans-out">
+          <div class="trans-top">
+            <span class="trans-lang" id="outLabel">Old English</span>
+            <button type="button" class="copy-btn" id="copyBtn" style="opacity:0">⎘ Copy</button>
           </div>
-        ))}
+          <textarea id="output-text" readonly placeholder="Thy translation shalt appear here..." aria-label="Translation output" aria-live="polite"></textarea>
+        </div>
       </div>
     </div>
 
-    <!-- How to use -->
-    <div style="max-width:700px;margin:0 auto 64px">
-      <h2 style="margin-bottom:32px">How Translator Old English Works in 3 Simple Steps</h2>
-      {[
-        {n:'01',title:'Choose Your Historical Style',desc:'Select Early (1500s), Middle (1300s), Ancient (800s), or Simple style from the dropdown above the translator.'},
-        {n:'02',title:'Enter Your Modern Text',desc:'Type or paste up to 5,000 characters into the input box. Optionally fine-tune pronouns, verb endings, and vocabulary in Advanced Settings.'},
-        {n:'03',title:'Click Translate',desc:'Get authentic archaic English instantly. Copy the result, flip direction, or view your last 50 translations in History.'},
-      ].map(s => (
-        <div style="display:flex;gap:20px;margin-bottom:28px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)">
-          <div style="font-weight:700;color:var(--gold);opacity:0.4;min-width:40px">{s.n}</div>
-          <div>
-            <h4 style="margin-bottom:6px">{s.title}</h4>
-            <p style="color:var(--text-secondary);line-height:1.7">{s.desc}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-
-    <!-- Who uses -->
-    <div style="margin-bottom:64px">
-      <h2 style="text-align:center;margin-bottom:32px">Who Uses Translator Old English?</h2>
-      <div class="grid-3">
-        {[
-          {icon:'✍️',cat:'Writers & Authors',desc:'Authors writing historical fiction, fantasy, or period novels use this tool to add authentic linguistic texture to dialogue and narration.'},
-          {icon:'🎮',cat:'Game Developers',desc:'RPG and tabletop game creators use Old English to name items, spells, and characters with period-accurate authenticity.'},
-          {icon:'🎓',cat:'Students & Educators',desc:'History and literature students use this to understand Old and Middle English texts, while teachers use it for classroom demonstrations.'},
-          {icon:'🎭',cat:'Theatre & Film',desc:'Directors and screenwriters working on period productions use Old English to make dialogue feel genuinely historical.'},
-          {icon:'📱',cat:'Social Media & Memes',desc:'The Simple Old-Style option is hugely popular for creating funny, dramatic, or whimsical social media posts.'},
-          {icon:'🔍',cat:'Curious Learners',desc:'Anyone fascinated by the history of the English language can explore how words and grammar have changed over 1,200 years.'},
-        ].map(u => (
-          <div class="card">
-            <span style="margin-bottom:12px;display:block">{u.icon}</span>
-            <h3 style="margin-bottom:8px">{u.cat}</h3>
-            <p style="color:var(--text-secondary);line-height:1.7">{u.desc}</p>
-          </div>
-        ))}
-      </div>
+    <div class="actions">
+      <button type="button" class="btn-clear" id="clearBtn">✕ Clear</button>
+      <button type="button" class="btn-translate" id="translateBtn">✦ Translate</button>
     </div>
   </div>
-</section>
 
-<!-- RELATED TOOLS -->
-<section class="section-sm">
-  <div class="container">
-    <div class="section-heading">
-      <h2>More Translation <span class="gold-text">Tools</span></h2>
-    </div>
-    <div class="grid-2" style="max-width:700px;margin:0 auto">
-      <a href="/all-languages/" class="card card-gold" style="text-decoration:none;display:block">
-        <div style="margin-bottom:12px">🌍</div>
-        <h3 style="margin-bottom:8px">All Languages</h3>
-        <p style="color:var(--text-secondary)">Translate between any language and English — 100+ languages supported</p>
-        <div style="color:var(--gold);margin-top:16px;font-weight:600">Explore →</div>
-      </a>
-      <a href="/text-translator/" class="card card-gold" style="text-decoration:none;display:block">
-        <div style="margin-bottom:12px">📝</div>
-        <h3 style="margin-bottom:8px">Text Translator</h3>
-        <p style="color:var(--text-secondary)">Word and sentence-level translation with instant, accurate results</p>
-        <div style="color:var(--gold);margin-top:16px;font-weight:600">Explore →</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="section">
-  <div class="container" style="max-width:800px">
-    <div class="section-heading">
-      <h2>Translator Old English — Frequently Asked Questions</h2>
-    </div>
+  <div class="sec-head"><h2 class="sec-title">Quick Examples</h2><div class="sec-line"></div></div>
+  <p class="sec-sub">Click any card to load it into the translator</p>
+  <div class="ex-grid grid-3">
     {[
-      {q:'What is the difference between Old English and Middle English?',a:'Old English (450–1150 AD) is the language of Beowulf — heavily Germanic with complex case endings. Middle English (1150–1500 AD) is Chaucer\'s language — more recognisable to modern readers but still very different. This tool covers both via the Ancient and Middle style options respectively.'},
-      {q:'Is this tool free to use?',a:'Yes, completely free. There is no account required, no daily limit, and no paywall. You can translate as much text as you need, whenever you need it.'},
-      {q:'How accurate are the translations?',a:'The AI is trained on historical linguistic patterns and uses context-aware processing — not just word-for-word substitution. Accuracy varies by style: Early and Simple styles are highly accurate; Ancient style is an approximation as true Old English is a very different language system.'},
-      {q:'Can I translate old language back to modern?',a:'Yes. Use the flip button between the two text boxes to reverse the direction — from Old English back to modern English.'},
-      {q:'What is the character limit?',a:'Each translation supports up to 5,000 characters. For longer texts, split them into sections and translate each part separately.'},
-      {q:'Does the tool save my history?',a:'Yes. Your last 50 translations are saved automatically in your browser\'s local storage. They are never sent to any server. Click the History button in the top bar to view, copy, or delete them.'},
-      {q:'Which style should I choose?',a:'For Shakespeare-style writing, choose Early. For Chaucer-era English, choose Middle. For Beowulf-era Anglo-Saxon flavour, choose Ancient. For casual, fun archaic English (social media, memes, games), choose Simple Old-Style.'},
-      {q:'Can I use translations for commercial projects?',a:'Yes. Output from this tool is free to use in personal and commercial projects, including books, games, films, and marketing. Attribution is appreciated but not required.'},
-    ].map(f => (
-      <div class="faq-item">
-        <button class="faq-question">
-          {f.q}
-          <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">{f.a}</div>
+      {m:'Hello, how are you today?',o:'Hail, how farest thou this day?'},
+      {m:"I don't understand what you're saying.",o:'I comprehend not thy words, good fellow.'},
+      {m:'Thank you for your help.',o:'I thank thee most heartily for thy aid.'},
+    ].map(ex => (
+      <div class="ex-card example-card" data-modern={ex.m} data-old={ex.o} role="button" tabindex="0">
+        <div class="ex-tag example-label">Modern</div>
+        <div class="ex-modern example-text">{ex.m}</div>
+        <div class="ex-hr" style="height:1px;background:var(--border);margin:10px 0"></div>
+        <div class="ex-tag example-label">Old English</div>
+        <div class="ex-old example-text">{ex.o}</div>
       </div>
     ))}
   </div>
-</section>
 
-<!-- CTA Banner -->
-<section class="section-sm">
-  <div class="container">
-    <div class="cta-banner">
-      <h2 style="margin-bottom:16px">Begin Your <span class="gold-text">Translation</span></h2>
-      <p style="color:var(--text-secondary);margin-bottom:32px">Join thousands of writers, students, and creators using free AI-powered Old English translation</p>
-      <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Start Translating Free</a>
-      <div class="trust-badges">
-        <div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div>
-        <div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div>
-        <div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div>
+  <div class="sec-head"><h2 class="sec-title">Choose Your Style</h2><div class="sec-line"></div></div>
+  <p class="sec-sub">Four distinct historical periods — each with its own character</p>
+  <div class="sc-grid grid-4">
+    {[
+      {icon:'🎭',name:'Shakespeare Style',period:'1500s – 1600s',desc:'Early Modern English. Thee, thou, dost, hath. Most readable and widely recognised archaic style.'},
+      {icon:'📜',name:'Medieval Style',period:'1300s – 1400s',desc:"Chaucer's era. Older spelling and grammar. Ideal for historical fiction and academic work."},
+      {icon:'⚔️',name:'Anglo-Saxon',period:'800s – 1000s',desc:'True Old English. Deeply Germanic, most authentic. Used in Beowulf-era literature.'},
+      {icon:'✨',name:'Archaic Simplified',period:'Casual Archaic',desc:'Easy old-timey style. Great for social media, memes, games, and casual use.'},
+    ].map(s => (
+      <div class="sc-card card">
+        <div class="sc-icon">{s.icon}</div>
+        <div class="sc-name">{s.name}</div>
+        <div class="sc-period">{s.period}</div>
+        <div class="sc-desc">{s.desc}</div>
       </div>
+    ))}
+  </div>
+
+  <div class="info-block">
+    <h2>Translator Old English — Complete Guide</h2>
+    <p>Translator Old English is the most advanced free AI tool for converting modern English into authentic archaic language styles spanning over a thousand years of English history.</p>
+    <div class="feat-grid grid-2">
+      {[
+        {icon:'🔄',name:'Bidirectional Translation',desc:'Modern to old, or old to modern'},
+        {icon:'📚',name:'4 Historical Styles',desc:'Early, Middle, Ancient, Simple'},
+        {icon:'🤖',name:'AI-Powered Accuracy',desc:'Context-aware, not word-for-word'},
+        {icon:'⚙️',name:'Customisable Output',desc:'Formality, pronouns, endings, vocabulary'},
+      ].map(f => (
+        <div class="feat">
+          <div class="feat-icon">{f.icon}</div>
+          <div><div class="feat-name">{f.name}</div><div class="feat-desc">{f.desc}</div></div>
+        </div>
+      ))}
     </div>
   </div>
-</section>
+
+  <div class="info-block">
+    <h3>Why Use Translator Old English?</h3>
+    <div class="benefit-row grid-3">
+      {[
+        {icon:'⚡',name:'Instant',desc:'Results appear in seconds — no waiting.'},
+        {icon:'🎯',name:'Accurate',desc:'Trained on authentic historical texts.'},
+        {icon:'♾️',name:'Free Forever',desc:'No account, no limits, no fees.'},
+      ].map(b => (
+        <div class="benefit">
+          <div class="benefit-icon">{b.icon}</div>
+          <div class="benefit-name">{b.name}</div>
+          <div class="benefit-desc">{b.desc}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="info-block">
+    <h3>How Translator Old English Works in 3 Simple Steps</h3>
+    <div class="steps">
+      {[
+        {n:'1',title:'Choose a translation style from the dropdown',desc:'Shakespeare (1500s), Medieval (1300s), Anglo-Saxon (800s), or Archaic Simplified.'},
+        {n:'2',title:'Type or paste text into the input box',desc:'Up to 5,000 characters — roughly 800 words.'},
+        {n:'3',title:'Click Translate — copy the result',desc:'Result appears instantly. Use History for past translations.'},
+      ].map(s => (
+        <div class="step">
+          <div class="step-num">{s.n}</div>
+          <div><div class="step-title">{s.title}</div><div class="step-desc">{s.desc}</div></div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="info-block">
+    <h3>Who Uses Translator Old English?</h3>
+    <div class="users-grid grid-2">
+      {[
+        {title:'✍️ Writers & Authors',desc:'Authentic dialogue for historical fiction and fantasy novels.'},
+        {title:'🎮 Game Developers',desc:'Immersive NPC dialogue and lore text for RPGs.'},
+        {title:'🎓 Students & Educators',desc:'Study the evolution of English language interactively.'},
+        {title:'🎭 Theatre & Film',desc:'Period-accurate scripts and production materials.'},
+        {title:'📱 Social Media',desc:'Humorous archaic posts, memes, and content.'},
+        {title:'🔍 Curious Users',desc:'Explore a thousand years of English language history.'},
+      ].map(u => (
+        <div class="user-item">
+          <div class="user-title">{u.title}</div>
+          <div class="user-desc">{u.desc}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="info-block">
+    <h3>Translator Old English — Frequently Asked Questions</h3>
+    <div class="faq">
+      {[
+        {q:'What is the difference between Old English and Middle English?',a:'Old English (Anglo-Saxon, 800–1100 AD) is heavily Germanic and almost unrecognisable today. Middle English (1100–1500 AD), as written by Chaucer, is more familiar. Early Modern English (1500–1700 AD) includes Shakespeare\'s works and is the most readable archaic style.'},
+        {q:'Is Translator Old English free to use?',a:'Yes — completely free. No account, no limits, no hidden fees.'},
+        {q:'How accurate are the translations?',a:'Translator Old English uses context-aware AI — not word-for-word replacement. Results are authentic and natural-sounding for creative and educational purposes.'},
+        {q:'Can I translate old language back to modern?',a:'Yes. Use the ⇄ Flip button between the boxes to switch the translation direction.'},
+        {q:'What is the character limit?',a:'Up to 5,000 characters per translation — approximately 800–1,000 words.'},
+        {q:'Does Translator Old English save my history?',a:'Yes. Your last 50 translations are saved locally in your browser only — nothing is sent to any server.'},
+        {q:'Which style should I choose?',a:'Shakespeare for creative writing, Medieval for historical fiction, Anglo-Saxon for academic use, and Archaic Simplified for social media and casual fun.'},
+        {q:'Can I use translations for commercial projects?',a:'Yes — no restrictions. Use the output in books, games, films, or any commercial project without attribution required.'},
+      ].map(f => (
+        <div class="faq-item">
+          <button type="button" class="faq-question faq-q">{f.q} <span class="faq-icon">+</span></button>
+          <div class="faq-answer faq-a">{f.a}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="cta cta-banner">
+    <div class="cta-top"></div>
+    <h2>Begin Thy Translation</h2>
+    <p>Free, instant, AI-powered — no signup required</p>
+    <a href="#tool-area" class="cta-btn btn btn-primary btn-lg">Start Translating Now</a>
+    <div class="trust-badges">
+      <div class="badge"><span>♾️</span> Free forever</div>
+      <div class="badge"><span>⚡</span> Instant results</div>
+      <div class="badge"><span>🎯</span> AI-powered accuracy</div>
+    </div>
+  </div>
+
+</div>
 
 <script>
-  // Character counter
   const inputText = document.getElementById('input-text') as HTMLTextAreaElement;
   const charCount = document.getElementById('charCount');
   inputText?.addEventListener('input', () => {
     if (charCount) charCount.textContent = String(inputText.value.length);
   });
 
-  // Advanced panel
   const advancedToggle = document.getElementById('advancedToggle');
   const advancedContent = document.getElementById('advancedContent');
-  const advancedArrow = document.getElementById('advancedArrow');
   advancedToggle?.addEventListener('click', () => {
     const open = advancedContent?.classList.toggle('open');
-    if (advancedArrow) advancedArrow.style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
-    advancedToggle.setAttribute('aria-expanded', String(open));
+    advancedToggle.classList.toggle('open', !!open);
+    advancedToggle.setAttribute('aria-expanded', String(!!open));
   });
 
-  // Toggles
   ['pronounToggle','verbToggle','vocabToggle'].forEach(id => {
     const el = document.getElementById(id);
     el?.addEventListener('click', () => {
@@ -304,15 +255,21 @@ import Layout from '../../layouts/Layout.astro';
     });
   });
 
-  // Flip
+  let swapped = false;
   document.getElementById('flipBtn')?.addEventListener('click', () => {
+    swapped = !swapped;
     const inp = document.getElementById('input-text') as HTMLTextAreaElement;
     const out = document.getElementById('output-text') as HTMLTextAreaElement;
+    const inLabel = document.getElementById('inLabel');
+    const outLabel = document.getElementById('outLabel');
+    if (inLabel) inLabel.textContent = swapped ? 'Old English' : 'Modern English';
+    if (outLabel) outLabel.textContent = swapped ? 'Modern English' : 'Old English';
+    inp.placeholder = swapped ? 'Enter Old English text here...' : 'Enter your modern text here...';
+    out.placeholder = swapped ? 'Modern translation shalt appear...' : 'Thy translation shalt appear here...';
     const tmp = inp.value; inp.value = out.value; out.value = tmp;
     if (charCount) charCount.textContent = String(inp.value.length);
   });
 
-  // Clear
   document.getElementById('clearBtn')?.addEventListener('click', () => {
     (document.getElementById('input-text') as HTMLTextAreaElement).value = '';
     (document.getElementById('output-text') as HTMLTextAreaElement).value = '';
@@ -321,12 +278,25 @@ import Layout from '../../layouts/Layout.astro';
     if (copyBtn) copyBtn.style.opacity = '0';
   });
 
-  // Copy
   document.getElementById('copyBtn')?.addEventListener('click', () => {
     const out = (document.getElementById('output-text') as HTMLTextAreaElement).value;
     navigator.clipboard.writeText(out);
     const btn = document.getElementById('copyBtn');
-    if (btn) { btn.textContent = '✓ Copied!'; setTimeout(() => btn.textContent = '📋 Copy', 2000); }
+    if (btn) { btn.textContent = '✓ Copied'; setTimeout(() => { btn.textContent = '⎘ Copy'; }, 1600); }
+  });
+
+  document.querySelectorAll('.ex-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const m = card.getAttribute('data-modern') || '';
+      const o = card.getAttribute('data-old') || '';
+      const inp = document.getElementById('input-text') as HTMLTextAreaElement;
+      const out = document.getElementById('output-text') as HTMLTextAreaElement;
+      if (inp) inp.value = m;
+      if (out) out.value = o;
+      if (charCount) charCount.textContent = String(m.length);
+      const copyBtn = document.getElementById('copyBtn');
+      if (copyBtn) copyBtn.style.opacity = '1';
+    });
   });
 </script>
 </Layout>
