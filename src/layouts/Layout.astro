@@ -44,7 +44,7 @@ const homeActiveClass = () => (isHome ? 'active' : '');
   />
   <slot name="head" />
 </head>
-<body>
+<body class:list={[{ 'is-home': isHome }]}>
 
 <div class="history-overlay" id="historyOverlay"></div>
 
@@ -241,6 +241,13 @@ const homeActiveClass = () => (isHome ? 'active' : '');
 </footer>
 
 <script>
+  if (document.body.classList.contains('is-home')) {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    const scrollHomeTop = () => window.scrollTo(0, 0);
+    scrollHomeTop();
+    window.addEventListener('pageshow', (e) => { if (e.persisted) scrollHomeTop(); });
+  }
+
   const themeToggle = document.getElementById('themeToggle');
   const themeIcon = themeToggle?.querySelector('.theme-icon');
   const html = document.documentElement;

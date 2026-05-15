@@ -1235,8 +1235,12 @@ main { max-width: 920px; margin: 0 auto; }
 .trust-badge, .badge-trust { font-size: var(--fs-secondary); color: var(--muted); display: flex; align-items: center; gap: 6px; }
 .trust-badge-icon { font-size: 16px; }
 
-/* Footer */
+/* Footer — 1px smaller than site scale (reversed from site-wide bump) */
 .site-footer {
+  --fs-footer-heading: 13px;
+  --fs-footer-link: 15px;
+  --fs-footer-copy: 15px;
+  --fs-footer-seo: 11px;
   border-top: 1px solid var(--border); margin-top: 64px; padding-top: 56px;
   background: var(--bg);
 }
@@ -1245,8 +1249,13 @@ main { max-width: 920px; margin: 0 auto; }
   display: grid; grid-template-columns: 2fr repeat(4, 1fr);
   gap: 48px; margin-bottom: 48px;
 }
+.site-footer .footer-brand p,
+.site-footer .footer-bottom p,
+.site-footer .footer-bottom div {
+  font-size: var(--fs-footer-copy);
+}
 .footer-col h4 {
-  font-family: var(--font-display); font-size: var(--fs-label); font-weight: 700;
+  font-family: var(--font-display); font-size: var(--fs-footer-heading); font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);
   margin-bottom: 18px;
 }
@@ -1255,7 +1264,7 @@ main { max-width: 920px; margin: 0 auto; }
   display: inline-block;
   font-family: var(--font-display);
   color: var(--muted);
-  font-size: var(--fs-secondary);
+  font-size: var(--fs-footer-link);
   letter-spacing: 0.02em;
   padding: 6px 10px;
   margin-left: -10px;
@@ -1292,7 +1301,7 @@ main { max-width: 920px; margin: 0 auto; }
 }
 .seo-footer-links {
   padding: 14px 20px; border-top: 1px solid var(--border);
-  text-align: center; font-size: 12px; color: var(--muted-lt); line-height: 2.2;
+  text-align: center; font-size: var(--fs-footer-seo); color: var(--muted-lt); line-height: 2.2;
   max-width: 1280px; margin: 0 auto;
 }
 .seo-footer-links a { color: var(--muted-lt); padding: 0 4px; }
@@ -1417,6 +1426,36 @@ main { max-width: 920px; margin: 0 auto; }
   .hero-sub { display: none; }
   .hero-line { margin: 14px auto 0; width: 72px; }
 
+  /* Homepage mobile: hero + mode tabs visible without scrolling up */
+  .page-home.container--page { padding-top: 8px; }
+  .page-home .hero-section { padding: 4px 0 2px; }
+  .page-home .hero-tag {
+    margin-bottom: 6px;
+    padding: 4px 12px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  .page-home .hero-section h1 {
+    font-size: var(--fs-h1-mobile);
+    line-height: 1.12;
+    margin-bottom: 0;
+  }
+  .page-home .hero-line { display: none; }
+  .page-home .tool-stack { margin-top: 6px; scroll-margin-top: calc(var(--header-h) + 8px); }
+  .page-home .tool-mode-tabs { margin-bottom: 8px; gap: 5px; }
+  .page-home .tool-mode-tab { padding: 6px 10px; font-size: var(--fs-label); }
+  .page-home .tool-mode-tab .tab-icon { width: 15px; height: 15px; }
+  .page-home .tool-area,
+  .page-home .tool-card { padding: 10px; }
+  .page-home .style-row,
+  .page-home .tool-controls { margin-bottom: 8px; gap: 6px; }
+  .page-home .tool-boxes,
+  .page-home .boxes {
+    grid-template-rows: minmax(120px, 22dvh);
+    height: minmax(120px, 22dvh);
+    max-height: 22dvh;
+  }
+
   .tool-stack { margin-top: 12px; scroll-margin-top: calc(var(--header-h) + 8px); }
   .tool-mode-tabs { margin-bottom: 12px; gap: 6px; }
   .tool-mode-tab { padding: 8px 12px; font-size: var(--fs-label); }
@@ -1520,6 +1559,12 @@ main { max-width: 920px; margin: 0 auto; }
 @media (max-width: 600px) {
   :root {
     --lh-base: 1.7;
+  }
+  .page-home .tool-boxes,
+  .page-home .boxes {
+    grid-template-rows: minmax(108px, 20dvh);
+    height: minmax(108px, 20dvh);
+    max-height: 20dvh;
   }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; }
