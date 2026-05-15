@@ -28,11 +28,19 @@ const homeActiveClass = () => (isHome ? 'active' : '');
   <meta name="description" content={description} />
   <title>{title}</title>
   {canonical && <link rel="canonical" href={`${base}${canonical}`} />}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap"
+    rel="preload"
+    href="/fonts/im-fell-english-regular.ttf"
+    as="font"
+    type="font/ttf"
+    crossorigin
+  />
+  <link
+    rel="preload"
+    href="/fonts/im-fell-english-italic.ttf"
+    as="font"
+    type="font/ttf"
+    crossorigin
   />
   <slot name="head" />
 </head>

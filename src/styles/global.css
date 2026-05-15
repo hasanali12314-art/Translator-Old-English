@@ -1,4 +1,18 @@
 /* Translator Old English — medieval manuscript theme */
+@font-face {
+  font-family: 'IM Fell English';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/im-fell-english-regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'IM Fell English';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/im-fell-english-italic.ttf') format('truetype');
+}
 
 :root {
   --bg: #0E0E0E;
@@ -1231,4 +1245,36 @@ main { max-width: 920px; margin: 0 auto; }
   .download-btn, .comp-download { display: none; }
   .tool-textarea, textarea.tool-textarea, .comp-input, .comp-output,
   #input-text, #output-text { font-size: var(--fs-base); line-height: var(--lh-base); padding: 7px 8px; }
+}
+
+/* Manuscript face — literal name so it works even if CSS variables fail */
+html,
+body,
+.site-header,
+.site-footer,
+.desktop-nav,
+.mobile-nav,
+.hero,
+.history-panel,
+.nav-link,
+.dropdown-item,
+.mobile-nav-link,
+.mobile-nav-sub,
+.logo-main,
+.logo-sub,
+.hdr-btn,
+.btn,
+.select,
+.tool-mode-tab,
+.trans-lang,
+.tool-textarea,
+.comp-input,
+.comp-output,
+#input-text,
+#output-text,
+input,
+textarea,
+select,
+button {
+  font-family: 'IM Fell English', Georgia, 'Times New Roman', serif;
 }
