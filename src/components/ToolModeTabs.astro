@@ -47,6 +47,10 @@
           <p class="upload-file-name" id="imageFileName" hidden></p>
           <img class="upload-preview" id="imagePreview" alt="" hidden />
         </label>
+        <div class="upload-extract-block" id="imageExtractBlock" hidden>
+          <label for="imageExtractedText">Text detected (OCR)</label>
+          <textarea id="imageExtractedText" readonly placeholder="Upload an image and click Translate Image to extract text…"></textarea>
+        </div>
         <div class="speech-bridge">
           <p class="speech-bridge-label">Or speak your text</p>
           <div class="textarea-wrap">
@@ -63,7 +67,7 @@
         <div class="actions" style="margin-top:16px">
           <button type="button" class="btn-clear" data-clear-upload="images">✕ Clear</button>
           <button type="button" class="download-btn upload-download-btn" id="imageFileDownload" hidden>↓ Download File</button>
-          <button type="button" class="btn-translate" id="imageTranslateBtn">✦ Translate Image</button>
+          <button type="button" class="btn-translate btn-primary" id="imageTranslateBtn">✦ Translate Image</button>
         </div>
         <p class="upload-note" id="imageUploadNote" hidden role="status"></p>
       </div>
@@ -85,10 +89,14 @@
           <p class="upload-hint">Max. file size <strong>10 MB</strong></p>
           <p class="upload-file-name" id="docFileName" hidden></p>
         </label>
+        <div class="upload-extract-block" id="docExtractBlock" hidden>
+          <label for="docExtractedText">Text extracted from document</label>
+          <textarea id="docExtractedText" readonly placeholder="Upload a document and click Translate Document to extract text…"></textarea>
+        </div>
         <div class="actions" style="margin-top:16px">
           <button type="button" class="btn-clear" data-clear-upload="documents">✕ Clear</button>
           <button type="button" class="download-btn upload-download-btn" id="docFileDownload" hidden>↓ Download File</button>
-          <button type="button" class="btn-translate" id="docTranslateBtn">✦ Translate Document</button>
+          <button type="button" class="btn-translate btn-primary" id="docTranslateBtn">✦ Translate Document</button>
         </div>
         <p class="upload-note" id="docUploadNote" hidden role="status"></p>
       </div>

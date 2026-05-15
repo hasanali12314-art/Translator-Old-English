@@ -417,6 +417,59 @@
     }
   }
 
+  async function runHomepageTranslation(optionalText) {
+    const inp = document.getElementById('input-text');
+    const out = document.getElementById('output-text');
+    const btn = document.getElementById('translateBtn');
+    if (!inp || !out) throw new Error('Translator not ready. Open the Text tab and try again.');
+
+    if (optionalText != null) {
+      const max = inp.maxLength > 0 ? inp.maxLength : 5000;
+      inp.value = String(optionalText).trim().slice(0, max);
+      inp.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    const text = inp.value.trim();
+    if (!text) throw new Error('No text to translate. Upload a file or type text first.');
+
+    const styleSel = document.getElementById('style-select');
+    const style = styleSel ? styleSel.value : 'early';
+    const prev = btn ? btn.textContent : '';
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Translating…';
+    }
+    try {
+      const result = await translate(text, {
+        mode: 'archaic',
+        source: 'en',
+        target: 'ang',
+        style: style,
+        pronouns: document.getElementById('pronounToggle')?.classList.contains('active') !== false,
+        verbs: document.getElementById('verbToggle')?.classList.contains('active') !== false,
+        vocab: document.getElementById('vocabToggle')?.classList.contains('active') !== false,
+      });
+      out.value = result;
+      const copyBtn = document.getElementById('copyBtn');
+      const downloadBtn = document.getElementById('downloadBtn');
+      showOutActions(copyBtn, downloadBtn);
+      if (window.saveToHistory) window.saveToHistory(style, text, result);
+      return result;
+    } catch (e) {
+      out.value = '';
+      out.placeholder = (e && e.message) || 'Translation failed';
+      hideOutActions(document.getElementById('copyBtn'), document.getElementById('downloadBtn'));
+      throw e;
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = prev || '✦ Translate';
+      }
+    }
+  }
+
+  window.runHomeTranslate = runHomepageTranslation;
+
   /** Homepage tool uses #input-text / #output-text */
   function bindHomepageTool() {
     const inp = document.getElementById('input-text');
@@ -429,37 +482,8 @@
       if (charCount) charCount.textContent = String(inp.value.length);
     });
 
-    btn.addEventListener('click', async function () {
-      const text = inp.value.trim();
-      if (!text) return;
-      const styleSel = document.getElementById('style-select');
-      const style = styleSel ? styleSel.value : 'early';
-      const prev = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = 'Translating…';
-      try {
-        const result = await translate(text, {
-          mode: 'archaic',
-          source: 'en',
-          target: 'ang',
-          style: style,
-          pronouns: document.getElementById('pronounToggle')?.classList.contains('active') !== false,
-          verbs: document.getElementById('verbToggle')?.classList.contains('active') !== false,
-          vocab: document.getElementById('vocabToggle')?.classList.contains('active') !== false,
-        });
-        out.value = result;
-        const copyBtn = document.getElementById('copyBtn');
-        const downloadBtn = document.getElementById('downloadBtn');
-        showOutActions(copyBtn, downloadBtn);
-        if (window.saveToHistory) window.saveToHistory(style, text, result);
-      } catch (e) {
-        out.value = '';
-        out.placeholder = (e && e.message) || 'Translation failed';
-        hideOutActions(document.getElementById('copyBtn'), document.getElementById('downloadBtn'));
-      } finally {
-        btn.disabled = false;
-        btn.textContent = prev || '✦ Translate';
-      }
+    btn.addEventListener('click', function () {
+      runHomepageTranslation().catch(function () {});
     });
 
     const copyBtn = document.getElementById('copyBtn');
