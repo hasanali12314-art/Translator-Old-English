@@ -133,6 +133,75 @@
   opacity: 0.4;
 }
 
+/* Dark mode: homepage / guide marketing copy — pure white (tool UI labels unchanged) */
+[data-theme="dark"] main .hero-section .hero-tag,
+[data-theme="dark"] main .hero-section .hero-badge .badge,
+[data-theme="dark"] main .hero-section .hero-sub {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .sec-title,
+[data-theme="dark"] main .sec-sub,
+[data-theme="dark"] main .section-heading p {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .sc-name,
+[data-theme="dark"] main .sc-period,
+[data-theme="dark"] main .sc-desc {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .example-label,
+[data-theme="dark"] main .ex-tag {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .ex-modern,
+[data-theme="dark"] main .example-text {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .ex-old {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .feat-name,
+[data-theme="dark"] main .feat-desc,
+[data-theme="dark"] main .benefit-name,
+[data-theme="dark"] main .benefit-desc,
+[data-theme="dark"] main .step-title,
+[data-theme="dark"] main .step-desc,
+[data-theme="dark"] main .user-title,
+[data-theme="dark"] main .user-desc {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .info-block h2,
+[data-theme="dark"] main .info-block h3,
+[data-theme="dark"] main .info-block p,
+[data-theme="dark"] main .info-block li,
+[data-theme="dark"] main .info-block ul {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .faq-question {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .faq-icon {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .faq-item.open .faq-question {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .faq-item.open .faq-icon {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .faq-answer,
+[data-theme="dark"] main .faq-answer span {
+  color: #ffffff !important;
+}
+[data-theme="dark"] main .cta-banner h2,
+[data-theme="dark"] main .cta h2,
+[data-theme="dark"] main .cta-banner p,
+[data-theme="dark"] main .cta p,
+[data-theme="dark"] main .trust-badge,
+[data-theme="dark"] main .badge-trust {
+  color: #ffffff !important;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
