@@ -74,7 +74,21 @@
     else btn.classList.remove('show');
   }
 
-  function loadImageFromFile(file) {
+  let ocrWorkerPromise = null;
+
+  async function loadImageFromFile(file) {
+    if (typeof createImageBitmap === 'function') {
+      try {
+        const bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+        const canvas = document.createElement('canvas');
+        canvas.width = bitmap.width;
+        canvas.height = bitmap.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(bitmap, 0, 0);
+        if (bitmap.close) bitmap.close();
+        return canvasToImage(canvas);
+      } catch (e) { /* fall through */ }
+    }
     return new Promise(function (resolve, reject) {
       const url = URL.createObjectURL(file);
       const img = new Image();
@@ -90,23 +104,83 @@
     });
   }
 
+  function canvasToImage(canvas) {
+    return new Promise(function (resolve, reject) {
+      const img = new Image();
+      img.onload = function () { resolve(img); };
+      img.onerror = reject;
+      img.src = canvas.toDataURL('image/png');
+    });
+  }
+
   function enhanceContrast(ctx, w, h) {
     const id = ctx.getImageData(0, 0, w, h);
     const d = id.data;
     for (let i = 0; i < d.length; i += 4) {
       const gray = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
-      const v = Math.min(255, Math.max(0, (gray - 128) * 1.45 + 128));
+      const v = Math.min(255, Math.max(0, (gray - 128) * 1.55 + 128));
       d[i] = d[i + 1] = d[i + 2] = v;
       d[i + 3] = 255;
     }
     ctx.putImageData(id, 0, 0);
   }
 
+  function otsuThreshold(histogram, total) {
+    let sum = 0;
+    for (let i = 0; i < 256; i++) sum += i * histogram[i];
+    let sumB = 0;
+    let wB = 0;
+    let max = 0;
+    let threshold = 128;
+    for (let t = 0; t < 256; t++) {
+      wB += histogram[t];
+      if (!wB) continue;
+      const wF = total - wB;
+      if (!wF) break;
+      sumB += t * histogram[t];
+      const mB = sumB / wB;
+      const mF = (sum - sumB) / wF;
+      const between = wB * wF * (mB - mF) * (mB - mF);
+      if (between > max) {
+        max = between;
+        threshold = t;
+      }
+    }
+    return threshold;
+  }
+
+  function binarizeCanvas(sourceCanvas) {
+    const w = sourceCanvas.width;
+    const h = sourceCanvas.height;
+    const out = document.createElement('canvas');
+    out.width = w;
+    out.height = h;
+    const sctx = sourceCanvas.getContext('2d');
+    const octx = out.getContext('2d');
+    const id = sctx.getImageData(0, 0, w, h);
+    const d = id.data;
+    const histogram = new Array(256).fill(0);
+    const gray = new Uint8Array(w * h);
+    for (let i = 0, p = 0; i < d.length; i += 4, p++) {
+      const g = Math.round(0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]);
+      gray[p] = g;
+      histogram[g]++;
+    }
+    const th = otsuThreshold(histogram, w * h);
+    for (let i = 0, p = 0; i < d.length; i += 4, p++) {
+      const v = gray[p] > th ? 255 : 0;
+      d[i] = d[i + 1] = d[i + 2] = v;
+      d[i + 3] = 255;
+    }
+    octx.putImageData(id, 0, 0);
+    return out;
+  }
+
   function buildOcrCanvas(img) {
     let scale = 1;
     const maxSide = Math.max(img.width, img.height);
-    if (maxSide < 1200) scale = 1200 / maxSide;
-    if (maxSide > 2400) scale = 2400 / maxSide;
+    if (maxSide < 1600) scale = 1600 / maxSide;
+    if (maxSide > 3200) scale = 3200 / maxSide;
 
     const w = Math.round(img.width * scale);
     const h = Math.round(img.height * scale);
@@ -116,31 +190,95 @@
     const ctx = canvas.getContext('2d');
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, w, h);
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(img, 0, 0, w, h);
     enhanceContrast(ctx, w, h);
     return { canvas: canvas, scale: scale };
   }
 
+  function buildOcrVariants(img) {
+    const base = buildOcrCanvas(img);
+    return [
+      { canvas: base.canvas, scale: base.scale, label: 'enhanced' },
+      { canvas: binarizeCanvas(base.canvas), scale: base.scale, label: 'binary' },
+    ];
+  }
+
+  function mergeBbox(words) {
+    let x0 = Infinity; let y0 = Infinity; let x1 = 0; let y1 = 0;
+    words.forEach(function (w) {
+      const b = w.bbox || {};
+      x0 = Math.min(x0, b.x0 || 0);
+      y0 = Math.min(y0, b.y0 || 0);
+      x1 = Math.max(x1, b.x1 || 0);
+      y1 = Math.max(y1, b.y1 || 0);
+    });
+    return { x0: x0, y0: y0, x1: x1, y1: y1 };
+  }
+
+  function linesFromWords(data) {
+    const words = (data && data.words) ? data.words : [];
+    const usable = words.filter(function (w) {
+      const t = String(w.text || '').trim();
+      return t && (w.confidence == null || w.confidence > 15);
+    });
+    if (!usable.length) return [];
+
+    usable.sort(function (a, b) {
+      const ay = ((a.bbox && a.bbox.y0) || 0) + ((a.bbox && a.bbox.y1) || 0);
+      const by = ((b.bbox && b.bbox.y0) || 0) + ((b.bbox && b.bbox.y1) || 0);
+      if (Math.abs(ay - by) > 20) return ay - by;
+      return ((a.bbox && a.bbox.x0) || 0) - ((b.bbox && b.bbox.x0) || 0);
+    });
+
+    const lines = [];
+    let group = [];
+    let groupY = null;
+
+    usable.forEach(function (w) {
+      const b = w.bbox || {};
+      const cy = ((b.y0 || 0) + (b.y1 || 0)) / 2;
+      const lineH = Math.max(12, (b.y1 || 0) - (b.y0 || 0));
+      if (group.length && groupY != null && Math.abs(cy - groupY) > lineH * 0.65) {
+        lines.push(group);
+        group = [];
+      }
+      group.push(w);
+      groupY = groupY == null ? cy : (groupY + cy) / 2;
+    });
+    if (group.length) lines.push(group);
+
+    return lines.map(function (chunk) {
+      const conf = chunk.reduce(function (s, w) { return s + (w.confidence || 0); }, 0) / chunk.length;
+      return {
+        text: chunk.map(function (w) { return String(w.text || '').trim(); }).filter(Boolean).join(' '),
+        confidence: conf,
+        bbox: mergeBbox(chunk),
+      };
+    }).filter(function (l) { return l.text.length > 0; });
+  }
+
   function normalizeLines(data) {
     const raw = (data && data.lines) ? data.lines : [];
-    const lines = raw
+    let lines = raw
       .map(function (line) {
         const text = String(line.text || '').replace(/\s+/g, ' ').trim();
         const b = line.bbox || {};
         return {
           text: text,
           confidence: line.confidence || 0,
-          bbox: {
-            x0: b.x0 || 0,
-            y0: b.y0 || 0,
-            x1: b.x1 || 0,
-            y1: b.y1 || 0,
-          },
+          bbox: { x0: b.x0 || 0, y0: b.y0 || 0, x1: b.x1 || 0, y1: b.y1 || 0 },
         };
       })
       .filter(function (line) {
-        return line.text.length > 0 && (line.confidence > 25 || line.text.length > 2);
+        return line.text.length > 0 && (line.confidence > 20 || line.text.length > 2);
       });
+
+    if (lines.length < 2) {
+      const fromWords = linesFromWords(data);
+      if (fromWords.length > lines.length) lines = fromWords;
+    }
 
     if (lines.length) return lines;
 
@@ -149,10 +287,82 @@
     return fallback.split(/\n+/).map(function (t, i) {
       return {
         text: t.trim(),
-        confidence: 100,
-        bbox: { x0: 20, y0: 30 + i * 36, x1: 400, y1: 58 + i * 36 },
+        confidence: 60,
+        bbox: { x0: 16, y0: 24 + i * 40, x1: 480, y1: 56 + i * 40 },
       };
     }).filter(function (l) { return l.text; });
+  }
+
+  function scoreOcrResult(data) {
+    const text = String(data && data.text ? data.text : '').trim();
+    const words = (data && data.words) ? data.words : [];
+    const confs = words
+      .filter(function (w) { return String(w.text || '').trim(); })
+      .map(function (w) { return w.confidence || 0; });
+    const avg = confs.length
+      ? confs.reduce(function (a, b) { return a + b; }, 0) / confs.length
+      : (text.length > 8 ? 45 : 0);
+    return avg + Math.min(text.length, 400) * 0.05;
+  }
+
+  function cleanOcrText(text) {
+    return String(text || '')
+      .replace(/[|¦]/g, 'I')
+      .replace(/\s+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .replace(/[^\S\n]+/g, ' ')
+      .trim();
+  }
+
+  async function getOcrWorker() {
+    await loadScript(TESSERACT_SRC, 'Tesseract');
+    if (!window.Tesseract || !window.Tesseract.createWorker) {
+      throw new Error('OCR library failed to load. Check your internet connection.');
+    }
+    if (!ocrWorkerPromise) {
+      ocrWorkerPromise = window.Tesseract.createWorker('eng').then(async function (worker) {
+        await worker.setParameters({ preserve_interword_spaces: '1' });
+        return worker;
+      });
+    }
+    return ocrWorkerPromise;
+  }
+
+  async function recognizeCanvas(worker, canvas, psm) {
+    await worker.setParameters({ tessedit_pageseg_mode: String(psm) });
+    const result = await worker.recognize(canvas);
+    return result && result.data ? result.data : {};
+  }
+
+  async function runBestOcr(worker, variants) {
+    const tries = [
+      { v: 0, psm: 3 },
+      { v: 1, psm: 6 },
+      { v: 0, psm: 6 },
+      { v: 1, psm: 11 },
+      { v: 1, psm: 3 },
+      { v: 0, psm: 11 },
+      { v: 0, psm: 4 },
+      { v: 1, psm: 4 },
+    ];
+    let best = null;
+
+    for (let i = 0; i < tries.length; i++) {
+      const t = tries[i];
+      const variant = variants[t.v];
+      if (!variant) continue;
+      try {
+        const data = await recognizeCanvas(worker, variant.canvas, t.psm);
+        const score = scoreOcrResult(data);
+        if (!best || score > best.score) {
+          best = { score: score, data: data, scale: variant.scale };
+        }
+        if (best.score >= 78) break;
+      } catch (e) { /* try next */ }
+    }
+
+    if (!best) throw new Error('OCR could not read this image. Try a clearer photo with good lighting.');
+    return best;
   }
 
   async function extractImageText(file) {
@@ -162,36 +372,31 @@
     }
 
     const img = await loadImageFromFile(file);
-    const ocrPrep = buildOcrCanvas(img);
-
-    await loadScript(TESSERACT_SRC, 'Tesseract');
-    if (!window.Tesseract || !window.Tesseract.createWorker) {
-      throw new Error('OCR library failed to load.');
-    }
-
-    const worker = await window.Tesseract.createWorker('eng');
+    const variants = buildOcrVariants(img);
+    let worker;
     try {
-      await worker.setParameters({
-        tessedit_pageseg_mode: '1',
-        preserve_interword_spaces: '1',
-      });
-      const result = await worker.recognize(ocrPrep.canvas);
-      const data = result && result.data ? result.data : {};
-      const lines = normalizeLines(data);
-      const text = lines.map(function (l) { return l.text; }).join('\n').trim()
-        || String(data.text || '').trim();
-
-      if (!text) throw new Error('No readable text found. Use a clearer, higher-contrast image.');
-
-      return {
-        text: text,
-        lines: lines,
-        sourceImage: img,
-        ocrScale: ocrPrep.scale,
-      };
-    } finally {
-      await worker.terminate();
+      worker = await getOcrWorker();
+    } catch (e) {
+      ocrWorkerPromise = null;
+      throw e;
     }
+    const best = await runBestOcr(worker, variants);
+    const data = best.data;
+    const lines = normalizeLines(data);
+    const text = cleanOcrText(
+      lines.map(function (l) { return l.text; }).join('\n') || String(data.text || '')
+    );
+
+    if (!text || text.length < 2) {
+      throw new Error('No readable text found. Use a straight, well-lit photo of printed or typed text.');
+    }
+
+    return {
+      text: text,
+      lines: lines.length ? lines : normalizeLines({ text: text, words: [], lines: [] }),
+      sourceImage: img,
+      ocrScale: best.scale,
+    };
   }
 
   async function translateString(text) {
@@ -265,6 +470,48 @@
     drawn.forEach(function (ln) {
       ctx.fillText(ln, x + 3, cy, w - 6);
       cy += fontSize * 1.22;
+    });
+  }
+
+  function renderTranslatedImageSimple(sourceImage, translatedText, mimeType) {
+    const canvas = document.createElement('canvas');
+    canvas.width = sourceImage.width;
+    canvas.height = sourceImage.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(sourceImage, 0, 0);
+
+    const pad = 14;
+    const maxPanelH = Math.min(Math.round(sourceImage.height * 0.42), 220);
+    const maxW = sourceImage.width - pad * 2;
+    let fontSize = Math.max(14, Math.min(22, Math.round(sourceImage.width / 28)));
+    let lines = [];
+    while (fontSize >= 11) {
+      ctx.font = '600 ' + fontSize + 'px "Crimson Pro", Georgia, serif';
+      lines = wrapCanvasLines(ctx, translatedText, maxW);
+      if (lines.length * fontSize * 1.28 + pad * 2 <= maxPanelH) break;
+      fontSize -= 1;
+    }
+    const panelH = Math.min(maxPanelH, lines.length * fontSize * 1.28 + pad * 2);
+    const y0 = sourceImage.height - panelH;
+
+    ctx.fillStyle = 'rgba(250, 247, 242, 0.96)';
+    ctx.fillRect(0, y0, sourceImage.width, panelH);
+    ctx.strokeStyle = 'rgba(201, 168, 76, 0.45)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(0, y0, sourceImage.width, panelH);
+
+    ctx.fillStyle = '#1a1510';
+    let cy = y0 + pad + fontSize;
+    lines.forEach(function (ln) {
+      ctx.fillText(ln, pad, cy, maxW);
+      cy += fontSize * 1.28;
+    });
+
+    const outMime = mimeType === 'image/jpeg' || mimeType === 'image/jpg' ? 'image/jpeg' : 'image/png';
+    return new Promise(function (resolve) {
+      canvas.toBlob(function (blob) {
+        resolve({ blob: blob, dataUrl: canvas.toDataURL(outMime, 0.92), mime: outMime });
+      }, outMime, 0.92);
     });
   }
 
@@ -523,6 +770,11 @@
     let currentFile = null;
     let translatedBlob = null;
     let translatedUrl = null;
+    let ocrCache = null;
+
+    function fileKey(file) {
+      return file.name + '|' + file.size + '|' + file.lastModified;
+    }
 
     function revokeTranslatedUrl() {
       if (translatedUrl) {
@@ -534,6 +786,7 @@
     function clear() {
       if (input) input.value = '';
       currentFile = null;
+      ocrCache = null;
       translatedBlob = null;
       revokeTranslatedUrl();
       setBtnVisible(fileDl, false);
@@ -552,6 +805,7 @@
       if (err) { showNote(note, err, '#c04040'); return; }
       assignFileToInput(input, file);
       currentFile = file;
+      ocrCache = null;
       translatedBlob = null;
       revokeTranslatedUrl();
       if (nameEl) { nameEl.hidden = false; nameEl.textContent = file.name; }
@@ -595,20 +849,52 @@
       showNote(note, 'Enhancing image and reading text…', 'var(--gold)');
 
       try {
-        const ocr = await extractImageText(file);
-        if (extractTa) extractTa.value = ocr.text.slice(0, 5000);
-        if (extractBlock) extractBlock.hidden = false;
+        const key = fileKey(file);
+        const manualText = extractTa && extractTa.value.trim();
+        let ocr;
+        const reuseOcr = ocrCache && ocrCache.key === key && manualText;
 
-        showNote(note, 'Translating text on image…', 'var(--gold)');
+        if (reuseOcr) {
+          ocr = {
+            text: manualText,
+            lines: ocrCache.lines,
+            sourceImage: ocrCache.sourceImage,
+            ocrScale: ocrCache.ocrScale,
+          };
+          showNote(note, 'Using detected text. Translating…', 'var(--gold)');
+        } else {
+          ocr = await extractImageText(file);
+          ocrCache = {
+            key: key,
+            text: ocr.text,
+            lines: ocr.lines,
+            sourceImage: ocr.sourceImage,
+            ocrScale: ocr.ocrScale,
+          };
+          if (extractTa) extractTa.value = ocr.text.slice(0, 5000);
+          if (extractBlock) extractBlock.hidden = false;
+          showNote(note, 'Text detected. Translating on image…', 'var(--gold)');
+        }
+
         btn.textContent = 'Translating…';
+        const textForTranslate = (extractTa && extractTa.value.trim()) || ocr.text;
+        const userEdited = reuseOcr && manualText !== ocrCache.text;
+        let rendered;
+        let fullTranslated;
 
-        const translatedLines = await translateOcrLines(ocr.lines);
-        const rendered = await renderTranslatedImage(
-          ocr.sourceImage,
-          translatedLines,
-          ocr.ocrScale,
-          file.type
-        );
+        if (userEdited || !ocr.lines.length) {
+          fullTranslated = await translateString(textForTranslate);
+          rendered = await renderTranslatedImageSimple(ocr.sourceImage, fullTranslated, file.type);
+        } else {
+          const translatedLines = await translateOcrLines(ocr.lines);
+          rendered = await renderTranslatedImage(
+            ocr.sourceImage,
+            translatedLines,
+            ocr.ocrScale,
+            file.type
+          );
+          fullTranslated = translatedLines.map(function (l) { return l.translatedText || l.text; }).join('\n');
+        }
 
         translatedBlob = rendered.blob;
         revokeTranslatedUrl();
@@ -619,11 +905,10 @@
         if (resultBlock) resultBlock.hidden = false;
         setBtnVisible(translatedDl, true);
 
-        const fullTranslated = translatedLines.map(function (l) { return l.translatedText || l.text; }).join('\n');
         if (window.fillMainTextInput) window.fillMainTextInput(fullTranslated, stack);
         if (window.runHomeTranslate) await window.runHomeTranslate(fullTranslated);
 
-        showNote(note, 'Done! Download the translated image below.', 'var(--gold-lt)');
+        showNote(note, 'Done! Fix OCR text above if needed, then download the translated image.', 'var(--gold-lt)');
       } catch (e) {
         showNote(note, (e && e.message) || 'Image translation failed.', '#c04040');
       } finally {
