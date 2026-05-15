@@ -75,7 +75,9 @@
     });
 
     const tool = document.getElementById('tool-area');
-    if (tool) setTimeout(function () { tool.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+    if (tool && !document.body.classList.contains('is-home')) {
+      setTimeout(function () { tool.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+    }
   }
 
   function splitChunks(text) {

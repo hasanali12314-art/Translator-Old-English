@@ -243,13 +243,21 @@ const homeActiveClass = () => (isHome ? 'active' : '');
 <script>
   if (document.body.classList.contains('is-home')) {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    const scrollHomeTop = () => window.scrollTo(0, 0);
+    const scrollHomeTop = () => {
+      if (window.location.hash === '#tool-area') {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+      window.scrollTo(0, 0);
+    };
     scrollHomeTop();
+    document.addEventListener('DOMContentLoaded', scrollHomeTop);
     requestAnimationFrame(() => {
       scrollHomeTop();
       requestAnimationFrame(scrollHomeTop);
     });
     window.addEventListener('load', scrollHomeTop);
+    setTimeout(scrollHomeTop, 150);
+    setTimeout(scrollHomeTop, 400);
     window.addEventListener('pageshow', (e) => { if (e.persisted) scrollHomeTop(); });
   }
 
