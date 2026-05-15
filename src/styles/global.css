@@ -1,5 +1,33 @@
 /* Translator Old English — medieval manuscript theme */
-/* Single-word family name — minifiers drop quotes and break "IM Fell English" */
+/* Cinzel = hero "Translator" chunky serif | IMFellEnglish = script accents */
+@font-face {
+  font-family: CinzelFont;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/cinzel-400.ttf') format('truetype');
+}
+@font-face {
+  font-family: CinzelFont;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/cinzel-500.ttf') format('truetype');
+}
+@font-face {
+  font-family: CinzelFont;
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/cinzel-600.ttf') format('truetype');
+}
+@font-face {
+  font-family: CinzelFont;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/cinzel-700.ttf') format('truetype');
+}
 @font-face {
   font-family: IMFellEnglish;
   font-style: normal;
@@ -34,7 +62,8 @@
   --muted-lt: #5A5245;
   --shadow: rgba(0,0,0,0.5);
   --shadow-gold: rgba(201,168,76,0.2);
-  --font-display: IMFellEnglish, Georgia, 'Times New Roman', serif;
+  --font-display: CinzelFont, Georgia, serif;
+  --font-script: IMFellEnglish, Georgia, serif;
   --font-body: var(--font-display);
   /* legacy aliases */
   --gold-light: var(--gold-lt);
@@ -135,13 +164,19 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   transition: color 0.35s ease;
 }
-h1 { font-size: clamp(28px, 5.5vw, 48px); color: var(--ink); }
-h2 { font-size: var(--fs-h2); }
-h3, h4 { font-size: var(--fs-h3); }
+h1 {
+  font-size: clamp(28px, 5.5vw, 48px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+h2 { font-size: var(--fs-h2); font-weight: 600; letter-spacing: 0.02em; }
+h3, h4 { font-size: var(--fs-h3); font-weight: 600; }
 p { font-size: var(--fs-base); line-height: var(--lh-base); }
-.serif { font-family: var(--font-display); font-style: italic; }
+.serif { font-family: var(--font-script); font-style: italic; }
 
 .gold-text, .gold-text em {
+  font-family: var(--font-script);
   color: var(--gold);
   font-style: italic;
   background: none;
@@ -209,20 +244,26 @@ main { max-width: 920px; margin: 0 auto; }
 .logo-text, .logo-main {
   font-family: var(--font-display);
   font-size: clamp(19px, 2.6vw, 24px);
-  font-weight: 400;
-  font-style: italic;
-  color: var(--gold-lt);
-  letter-spacing: 0.05em;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--ink);
+  letter-spacing: 0.03em;
   line-height: 1.15;
 }
-.logo-text .logo-dot, .logo-main em { color: var(--gold-lt); font-style: italic; }
+.logo-text .logo-dot, .logo-main em {
+  font-family: var(--font-script);
+  color: var(--gold-lt);
+  font-style: italic;
+  font-weight: 400;
+}
 .logo-sub {
   font-size: var(--fs-label);
   color: var(--muted);
   display: none;
   font-family: var(--font-display);
-  font-style: italic;
-  letter-spacing: 0.02em;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.04em;
   line-height: 1.3;
 }
 @media (min-width: 600px) { .logo-sub { display: block; } }
@@ -232,9 +273,9 @@ main { max-width: 920px; margin: 0 auto; }
 .nav-link {
   display: flex; align-items: center; gap: 4px;
   padding: 6px 10px; border-radius: 7px;
-  font-family: var(--font-display); font-size: var(--fs-label); font-weight: 400;
-  font-style: italic;
-  letter-spacing: 0.04em;
+  font-family: var(--font-display); font-size: var(--fs-label); font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.06em;
   color: var(--muted); background: none; border: none; cursor: pointer;
   text-decoration: none; transition: color 0.2s ease, background 0.2s ease; white-space: nowrap;
 }
@@ -639,9 +680,15 @@ main { max-width: 920px; margin: 0 auto; }
   max-width: 100%; line-height: 1.5;
 }
 .hero-badge .badge-gold, .hero-tag span { color: var(--gold); background: transparent; border: none; }
-.hero-section h1 { margin: 0 0 18px; }
-.hero-section h1 em, .hero-section h1 .gold-text { color: var(--gold); font-style: italic; }
+.hero-section h1 { margin: 0 0 18px; font-weight: 600; }
+.hero-section h1 em, .hero-section h1 .gold-text {
+  font-family: var(--font-script);
+  color: var(--gold-lt);
+  font-style: italic;
+  font-weight: 400;
+}
 .hero-sub {
+  font-family: var(--font-display);
   font-size: var(--fs-base); color: var(--muted); font-style: italic;
   max-width: 540px; margin: 0 auto; line-height: 1.75;
   padding: 0 8px;
@@ -689,7 +736,7 @@ main { max-width: 920px; margin: 0 auto; }
 .select option, select option {
   background: var(--card);
   color: var(--ink2);
-  font-family: IMFellEnglish, Georgia, serif;
+  font-family: CinzelFont, Georgia, serif;
 }
 
 .advanced-toggle, .adv-btn {
@@ -756,7 +803,7 @@ main { max-width: 920px; margin: 0 auto; }
 .tool-textarea::placeholder, .comp-input::placeholder { color: var(--muted-lt); font-style: italic; }
 .tool-textarea:focus, .comp-input:focus { background: var(--card2); }
 #output-text, .comp-output, .trans-out textarea {
-  font-family: var(--font-display); font-style: italic;
+  font-family: var(--font-script); font-style: italic;
   color: var(--gold-lt); background: var(--bg2);
 }
 
@@ -885,7 +932,10 @@ main { max-width: 920px; margin: 0 auto; }
   font-family: var(--font-display);
   font-size: var(--fs-base); color: var(--ink2); line-height: 1.65;
 }
-.ex-old, .example-text[style] { font-family: var(--font-display); color: var(--gold-lt) !important; font-style: italic; line-height: 1.65; }
+.ex-old, .example-text[style] {
+  font-family: var(--font-script); color: var(--gold-lt) !important;
+  font-style: italic; line-height: 1.65;
+}
 .ex-card { padding: 22px 20px; cursor: pointer; }
 .ex-hr { height: 1px; background: var(--border); margin: 18px 0; }
 .ex-card .ex-hr { margin: 18px 0 !important; }
@@ -1306,26 +1356,42 @@ main { max-width: 920px; margin: 0 auto; }
 }
 
 /*
- * Manuscript font — site-wide (PDF audit: tabs, hero, tool, examples,
- * guide, FAQ, footer were missing explicit face on some nodes).
+ * Site-wide Cinzel (hero "Translator" style). Script face only on marked accents.
  */
 html {
-  font-family: IMFellEnglish, Georgia, serif;
+  font-family: CinzelFont, Georgia, serif;
 }
 
 html body :where(
-  p, span, a, li, label, strong, em, small, div,
+  p, span, a, li, label, strong, small, div,
   h1, h2, h3, h4, h5, h6,
   button, input, textarea, select, option, optgroup
+) {
+  font-family: CinzelFont, Georgia, serif;
+}
+
+/* Script italic — "Old English" accent (output, em in titles, examples) */
+html body :where(
+  em,
+  .gold-text,
+  .ex-old,
+  #output-text,
+  .comp-output,
+  .trans-out textarea
 ) {
   font-family: IMFellEnglish, Georgia, serif;
 }
 
-/* Native controls often ignore inherit — force directly */
 button,
 input,
 textarea,
 select,
 option {
+  font-family: CinzelFont, Georgia, serif !important;
+}
+
+#output-text,
+.comp-output,
+.trans-out textarea {
   font-family: IMFellEnglish, Georgia, serif !important;
 }
