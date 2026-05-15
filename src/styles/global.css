@@ -1485,9 +1485,9 @@ main { max-width: 920px; margin: 0 auto; }
   .tool-stack--home .tool-controls { margin-bottom: 8px; gap: 6px; }
   .tool-stack--home .tool-boxes,
   .tool-stack--home .boxes {
-    grid-template-rows: minmax(100px, 18dvh);
-    height: minmax(100px, 18dvh);
-    max-height: 18dvh;
+    grid-template-rows: minmax(200px, min(52dvh, 420px));
+    height: minmax(200px, min(52dvh, 420px));
+    max-height: min(56dvh, 440px);
   }
 
   .tool-stack { margin-top: 12px; scroll-margin-top: calc(var(--header-h) + 8px); }
@@ -1596,9 +1596,9 @@ main { max-width: 920px; margin: 0 auto; }
   }
   .tool-stack--home .tool-boxes,
   .tool-stack--home .boxes {
-    grid-template-rows: minmax(88px, 16dvh);
-    height: minmax(88px, 16dvh);
-    max-height: 16dvh;
+    grid-template-rows: minmax(176px, min(46dvh, 380px));
+    height: minmax(176px, min(46dvh, 380px));
+    max-height: min(50dvh, 400px);
   }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; text-align: center; }
