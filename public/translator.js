@@ -470,6 +470,24 @@
 
   window.runHomeTranslate = runHomepageTranslation;
 
+  async function getHomeTranslationText(text) {
+    const trimmed = String(text || '').trim();
+    if (!trimmed) throw new Error('No text to translate.');
+    const styleSel = document.getElementById('style-select');
+    const style = styleSel ? styleSel.value : 'early';
+    return translate(trimmed, {
+      mode: 'archaic',
+      source: 'en',
+      target: 'ang',
+      style: style,
+      pronouns: document.getElementById('pronounToggle')?.classList.contains('active') !== false,
+      verbs: document.getElementById('verbToggle')?.classList.contains('active') !== false,
+      vocab: document.getElementById('vocabToggle')?.classList.contains('active') !== false,
+    });
+  }
+
+  window.getHomeTranslation = getHomeTranslationText;
+
   /** Homepage tool uses #input-text / #output-text */
   function bindHomepageTool() {
     const inp = document.getElementById('input-text');

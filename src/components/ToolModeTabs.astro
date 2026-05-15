@@ -34,13 +34,12 @@
     <div class="tool-mode-panel" data-panel="images" role="tabpanel" aria-labelledby="tab-images" hidden>
       <div class="tool-card tool-area tool-mode-upload-card">
         <label class="upload-zone" id="imageUploadZone" for="imageFileInput">
-          <input type="file" id="imageFileInput" class="upload-input" accept=".jpg,.jpeg,.png,.webp,.gif,.svg,image/*" hidden />
+          <input type="file" id="imageFileInput" class="upload-input" accept=".jpg,.jpeg,.png,.webp,.gif,image/jpeg,image/png,image/webp,image/gif" hidden />
           <div class="format-icons" aria-hidden="true">
             <span class="format-icon format-jpg"><span class="format-badge">.JPG</span></span>
             <span class="format-icon format-png"><span class="format-badge">.PNG</span></span>
             <span class="format-icon format-webp"><span class="format-badge">.WEBP</span></span>
             <span class="format-icon format-gif"><span class="format-badge">.GIF</span></span>
-            <span class="format-icon format-svg"><span class="format-badge">.SVG</span></span>
           </div>
           <p class="upload-title">Upload or drop image to translate</p>
           <p class="upload-hint">Max. file size <strong>10 MB</strong></p>
@@ -64,9 +63,16 @@
             <span class="speech-bridge-hint">Speak instead of typing, then open the text translator</span>
           </div>
         </div>
+        <div class="upload-result-block" id="imageResultBlock" hidden>
+          <label>Translated image preview</label>
+          <a id="imageTranslatedPreviewLink" href="#" target="_blank" rel="noopener" class="upload-result-preview-wrap">
+            <img id="imageTranslatedPreview" class="upload-result-preview" alt="Translated image preview" />
+          </a>
+        </div>
         <div class="actions" style="margin-top:16px">
           <button type="button" class="btn-clear" data-clear-upload="images">✕ Clear</button>
-          <button type="button" class="download-btn upload-download-btn" id="imageFileDownload" hidden>↓ Download File</button>
+          <button type="button" class="download-btn upload-download-btn" id="imageFileDownload" hidden>↓ Original</button>
+          <button type="button" class="download-btn upload-download-btn" id="imageTranslatedDownload" hidden>↓ Translated Image</button>
           <button type="button" class="btn-translate btn-primary" id="imageTranslateBtn">✦ Translate Image</button>
         </div>
         <p class="upload-note" id="imageUploadNote" hidden role="status"></p>
@@ -93,9 +99,14 @@
           <label for="docExtractedText">Text extracted from document</label>
           <textarea id="docExtractedText" readonly placeholder="Upload a document and click Translate Document to extract text…"></textarea>
         </div>
+        <div class="upload-extract-block" id="docTranslatedBlock" hidden>
+          <label for="docTranslatedText">Translated document text</label>
+          <textarea id="docTranslatedText" readonly placeholder="Translated text will appear here…"></textarea>
+        </div>
         <div class="actions" style="margin-top:16px">
           <button type="button" class="btn-clear" data-clear-upload="documents">✕ Clear</button>
-          <button type="button" class="download-btn upload-download-btn" id="docFileDownload" hidden>↓ Download File</button>
+          <button type="button" class="download-btn upload-download-btn" id="docFileDownload" hidden>↓ Original</button>
+          <button type="button" class="download-btn upload-download-btn" id="docTranslatedDownload" hidden>↓ Translated Document</button>
           <button type="button" class="btn-translate btn-primary" id="docTranslateBtn">✦ Translate Document</button>
         </div>
         <p class="upload-note" id="docUploadNote" hidden role="status"></p>
