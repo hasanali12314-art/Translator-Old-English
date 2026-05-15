@@ -18,6 +18,7 @@ const base = Astro.url.origin;
   {canonical && <link rel="canonical" href={`${base}${canonical}`} />}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <slot name="head" />
 </head>
 <body>
 

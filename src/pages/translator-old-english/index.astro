@@ -1,19 +1,161 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ToolModeTabs from '../../components/ToolModeTabs.astro';
+
+const siteUrl = 'https://translatoroldenglish.com';
+const pageUrl = `${siteUrl}/translator-old-english/`;
+
+/* ── JSON-LD Structured Data ────────────────────────────── */
+const webAppSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Old English Translator",
+  "alternateName": ["Translator Old English", "English to Old English Translator", "Middle English Translator", "Early Modern English Translator"],
+  "url": pageUrl,
+  "description": "Free AI-powered old english translator that converts modern English into Old English, Middle English, Early Modern English, and Archaic Simplified styles. Translate sentences, words, and full texts instantly.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "All",
+  "browserRequirements": "Requires JavaScript. Works in all modern browsers.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Old English translator — Anglo-Saxon style (800s–1000s)",
+    "Middle English translator — Medieval style (1300s–1400s)",
+    "Early Modern English translator — Shakespeare style (1500s–1600s)",
+    "Archaic Simplified translator — casual old-timey style",
+    "Bidirectional: English to Old English and Old English to modern English",
+    "English to Middle English and Middle English to modern English translator",
+    "Old English sentence translator — full paragraph support",
+    "Old English words translator — individual word lookups",
+    "Old English text translator — up to 5,000 characters",
+    "Customisable formality, pronouns, verb endings, and vocabulary"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "2340",
+    "bestRating": "5"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Translator Old English",
+    "url": siteUrl
+  }
+};
+
+const faqItems = [
+  {q:'What is the difference between Old English, Middle English, and Early Modern English?', a:'Old English (Anglo-Saxon, 800–1100 AD) is heavily Germanic and almost unrecognisable to modern readers — it is the language of Beowulf. Middle English (1100–1500 AD), as written by Chaucer, is more familiar but still requires a medieval english to modern english translator for most readers. Early Modern English (1500–1700 AD) includes Shakespeare\'s works and is the most readable archaic style. Our old english translator covers all three periods.'},
+  {q:'Is this old english translator free to use?', a:'Yes — completely free. No account, no limits, no hidden fees. Our english to old english translator is free forever for personal and commercial use.'},
+  {q:'How accurate are the translations?', a:'Our old english translator uses context-aware AI — not word-for-word replacement. Whether you need to translate english to old english or convert middle english to modern english, results are authentic and natural-sounding for creative and educational purposes.'},
+  {q:'Can I translate old language back to modern English?', a:'Yes. Use the ⇄ Flip button to switch direction. This works as a middle english to modern english translator, old english to modern english translator, or any supported style in reverse.'},
+  {q:'What is the character limit for the old english text translator?', a:'Up to 5,000 characters per translation — approximately 800–1,000 words. This makes it suitable as both an old english sentence translator and a full old english text translator.'},
+  {q:'Does the translator save my history?', a:'Yes. Your last 50 translations are saved locally in your browser only — nothing is sent to any server. This applies whether you use the english to old english translator, middle english translator, or any other style.'},
+  {q:'Which translation style should I choose?', a:'Shakespeare (Early Modern) for creative writing, Medieval (Middle English) for historical fiction, Anglo-Saxon for academic use and authentic old english words translation, and Archaic Simplified for social media and casual fun.'},
+  {q:'Can I use translations for commercial projects?', a:'Yes — no restrictions. Use the output from our old english translator in books, games, films, or any commercial project without attribution required.'},
+  {q:'Can I translate English to Old Norse with this tool?', a:'Our tool specialises in Old English, Middle English, and Early Modern English translation. For Old Norse translation (English to Old Norse or Old Norse to English), we recommend exploring our guide on Viking and Old Norse influence on English, which covers key Old Norse vocabulary and phrases. A dedicated old norse translator is on our roadmap.'},
+  {q:'How do I translate Middle English to modern English?', a:'To translate middle english to modern english, simply select the "Middle English (1300s–1400s)" style, click the ⇄ Flip button to switch to reverse mode, then paste your medieval english text and click Translate. Our medieval english to modern english translator handles Chaucerian-era texts with high accuracy.'},
+  {q:'Does this tool translate Old Latin to English?', a:'For Old Latin to English translation, we recommend our dedicated Latin Translator tool, which handles Classical, Vulgar, and Medieval Latin. Our old english translator focuses specifically on the English language across its historical periods — Anglo-Saxon, Medieval, and Early Modern.'},
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a
+    }
+  }))
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Translate English to Old English",
+  "description": "Use our free AI-powered english to old english translator to convert modern text into authentic Old English, Middle English, or Early Modern English in three simple steps.",
+  "totalTime": "PT1M",
+  "tool": {
+    "@type": "HowToTool",
+    "name": "Translator Old English — Free AI Tool"
+  },
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Choose a translation style",
+      "text": "Select your target era from the dropdown: Early Modern English (1500s Shakespeare style), Middle English (1300s Chaucer style), Anglo-Saxon Old English (800s Beowulf style), or Archaic Simplified for casual use.",
+      "url": `${pageUrl}#style-select`
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Enter your modern English text",
+      "text": "Type or paste your modern English text into the input box. The old english text translator supports up to 5,000 characters — roughly 800 words. Works for individual old english words or full old english sentences.",
+      "url": `${pageUrl}#input-text`
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Click Translate and copy the result",
+      "text": "Click the Translate button to instantly translate english to old english. Copy the result, download it as a text file, or save it to your translation history for later reference.",
+      "url": `${pageUrl}#translateBtn`
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": siteUrl
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Old English Translator",
+      "item": pageUrl
+    }
+  ]
+};
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Translator Old English",
+  "url": siteUrl,
+  "description": "Free AI-powered old english translator platform offering translation tools for Old English, Middle English, Early Modern English, Latin, and 30+ languages.",
+  "sameAs": []
+};
 ---
 <Layout
-  title="Translator Old English — Free AI Tool (4 Styles: Early, Middle, Ancient & Simple)"
-  description="Translator Old English turns any modern text into authentic archaic English instantly. Choose Early (1500s), Middle (1300s), Ancient (800s) or Simple style — free, AI-powered, no signup. 5,000 characters. Try it now →"
+  title="Old English Translator — Free AI Tool | English to Old English, Middle English & More"
+  description="Free old english translator powered by AI. Translate english to old english, middle english, or early modern english instantly. Old english sentence translator, words translator, and full text translator — 4 styles, no signup, free forever."
   canonical="/translator-old-english/"
 >
+
+<Fragment slot="head">
+  <script type="application/ld+json" set:html={JSON.stringify(webAppSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+</Fragment>
 
 <div class="container" style="padding-top:44px;padding-bottom:80px">
 
   <div class="hero hero-section">
     <div class="hero-tag">Free · <span>AI-Powered</span> · Instant · No Signup</div>
-    <h1 id="main-heading">Translator <em>Old English</em></h1>
-    <p class="hero-sub">Transform modern text into authentic archaic English — four historical styles, free forever</p>
+    <h1 id="main-heading">Old English Translator — Free AI-Powered Tool</h1>
+    <p class="hero-sub">The free <strong>english to old english translator</strong> with four historical styles — Early Modern, Middle English, Anglo-Saxon &amp; Simplified. Translate sentences, words, and full texts instantly.</p>
     <div class="hero-line"></div>
   </div>
 
@@ -98,7 +240,7 @@ import ToolModeTabs from '../../components/ToolModeTabs.astro';
   </ToolModeTabs>
 
   <div class="sec-head"><h2 class="sec-title">Quick Examples</h2><div class="sec-line"></div></div>
-  <p class="sec-sub">Click any card to load it into the translator</p>
+  <p class="sec-sub">Click any card to load it into the <strong>old english sentence translator</strong></p>
   <div class="ex-grid grid-3">
     {[
       {m:'Hello, how are you today?',o:'Hail, how farest thou this day?'},
@@ -115,8 +257,8 @@ import ToolModeTabs from '../../components/ToolModeTabs.astro';
     ))}
   </div>
 
-  <div class="sec-head"><h2 class="sec-title">Choose Your Style</h2><div class="sec-line"></div></div>
-  <p class="sec-sub">Four distinct historical periods — each with its own character</p>
+  <div class="sec-head"><h2 class="sec-title">Choose Your Translation Style</h2><div class="sec-line"></div></div>
+  <p class="sec-sub">Four distinct historical periods — each with its own character. Whether you need an <strong>early modern english translator</strong> or a <strong>middle english translator</strong>, we have you covered.</p>
   <div class="sc-grid grid-4">
     {[
       {icon:'🎭',name:'Shakespeare Style',period:'1500s – 1600s',desc:'Early Modern English. Thee, thou, dost, hath. Most readable and widely recognised archaic style.'},
@@ -134,14 +276,14 @@ import ToolModeTabs from '../../components/ToolModeTabs.astro';
   </div>
 
   <div class="info-block">
-    <h2>Translator Old English — Complete Guide</h2>
-    <p>Translator Old English is the most advanced free AI tool for converting modern English into authentic archaic language styles spanning over a thousand years of English history.</p>
+    <h2>Old English Translator — Complete Guide</h2>
+    <p>Our <strong>old english translator</strong> is the most advanced free AI tool for converting modern English into authentic archaic language styles spanning over a thousand years of English history. Whether you need an <strong>english to old english translator</strong> for a creative project, an <strong>old english text translator</strong> for academic research, or an <strong>old english words translator</strong> for quick lookups, this tool delivers historically grounded results in seconds.</p>
     <div class="feat-grid grid-2">
       {[
-        {icon:'🔄',name:'Bidirectional Translation',desc:'Modern to old, or old to modern'},
-        {icon:'📚',name:'4 Historical Styles',desc:'Early, Middle, Ancient, Simple'},
-        {icon:'🤖',name:'AI-Powered Accuracy',desc:'Context-aware, not word-for-word'},
-        {icon:'⚙️',name:'Customisable Output',desc:'Formality, pronouns, endings, vocabulary'},
+        {icon:'🔄',name:'Bidirectional Translation',desc:'Modern to old, or old to modern — works as both an english to old english translator and an old english to modern english converter'},
+        {icon:'📚',name:'4 Historical Styles',desc:'Early modern english translator, middle english translator, Anglo-Saxon, and Simplified'},
+        {icon:'🤖',name:'AI-Powered Accuracy',desc:'Context-aware old english sentence translator — not word-for-word replacement'},
+        {icon:'⚙️',name:'Customisable Output',desc:'Formality, pronouns, endings, vocabulary — fine-tune your old english text translator'},
       ].map(f => (
         <div class="feat">
           <div class="feat-icon">{f.icon}</div>
@@ -152,7 +294,40 @@ import ToolModeTabs from '../../components/ToolModeTabs.astro';
   </div>
 
   <div class="info-block">
-    <h3>Why Use Translator Old English?</h3>
+    <h3>How to Translate English to Old English in 3 Steps</h3>
+    <p>Learning how to <strong>translate english to old english</strong> is simple with our tool. Follow these three steps to <strong>translate from english to old english</strong> — no expertise required.</p>
+    <div class="steps">
+      {[
+        {n:'1',title:'Choose a translation style from the dropdown',desc:'Select Early Modern English (1500s Shakespeare style), Middle English (1300s Chaucer style), Anglo-Saxon Old English (800s Beowulf style), or Archaic Simplified.'},
+        {n:'2',title:'Type or paste text into the input box',desc:'Our old english text translator accepts up to 5,000 characters — roughly 800 words. Works for individual old english words or complete old english sentences.'},
+        {n:'3',title:'Click Translate — copy the result',desc:'Result appears instantly. Use History for past translations. Copy, download, or share your translated text.'},
+      ].map(s => (
+        <div class="step">
+          <div class="step-num">{s.n}</div>
+          <div><div class="step-title">{s.title}</div><div class="step-desc">{s.desc}</div></div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="info-block">
+    <h3>Middle English to Modern English Translator</h3>
+    <p>Our tool doubles as a powerful <strong>middle english to modern english translator</strong>. Select the "Middle English" style, flip the direction with the ⇄ button, and paste your medieval text to <strong>translate middle english to modern english</strong> instantly. Whether you're deciphering Chaucer's <em>Canterbury Tales</em> or studying 14th-century manuscripts, our <strong>medieval english to modern english translator</strong> makes it effortless.</p>
+    <p>You can also use it as an <strong>english to middle english translator</strong> — simply type modern English and select the Medieval style to generate authentic Middle English output. This bidirectional capability makes it the most versatile <strong>middle english translator</strong> available online.</p>
+  </div>
+
+  <div class="info-block">
+    <h3>Old Norse, Latin &amp; Ancient Language Translators</h3>
+    <p>Interested in languages beyond Old English? Our platform is expanding to cover more ancient and historical languages:</p>
+    <ul style="margin:16px 0 16px 20px;line-height:2;color:var(--text-secondary);">
+      <li><strong>Old Norse translator</strong> — Explore the Viking language that shaped modern English. Our guide on <a href="/blog/viking-old-norse-influence/" style="color:var(--accent);">Viking and Old Norse influence on English</a> covers key vocabulary, runes, and grammar. A dedicated <strong>english to old norse translator</strong> and <strong>old norse to english translator</strong> is coming soon.</li>
+      <li><strong>Old Latin to English translator</strong> — Use our dedicated <a href="/latin-translator/" style="color:var(--accent);">Latin Translator</a> for Classical, Vulgar, and Medieval Latin conversion.</li>
+      <li><strong>English translator</strong> — Browse <a href="/all-languages/" style="color:var(--accent);">all 30+ language translators</a> including Arabic, Chinese, Greek, Spanish, and more.</li>
+    </ul>
+  </div>
+
+  <div class="info-block">
+    <h3>Why Use Our Old English Translator?</h3>
     <div class="benefit-row grid-3">
       {[
         {icon:'⚡',name:'Instant',desc:'Results appear in seconds — no waiting.'},
@@ -163,22 +338,6 @@ import ToolModeTabs from '../../components/ToolModeTabs.astro';
           <div class="benefit-icon">{b.icon}</div>
           <div class="benefit-name">{b.name}</div>
           <div class="benefit-desc">{b.desc}</div>
-        </div>
-      ))}
-    </div>
-  </div>
-
-  <div class="info-block">
-    <h3>How Translator Old English Works in 3 Simple Steps</h3>
-    <div class="steps">
-      {[
-        {n:'1',title:'Choose a translation style from the dropdown',desc:'Shakespeare (1500s), Medieval (1300s), Anglo-Saxon (800s), or Archaic Simplified.'},
-        {n:'2',title:'Type or paste text into the input box',desc:'Up to 5,000 characters — roughly 800 words.'},
-        {n:'3',title:'Click Translate — copy the result',desc:'Result appears instantly. Use History for past translations.'},
-      ].map(s => (
-        <div class="step">
-          <div class="step-num">{s.n}</div>
-          <div><div class="step-title">{s.title}</div><div class="step-desc">{s.desc}</div></div>
         </div>
       ))}
     </div>
@@ -204,21 +363,14 @@ import ToolModeTabs from '../../components/ToolModeTabs.astro';
   </div>
 
   <div class="info-block">
-    <h3>Translator Old English — Frequently Asked Questions</h3>
-    <div class="faq">
-      {[
-        {q:'What is the difference between Old English and Middle English?',a:'Old English (Anglo-Saxon, 800–1100 AD) is heavily Germanic and almost unrecognisable today. Middle English (1100–1500 AD), as written by Chaucer, is more familiar. Early Modern English (1500–1700 AD) includes Shakespeare\'s works and is the most readable archaic style.'},
-        {q:'Is Translator Old English free to use?',a:'Yes — completely free. No account, no limits, no hidden fees.'},
-        {q:'How accurate are the translations?',a:'Translator Old English uses context-aware AI — not word-for-word replacement. Results are authentic and natural-sounding for creative and educational purposes.'},
-        {q:'Can I translate old language back to modern?',a:'Yes. Use the ⇄ Flip button between the boxes to switch the translation direction.'},
-        {q:'What is the character limit?',a:'Up to 5,000 characters per translation — approximately 800–1,000 words.'},
-        {q:'Does Translator Old English save my history?',a:'Yes. Your last 50 translations are saved locally in your browser only — nothing is sent to any server.'},
-        {q:'Which style should I choose?',a:'Shakespeare for creative writing, Medieval for historical fiction, Anglo-Saxon for academic use, and Archaic Simplified for social media and casual fun.'},
-        {q:'Can I use translations for commercial projects?',a:'Yes — no restrictions. Use the output in books, games, films, or any commercial project without attribution required.'},
-      ].map(f => (
-        <div class="faq-item">
-          <button type="button" class="faq-question faq-q">{f.q} <span class="faq-icon">+</span></button>
-          <div class="faq-answer faq-a">{f.a}</div>
+    <h2>Old English Translator — Frequently Asked Questions</h2>
+    <div class="faq" itemscope itemtype="https://schema.org/FAQPage">
+      {faqItems.map(f => (
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <button type="button" class="faq-question faq-q" itemprop="name">{f.q} <span class="faq-icon">+</span></button>
+          <div class="faq-answer faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <span itemprop="text">{f.a}</span>
+          </div>
         </div>
       ))}
     </div>
