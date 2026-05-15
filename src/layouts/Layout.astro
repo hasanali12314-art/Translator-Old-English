@@ -16,9 +16,6 @@ const base = Astro.url.origin;
   <meta name="description" content={description} />
   <title>{title}</title>
   {canonical && <link rel="canonical" href={`${base}${canonical}`} />}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
 
@@ -29,14 +26,14 @@ const base = Astro.url.origin;
 <aside class="history-panel" id="historyPanel" role="complementary" aria-label="Translation history">
   <div class="history-header">
     <div>
-      <h3 style="font-size:1.1rem;margin-bottom:4px;">Translation History</h3>
-      <p style="font-size:0.8rem;color:var(--text-muted);">Last 50 translations · stored locally</p>
+      <h3 style="margin-bottom:4px;">Translation History</h3>
+      <p class="text-xs" style="color:var(--text-muted);">Last 50 translations · stored locally</p>
     </div>
     <button class="btn btn-ghost btn-sm" id="closeHistory" aria-label="Close history">✕</button>
   </div>
   <div class="history-list" id="historyList">
     <div class="history-empty">
-      <div style="font-size:2rem;margin-bottom:12px;">📜</div>
+      <div style="margin-bottom:12px;">📜</div>
       <p>No translations yet.<br/>Your history will appear here.</p>
     </div>
   </div>
@@ -51,7 +48,7 @@ const base = Astro.url.origin;
     <!-- Logo -->
     <a href="/translator-old-english/" class="site-logo" id="site-logo">
       <span class="logo-icon">⚜</span>
-      <span class="logo-text">Translator<span class="logo-dot gold-text"> Old English</span></span>
+      <span class="logo-text text-md md:text-2xl">Translator<span class="logo-dot gold-text"> Old English</span></span>
     </a>
 
     <!-- Desktop Nav -->
@@ -164,9 +161,9 @@ const base = Astro.url.origin;
       <div class="footer-brand">
         <a href="/translator-old-english/" class="site-logo" style="margin-bottom:16px;display:inline-flex;">
           <span class="logo-icon">⚜</span>
-          <span class="logo-text">Translator<span class="logo-dot gold-text"> Old English</span></span>
+          <span class="logo-text text-md md:text-2xl">Translator<span class="logo-dot gold-text"> Old English</span></span>
         </a>
-        <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.7;max-width:260px;">
+        <p class="text-sm" style="color:var(--text-muted);line-height:1.7;max-width:260px;">
           Free AI-powered translation between modern English and historical styles — Early, Middle, Ancient, and more.
         </p>
       </div>
@@ -216,11 +213,11 @@ const base = Astro.url.origin;
       </div>
     </div>
     <div class="footer-bottom">
-      <p style="color:var(--text-muted);font-size:0.85rem;">© 2024 Translator Old English. Free for personal and commercial use.</p>
-      <div style="display:flex;gap:16px;">
-        <a href="/privacy-policy/" style="color:var(--text-muted);font-size:0.85rem;">Privacy</a>
-        <a href="/terms-and-conditions/" style="color:var(--text-muted);font-size:0.85rem;">Terms</a>
-        <a href="/sitemap/" style="color:var(--text-muted);font-size:0.85rem;">Sitemap</a>
+      <p class="text-sm" style="color:var(--text-muted);">© 2024 Translator Old English. Free for personal and commercial use.</p>
+      <div class="text-sm" style="display:flex;gap:16px;">
+        <a href="/privacy-policy/" style="color:var(--text-muted);">Privacy</a>
+        <a href="/terms-and-conditions/" style="color:var(--text-muted);">Terms</a>
+        <a href="/sitemap/" style="color:var(--text-muted);">Sitemap</a>
       </div>
     </div>
   </div>
@@ -263,7 +260,7 @@ const base = Astro.url.origin;
   }
   .hero-badge { margin-bottom: 20px; }
   .hero-sub {
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-size: 0.875rem;
     color: var(--text-secondary);
     max-width: 640px;
     margin: 16px auto 0;
@@ -305,8 +302,8 @@ const base = Astro.url.origin;
     text-decoration: none;
     flex-shrink: 0;
   }
-  .logo-icon { font-size: 1.4rem; filter: drop-shadow(0 0 8px rgba(201,168,76,0.5)); }
-  .logo-text { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+  .logo-icon { filter: drop-shadow(0 0 8px rgba(201,168,76,0.5)); }
+  .logo-text { font-family: var(--font-serif); font-weight: 700; color: var(--text-primary); white-space: nowrap; }
   .logo-dot { margin-left: 2px; }
 
   .desktop-nav { flex: 1; display: flex; justify-content: center; }
@@ -325,7 +322,7 @@ const base = Astro.url.origin;
     border: none;
     background: none;
     cursor: pointer;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-sans);
     white-space: nowrap;
   }
   .nav-link:hover { color: var(--text-primary); background: var(--surface-2); }
@@ -361,7 +358,7 @@ const base = Astro.url.origin;
   .dropdown-item:hover { background: var(--surface-2); color: var(--text-primary); }
   .dropdown-see-all { color: var(--gold) !important; font-weight: 600; }
   .dropdown-divider { height: 1px; background: var(--border); margin: 6px 0; }
-  .nav-arrow { font-size: 0.7rem; transition: var(--transition); }
+  .nav-arrow { font-size: 0.75rem; transition: var(--transition); }
 
   .header-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0; }
   .icon-btn {
@@ -373,7 +370,7 @@ const base = Astro.url.origin;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer;
     transition: var(--transition);
-    font-size: 1rem;
+
   }
   .icon-btn:hover { border-color: var(--border-strong); color: var(--gold); background: var(--gold-glow); }
   .mobile-menu-btn { display: none; }
@@ -396,8 +393,8 @@ const base = Astro.url.origin;
     display: block;
     padding: 12px 16px;
     color: var(--text-primary);
+    font-size: 0.875rem;
     font-weight: 600;
-    font-size: 0.95rem;
     border-radius: var(--radius-sm);
     text-decoration: none;
     transition: var(--transition);
@@ -407,7 +404,7 @@ const base = Astro.url.origin;
   .mobile-nav-label {
     display: block;
     padding: 8px 16px;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -437,10 +434,10 @@ const base = Astro.url.origin;
     gap: 40px;
     margin-bottom: 48px;
   }
-  .footer-brand h3 { font-size: 1.1rem; margin-bottom: 12px; }
+  .footer-brand h3 { margin-bottom: 12px; }
   .footer-col h4 {
-    font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
+    font-family: var(--font-serif);
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -509,7 +506,7 @@ const base = Astro.url.origin;
     if (!list) return;
     const items: Array<{style:string;input:string;output:string;date:string}> = JSON.parse(localStorage.getItem('oe-history') || '[]');
     if (!items.length) {
-      list.innerHTML = '<div class="history-empty"><div style="font-size:2rem;margin-bottom:12px;">📜</div><p>No translations yet.<br/>Your history will appear here.</p></div>';
+      list.innerHTML = '<div class="history-empty"><div style="margin-bottom:12px;">📜</div><p>No translations yet.<br/>Your history will appear here.</p></div>';
       return;
     }
     list.innerHTML = items.map((item, i) => `

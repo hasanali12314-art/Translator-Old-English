@@ -53,13 +53,13 @@ const groups=[
   <h1 id="main-heading">Site <span class="gold-text">Map</span></h1>
   <p class="hero-sub">All pages on Translator Old English — organised by section</p>
 </div></section>
-<section class="section"><div class="container" style="max-width:900px;">
+<section class="section"><div class="container" style="max-width:900px">
   <div class="grid-3">
     {groups.map(g=>(
       <div class="card">
-        <h2 style="font-size:0.85rem;font-family:'Cinzel',serif;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;">{g.title}</h2>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
-          {g.pages.map(p=>(<li><a href={p.href} style="font-size:0.875rem;color:var(--text-secondary);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s;"><span style="color:var(--gold);font-size:0.7rem;">→</span>{p.name}</a></li>))}
+        <h2 style="letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">{g.title}</h2>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+          {g.pages.map(p=>(<li><a href={p.href} style="color:var(--text-secondary);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s"><span style="color:var(--gold)">→</span>{p.name}</a></li>))}
         </ul>
       </div>
     ))}

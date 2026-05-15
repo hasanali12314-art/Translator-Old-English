@@ -5,8 +5,8 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
 <Layout title="Text Translator — Free Online Text Translation Tool" description="Translate text and words instantly with our free online text translator. Accurate, fast, and works on any device." canonical="/text-translator/">
 <section class="hero-section">
   <div class="container">
-    <nav class="breadcrumb" style="margin-bottom:16px;"><a href="/translator-old-english/">Home</a><span>›</span><span>Text Translator</span></nav>
-    <a href="/translator-old-english/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Home</a>
+    <nav class="breadcrumb" style="margin-bottom:16px"><a href="/translator-old-english/">Home</a><span>›</span><span>Text Translator</span></nav>
+    <a href="/translator-old-english/" class="btn btn-ghost btn-sm" style="margin-bottom:24px">← Back to Home</a>
     <h1 id="main-heading">Text <span class="gold-text">Translator</span></h1>
     <p class="hero-sub">Translate any text or word instantly — free, accurate, AI-powered translation for every purpose</p>
   </div>
@@ -18,39 +18,39 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
     {[{orig:'The quick brown fox jumps over the lazy dog.',trans:'El rápido zorro marrón salta sobre el perro perezoso.'},{orig:'Knowledge is power.',trans:'Le savoir, c\'est le pouvoir.'},{orig:'Hello, how can I help you today?',trans:'Hallo, wie kann ich Ihnen heute helfen?'}].map(e=>(
       <div class="example-card">
         <div class="example-card-section"><div class="example-label">Original</div><div class="example-text">{e.orig}</div></div>
-        <div class="example-card-section"><div class="example-label">Translated</div><div class="example-text" style="color:var(--gold-light);">{e.trans}</div></div>
+        <div class="example-card-section"><div class="example-label">Translated</div><div class="example-text" style="color:var(--gold-light)">{e.trans}</div></div>
       </div>
     ))}
   </div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
-  <h2 style="margin-bottom:16px;">About <span class="gold-text">Text Translation</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:24px;">The Text Translator is designed for word and sentence-level translation. Whether you need to translate a single phrase, a paragraph, or a full message, this tool delivers accurate results instantly. It is ideal for communication, learning, and content creation. For translating to historical English styles, visit the <a href="/translator-old-english/">Translator Old English</a>.</p>
-  <div class="grid-2" style="margin-top:32px;">
+<section class="section"><div class="container" style="max-width:800px">
+  <h2 style="margin-bottom:16px">About <span class="gold-text">Text Translation</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:24px">The Text Translator is designed for word and sentence-level translation. Whether you need to translate a single phrase, a paragraph, or a full message, this tool delivers accurate results instantly. It is ideal for communication, learning, and content creation. For translating to historical English styles, visit the <a href="/translator-old-english/">Translator Old English</a>.</p>
+  <div class="grid-2" style="margin-top:32px">
     {[{icon:'⚡',t:'Instant Results',d:'Translations appear in seconds'},{icon:'📱',t:'Works on Mobile',d:'Fully responsive on all devices'},{icon:'🆓',t:'Always Free',d:'No account or limits required'},{icon:'📋',t:'Easy to Copy',d:'One-click copy of results'}].map(f=>(
-      <div style="display:flex;gap:14px;padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);">
-        <span style="font-size:1.6rem;">{f.icon}</span><div><h4 style="font-size:0.9rem;margin-bottom:4px;">{f.t}</h4><p style="font-size:0.82rem;color:var(--text-secondary);">{f.d}</p></div>
+      <div style="display:flex;gap:14px;padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)">
+        <span>{f.icon}</span><div><h4 style="margin-bottom:4px">{f.t}</h4><p style="color:var(--text-secondary)">{f.d}</p></div>
       </div>
     ))}
   </div>
 </div></section>
 <section class="section-sm"><div class="container">
   <div class="section-heading"><h2>Related <span class="gold-text">Pages</span></h2></div>
-  <div class="grid-2" style="max-width:600px;margin:0 auto;">
-    <a href="/all-languages/" class="card card-gold" style="text-decoration:none;"><span style="font-size:1.8rem;display:block;margin-bottom:10px;">🌍</span><h3 style="font-size:1rem;margin-bottom:6px;">All Languages</h3><p style="font-size:0.85rem;color:var(--text-secondary);">100+ languages supported</p></a>
-    <a href="/translator-old-english/" class="card card-gold" style="text-decoration:none;"><span style="font-size:1.8rem;display:block;margin-bottom:10px;">⚜️</span><h3 style="font-size:1rem;margin-bottom:6px;">Translator Old English</h3><p style="font-size:0.85rem;color:var(--text-secondary);">Translate to historical English</p></a>
+  <div class="grid-2" style="max-width:600px;margin:0 auto">
+    <a href="/all-languages/" class="card card-gold" style="text-decoration:none"><span style="display:block;margin-bottom:10px">🌍</span><h3 style="margin-bottom:6px">All Languages</h3><p style="color:var(--text-secondary)">100+ languages supported</p></a>
+    <a href="/translator-old-english/" class="card card-gold" style="text-decoration:none"><span style="display:block;margin-bottom:10px">⚜️</span><h3 style="margin-bottom:6px">Translator Old English</h3><p style="color:var(--text-secondary)">Translate to historical English</p></a>
   </div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
+<section class="section"><div class="container" style="max-width:800px">
   <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
   {[{q:'What is a text translator?',a:'A text translator converts written words, phrases, or paragraphs from one language to another using AI-powered processing.'},{q:'Is this tool free to use?',a:'Yes. The text translator is completely free with no account, no daily limits, and no subscriptions.'},{q:'How accurate are the translations?',a:'Very accurate for common languages. The AI uses context to understand meaning, not just individual words.'},{q:'Can I translate both ways?',a:'Yes. Use the flip button to reverse the translation direction.'},{q:'What is the character limit?',a:'Each translation supports up to 5,000 characters.'},{q:'Does the tool save my history?',a:'Yes. Your last 50 translations are saved locally in your browser.'},{q:'Does it work on mobile?',a:'Yes. The tool is fully responsive and works on smartphones and tablets.'},{q:'Can I use translations commercially?',a:'Yes. All translations can be used in personal and commercial projects.'}].map(f=>(
     <div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>
   ))}
 </div></section>
 <section class="section-sm"><div class="container"><div class="cta-banner">
-  <h2 style="margin-bottom:16px;">Start <span class="gold-text">Translating</span> Now</h2>
-  <p style="color:var(--text-secondary);margin-bottom:32px;">Free, instant, AI-powered text translation</p>
-  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Translate Text Free</a>
+  <h2 style="margin-bottom:16px">Start <span class="gold-text">Translating</span> Now</h2>
+  <p style="color:var(--text-secondary);margin-bottom:32px">Free, instant, AI-powered text translation</p>
+  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Translate Text Free</a>
   <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
 </div></div></section>
 </Layout>

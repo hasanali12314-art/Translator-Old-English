@@ -21,16 +21,16 @@ const posts=[
 <section class="section"><div class="container">
   <div class="grid-2">
     {posts.map(p=>(
-      <a href={`/blog/${p.slug}/`} class="card" style="text-decoration:none;display:block;">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <a href={`/blog/${p.slug}/`} class="card" style="text-decoration:none;display:block">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
           <span class="badge badge-gold">{p.cat}</span>
-          <span style="font-size:0.75rem;color:var(--text-muted);">{p.time} min read</span>
+          <span style="color:var(--text-muted)">{p.time} min read</span>
         </div>
-        <h2 style="font-size:1.05rem;margin-bottom:10px;line-height:1.4;">{p.title}</h2>
-        <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.6;margin-bottom:14px;">{p.desc}</p>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span style="font-size:0.75rem;color:var(--text-muted);">{p.date}</span>
-          <span style="color:var(--gold);font-size:0.82rem;font-weight:600;">Read →</span>
+        <h2 style="margin-bottom:10px;line-height:1.4">{p.title}</h2>
+        <p style="color:var(--text-secondary);line-height:1.6;margin-bottom:14px">{p.desc}</p>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="color:var(--text-muted)">{p.date}</span>
+          <span style="color:var(--gold);font-weight:600">Read →</span>
         </div>
       </a>
     ))}

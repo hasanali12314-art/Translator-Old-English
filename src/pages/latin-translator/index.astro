@@ -4,8 +4,8 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
 ---
 <Layout title="Latin Translator — English to Latin Free Online" description="Translate English to Latin or Latin to English instantly. Classical and Ecclesiastical Latin with style options. Free AI-powered." canonical="/latin-translator/">
 <section class="hero-section"><div class="container">
-  <nav class="breadcrumb" style="margin-bottom:16px;"><a href="/translator-old-english/">Home</a><span>›</span><a href="/ancient-languages/">Ancient Languages</a><span>›</span><span>Latin Translator</span></nav>
-  <a href="/ancient-languages/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Ancient Languages</a>
+  <nav class="breadcrumb" style="margin-bottom:16px"><a href="/translator-old-english/">Home</a><span>›</span><a href="/ancient-languages/">Ancient Languages</a><span>›</span><span>Latin Translator</span></nav>
+  <a href="/ancient-languages/" class="btn btn-ghost btn-sm" style="margin-bottom:24px">← Back to Ancient Languages</a>
   <h1 id="main-heading">Latin <span class="gold-text">Translator</span></h1>
   <p class="hero-sub">Translate English to Classical or Ecclesiastical Latin — free, AI-powered, with advanced style controls</p>
 </div></section>
@@ -14,25 +14,25 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
   <div class="section-heading"><h2>Translation <span class="gold-text">Examples</span></h2></div>
   <div class="grid-3">
     {[{e:'I came, I saw, I conquered.',l:'Veni, vidi, vici.'},{e:'Knowledge is power.',l:'Scientia est potentia.'},{e:'Time flies and cannot be recalled.',l:'Tempus fugit nec potest revocari.'}].map(ex=>(
-      <div class="example-card"><div class="example-card-section"><div class="example-label">Modern English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Latin</div><div class="example-text" style="color:var(--gold-light);">{ex.l}</div></div></div>
+      <div class="example-card"><div class="example-card-section"><div class="example-label">Modern English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Latin</div><div class="example-text" style="color:var(--gold-light)">{ex.l}</div></div></div>
     ))}
   </div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
-  <h2 style="margin-bottom:16px;">About <span class="gold-text">Latin</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8;">Latin was the language of the Roman Empire and served as the lingua franca of European scholarship, law, medicine, and the Catholic Church for over a millennium. It is the ancestor of the Romance languages — Italian, Spanish, French, Portuguese, and Romanian — and has contributed enormously to English vocabulary. Although no longer spoken natively, Latin remains essential in law, medicine, academia, Catholic liturgy, and classical studies.</p>
+<section class="section"><div class="container" style="max-width:800px">
+  <h2 style="margin-bottom:16px">About <span class="gold-text">Latin</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8">Latin was the language of the Roman Empire and served as the lingua franca of European scholarship, law, medicine, and the Catholic Church for over a millennium. It is the ancestor of the Romance languages — Italian, Spanish, French, Portuguese, and Romanian — and has contributed enormously to English vocabulary. Although no longer spoken natively, Latin remains essential in law, medicine, academia, Catholic liturgy, and classical studies.</p>
 </div></section>
 <section class="section-sm"><div class="container">
   <div class="section-heading"><h2>Related <span class="gold-text">Pages</span></h2></div>
-  <div class="grid-2" style="max-width:500px;margin:0 auto;">{[{href:'/old-english/',n:'Anglo-Saxon Old English'},{href:'/aramaic-translator/',n:'Aramaic Translator'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600;">{r.n}</a>))}</div>
+  <div class="grid-2" style="max-width:500px;margin:0 auto">{[{href:'/old-english/',n:'Anglo-Saxon Old English'},{href:'/aramaic-translator/',n:'Aramaic Translator'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600">{r.n}</a>))}</div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
+<section class="section"><div class="container" style="max-width:800px">
   <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
   {[{q:'Is it Classical or Ecclesiastical Latin?',a:'The tool supports both Classical Latin (as written by Caesar and Cicero) and Ecclesiastical Latin (as used by the Catholic Church), selectable via the style dropdown.'},{q:'Can I translate Latin back to English?',a:'Yes. Use the flip button to translate Latin text back into modern English.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per translation.'},{q:'How accurate is the Latin translation?',a:'Good accuracy for Classical Latin. Latin is a complex inflected language, so the AI handles case endings and conjugations with reasonable precision.'},{q:'Can I use it for academic work?',a:'Yes, though academic submissions should be verified by a Latinist.'},{q:'Does it support Roman numerals?',a:'The tool focuses on Latin text translation. Roman numerals in input text are recognised and contextualised.'},{q:'Can I use translations commercially?',a:'Yes. All output is free for personal and commercial use.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
 </div></section>
 <section class="section-sm"><div class="container"><div class="cta-banner">
-  <h2 style="margin-bottom:16px;">Translate to <span class="gold-text">Latin</span> Now</h2>
-  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Start Translating</a>
+  <h2 style="margin-bottom:16px">Translate to <span class="gold-text">Latin</span> Now</h2>
+  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Start Translating</a>
   <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
 </div></div></section>
 </Layout>

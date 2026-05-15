@@ -37,10 +37,10 @@ function langHref(name: string): string {
 <Layout title="All Language Translator — Translate Any Language Online Free" description="Translate English to any language or any language to English — instant, free, AI-powered. 100+ languages supported." canonical="/all-languages/">
 <section class="hero-section">
   <div class="container">
-    <nav class="breadcrumb" style="margin-bottom:16px;">
+    <nav class="breadcrumb" style="margin-bottom:16px">
       <a href="/translator-old-english/">Home</a><span>›</span><span>All Languages Translator</span>
     </nav>
-    <a href="/translator-old-english/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Home</a>
+    <a href="/translator-old-english/" class="btn btn-ghost btn-sm" style="margin-bottom:24px">← Back to Home</a>
     <h1 id="main-heading">All Language <span class="gold-text">Translator</span></h1>
     <p class="hero-sub">Translate English to any language or any language to English — instant, free, AI-powered</p>
   </div>
@@ -78,7 +78,7 @@ function langHref(name: string): string {
           </div>
           <div class="example-card-section">
             <div class="example-label">English</div>
-            <div class="example-text" style="color:var(--gold-light);">{ex.eng}</div>
+            <div class="example-text" style="color:var(--gold-light)">{ex.eng}</div>
           </div>
         </div>
       ))}
@@ -90,10 +90,10 @@ function langHref(name: string): string {
 <section class="section">
   <div class="container">
     <div class="section-heading"><h2>All <span class="gold-text">Supported Languages</span></h2>
-    <p style="color:var(--text-muted);font-size:0.9rem;margin-top:8px;">Click a language to translate English into that language</p></div>
+    <p style="color:var(--text-muted);margin-top:8px">Click a language to translate English into that language</p></div>
     <div class="grid-auto">
       {languages.filter(l => l !== 'English').map(l => (
-        <a href={langHref(l)} class="card lang-card" style="text-align:center;padding:16px;font-size:0.875rem;font-weight:500;text-decoration:none;color:var(--text-secondary);" aria-label={`Translate to ${l}`}>
+        <a href={langHref(l)} class="card lang-card" style="text-align:center;padding:16px;font-weight:500;text-decoration:none;color:var(--text-secondary)" aria-label={`Translate to ${l}`}>
           {l}
         </a>
       ))}
@@ -103,18 +103,18 @@ function langHref(name: string): string {
 
 <!-- Content -->
 <section class="section">
-  <div class="container" style="max-width:800px;">
-    <h2 style="margin-bottom:20px;">Translate Any Language <span class="gold-text">to English</span></h2>
-    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px;">Select the source language (or Auto-detect), choose English as the target, paste your text, and click Translate. The tool detects many scripts automatically when Auto-detect is selected.</p>
+  <div class="container" style="max-width:800px">
+    <h2 style="margin-bottom:20px">Translate Any Language <span class="gold-text">to English</span></h2>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px">Select the source language (or Auto-detect), choose English as the target, paste your text, and click Translate. The tool detects many scripts automatically when Auto-detect is selected.</p>
 
-    <h2 style="margin-bottom:20px;">English to All Languages — <span class="gold-text">Free Online Translator</span></h2>
-    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px;">Click any language above to open the translator with that target pre-selected, or use the dropdowns. This free online translator covers Germanic, Romance, Slavic, Asian, Semitic, and many other language families.</p>
+    <h2 style="margin-bottom:20px">English to All Languages — <span class="gold-text">Free Online Translator</span></h2>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px">Click any language above to open the translator with that target pre-selected, or use the dropdowns. This free online translator covers Germanic, Romance, Slavic, Asian, Semitic, and many other language families.</p>
 
-    <h2 style="margin-bottom:20px;">How to Use the <span class="gold-text">All Language Translator</span></h2>
+    <h2 style="margin-bottom:20px">How to Use the <span class="gold-text">All Language Translator</span></h2>
     {['Select your source language or leave it on Auto-detect','Select your target language — or click a language card below','Type or paste your text into the input box (up to 5000 characters)','Click Translate — the result appears instantly','Use the flip button to reverse source and target languages'].map((s,i) => (
-      <div style="display:flex;gap:16px;margin-bottom:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);">
-        <span style="font-family:'Cinzel',serif;font-size:1.2rem;font-weight:700;color:var(--gold);opacity:0.5;min-width:28px;">0{i+1}</span>
-        <span style="color:var(--text-secondary);font-size:0.9rem;">{s}</span>
+      <div style="display:flex;gap:16px;margin-bottom:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)">
+        <span style="font-weight:700;color:var(--gold);opacity:0.5;min-width:28px">0{i+1}</span>
+        <span style="color:var(--text-secondary)">{s}</span>
       </div>
     ))}
   </div>
@@ -130,10 +130,10 @@ function langHref(name: string): string {
         {href:'/translator-old-english/',icon:'⚜️',title:'Translator Old English',desc:'Translate to historical English styles'},
         {href:'/language-translators/',icon:'🌍',title:'Language Translators',desc:'Browse all individual language pages'},
       ].map(r => (
-        <a href={r.href} class="card card-gold" style="text-decoration:none;display:block;">
-          <span style="font-size:1.8rem;display:block;margin-bottom:10px;">{r.icon}</span>
-          <h3 style="font-size:1rem;margin-bottom:6px;">{r.title}</h3>
-          <p style="font-size:0.85rem;color:var(--text-secondary);">{r.desc}</p>
+        <a href={r.href} class="card card-gold" style="text-decoration:none;display:block">
+          <span style="display:block;margin-bottom:10px">{r.icon}</span>
+          <h3 style="margin-bottom:6px">{r.title}</h3>
+          <p style="color:var(--text-secondary)">{r.desc}</p>
         </a>
       ))}
     </div>
@@ -142,7 +142,7 @@ function langHref(name: string): string {
 
 <!-- FAQ -->
 <section class="section">
-  <div class="container" style="max-width:800px;">
+  <div class="container" style="max-width:800px">
     <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
     {[
       {q:'Can I translate any language to English for free?',a:'Yes. Use Auto-detect as the source and English as the target, or select the source language manually. Translation is completely free.'},
@@ -165,9 +165,9 @@ function langHref(name: string): string {
 <section class="section-sm">
   <div class="container">
     <div class="cta-banner">
-      <h2 style="margin-bottom:16px;">Translate <span class="gold-text">Any Language</span> Now</h2>
-      <p style="color:var(--text-secondary);margin-bottom:32px;">Free, instant — no account needed</p>
-      <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Start Translating</a>
+      <h2 style="margin-bottom:16px">Translate <span class="gold-text">Any Language</span> Now</h2>
+      <p style="color:var(--text-secondary);margin-bottom:32px">Free, instant — no account needed</p>
+      <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Start Translating</a>
       <div class="trust-badges">
         <div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div>
         <div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div>

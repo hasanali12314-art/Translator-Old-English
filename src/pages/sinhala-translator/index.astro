@@ -4,8 +4,8 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
 ---
 <Layout title="Sinhala Translator — English to Sinhala Free Online" description="Translate English to Sinhala or Sinhala to English instantly. Free AI-powered Sinhala translation with native script support." canonical="/sinhala-translator/">
 <section class="hero-section"><div class="container">
-  <nav class="breadcrumb" style="margin-bottom:16px;"><a href="/translator-old-english/">Home</a><span>›</span><a href="/specialty-translators/">Specialty Translators</a><span>›</span><span>Sinhala Translator</span></nav>
-  <a href="/specialty-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Specialty Translators</a>
+  <nav class="breadcrumb" style="margin-bottom:16px"><a href="/translator-old-english/">Home</a><span>›</span><a href="/specialty-translators/">Specialty Translators</a><span>›</span><span>Sinhala Translator</span></nav>
+  <a href="/specialty-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px">← Back to Specialty Translators</a>
   <h1 id="main-heading">Sinhala <span class="gold-text">Translator</span></h1>
   <p class="hero-sub">Translate English to Sinhala (සිංහල) or Sinhala to English — free, instant, AI-powered</p>
 </div></section>
@@ -14,26 +14,26 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
   <div class="section-heading"><h2>Translation <span class="gold-text">Examples</span></h2></div>
   <div class="grid-3">
     {[{e:'Good morning, how are you?',s:'සුබ උදෑසනක්, ඔබ කෙසේ ද?'},{e:'Welcome to Sri Lanka.',s:'ශ්‍රී ලංකාවට සාදරයෙන් පිළිගනිමු.'},{e:'Thank you very much.',s:'ඉතා ස්තූතිය.'}].map(ex=>(
-      <div class="example-card"><div class="example-card-section"><div class="example-label">English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Sinhala</div><div class="example-text" style="color:var(--gold-light);">{ex.s}</div></div></div>
+      <div class="example-card"><div class="example-card-section"><div class="example-label">English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Sinhala</div><div class="example-text" style="color:var(--gold-light)">{ex.s}</div></div></div>
     ))}
   </div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
-  <h2 style="margin-bottom:16px;">About <span class="gold-text">Sinhala</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8;">Sinhala (සිංහල) is an Indo-Aryan language spoken by approximately 17 million people, primarily in Sri Lanka where it is one of the official languages alongside Tamil. It has its own unique script derived from the ancient Brahmi alphabet and has been written for over 2,000 years. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
+<section class="section"><div class="container" style="max-width:800px">
+  <h2 style="margin-bottom:16px">About <span class="gold-text">Sinhala</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8">Sinhala (සිංහල) is an Indo-Aryan language spoken by approximately 17 million people, primarily in Sri Lanka where it is one of the official languages alongside Tamil. It has its own unique script derived from the ancient Brahmi alphabet and has been written for over 2,000 years. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
 </div></section>
 <section class="section-sm"><div class="container">
   <div class="section-heading"><h2>Related <span class="gold-text">Tools</span></h2></div>
-  <div class="grid-3">{[{href:'/rare-languages/',n:'Rare Languages'},{href:'/navajo-translator/',n:'Navajo'},{href:'/dialect-translator/',n:'Dialect Converter'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600;">{r.n}</a>))}</div>
-  <div style="text-align:center;margin-top:24px;"><a href="/specialty-translators/" class="btn btn-outline">Back to Specialty Translators</a></div>
+  <div class="grid-3">{[{href:'/rare-languages/',n:'Rare Languages'},{href:'/navajo-translator/',n:'Navajo'},{href:'/dialect-translator/',n:'Dialect Converter'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600">{r.n}</a>))}</div>
+  <div style="text-align:center;margin-top:24px"><a href="/specialty-translators/" class="btn btn-outline">Back to Specialty Translators</a></div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
+<section class="section"><div class="container" style="max-width:800px">
   <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
   {[{q:'What is the Sinhala language?',a:'Sinhala is an Indo-Aryan language spoken by the Sinhalese people of Sri Lanka. It has its own unique script and over 2,000 years of written history.'},{q:'Can I translate Sinhala back to English?',a:'Yes. Use the flip button to translate Sinhala back into English.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per translation.'},{q:'How accurate is the Sinhala translation?',a:'Good accuracy for common expressions. Sinhala is a less-resourced language so complex sentences may have some variation.'},{q:'Does it support the Sinhala script?',a:'Yes. Output is displayed in native Sinhala script (Sinhalese alphabet).'},{q:'Does it work on mobile?',a:'Yes, fully responsive on all devices.'},{q:'Can I use output commercially?',a:'Yes. All output is free for personal and commercial use.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
 </div></section>
 <section class="section-sm"><div class="container"><div class="cta-banner">
-  <h2 style="margin-bottom:16px;">Translate to <span class="gold-text">Sinhala</span> Now</h2>
-  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Start Translating</a>
+  <h2 style="margin-bottom:16px">Translate to <span class="gold-text">Sinhala</span> Now</h2>
+  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Start Translating</a>
   <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
 </div></div></section>
 </Layout>

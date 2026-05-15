@@ -25,11 +25,11 @@ const all = [
   <div class="section-heading"><h2>Featured <span class="gold-text">Languages</span></h2></div>
   <div class="grid-3">
     {featured.map(f=>(
-      <a href={f.href} class="card card-gold" style="text-decoration:none;display:block;">
-        <div class="badge badge-gold" style="margin-bottom:12px;">{f.vol}</div>
-        <h3 style="font-size:1.1rem;margin-bottom:6px;">{f.name}</h3>
-        <p style="font-size:0.8rem;color:var(--text-muted);">{f.kw}</p>
-        <div style="color:var(--gold);font-size:0.85rem;margin-top:16px;font-weight:600;">Translate Now →</div>
+      <a href={f.href} class="card card-gold" style="text-decoration:none;display:block">
+        <div class="badge badge-gold" style="margin-bottom:12px">{f.vol}</div>
+        <h3 style="margin-bottom:6px">{f.name}</h3>
+        <p style="color:var(--text-muted)">{f.kw}</p>
+        <div style="color:var(--gold);margin-top:16px;font-weight:600">Translate Now →</div>
       </a>
     ))}
   </div>
@@ -39,20 +39,20 @@ const all = [
   <div class="section-heading"><h2>All <span class="gold-text">Language Pages</span></h2></div>
   <div class="grid-3">
     {all.map(l=>(
-      <a href={l.href} class="card" style="text-decoration:none;display:block;">
-        <h3 style="font-size:1rem;margin-bottom:8px;">{l.name}</h3>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href={l.href} class="card" style="text-decoration:none;display:block">
+        <h3 style="margin-bottom:8px">{l.name}</h3>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
           <span class="badge badge-gold">{l.kw}</span>
-          {l.vol && <span style="font-size:0.75rem;color:var(--text-muted);display:flex;align-items:center;">{l.vol}</span>}
+          {l.vol && <span style="color:var(--text-muted);display:flex;align-items:center">{l.vol}</span>}
         </div>
-        <div style="color:var(--gold);font-size:0.82rem;margin-top:14px;font-weight:600;">{l.href} →</div>
+        <div style="color:var(--gold);margin-top:14px;font-weight:600">{l.href} →</div>
       </a>
     ))}
   </div>
 </div></section>
 
-<section class="section-sm"><div class="container" style="max-width:800px;">
-  <h2 style="margin-bottom:16px;">About <span class="gold-text">Language Translation</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8;">Each language page on this site is dedicated to a specific language, providing tailored translation tools, examples, FAQs, and background information. Whether you need to translate to Chinese, Spanish, Arabic, or any other language, you'll find a dedicated, optimised tool here. <a href="/translator-old-english/">Return to the homepage</a> for the Translator Old English.</p>
+<section class="section-sm"><div class="container" style="max-width:800px">
+  <h2 style="margin-bottom:16px">About <span class="gold-text">Language Translation</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8">Each language page on this site is dedicated to a specific language, providing tailored translation tools, examples, FAQs, and background information. Whether you need to translate to Chinese, Spanish, Arabic, or any other language, you'll find a dedicated, optimised tool here. <a href="/translator-old-english/">Return to the homepage</a> for the Translator Old English.</p>
 </div></section>
 </Layout>

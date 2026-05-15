@@ -4,8 +4,8 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
 ---
 <Layout title="Ancient Greek Translator — English to Koine & Classical Greek Free" description="Translate English to Ancient Greek (Koine and Classical). Free AI-powered ancient Greek translation tool with style options." canonical="/ancient-greek/">
 <section class="hero-section"><div class="container">
-  <nav class="breadcrumb" style="margin-bottom:16px;"><a href="/translator-old-english/">Home</a><span>›</span><a href="/ancient-languages/">Ancient Languages</a><span>›</span><span>Ancient Greek Translator</span></nav>
-  <a href="/ancient-languages/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Ancient Languages</a>
+  <nav class="breadcrumb" style="margin-bottom:16px"><a href="/translator-old-english/">Home</a><span>›</span><a href="/ancient-languages/">Ancient Languages</a><span>›</span><span>Ancient Greek Translator</span></nav>
+  <a href="/ancient-languages/" class="btn btn-ghost btn-sm" style="margin-bottom:24px">← Back to Ancient Languages</a>
   <h1 id="main-heading">Ancient Greek <span class="gold-text">Translator</span></h1>
   <p class="hero-sub">Translate English to Koine or Classical Ancient Greek — free, AI-powered, with style controls</p>
 </div></section>
@@ -14,26 +14,26 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
   <div class="section-heading"><h2>Translation <span class="gold-text">Examples</span></h2></div>
   <div class="grid-3">
     {[{e:'Know thyself.',ag:'Γνῶθι σεαυτόν.'},{e:'In the beginning was the Word.',ag:'Ἐν ἀρχῇ ἦν ὁ Λόγος.'},{e:'Nothing in excess.',ag:'Μηδὲν ἄγαν.'}].map(ex=>(
-      <div class="example-card"><div class="example-card-section"><div class="example-label">Modern English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Ancient Greek</div><div class="example-text" style="color:var(--gold-light);">{ex.ag}</div></div></div>
+      <div class="example-card"><div class="example-card-section"><div class="example-label">Modern English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Ancient Greek</div><div class="example-text" style="color:var(--gold-light)">{ex.ag}</div></div></div>
     ))}
   </div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
-  <h2 style="margin-bottom:16px;">About <span class="gold-text">Ancient Greek</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:20px;">Ancient Greek was spoken in the Greek world from approximately 800 BCE to 600 CE. Classical Greek (Attic dialect) is the language of Plato, Aristotle, Sophocles, and Thucydides. Koine Greek — the "common" language — spread across the Mediterranean with Alexander the Great's conquests and is the language of the New Testament. Together, these dialects form the foundation of Western philosophy, literature, mathematics, and science.</p>
-  <p style="color:var(--text-secondary);line-height:1.8;">For Modern Greek, visit the <a href="/greek-translator/">Greek Translator</a>. Return to <a href="/ancient-languages/">Ancient Languages</a>.</p>
+<section class="section"><div class="container" style="max-width:800px">
+  <h2 style="margin-bottom:16px">About <span class="gold-text">Ancient Greek</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:20px">Ancient Greek was spoken in the Greek world from approximately 800 BCE to 600 CE. Classical Greek (Attic dialect) is the language of Plato, Aristotle, Sophocles, and Thucydides. Koine Greek — the "common" language — spread across the Mediterranean with Alexander the Great's conquests and is the language of the New Testament. Together, these dialects form the foundation of Western philosophy, literature, mathematics, and science.</p>
+  <p style="color:var(--text-secondary);line-height:1.8">For Modern Greek, visit the <a href="/greek-translator/">Greek Translator</a>. Return to <a href="/ancient-languages/">Ancient Languages</a>.</p>
 </div></section>
 <section class="section-sm"><div class="container">
   <div class="section-heading"><h2>Related <span class="gold-text">Pages</span></h2></div>
-  <div class="grid-3">{[{href:'/latin-translator/',n:'Latin Translator'},{href:'/old-english/',n:'Old English'},{href:'/greek-translator/',n:'Modern Greek'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600;">{r.n}</a>))}</div>
+  <div class="grid-3">{[{href:'/latin-translator/',n:'Latin Translator'},{href:'/old-english/',n:'Old English'},{href:'/greek-translator/',n:'Modern Greek'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600">{r.n}</a>))}</div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
+<section class="section"><div class="container" style="max-width:800px">
   <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
   {[{q:'What is the difference between Koine and Classical Greek?',a:'Classical Greek (Attic dialect, ~500–300 BCE) is more complex and literary. Koine Greek (~300 BCE–600 CE) is simpler and more widespread — it is the language of the New Testament and Hellenistic literature.'},{q:'Is this different from the Modern Greek page?',a:'Yes. Ancient Greek and Modern Greek are different languages. This page focuses on Classical and Koine ancient Greek. For Modern Greek, visit the Greek Translator.'},{q:'Can I translate both ways?',a:'Yes. Use the flip button to translate Ancient Greek back to modern English.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per translation.'},{q:'How accurate is the Ancient Greek translation?',a:'Good accuracy for Koine and Classical Greek vocabulary and structure. The AI handles Greek polytonic diacritics with reasonable precision.'},{q:'Can I use it for academic or religious work?',a:'Yes, though for critical academic or theological purposes, expert verification is recommended.'},{q:'Can I use translations commercially?',a:'Yes. All output is free for personal and commercial use.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
 </div></section>
 <section class="section-sm"><div class="container"><div class="cta-banner">
-  <h2 style="margin-bottom:16px;">Translate to <span class="gold-text">Ancient Greek</span> Now</h2>
-  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Start Translating</a>
+  <h2 style="margin-bottom:16px">Translate to <span class="gold-text">Ancient Greek</span> Now</h2>
+  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Start Translating</a>
   <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
 </div></div></section>
 </Layout>

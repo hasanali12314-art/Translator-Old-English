@@ -2,15 +2,15 @@
 import Layout from '../../../layouts/Layout.astro';
 ---
 <Layout title="What Is Old English? A Complete Guide to Anglo-Saxon Language" description="Discover the origins, structure, and legacy of Old English — the language of Beowulf and the Anglo-Saxons — and how it evolved into modern English." canonical="/blog/what-is-old-english/">
-<section class="section-sm"><div class="container" style="max-width:820px;">
-  <a href="/blog/" style="color:var(--text-muted);font-size:0.85rem;text-decoration:none;">← All articles</a>
-  <div style="margin-top:24px;margin-bottom:8px;"><span class="badge badge-gold">History</span></div>
-  <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:8px;">12 May 2024 · 6 min read</div>
-  <h1 id="main-heading" style="font-size:clamp(1.6rem,4vw,2.5rem);margin-bottom:20px;">What Is Old English? A Complete Guide to Anglo-Saxon Language</h1>
-  <p class="serif" style="font-size:1.15rem;color:var(--text-secondary);line-height:1.8;margin-bottom:40px;">Old English is one of the oldest forms of the English language, spoken by the Anglo-Saxons from roughly 450 to 1150 AD. It is the direct ancestor of the language spoken by over 1.5 billion people today — yet it is almost unrecognisable to the modern eye.</p>
+<section class="section-sm"><div class="container" style="max-width:820px">
+  <a href="/blog/" style="color:var(--text-muted);text-decoration:none">← All articles</a>
+  <div style="margin-top:24px;margin-bottom:8px"><span class="badge badge-gold">History</span></div>
+  <div style="color:var(--text-muted);margin-bottom:8px">12 May 2024 · 6 min read</div>
+  <h1 id="main-heading" style="margin-bottom:20px">What Is Old English? A Complete Guide to Anglo-Saxon Language</h1>
+  <p class="serif" style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px">Old English is one of the oldest forms of the English language, spoken by the Anglo-Saxons from roughly 450 to 1150 AD. It is the direct ancestor of the language spoken by over 1.5 billion people today — yet it is almost unrecognisable to the modern eye.</p>
   <div class="divider"></div>
 </div></section>
-<section class="section"><div class="container" style="max-width:820px;">
+<section class="section"><div class="container" style="max-width:820px">
   {[
     {title:'Origins of Old English',body:'Old English descended from the Germanic dialects brought to Britain by the Angles, Saxons, and Jutes — tribes from modern-day northern Germany and Denmark — who began settling in Britain in the 5th century AD. This West Germanic language gradually replaced the Celtic languages spoken by the native Britons in most of England.',points:['Angle dialect (Anglian) became dominant in the north','Saxon dialect shaped the south and west','Jutish influenced Kent and the Isle of Wight']},
     {title:'How Different Is Old English From Modern English?',body:'Old English is dramatically different from modern English. The vocabulary is predominantly Germanic — words like "mann" (man), "wif" (woman), "cild" (child), and "hus" (house) are recognisable, but most Old English vocabulary is unrecognisable to modern readers. The grammar is highly inflected, meaning word endings change to indicate grammatical function — similar to modern German or Latin.',points:['Four grammatical cases: nominative, accusative, dative, genitive','Three grammatical genders: masculine, feminine, neuter','Verb conjugations differ significantly by person and tense']},
@@ -19,29 +19,29 @@ import Layout from '../../../layouts/Layout.astro';
     {title:'Old English\'s Legacy in Modern English',body:'Despite its apparent distance, Old English forms the core of modern English. The most common words in English — "the", "be", "to", "and", "a", "in", "is", "it", "of", "that" — are all Old English in origin. Function words, basic nouns (water, earth, fire, air), and many verbs (go, come, see, hear, speak) descend directly from Old English.',points:['Over 4,000 Old English words survived into modern English','Weekday names are all Old English (Monday = Mōnandæg)','Most English place names in England have Old English roots']},
     {title:'Using Old English Today',body:'Old English is studied in university linguistics and literature departments worldwide. It appears in fantasy fiction, video games, and film as a marker of authenticity. Translator Old English offers four historical styles — from the accessible Early Modern style to the deeply archaic Ancient style — making Old English accessible to writers, game developers, and curious learners.'},
   ].map(s=>(
-    <div style="margin-bottom:40px;">
-      <h2 style="font-size:1.2rem;margin-bottom:14px;">{s.title}</h2>
-      <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px;">{s.body}</p>
-      {s.points && <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px;">{s.points.map(p=>(<li style="color:var(--text-secondary);font-size:0.9rem;">{p}</li>))}</ul>}
+    <div style="margin-bottom:40px">
+      <h2 style="margin-bottom:14px">{s.title}</h2>
+      <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">{s.body}</p>
+      {s.points && <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px">{s.points.map(p=>(<li style="color:var(--text-secondary)">{p}</li>))}</ul>}
     </div>
   ))}
 
   <!-- Inset CTA -->
-  <div style="background:var(--surface-2);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:28px;margin:40px 0;text-align:center;">
-    <p style="font-weight:600;margin-bottom:12px;">Ready to try Old English yourself?</p>
+  <div style="background:var(--surface-2);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:28px;margin:40px 0;text-align:center">
+    <p style="font-weight:600;margin-bottom:12px">Ready to try Old English yourself?</p>
     <a href="/translator-old-english/" class="btn btn-primary">✦ Use the Translator Old English</a>
   </div>
 
   <div class="divider"></div>
-  <h2 style="font-size:1rem;margin-bottom:20px;color:var(--gold);">Related Articles</h2>
+  <h2 style="margin-bottom:20px;color:var(--gold)">Related Articles</h2>
   <div class="grid-2">
-    <a href="/blog/middle-english-vs-old-english/" class="card" style="text-decoration:none;">
-      <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:6px;">5 min read</div>
-      <h3 style="font-size:0.95rem;">Middle English vs Old English: Key Differences</h3>
+    <a href="/blog/middle-english-vs-old-english/" class="card" style="text-decoration:none">
+      <div style="color:var(--text-muted);margin-bottom:6px">5 min read</div>
+      <h3>Middle English vs Old English: Key Differences</h3>
     </a>
-    <a href="/blog/history-of-english-language/" class="card" style="text-decoration:none;">
-      <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:6px;">8 min read</div>
-      <h3 style="font-size:0.95rem;">The History of the English Language</h3>
+    <a href="/blog/history-of-english-language/" class="card" style="text-decoration:none">
+      <div style="color:var(--text-muted);margin-bottom:6px">8 min read</div>
+      <h3>The History of the English Language</h3>
     </a>
   </div>
 </div></section>

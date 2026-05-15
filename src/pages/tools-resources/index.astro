@@ -14,16 +14,16 @@ const sections=[
 <section class="section"><div class="container">
   <div class="section-heading"><h2>Available <span class="gold-text">Resources</span></h2></div>
   <div class="grid-3">
-    {sections.map(s=>(<a href={s.href} class="card card-gold" style="text-decoration:none;display:block;">
-      <div style="font-size:2.5rem;margin-bottom:12px;">{s.icon}</div>
-      <h3 style="font-size:1.05rem;margin-bottom:8px;">{s.name}</h3>
-      <p style="font-size:0.875rem;color:var(--text-secondary);">{s.desc}</p>
-      <div style="color:var(--gold);font-size:0.82rem;margin-top:14px;font-weight:600;">Explore →</div>
+    {sections.map(s=>(<a href={s.href} class="card card-gold" style="text-decoration:none;display:block">
+      <div style="margin-bottom:12px">{s.icon}</div>
+      <h3 style="margin-bottom:8px">{s.name}</h3>
+      <p style="color:var(--text-secondary)">{s.desc}</p>
+      <div style="color:var(--gold);margin-top:14px;font-weight:600">Explore →</div>
     </a>))}
   </div>
 </div></section>
-<section class="section-sm"><div class="container" style="max-width:800px;">
-  <h2 style="margin-bottom:16px;">About Our <span class="gold-text">Resources</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8;">This section brings together all the supporting resources available alongside the translation tools. Whether you want to understand how the tools work, explore articles on language history, or find answers to common questions, you'll find everything here. <a href="/translator-old-english/">Return to the homepage</a>.</p>
+<section class="section-sm"><div class="container" style="max-width:800px">
+  <h2 style="margin-bottom:16px">About Our <span class="gold-text">Resources</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8">This section brings together all the supporting resources available alongside the translation tools. Whether you want to understand how the tools work, explore articles on language history, or find answers to common questions, you'll find everything here. <a href="/translator-old-english/">Return to the homepage</a>.</p>
 </div></section>
 </Layout>

@@ -4,8 +4,8 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
 ---
 <Layout title="Speak Translator — Voice & Spoken Language Translation Free" description="Translate spoken and typed text with our free speak translator tool. Voice-friendly, instant, AI-powered translation." canonical="/speak-translate/">
 <section class="hero-section"><div class="container">
-  <nav class="breadcrumb" style="margin-bottom:16px;"><a href="/translator-old-english/">Home</a><span>›</span><a href="/specialty-translators/">Specialty Translators</a><span>›</span><span>Speak Translator</span></nav>
-  <a href="/specialty-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Specialty Translators</a>
+  <nav class="breadcrumb" style="margin-bottom:16px"><a href="/translator-old-english/">Home</a><span>›</span><a href="/specialty-translators/">Specialty Translators</a><span>›</span><span>Speak Translator</span></nav>
+  <a href="/specialty-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px">← Back to Specialty Translators</a>
   <h1 id="main-heading">Speak <span class="gold-text">Translator</span></h1>
   <p class="hero-sub">Translate spoken or typed text instantly — voice-friendly, free, AI-powered translation</p>
 </div></section>
@@ -14,26 +14,26 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
   <div class="section-heading"><h2>Conversion <span class="gold-text">Examples</span></h2></div>
   <div class="grid-3">
     {[{orig:'Hey, what\'s up? You coming later?',trans:'Hola, ¿qué tal? ¿Vendrás más tarde?'},{orig:'Catch you on the flip side, mate.',trans:'À tout à l\'heure, mon ami.'},{orig:'That was absolutely brilliant, well done!',trans:'Das war absolut brillant, gut gemacht!'}].map(ex=>(
-      <div class="example-card"><div class="example-card-section"><div class="example-label">Spoken Input</div><div class="example-text">{ex.orig}</div></div><div class="example-card-section"><div class="example-label">Translated Output</div><div class="example-text" style="color:var(--gold-light);">{ex.trans}</div></div></div>
+      <div class="example-card"><div class="example-card-section"><div class="example-label">Spoken Input</div><div class="example-text">{ex.orig}</div></div><div class="example-card-section"><div class="example-label">Translated Output</div><div class="example-text" style="color:var(--gold-light)">{ex.trans}</div></div></div>
     ))}
   </div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
-  <h2 style="margin-bottom:16px;">About <span class="gold-text">Speak Translation</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8;">The Speak Translator is optimised for conversational and spoken language patterns. Unlike formal translators, it handles contractions, colloquialisms, informal grammar, and natural speech rhythms — delivering translations that sound natural when spoken aloud. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
+<section class="section"><div class="container" style="max-width:800px">
+  <h2 style="margin-bottom:16px">About <span class="gold-text">Speak Translation</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8">The Speak Translator is optimised for conversational and spoken language patterns. Unlike formal translators, it handles contractions, colloquialisms, informal grammar, and natural speech rhythms — delivering translations that sound natural when spoken aloud. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
 </div></section>
 <section class="section-sm"><div class="container">
   <div class="section-heading"><h2>Related <span class="gold-text">Tools</span></h2></div>
-  <div class="grid-3">{[{href:'/dialect-translator/',n:'Dialect Converter'},{href:'/fancy-translator/',n:'Fancy Text'},{href:'/translator-old-english/',n:'Main Tool'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600;">{r.n}</a>))}</div>
-  <div style="text-align:center;margin-top:24px;"><a href="/specialty-translators/" class="btn btn-outline">Back to Specialty Translators</a></div>
+  <div class="grid-3">{[{href:'/dialect-translator/',n:'Dialect Converter'},{href:'/fancy-translator/',n:'Fancy Text'},{href:'/translator-old-english/',n:'Main Tool'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600">{r.n}</a>))}</div>
+  <div style="text-align:center;margin-top:24px"><a href="/specialty-translators/" class="btn btn-outline">Back to Specialty Translators</a></div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
+<section class="section"><div class="container" style="max-width:800px">
   <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
   {[{q:'Does it support voice input?',a:'The tool is optimised for transcribed voice text. Browser-based speech-to-text can be used to capture voice input before pasting.'},{q:'Which languages does it support?',a:'The tool supports major spoken languages including Spanish, French, German, Italian, Portuguese, and more.'},{q:'Can I translate both ways?',a:'Yes. Use the flip button to reverse the translation direction.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per translation.'},{q:'Does it work on mobile?',a:'Yes, fully responsive and ideal for mobile use.'},{q:'How accurate is the voice translation?',a:'Very accurate for conversational text. The AI understands informal language and contractions.'},{q:'Can I use output commercially?',a:'Yes. All output is free for personal and commercial use.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
 </div></section>
 <section class="section-sm"><div class="container"><div class="cta-banner">
-  <h2 style="margin-bottom:16px;">Start <span class="gold-text">Speaking & Translating</span></h2>
-  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Translate Now</a>
+  <h2 style="margin-bottom:16px">Start <span class="gold-text">Speaking & Translating</span></h2>
+  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Translate Now</a>
   <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
 </div></div></section>
 </Layout>

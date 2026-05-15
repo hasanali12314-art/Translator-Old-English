@@ -40,15 +40,15 @@ const faqs=[
   <h1 id="main-heading">Frequently Asked <span class="gold-text">Questions</span></h1>
   <p class="hero-sub">Everything you need to know about our free translation tools</p>
 </div></section>
-<section class="section"><div class="container" style="max-width:860px;">
+<section class="section"><div class="container" style="max-width:860px">
   {faqs.map(cat=>(
-    <div style="margin-bottom:48px;">
-      <h2 style="font-size:1.1rem;margin-bottom:20px;color:var(--gold);">{cat.cat}</h2>
+    <div style="margin-bottom:48px">
+      <h2 style="margin-bottom:20px;color:var(--gold)">{cat.cat}</h2>
       {cat.items.map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
     </div>
   ))}
   <div class="divider"></div>
-  <div style="display:flex;gap:16px;flex-wrap:wrap;">
+  <div style="display:flex;gap:16px;flex-wrap:wrap">
     <a href="/translation-tools/" class="btn btn-outline">All Tools</a>
     <a href="/blog/" class="btn btn-ghost">Blog</a>
     <a href="/tools-resources/" class="btn btn-ghost">Back to Resources</a>

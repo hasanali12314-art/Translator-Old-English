@@ -4,8 +4,8 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
 ---
 <Layout title="Creole Translator — English to Haitian Creole Free Online" description="Translate English to Haitian Creole or Creole to English instantly. Free AI-powered Creole translation tool." canonical="/creole-translator/">
 <section class="hero-section"><div class="container">
-  <nav class="breadcrumb" style="margin-bottom:16px;"><a href="/translator-old-english/">Home</a><span>›</span><a href="/language-translators/">Language Translators</a><span>›</span><span>Creole Translator</span></nav>
-  <a href="/language-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px;">← Back to Language Translators</a>
+  <nav class="breadcrumb" style="margin-bottom:16px"><a href="/translator-old-english/">Home</a><span>›</span><a href="/language-translators/">Language Translators</a><span>›</span><span>Creole Translator</span></nav>
+  <a href="/language-translators/" class="btn btn-ghost btn-sm" style="margin-bottom:24px">← Back to Language Translators</a>
   <h1 id="main-heading">Creole <span class="gold-text">Translator</span></h1>
   <p class="hero-sub">Translate English to Haitian Creole (Kreyòl Ayisyen) or Creole to English — free, instant, AI-powered</p>
 </div></section>
@@ -14,27 +14,27 @@ import TranslatorTool from '../../components/TranslatorTool.astro';
   <div class="section-heading"><h2>Translation <span class="gold-text">Examples</span></h2></div>
   <div class="grid-3">
     {[{e:'Good morning, how are you?',c:'Bonjou, kijan ou ye?'},{e:'Where can I find help?',c:'Kote mwen ka jwenn èd?'},{e:'Thank you for your kindness.',c:'Mèsi pou jantiyès ou.'}].map(ex=>(
-      <div class="example-card"><div class="example-card-section"><div class="example-label">English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Creole (Haitian)</div><div class="example-text" style="color:var(--gold-light);">{ex.c}</div></div></div>
+      <div class="example-card"><div class="example-card-section"><div class="example-label">English</div><div class="example-text">{ex.e}</div></div><div class="example-card-section"><div class="example-label">Creole (Haitian)</div><div class="example-text" style="color:var(--gold-light)">{ex.c}</div></div></div>
     ))}
   </div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
-  <h2 style="margin-bottom:16px;">About <span class="gold-text">Haitian Creole</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:20px;">Haitian Creole (Kreyòl Ayisyen) is spoken by approximately 12 million people, primarily in Haiti where it is one of the two official languages alongside French. It developed from French during the colonial period, blending French vocabulary with West African grammar and influences from Spanish, English, Portuguese, and Taíno.</p>
-  <p style="color:var(--text-secondary);line-height:1.8;">This translator is valuable for humanitarian work, healthcare communication, travel to Haiti, and cultural research. Return to <a href="/language-translators/">Language Translators</a>.</p>
+<section class="section"><div class="container" style="max-width:800px">
+  <h2 style="margin-bottom:16px">About <span class="gold-text">Haitian Creole</span></h2>
+  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:20px">Haitian Creole (Kreyòl Ayisyen) is spoken by approximately 12 million people, primarily in Haiti where it is one of the two official languages alongside French. It developed from French during the colonial period, blending French vocabulary with West African grammar and influences from Spanish, English, Portuguese, and Taíno.</p>
+  <p style="color:var(--text-secondary);line-height:1.8">This translator is valuable for humanitarian work, healthcare communication, travel to Haiti, and cultural research. Return to <a href="/language-translators/">Language Translators</a>.</p>
 </div></section>
 <section class="section-sm"><div class="container">
   <div class="section-heading"><h2>Related <span class="gold-text">Translators</span></h2></div>
-  <div class="grid-3">{[{href:'/french-translator/',n:'French'},{href:'/spanish-translator/',n:'Spanish'},{href:'/rare-languages/',n:'Rare Languages'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600;font-size:0.9rem;">{r.n}</a>))}</div>
-  <div style="text-align:center;margin-top:24px;"><a href="/language-translators/" class="btn btn-outline">Browse all Language Translators</a></div>
+  <div class="grid-3">{[{href:'/french-translator/',n:'French'},{href:'/spanish-translator/',n:'Spanish'},{href:'/rare-languages/',n:'Rare Languages'}].map(r=>(<a href={r.href} class="card" style="text-decoration:none;text-align:center;font-weight:600">{r.n}</a>))}</div>
+  <div style="text-align:center;margin-top:24px"><a href="/language-translators/" class="btn btn-outline">Browse all Language Translators</a></div>
 </div></section>
-<section class="section"><div class="container" style="max-width:800px;">
+<section class="section"><div class="container" style="max-width:800px">
   <div class="section-heading"><h2>Frequently Asked <span class="gold-text">Questions</span></h2></div>
   {[{q:'Which Creole dialect does this support?',a:'This tool focuses on Haitian Creole (Kreyòl Ayisyen), the most widely spoken Creole language in the world.'},{q:'Can I translate Creole back to English?',a:'Yes. Use the flip button to reverse the translation direction.'},{q:'Is this tool free to use?',a:'Completely free, no account required.'},{q:'What is the character limit?',a:'Up to 5,000 characters per translation.'},{q:'How accurate is the Creole translation?',a:'Good accuracy for Haitian Creole. This is a less-resourced language so some nuances may vary.'},{q:'Does it work on mobile?',a:'Yes, fully responsive on all devices.'},{q:'Can I use translations commercially?',a:'Yes, all output is free for commercial use.'},{q:'Is Haitian Creole the same as French Creole?',a:'No. While Haitian Creole has French roots, it is a distinct language with its own grammar, vocabulary, and spelling system separate from French.'}].map(f=>(<div class="faq-item"><button class="faq-question">{f.q}<span class="faq-icon">+</span></button><div class="faq-answer">{f.a}</div></div>))}
 </div></section>
 <section class="section-sm"><div class="container"><div class="cta-banner">
-  <h2 style="margin-bottom:16px;">Translate to <span class="gold-text">Creole</span> Now</h2>
-  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px;">✦ Start Translating</a>
+  <h2 style="margin-bottom:16px">Translate to <span class="gold-text">Creole</span> Now</h2>
+  <a href="#tool-area" class="btn btn-primary btn-lg" style="margin-bottom:32px">✦ Start Translating</a>
   <div class="trust-badges"><div class="trust-badge"><div class="trust-badge-icon">🆓</div> Free forever</div><div class="trust-badge"><div class="trust-badge-icon">⚡</div> Instant results</div><div class="trust-badge"><div class="trust-badge-icon">🤖</div> AI-powered accuracy</div></div>
 </div></div></section>
 </Layout>
