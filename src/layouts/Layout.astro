@@ -21,10 +21,8 @@ const base = Astro.url.origin;
 </head>
 <body>
 
-<!-- History overlay -->
 <div class="history-overlay" id="historyOverlay"></div>
 
-<!-- History side panel -->
 <aside class="history-panel" id="historyPanel" role="complementary" aria-label="Translation history">
   <div class="history-header">
     <div>
@@ -44,22 +42,19 @@ const base = Astro.url.origin;
   </div>
 </aside>
 
-<!-- HEADER -->
 <header class="site-header" role="banner">
   <div class="header-inner container">
-    <!-- Logo -->
     <a href="/translator-old-english/" class="site-logo" id="site-logo">
       <span class="logo-main">Translator <em>Old English</em></span>
       <span class="logo-sub">Free AI-powered archaic language tool</span>
     </a>
 
-    <!-- Desktop Nav -->
     <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
       <ul class="nav-list">
         <li><a href="/translator-old-english/" class="nav-link">Home</a></li>
         <li><a href="/all-languages/" class="nav-link">All Languages</a></li>
         <li class="nav-dropdown">
-          <button class="nav-link nav-dropdown-btn" aria-haspopup="true">
+          <button type="button" class="nav-link nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
             Language Translators <span class="nav-arrow">▾</span>
           </button>
           <div class="dropdown-menu" role="menu">
@@ -71,7 +66,7 @@ const base = Astro.url.origin;
           </div>
         </li>
         <li class="nav-dropdown">
-          <button class="nav-link nav-dropdown-btn" aria-haspopup="true">
+          <button type="button" class="nav-link nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
             Ancient Languages <span class="nav-arrow">▾</span>
           </button>
           <div class="dropdown-menu" role="menu">
@@ -83,22 +78,24 @@ const base = Astro.url.origin;
           </div>
         </li>
         <li class="nav-dropdown">
-          <button class="nav-link nav-dropdown-btn" aria-haspopup="true">
-            Specialty <span class="nav-arrow">▾</span>
+          <button type="button" class="nav-link nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+            Tools <span class="nav-arrow">▾</span>
           </button>
           <div class="dropdown-menu" role="menu">
             <a href="/dialect-translator/" class="dropdown-item" role="menuitem">🗣 Dialect Converter</a>
             <a href="/fancy-translator/" class="dropdown-item" role="menuitem">✨ Fancy Text</a>
+            <a href="/speak-translate/" class="dropdown-item" role="menuitem">🎙 Speak Translator</a>
+            <a href="/sinhala-translator/" class="dropdown-item" role="menuitem">🇱🇰 Sinhala Translator</a>
             <a href="/rare-languages/" class="dropdown-item" role="menuitem">💎 Rare Languages</a>
+            <a href="/navajo-translator/" class="dropdown-item" role="menuitem">🪶 Navajo Translator</a>
             <div class="dropdown-divider"></div>
-            <a href="/specialty-translators/" class="dropdown-item dropdown-see-all" role="menuitem">See All Specialty →</a>
+            <a href="/tools-resources/" class="dropdown-item dropdown-see-all" role="menuitem">See All Tools →</a>
           </div>
         </li>
-        <li><a href="/tools-resources/" class="nav-link">Tools</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
       </ul>
     </nav>
 
-    <!-- Header actions -->
     <div class="header-actions">
       <button class="hdr-btn" id="historyBtn" title="Translation History" aria-label="Open translation history">
         <span class="hdr-icon">📜</span>
@@ -107,13 +104,12 @@ const base = Astro.url.origin;
       <button class="icon-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle light/dark mode">
         <span class="theme-icon">🌙</span>
       </button>
-      <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Open mobile menu">
+      <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Open mobile menu" aria-expanded="false">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
       </button>
     </div>
   </div>
 
-  <!-- Mobile nav -->
   <div class="mobile-nav" id="mobileNav">
     <nav>
       <a href="/translator-old-english/" class="mobile-nav-link">Home</a>
@@ -123,39 +119,34 @@ const base = Astro.url.origin;
         <a href="/chinese-translator/" class="mobile-nav-sub">Chinese</a>
         <a href="/spanish-translator/" class="mobile-nav-sub">Spanish</a>
         <a href="/arabic-translator/" class="mobile-nav-sub">Arabic</a>
-        <a href="/greek-translator/" class="mobile-nav-sub">Greek</a>
-        <a href="/french-translator/" class="mobile-nav-sub">French</a>
-        <a href="/german-translator/" class="mobile-nav-sub">German</a>
-        <a href="/creole-translator/" class="mobile-nav-sub">Creole</a>
-        <a href="/language-translators/" class="mobile-nav-sub" style="color:var(--gold);">See All →</a>
+        <a href="/language-translators/" class="mobile-nav-sub mobile-nav-see-all">See All Languages →</a>
       </div>
       <div class="mobile-nav-group">
         <span class="mobile-nav-label">Ancient Languages</span>
         <a href="/latin-translator/" class="mobile-nav-sub">Latin</a>
         <a href="/old-english/" class="mobile-nav-sub">Old English</a>
         <a href="/ancient-greek/" class="mobile-nav-sub">Ancient Greek</a>
-        <a href="/aramaic-translator/" class="mobile-nav-sub">Aramaic</a>
-        <a href="/ancient-languages/" class="mobile-nav-sub" style="color:var(--gold);">See All →</a>
+        <a href="/ancient-languages/" class="mobile-nav-sub mobile-nav-see-all">See All Ancient →</a>
       </div>
       <div class="mobile-nav-group">
-        <span class="mobile-nav-label">Specialty</span>
+        <span class="mobile-nav-label">Tools</span>
         <a href="/dialect-translator/" class="mobile-nav-sub">Dialect Converter</a>
         <a href="/fancy-translator/" class="mobile-nav-sub">Fancy Text</a>
+        <a href="/speak-translate/" class="mobile-nav-sub">Speak Translator</a>
+        <a href="/sinhala-translator/" class="mobile-nav-sub">Sinhala</a>
         <a href="/rare-languages/" class="mobile-nav-sub">Rare Languages</a>
-        <a href="/specialty-translators/" class="mobile-nav-sub" style="color:var(--gold);">See All →</a>
+        <a href="/navajo-translator/" class="mobile-nav-sub">Navajo</a>
+        <a href="/tools-resources/" class="mobile-nav-sub mobile-nav-see-all">See All Tools →</a>
       </div>
-      <a href="/tools-resources/" class="mobile-nav-link">Tools & Resources</a>
       <a href="/blog/" class="mobile-nav-link">Blog</a>
     </nav>
   </div>
 </header>
 
-<!-- Page content -->
 <main>
   <slot />
 </main>
 
-<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner container">
     <div class="footer-grid">
@@ -173,10 +164,7 @@ const base = Astro.url.origin;
           <li><a href="/chinese-translator/">Chinese Translator</a></li>
           <li><a href="/spanish-translator/">Spanish Translator</a></li>
           <li><a href="/arabic-translator/">Arabic Translator</a></li>
-          <li><a href="/greek-translator/">Greek Translator</a></li>
-          <li><a href="/french-translator/">French Translator</a></li>
-          <li><a href="/german-translator/">German Translator</a></li>
-          <li><a href="/language-translators/">All Languages →</a></li>
+          <li><a href="/language-translators/">See All Languages →</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -185,25 +173,26 @@ const base = Astro.url.origin;
           <li><a href="/latin-translator/">Latin Translator</a></li>
           <li><a href="/old-english/">Old English</a></li>
           <li><a href="/ancient-greek/">Ancient Greek</a></li>
-          <li><a href="/aramaic-translator/">Aramaic</a></li>
-          <li><a href="/egyptian-arabic/">Egyptian Arabic</a></li>
-          <li><a href="/ancient-languages/">All Ancient →</a></li>
+          <li><a href="/ancient-languages/">See All Ancient →</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Tools</h4>
         <ul>
-          <li><a href="/all-languages/">All Languages</a></li>
           <li><a href="/dialect-translator/">Dialect Converter</a></li>
           <li><a href="/fancy-translator/">Fancy Text</a></li>
-          <li><a href="/blog/">Blog</a></li>
-          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/speak-translate/">Speak Translator</a></li>
+          <li><a href="/sinhala-translator/">Sinhala Translator</a></li>
+          <li><a href="/rare-languages/">Rare Languages</a></li>
+          <li><a href="/navajo-translator/">Navajo Translator</a></li>
+          <li><a href="/tools-resources/">See All Tools →</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Legal</h4>
         <ul>
           <li><a href="/about-us/">About Us</a></li>
+          <li><a href="/blog/">Blog</a></li>
           <li><a href="/privacy-policy/">Privacy Policy</a></li>
           <li><a href="/terms-and-conditions/">Terms & Conditions</a></li>
           <li><a href="/cookies/">Cookies Policy</a></li>
@@ -220,28 +209,9 @@ const base = Astro.url.origin;
       </div>
     </div>
   </div>
-  <!-- SEO Footer Links -->
-  <div class="container">
-    <div class="seo-footer-links">
-      <a href="/translator-old-english/">translator old english</a>
-      <a href="/all-languages/">all language translator</a>
-      <a href="/latin-translator/">latin translator</a>
-      <a href="/ancient-greek/">ancient greek translator</a>
-      <a href="/chinese-translator/">chinese translator</a>
-      <a href="/spanish-translator/">spanish translator</a>
-      <a href="/arabic-translator/">arabic translator</a>
-      <a href="/dialect-translator/">dialect converter</a>
-      <a href="/fancy-translator/">fancy text generator</a>
-      <a href="/rare-languages/">rare language translator</a>
-      <a href="/old-english/">old english to modern english</a>
-      <a href="/aramaic-translator/">aramaic translator</a>
-      <a href="/greek-translator/">greek translator</a>
-    </div>
-  </div>
 </footer>
 
 <script>
-  // Theme toggle (day / night)
   const themeToggle = document.getElementById('themeToggle');
   const themeIcon = themeToggle?.querySelector('.theme-icon');
   const html = document.documentElement;
@@ -255,12 +225,34 @@ const base = Astro.url.origin;
     if (themeIcon) themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
   });
 
-  // Mobile menu
+  document.querySelectorAll('.nav-dropdown').forEach((dropdown) => {
+    const btn = dropdown.querySelector('.nav-dropdown-btn');
+    btn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = dropdown.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+      document.querySelectorAll('.nav-dropdown').forEach((d) => {
+        if (d !== dropdown) {
+          d.classList.remove('open');
+          d.querySelector('.nav-dropdown-btn')?.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown').forEach((d) => {
+      d.classList.remove('open');
+      d.querySelector('.nav-dropdown-btn')?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const mobileNav = document.getElementById('mobileNav');
-  mobileMenuBtn?.addEventListener('click', () => mobileNav?.classList.toggle('open'));
+  mobileMenuBtn?.addEventListener('click', () => {
+    const open = mobileNav?.classList.toggle('open');
+    mobileMenuBtn.setAttribute('aria-expanded', String(!!open));
+  });
 
-  // History panel
   const historyBtn = document.getElementById('historyBtn');
   const historyPanel = document.getElementById('historyPanel');
   const historyOverlay = document.getElementById('historyOverlay');
@@ -271,7 +263,6 @@ const base = Astro.url.origin;
   closeHistory?.addEventListener('click', closeHistoryPanel);
   historyOverlay?.addEventListener('click', closeHistoryPanel);
 
-  // Render history
   function renderHistory() {
     const list = document.getElementById('historyList');
     if (!list) return;
@@ -286,6 +277,7 @@ const base = Astro.url.origin;
         <div class="history-item-text">${item.input}</div>
         <div class="history-item-actions">
           <button class="btn btn-ghost btn-sm" onclick="copyHistory(${i})">Copy</button>
+          <button class="btn btn-ghost btn-sm" onclick="downloadHistory(${i})">Download</button>
           <button class="btn btn-ghost btn-sm" onclick="deleteHistory(${i})">Delete</button>
         </div>
       </div>
@@ -295,6 +287,15 @@ const base = Astro.url.origin;
   (window as any).copyHistory = (i: number) => {
     const items = JSON.parse(localStorage.getItem('oe-history') || '[]');
     if (items[i]) navigator.clipboard.writeText(items[i].output || items[i].input);
+  };
+  (window as any).downloadHistory = (i: number) => {
+    const items = JSON.parse(localStorage.getItem('oe-history') || '[]');
+    const item = items[i];
+    if (!item) return;
+    const text = item.output || item.input || '';
+    if ((window as any).downloadText) {
+      (window as any).downloadText(text, 'translation-' + (item.style || 'history') + '.txt');
+    }
   };
   (window as any).deleteHistory = (i: number) => {
     const items = JSON.parse(localStorage.getItem('oe-history') || '[]');
@@ -308,7 +309,6 @@ const base = Astro.url.origin;
     renderHistory();
   });
 
-  // Save to history (global function)
   (window as any).saveToHistory = (style: string, input: string, output: string) => {
     const items: Array<{style:string;input:string;output:string;date:string}> = JSON.parse(localStorage.getItem('oe-history') || '[]');
     items.unshift({ style, input, output, date: new Date().toISOString() });
@@ -316,7 +316,6 @@ const base = Astro.url.origin;
     localStorage.setItem('oe-history', JSON.stringify(items));
   };
 
-  // FAQ accordion (global)
   document.querySelectorAll('.faq-question').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');

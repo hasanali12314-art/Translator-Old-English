@@ -23,10 +23,10 @@ import ToolModeTabs from '../../components/ToolModeTabs.astro';
       <div class="field-wrap">
         <label class="field-label" for="style-select">Translation Style</label>
         <select class="select" id="style-select">
-          <option value="early">🎭 Shakespeare Style — Early Modern English (1500s–1600s)</option>
-          <option value="middle">📜 Medieval Style — Middle English (1300s–1400s)</option>
-          <option value="ancient">⚔️ Anglo-Saxon — True Old English (800s–1000s)</option>
-          <option value="simple">✨ Archaic Simplified — Easy thee/thou style</option>
+          <option value="early" title="Shakespeare Style — Early Modern English (1500s–1600s)">🎭 Early Modern (1500s–1600s)</option>
+          <option value="middle" title="Medieval Style — Middle English (1300s–1400s)">📜 Middle English (1300s–1400s)</option>
+          <option value="ancient" title="Anglo-Saxon — True Old English (800s–1000s)">⚔️ Anglo-Saxon (800s–1000s)</option>
+          <option value="simple" title="Archaic Simplified — Easy thee/thou style">✨ Archaic Simplified</option>
         </select>
       </div>
       <button type="button" class="adv-btn" id="advancedToggle" aria-expanded="false">
@@ -80,7 +80,10 @@ import ToolModeTabs from '../../components/ToolModeTabs.astro';
         <div class="trans-side trans-out">
           <div class="trans-top">
             <span class="trans-lang" id="outLabel">Old English</span>
-            <button type="button" class="copy-btn" id="copyBtn" style="opacity:0">⎘ Copy</button>
+            <div class="trans-actions">
+              <button type="button" class="copy-btn" id="copyBtn" style="opacity:0">⎘ Copy</button>
+              <button type="button" class="download-btn" id="downloadBtn" style="opacity:0">↓ Download</button>
+            </div>
           </div>
           <textarea id="output-text" readonly placeholder="Thy translation shalt appear here..." aria-label="Translation output" aria-live="polite"></textarea>
         </div>
@@ -278,14 +281,9 @@ import ToolModeTabs from '../../components/ToolModeTabs.astro';
     (document.getElementById('output-text') as HTMLTextAreaElement).value = '';
     if (charCount) charCount.textContent = '0';
     const copyBtn = document.getElementById('copyBtn');
-    if (copyBtn) copyBtn.style.opacity = '0';
-  });
-
-  document.getElementById('copyBtn')?.addEventListener('click', () => {
-    const out = (document.getElementById('output-text') as HTMLTextAreaElement).value;
-    navigator.clipboard.writeText(out);
-    const btn = document.getElementById('copyBtn');
-    if (btn) { btn.textContent = '✓ Copied'; setTimeout(() => { btn.textContent = '⎘ Copy'; }, 1600); }
+    const downloadBtn = document.getElementById('downloadBtn');
+    if (copyBtn) { copyBtn.style.opacity = '0'; copyBtn.classList.remove('show'); }
+    if (downloadBtn) { downloadBtn.style.opacity = '0'; downloadBtn.classList.remove('show'); }
   });
 
   document.querySelectorAll('.ex-card').forEach(card => {
@@ -298,7 +296,9 @@ import ToolModeTabs from '../../components/ToolModeTabs.astro';
       if (out) out.value = o;
       if (charCount) charCount.textContent = String(m.length);
       const copyBtn = document.getElementById('copyBtn');
-      if (copyBtn) copyBtn.style.opacity = '1';
+      const downloadBtn = document.getElementById('downloadBtn');
+      if (copyBtn) { copyBtn.style.opacity = '1'; copyBtn.classList.add('show'); }
+      if (downloadBtn) { downloadBtn.style.opacity = '1'; downloadBtn.classList.add('show'); }
     });
   });
 </script>

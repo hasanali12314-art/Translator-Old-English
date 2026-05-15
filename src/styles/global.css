@@ -172,7 +172,11 @@ main { max-width: 920px; margin: 0 auto; }
 }
 .nav-link:hover { color: var(--gold); background: var(--gold-glow2); }
 .nav-dropdown { position: relative; }
-.nav-dropdown:hover .dropdown-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown:focus-within .dropdown-menu,
+.nav-dropdown.open .dropdown-menu {
+  opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0);
+}
 .dropdown-menu {
   position: absolute; top: calc(100% + 8px); left: 50%;
   transform: translateX(-50%) translateY(-8px);
@@ -227,6 +231,7 @@ main { max-width: 920px; margin: 0 auto; }
   font-size: 14px; text-decoration: none; border-radius: 6px;
 }
 .mobile-nav-sub:hover { background: var(--card2); color: var(--ink); }
+.mobile-nav-see-all { color: var(--gold) !important; font-weight: 600; }
 
 /* History panel */
 .history-overlay {
@@ -376,22 +381,25 @@ main { max-width: 920px; margin: 0 auto; }
 }
 .hero-badge { margin-bottom: 18px; }
 .hero-badge .badge, .hero-tag {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 5px 16px; border: 1px solid var(--border-lt);
+  display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap;
+  gap: 6px 10px; margin-bottom: 28px;
+  padding: 6px 18px; border: 1px solid var(--border-lt);
   border-radius: 99px; font-size: 12px; color: var(--muted);
-  letter-spacing: 0.14em; text-transform: uppercase; background: var(--card2);
+  letter-spacing: 0.1em; text-transform: uppercase; background: var(--card2);
+  max-width: 100%; line-height: 1.5;
 }
 .hero-badge .badge-gold, .hero-tag span { color: var(--gold); background: transparent; border: none; }
-.hero-section h1 { margin-bottom: 12px; }
+.hero-section h1 { margin: 0 0 14px; }
 .hero-section h1 em, .hero-section h1 .gold-text { color: var(--gold); font-style: italic; }
 .hero-sub {
   font-size: 18px; color: var(--muted); font-style: italic;
   max-width: 520px; margin: 0 auto; line-height: 1.7;
 }
 .hero-line {
-  width: 100px; height: 1px; margin: 20px auto 0;
+  width: 100px; height: 1px; margin: 24px auto 12px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
+.hero-section { padding-bottom: 32px; }
 
 /* Tool card */
 .tool-area, .tool-card {
@@ -544,13 +552,21 @@ main { max-width: 920px; margin: 0 auto; }
 .btn-outline:hover { border-color: var(--gold); background: var(--gold-glow2); }
 .btn-sm { padding: 4px 12px; font-size: 12px; }
 .btn-lg { padding: 12px 36px; }
-.copy-btn, .copy-btn-overlay, .comp-copy {
+.trans-actions {
+  display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+}
+.copy-btn, .copy-btn-overlay, .comp-copy,
+.download-btn, .comp-download, .upload-download-btn {
   padding: 3px 10px; border: 1px solid var(--border-lt); border-radius: 5px;
   background: none; color: var(--gold-dim); font-size: 12px; cursor: pointer;
-  transition: var(--transition);
+  font-family: var(--font-body); transition: var(--transition);
 }
-.copy-btn.show, .comp-copy.show { opacity: 1 !important; pointer-events: all; }
-.copy-btn:hover, .copy-btn-overlay:hover, .comp-copy:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-glow2); }
+.copy-btn.show, .comp-copy.show,
+.download-btn.show, .comp-download.show { opacity: 1 !important; pointer-events: all; }
+.copy-btn:hover, .copy-btn-overlay:hover, .comp-copy:hover,
+.download-btn:hover, .comp-download:hover, .upload-download-btn:hover {
+  border-color: var(--gold); color: var(--gold); background: var(--gold-glow2);
+}
 
 /* Section headings */
 .section-heading, .sec-head { text-align: center; margin-bottom: 24px; }
@@ -734,7 +750,18 @@ main { max-width: 920px; margin: 0 auto; }
 @media (max-width: 768px) {
   .grid-2, .grid-3, .feat-grid, .users-grid, .benefit-row { grid-template-columns: 1fr; }
   .grid-4, .sc-grid { grid-template-columns: 1fr; }
+  .hero-section { padding: 28px 0 20px; }
+  .hero-tag { margin-bottom: 22px; font-size: 11px; padding: 6px 14px; letter-spacing: 0.08em; }
+  .hero-section h1 { font-size: clamp(28px, 8vw, 40px); }
+  .hero-sub { font-size: 16px; }
+  .tool-area, .tool-card { padding: 16px; margin-bottom: 24px; }
+  .style-row, .tool-controls { flex-direction: column; align-items: stretch; }
+  .style-row .field-wrap, .control-group { min-width: 0; flex: 1 1 100%; }
+  .style-row .adv-btn, .advanced-toggle { width: 100%; justify-content: center; }
+  .select, select { font-size: 14px; }
   .tool-boxes, .boxes { grid-template-columns: 1fr; }
+  .tool-textarea, textarea.tool-textarea, .comp-input, .comp-output,
+  #input-text, #output-text { min-height: 130px; font-size: 15px; }
   .tool-boxes > div:nth-child(2), .trans-mid {
     flex-direction: row; border: none;
     border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);

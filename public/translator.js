@@ -173,10 +173,12 @@
     italic: { u: 0x1d434, l: 0x1d44e },
     fraktur: { u: 0x1d504, l: 0x1d51e },
     double: { u: 0x1d538, l: 0x1d552 },
+    sans: { u: 0x1d5d4, l: 0x1d5ee },
+    mono: { u: 0x1d670, l: 0x1d68a },
   };
 
-  function toFancy(text) {
-    const s = FANCY.script;
+  function toFancy(text, styleKey) {
+    const s = FANCY[styleKey] || FANCY.script;
     return Array.from(text).map(function (ch) {
       const c = ch.codePointAt(0);
       if (c >= 0x41 && c <= 0x5a) return String.fromCodePoint(s.u + (c - 0x41));
@@ -218,7 +220,7 @@
     const style = opts.style || 'early';
     const dialect = opts.dialect || 'british';
 
-    if (mode === 'fancy') return toFancy(text);
+    if (mode === 'fancy') return toFancy(text, opts.fancyStyle || 'script');
     if (mode === 'dialect') return toDialect(text, dialect);
     if (mode === 'archaic' || target === 'ang') {
       return toArchaic(text, style, opts);
@@ -233,6 +235,56 @@
     return !el || el.classList.contains('active');
   }
 
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename || 'download';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 500);
+  }
+
+  function downloadText(text, filename) {
+    if (!text || !String(text).trim()) return false;
+    downloadBlob(new Blob([text], { type: 'text/plain;charset=utf-8' }), filename || 'translation.txt');
+    return true;
+  }
+
+  function showOutActions(copyBtn, downloadBtn) {
+    [copyBtn, downloadBtn].forEach(function (btn) {
+      if (!btn) return;
+      btn.style.opacity = '1';
+      btn.classList.add('show');
+    });
+  }
+
+  function hideOutActions(copyBtn, downloadBtn) {
+    [copyBtn, downloadBtn].forEach(function (btn) {
+      if (!btn) return;
+      btn.style.opacity = '0';
+      btn.classList.remove('show');
+    });
+  }
+
+  function bindDownloadBtn(btn, getText, getFilename) {
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      const text = getText();
+      if (!downloadText(text, getFilename())) {
+        alert('Nothing to download yet. Translate some text first.');
+        return;
+      }
+      const prev = btn.textContent;
+      btn.textContent = '✓ Saved';
+      setTimeout(function () { btn.textContent = prev; }, 1600);
+    });
+  }
+
+  window.downloadText = downloadText;
+  window.downloadBlob = downloadBlob;
+
   function bindTool(area) {
     const root = area;
     const inp = area.querySelector('.comp-input');
@@ -241,6 +293,7 @@
 
     const charEl = area.querySelector('.comp-char');
     const copyBtn = area.querySelector('.comp-copy');
+    const downloadBtn = area.querySelector('.comp-download');
     const errEl = area.querySelector('.comp-error');
     const btn = area.querySelector('.comp-translate');
     if (!btn) return;
@@ -276,7 +329,7 @@
         inp.value = '';
         out.value = '';
         if (charEl) charEl.textContent = '0';
-        if (copyBtn) { copyBtn.style.opacity = '0'; copyBtn.classList.remove('show'); }
+        hideOutActions(copyBtn, downloadBtn);
         if (errEl) errEl.style.display = 'none';
       });
     }
@@ -297,6 +350,7 @@
 
       const styleSel = area.querySelector('#style-select-c');
       const dialectSel = area.querySelector('#dialect-select-c');
+      const fancySel = area.querySelector('#fancy-style-select-c');
 
       if (errEl) errEl.style.display = 'none';
       const prev = btn.textContent;
@@ -310,13 +364,14 @@
           target: target,
           style: styleSel ? styleSel.value : 'early',
           dialect: dialectSel ? dialectSel.value : 'british',
+          fancyStyle: fancySel ? fancySel.value : 'script',
           pronouns: toggleOn(area, 'pronouns'),
           verbs: toggleOn(area, 'verbs'),
           vocab: toggleOn(area, 'vocab'),
         });
         out.value = result;
         out.removeAttribute('placeholder');
-        if (copyBtn) { copyBtn.style.opacity = '1'; copyBtn.classList.add('show'); }
+        showOutActions(copyBtn, downloadBtn);
         if (window.saveToHistory) window.saveToHistory('Translation', text, result);
       } catch (e) {
         const msg = (e && e.message) ? e.message : 'Translation failed. Check your connection or disable ad blockers.';
@@ -326,6 +381,7 @@
         }
         out.value = '';
         out.placeholder = msg;
+        hideOutActions(copyBtn, downloadBtn);
       } finally {
         btn.disabled = false;
         btn.textContent = prev || '✦ Translate';
@@ -336,9 +392,14 @@
       copyBtn.addEventListener('click', function () {
         navigator.clipboard.writeText(out.value);
         copyBtn.textContent = '✓ Copied!';
-        setTimeout(function () { copyBtn.textContent = '📋 Copy'; }, 2000);
+        setTimeout(function () { copyBtn.textContent = '⎘ Copy'; }, 2000);
       });
     }
+
+    bindDownloadBtn(downloadBtn, function () { return out.value; }, function () {
+      const tgt = root.dataset.targetLang || 'translation';
+      return 'translation-' + tgt + '.txt';
+    });
 
     area.querySelectorAll('.toggle').forEach(function (t) {
       t.addEventListener('click', function () { t.classList.toggle('active'); });
@@ -388,15 +449,32 @@
         });
         out.value = result;
         const copyBtn = document.getElementById('copyBtn');
-        if (copyBtn) { copyBtn.style.opacity = '1'; copyBtn.classList.add('show'); }
+        const downloadBtn = document.getElementById('downloadBtn');
+        showOutActions(copyBtn, downloadBtn);
         if (window.saveToHistory) window.saveToHistory(style, text, result);
       } catch (e) {
         out.value = '';
         out.placeholder = (e && e.message) || 'Translation failed';
+        hideOutActions(document.getElementById('copyBtn'), document.getElementById('downloadBtn'));
       } finally {
         btn.disabled = false;
         btn.textContent = prev || '✦ Translate';
       }
+    });
+
+    const copyBtn = document.getElementById('copyBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function () {
+        navigator.clipboard.writeText(out.value);
+        copyBtn.textContent = '✓ Copied';
+        setTimeout(function () { copyBtn.textContent = '⎘ Copy'; }, 1600);
+      });
+    }
+    bindDownloadBtn(downloadBtn, function () { return out.value; }, function () {
+      const styleSel = document.getElementById('style-select');
+      const style = styleSel ? styleSel.value : 'old-english';
+      return 'translator-old-english-' + style + '.txt';
     });
   }
 

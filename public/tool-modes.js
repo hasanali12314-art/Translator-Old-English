@@ -63,6 +63,22 @@
     });
   }
 
+  function downloadFile(file) {
+    if (!file) return;
+    if (window.downloadBlob) {
+      window.downloadBlob(file, file.name);
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = file.name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 500);
+  }
+
   function setupImageUpload(stack) {
     const input = stack.querySelector('#imageFileInput');
     const zone = stack.querySelector('#imageUploadZone');
@@ -70,10 +86,14 @@
     const preview = stack.querySelector('#imagePreview');
     const note = stack.querySelector('#imageUploadNote');
     const btn = stack.querySelector('#imageTranslateBtn');
+    const fileDl = stack.querySelector('#imageFileDownload');
     const allowed = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'];
+    let currentFile = null;
 
     function clear() {
       if (input) input.value = '';
+      currentFile = null;
+      if (fileDl) fileDl.hidden = true;
       if (nameEl) { nameEl.hidden = true; nameEl.textContent = ''; }
       if (preview) { preview.hidden = true; preview.src = ''; }
       if (note) { note.hidden = true; note.textContent = ''; }
@@ -90,6 +110,8 @@
         nameEl.textContent = file.name;
       }
       if (note) note.hidden = true;
+      currentFile = file;
+      if (fileDl) fileDl.hidden = false;
       if (preview && file.type.startsWith('image/')) {
         const reader = new FileReader();
         reader.onload = function () {
@@ -103,6 +125,11 @@
     setupDropZone(zone, input, onFile);
 
     stack.querySelector('[data-clear-upload="images"]')?.addEventListener('click', clear);
+
+    fileDl?.addEventListener('click', function () {
+      if (!currentFile) return;
+      downloadFile(currentFile);
+    });
 
     btn?.addEventListener('click', function () {
       const file = input && input.files && input.files[0];
@@ -125,10 +152,14 @@
     const nameEl = stack.querySelector('#docFileName');
     const note = stack.querySelector('#docUploadNote');
     const btn = stack.querySelector('#docTranslateBtn');
+    const fileDl = stack.querySelector('#docFileDownload');
     const allowed = ['.pdf', '.doc', '.docx', '.txt', '.md', '.srt'];
+    let currentFile = null;
 
     function clear() {
       if (input) input.value = '';
+      currentFile = null;
+      if (fileDl) fileDl.hidden = true;
       if (nameEl) { nameEl.hidden = true; nameEl.textContent = ''; }
       if (note) { note.hidden = true; note.textContent = ''; }
     }
@@ -144,11 +175,18 @@
         nameEl.textContent = file.name + ' (' + (file.size / 1024).toFixed(1) + ' KB)';
       }
       if (note) note.hidden = true;
+      currentFile = file;
+      if (fileDl) fileDl.hidden = false;
     }
 
     setupDropZone(zone, input, onFile);
 
     stack.querySelector('[data-clear-upload="documents"]')?.addEventListener('click', clear);
+
+    fileDl?.addEventListener('click', function () {
+      if (!currentFile) return;
+      downloadFile(currentFile);
+    });
 
     btn?.addEventListener('click', function () {
       const file = input && input.files && input.files[0];
