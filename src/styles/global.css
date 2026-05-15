@@ -44,6 +44,33 @@
   --header-h: 58px;
 }
 
+/* Light mode (day) */
+[data-theme="light"] {
+  --bg: #F5F0E8;
+  --bg2: #EDE8DE;
+  --card: #FAF7F2;
+  --card2: #F2EDE4;
+  --border: #D8D0C2;
+  --border-lt: #C8BEA8;
+  --gold: #A07830;
+  --gold-lt: #8A6A20;
+  --gold-pale: #6B5220;
+  --gold-dim: #7A6030;
+  --gold-glow: rgba(160,120,48,0.12);
+  --gold-glow2: rgba(160,120,48,0.06);
+  --ink: #1A1510;
+  --ink2: #3A3028;
+  --muted: #6A6050;
+  --muted-lt: #8A8070;
+  --shadow: rgba(0,0,0,0.08);
+  --shadow-gold: rgba(160,120,48,0.15);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.08), 0 0 0 1px var(--border);
+}
+
+[data-theme="light"] body::after {
+  opacity: 0.4;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
@@ -56,6 +83,7 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
+  transition: background 0.35s ease, color 0.35s ease;
 }
 
 body::after {
@@ -65,7 +93,12 @@ body::after {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); color: var(--gold); line-height: 1.2; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--gold);
+  line-height: 1.2;
+  transition: color 0.35s ease;
+}
 h1 { font-size: clamp(28px, 5.5vw, 48px); color: var(--ink); }
 h2 { font-size: 22px; }
 h3, h4 { font-size: 18px; }

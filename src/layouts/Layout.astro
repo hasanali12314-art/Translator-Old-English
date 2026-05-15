@@ -245,6 +245,20 @@ const base = Astro.url.origin;
 </footer>
 
 <script>
+  // Theme toggle (day / night)
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = themeToggle?.querySelector('.theme-icon');
+  const html = document.documentElement;
+  let theme = localStorage.getItem('oe-theme') || 'dark';
+  html.setAttribute('data-theme', theme);
+  if (themeIcon) themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+  themeToggle?.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('oe-theme', theme);
+    if (themeIcon) themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+  });
+
   // Mobile menu
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const mobileNav = document.getElementById('mobileNav');
