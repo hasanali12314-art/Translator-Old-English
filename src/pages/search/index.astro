@@ -1,0 +1,101 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITEMAP_PATHS, SITE_URL } from '../../data/siteConfig';
+
+const pages = SITEMAP_PATHS.filter((p) => p.path !== '/search/').map((p) => ({
+  path: p.path,
+  label: p.path === '/' ? 'Home' : p.path.replace(/^\//, '').replace(/\/$/, '').replace(/-/g, ' '),
+}));
+---
+<Layout
+  title="Search — Translator Old English"
+  description="Search Translator Old English pages, translators, blog articles, and resources."
+  canonical="/search/"
+  noindex={true}
+>
+  <section class="hero-section">
+    <div class="container">
+      <h1 id="main-heading">Search <span class="gold-text">site</span></h1>
+      <p class="hero-sub">Find translators, blog posts, and help pages</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:720px">
+      <form class="site-search-form" id="siteSearchForm" role="search" action="/search/" method="get">
+        <label for="siteSearchInput" class="field-label">Search</label>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <input
+            type="search"
+            id="siteSearchInput"
+            name="q"
+            class="select"
+            style="flex:1;min-width:200px"
+            placeholder="e.g. Latin translator, Old English grammar…"
+            autocomplete="off"
+            required
+          />
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+      <div id="searchResults" class="site-search-results" hidden></div>
+      <p class="text-sm" style="color:var(--muted);margin-top:16px">
+        Or browse the <a href="/sitemap/">HTML sitemap</a>.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<script define:vars={{ pages, siteUrl: SITE_URL }}>
+  const form = document.getElementById('siteSearchForm');
+  const input = document.getElementById('siteSearchInput');
+  const resultsEl = document.getElementById('searchResults');
+
+  function runSearch(q) {
+    if (!q || !resultsEl) return;
+    const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+    const matches = pages.filter((p) => {
+      const hay = (p.path + ' ' + p.label).toLowerCase();
+      return terms.every((t) => hay.includes(t));
+    });
+    if (!matches.length) {
+      resultsEl.innerHTML =
+        '<p style="color:var(--muted);margin-top:24px">No pages matched. Try <a href="' +
+        siteUrl +
+        '/all-languages/">all languages</a> or <a href="' +
+        siteUrl +
+        '/blog/">blog</a>.</p>';
+    } else {
+      resultsEl.innerHTML =
+        '<h2 style="margin:24px 0 12px;font-size:var(--fs-h3-h4)">Results</h2><ul class="site-search-list">' +
+        matches
+          .map(
+            (p) =>
+              '<li><a href="' +
+              p.path +
+              '">' +
+              (p.label.charAt(0).toUpperCase() + p.label.slice(1)) +
+              '</a><span style="color:var(--muted);font-size:var(--fs-label)"> ' +
+              p.path +
+              '</span></li>'
+          )
+          .join('') +
+        '</ul>';
+    }
+    resultsEl.hidden = false;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const initial = params.get('q');
+  if (initial && input) {
+    input.value = initial;
+    runSearch(initial);
+  }
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = input?.value?.trim();
+    if (!q) return;
+    history.replaceState(null, '', '/search/?q=' + encodeURIComponent(q));
+    runSearch(q);
+  });
+</script>

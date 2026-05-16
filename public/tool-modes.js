@@ -763,6 +763,7 @@
     const extractBlock = stack.querySelector('#imageExtractBlock');
     const extractTa = stack.querySelector('#imageExtractedText');
     const resultBlock = stack.querySelector('#imageResultBlock');
+    const resultWrap = stack.querySelector('#imageTranslatedPreviewWrap');
     const resultPreview = stack.querySelector('#imageTranslatedPreview');
     const resultLink = stack.querySelector('#imageTranslatedPreviewLink');
     const allowed = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
@@ -797,7 +798,9 @@
       if (extractBlock) extractBlock.hidden = true;
       if (extractTa) extractTa.value = '';
       if (resultBlock) resultBlock.hidden = true;
+      if (resultWrap) resultWrap.hidden = true;
       if (resultPreview) resultPreview.src = '';
+      if (resultLink) resultLink.removeAttribute('href');
     }
 
     function onFile(file) {
@@ -902,6 +905,7 @@
 
         if (resultPreview) resultPreview.src = rendered.dataUrl;
         if (resultLink) resultLink.href = translatedUrl;
+        if (resultWrap) resultWrap.hidden = false;
         if (resultBlock) resultBlock.hidden = false;
         setBtnVisible(translatedDl, true);
 

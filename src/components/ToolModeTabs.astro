@@ -52,7 +52,7 @@ const { homeLayout = false } = Astro.props;
           <p class="upload-title">Upload or drop image to translate</p>
           <p class="upload-hint">Max. file size <strong>10 MB</strong></p>
           <p class="upload-file-name" id="imageFileName" hidden></p>
-          <img class="upload-preview" id="imagePreview" alt="" hidden />
+          <img class="upload-preview" id="imagePreview" alt="Selected image for translation" hidden />
         </label>
         <div class="upload-extract-block" id="imageExtractBlock" hidden>
           <label for="imageExtractedText">Text detected (OCR) — edit if needed</label>
@@ -73,9 +73,11 @@ const { homeLayout = false } = Astro.props;
         </div>
         <div class="upload-result-block" id="imageResultBlock" hidden>
           <label>Translated image preview</label>
-          <a id="imageTranslatedPreviewLink" href="#" target="_blank" rel="noopener" class="upload-result-preview-wrap">
-            <img id="imageTranslatedPreview" class="upload-result-preview" alt="Translated image preview" />
-          </a>
+          <div id="imageTranslatedPreviewWrap" class="upload-result-preview-wrap" hidden>
+            <a id="imageTranslatedPreviewLink" target="_blank" rel="noopener noreferrer" class="upload-result-preview-link">
+              <img id="imageTranslatedPreview" class="upload-result-preview" alt="Translated image preview" />
+            </a>
+          </div>
         </div>
         <div class="actions" style="margin-top:16px">
           <button type="button" class="btn-clear" data-clear-upload="images">✕ Clear</button>

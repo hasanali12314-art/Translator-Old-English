@@ -1,13 +1,34 @@
 ---
 import '../styles/global.css';
 import { SITE_LOCALES } from '../data/siteLocales';
+import {
+  SITE_URL,
+  SITE_NAME,
+  SITE_EMAIL,
+  SITE_PHONE,
+  SITE_PHONE_TEL,
+  SOCIAL_LINKS,
+  DMCA_URL,
+  NAV_ITEMS,
+  DEFAULT_OG_IMAGE,
+  OG_IMAGE_WIDTH,
+  OG_IMAGE_HEIGHT,
+} from '../data/siteConfig';
+
 export interface Props {
   title: string;
   description?: string;
   canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
 }
-const { title, description = 'Translator Old English — translate modern English to Old English using AI. Early, Middle, Ancient, or Simple styles. Free, instant, and historically accurate.', canonical } = Astro.props;
-const base = Astro.url.origin;
+const {
+  title,
+  description = 'Translator Old English — translate modern English to Old English using AI. Early, Middle, Ancient, or Simple styles. Free, instant, and historically accurate.',
+  canonical,
+  ogImage = DEFAULT_OG_IMAGE,
+  noindex = false,
+} = Astro.props;
 
 function normPath(p: string) {
   if (!p || p === '/') return '/';
@@ -18,6 +39,57 @@ const isActive = (href: string) => currentPath === normPath(href);
 const isHome = currentPath === '/';
 const activeClass = (href: string) => (isActive(href) ? 'active' : '');
 const homeActiveClass = () => (isHome ? 'active' : '');
+
+const canonicalPath = canonical ? normPath(canonical) : currentPath;
+const canonicalUrl = `${SITE_URL}${canonicalPath === '/' ? '/' : canonicalPath}`;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`;
+const hasQueryParams = Astro.url.search.length > 0;
+const isIndexable = !noindex && !hasQueryParams;
+const robotsContent = isIndexable
+  ? 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+  : 'noindex, follow';
+const ogTitle = title;
+const ogDescription = description;
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_NAME,
+  url: SITE_URL + '/',
+  description,
+  inLanguage: 'en',
+  publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL + '/' },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${SITE_URL}/search/?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+const siteNavSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Main navigation',
+  itemListElement: NAV_ITEMS.map((item, i) => ({
+    '@type': 'SiteNavigationElement',
+    position: i + 1,
+    name: item.name,
+    url: `${SITE_URL}${item.url === '/' ? '/' : item.url}`,
+  })),
+};
+
+const orgLayoutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  url: SITE_URL + '/',
+  email: SITE_EMAIL,
+  telephone: SITE_PHONE_TEL,
+  sameAs: Object.values(SOCIAL_LINKS),
+};
 ---
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
@@ -28,7 +100,47 @@ const homeActiveClass = () => (isHome ? 'active' : '');
   <link rel="apple-touch-icon" href="/favicon.png" />
   <meta name="description" content={description} />
   <title>{title}</title>
-  {canonical && <link rel="canonical" href={`${base}${canonical}`} />}
+  <link rel="canonical" href={canonicalUrl} />
+  <meta name="robots" content={robotsContent} />
+  <meta name="googlebot" content={robotsContent} />
+  <!-- Open Graph (property + name for broad crawler support) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={SITE_NAME} />
+  <meta property="og:title" content={ogTitle} />
+  <meta property="og:description" content={ogDescription} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:secure_url" content={ogImageUrl} />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+  <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
+  <meta property="og:image:alt" content={`${SITE_NAME} — ${ogTitle}`} />
+  <meta property="og:locale" content="en_US" />
+  <meta name="og:title" content={ogTitle} />
+  <meta name="og:description" content={ogDescription} />
+  <meta name="og:image" content={ogImageUrl} />
+  <meta name="og:url" content={canonicalUrl} />
+  <!-- Twitter / X Card (name + property for Ahrefs and all crawlers) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@TranslatorOldEng" />
+  <meta property="twitter:site" content="@TranslatorOldEng" />
+  <meta name="twitter:creator" content="@TranslatorOldEng" />
+  <meta name="twitter:domain" content="translatoroldenglish.com" />
+  <meta name="twitter:url" content={canonicalUrl} />
+  <meta name="twitter:title" content={ogTitle} />
+  <meta property="twitter:title" content={ogTitle} />
+  <meta name="twitter:description" content={ogDescription} />
+  <meta property="twitter:description" content={ogDescription} />
+  <meta name="twitter:image" content={ogImageUrl} />
+  <meta property="twitter:image" content={ogImageUrl} />
+  <meta name="twitter:image:src" content={ogImageUrl} />
+  <meta name="twitter:image:alt" content={`${SITE_NAME} — ${ogTitle}`} />
+  <link rel="image_src" href={ogImageUrl} />
+  <link rel="alternate" type="application/rss+xml" title={`${SITE_NAME} Blog RSS`} href={`${SITE_URL}/rss.xml`} />
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(siteNavSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(orgLayoutSchema)} />
   <link
     rel="preload"
     href="/fonts/cinzel-600.ttf"
@@ -52,7 +164,7 @@ const homeActiveClass = () => (isHome ? 'active' : '');
 <aside class="history-panel" id="historyPanel" role="complementary" aria-label="Translation history">
   <div class="history-header">
     <div>
-      <h3 style="margin-bottom:4px;">Translation History</h3>
+      <p class="history-panel-title" style="margin-bottom:4px;font-weight:600;font-size:var(--fs-h3-h4);">Translation history</p>
       <p class="text-xs" style="color:var(--text-muted);">Last 50 translations · stored locally</p>
     </div>
     <button class="btn btn-ghost btn-sm" id="closeHistory" aria-label="Close history">✕</button>
@@ -79,6 +191,11 @@ const homeActiveClass = () => (isHome ? 'active' : '');
       <span class="logo-sub">Free AI-powered archaic language tool</span>
     </a>
 
+    <form class="header-search" role="search" action="/search/" method="get">
+      <label for="headerSearch" class="visually-hidden">Search site</label>
+      <input type="search" id="headerSearch" name="q" placeholder="Search…" autocomplete="off" />
+      <button type="submit" class="header-search-btn" aria-label="Search">⌕</button>
+    </form>
     <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
       <ul class="nav-list">
         <li><a href="/" class:list={['nav-link', homeActiveClass()]} aria-current={isHome ? 'page' : undefined}>Home</a></li>
@@ -169,6 +286,11 @@ const homeActiveClass = () => (isHome ? 'active' : '');
         <a href="/tools-resources/" class:list={['mobile-nav-sub', 'mobile-nav-see-all', activeClass('/tools-resources/')]}>See All Tools →</a>
       </div>
       <a href="/blog/" class:list={['mobile-nav-link', activeClass('/blog/')]}>Blog</a>
+      <form class="mobile-nav-search" role="search" action="/search/" method="get">
+        <label for="mobileSearch" class="visually-hidden">Search site</label>
+        <input type="search" id="mobileSearch" name="q" placeholder="Search site…" />
+        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+      </form>
     </nav>
   </div>
 </header>
@@ -186,6 +308,24 @@ const homeActiveClass = () => (isHome ? 'active' : '');
         </a>
         <p class="text-sm" style="color:var(--text-muted);line-height:1.7;max-width:260px;">
           Free AI-powered translation between modern English and historical styles — Early, Middle, Ancient, and more.
+        </p>
+        <p class="text-sm footer-contact" style="margin-top:14px;line-height:1.7">
+          <a href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a><br />
+          <a href={`tel:${SITE_PHONE_TEL}`}>{SITE_PHONE}</a>
+        </p>
+        <nav class="footer-social" aria-label="Social media">
+          <a href={SOCIAL_LINKS.twitter} rel="noopener noreferrer" target="_blank" aria-label="X (Twitter)">X</a>
+          <a href={SOCIAL_LINKS.facebook} rel="noopener noreferrer" target="_blank" aria-label="Facebook">Facebook</a>
+          <a href={SOCIAL_LINKS.linkedin} rel="noopener noreferrer" target="_blank" aria-label="LinkedIn">LinkedIn</a>
+          <a href={SOCIAL_LINKS.youtube} rel="noopener noreferrer" target="_blank" aria-label="YouTube">YouTube</a>
+          <a href={SOCIAL_LINKS.instagram} rel="noopener noreferrer" target="_blank" aria-label="Instagram">Instagram</a>
+          <a href={SOCIAL_LINKS.pinterest} rel="noopener noreferrer" target="_blank" aria-label="Pinterest">Pinterest</a>
+          <a href={SOCIAL_LINKS.tiktok} rel="noopener noreferrer" target="_blank" aria-label="TikTok">TikTok</a>
+        </nav>
+        <p class="text-sm" style="margin-top:12px">
+          <a href="/rss.xml" rel="alternate">RSS feed</a>
+          ·
+          <a href={DMCA_URL} rel="noopener noreferrer" target="_blank">DMCA</a>
         </p>
       </div>
       <div class="footer-col">
@@ -250,6 +390,8 @@ const homeActiveClass = () => (isHome ? 'active' : '');
     </div>
   </div>
 </footer>
+
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
 
 <script>
   if (document.body.classList.contains('is-home')) {
@@ -383,6 +525,16 @@ const homeActiveClass = () => (isHome ? 'active' : '');
       item?.classList.toggle('open');
     });
   });
+
+  const backToTop = document.getElementById('backToTop');
+  if (backToTop) {
+    const toggleBackToTop = () => {
+      backToTop.classList.toggle('visible', window.scrollY > 400);
+    };
+    window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    toggleBackToTop();
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
 </script>
 <script src={`${import.meta.env.BASE_URL}sentence-case.js`} defer></script>
 <script src={`${import.meta.env.BASE_URL}translator.js`} defer></script>

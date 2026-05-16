@@ -1,0 +1,50 @@
+# Auto-generated — node scripts/generate-redirects.mjs
+# Trailing slash canonical URLs
+
+/all-languages  /all-languages/  301
+/language-translators  /language-translators/  301
+/chinese-translator  /chinese-translator/  301
+/spanish-translator  /spanish-translator/  301
+/arabic-translator  /arabic-translator/  301
+/german-translator  /german-translator/  301
+/french-translator  /french-translator/  301
+/greek-translator  /greek-translator/  301
+/creole-translator  /creole-translator/  301
+/ancient-languages  /ancient-languages/  301
+/latin-translator  /latin-translator/  301
+/old-english  /old-english/  301
+/ancient-greek  /ancient-greek/  301
+/aramaic-translator  /aramaic-translator/  301
+/egyptian-arabic  /egyptian-arabic/  301
+/specialty-translators  /specialty-translators/  301
+/tools-resources  /tools-resources/  301
+/translation-tools  /translation-tools/  301
+/dialect-translator  /dialect-translator/  301
+/fancy-translator  /fancy-translator/  301
+/speak-translate  /speak-translate/  301
+/sinhala-translator  /sinhala-translator/  301
+/rare-languages  /rare-languages/  301
+/navajo-translator  /navajo-translator/  301
+/translator-old-english  /translator-old-english/  301
+/blog  /blog/  301
+/blog/what-is-old-english  /blog/what-is-old-english/  301
+/blog/middle-english-vs-old-english  /blog/middle-english-vs-old-english/  301
+/blog/shakespearean-language-guide  /blog/shakespearean-language-guide/  301
+/blog/old-english-in-fantasy-writing  /blog/old-english-in-fantasy-writing/  301
+/blog/history-of-english-language  /blog/history-of-english-language/  301
+/blog/old-english-vocabulary  /blog/old-english-vocabulary/  301
+/blog/beowulf-language-analysis  /blog/beowulf-language-analysis/  301
+/blog/old-english-grammar-basics  /blog/old-english-grammar-basics/  301
+/blog/old-english-for-game-developers  /blog/old-english-for-game-developers/  301
+/blog/viking-old-norse-influence  /blog/viking-old-norse-influence/  301
+/about-us  /about-us/  301
+/contact-us  /contact-us/  301
+/search  /search/  301
+/sitemap  /sitemap/  301
+/privacy-policy  /privacy-policy/  301
+/terms-and-conditions  /terms-and-conditions/  301
+/cookies  /cookies/  301
+
+# Legacy PHP
+/index.php  /  301
+/index.php/  /  301

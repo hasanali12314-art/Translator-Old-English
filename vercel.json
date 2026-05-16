@@ -1,0 +1,21 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/index.php", "destination": "/", "permanent": true },
+    { "source": "/about-us", "destination": "/about-us/", "permanent": true },
+    { "source": "/contact-us", "destination": "/contact-us/", "permanent": true },
+    { "source": "/all-languages", "destination": "/all-languages/", "permanent": true },
+    { "source": "/blog", "destination": "/blog/", "permanent": true },
+    { "source": "/sitemap", "destination": "/sitemap/", "permanent": true },
+    { "source": "/search", "destination": "/search/", "permanent": true },
+    { "source": "/privacy-policy", "destination": "/privacy-policy/", "permanent": true },
+    { "source": "/terms-and-conditions", "destination": "/terms-and-conditions/", "permanent": true },
+    { "source": "/cookies", "destination": "/cookies/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "X-Content-Type-Options", "value": "nosniff" }]
+    }
+  ]
+}

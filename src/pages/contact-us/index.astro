@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { SITE_EMAIL, SITE_PHONE, SITE_PHONE_TEL } from '../../data/siteConfig';
 ---
 <Layout
   title="Contact Us — Translator Old English"
@@ -16,9 +17,13 @@ import Layout from '../../layouts/Layout.astro';
     <p style="color:var(--ink2);line-height:1.8;margin-bottom:20px">
       For general enquiries about our Old English translator, technical issues, or suggestions to improve the site, use the email below. We aim to reply within 48 hours on business days.
     </p>
-    <p style="color:var(--ink2);line-height:1.8;margin-bottom:28px">
+    <p style="color:var(--ink2);line-height:1.8;margin-bottom:12px">
       <strong>Email:</strong>
-      <a href="mailto:support@translatoroldenglish.com">support@translatoroldenglish.com</a>
+      <a href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a>
+    </p>
+    <p style="color:var(--ink2);line-height:1.8;margin-bottom:28px">
+      <strong>Phone:</strong>
+      <a href={`tel:${SITE_PHONE_TEL}`}>{SITE_PHONE}</a>
     </p>
     <p style="color:var(--muted);font-size:var(--fs-label);line-height:1.7">
       Please do not send sensitive personal data by email. For privacy matters, see our

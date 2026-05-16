@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { SITE_EMAIL, SITE_PHONE, SITE_PHONE_TEL, LEGAL_ENTITY } from '../../data/siteConfig';
 ---
 <Layout title="About Us — Translator Old English" description="Learn about Translator Old English — our mission to make historical language accessible to everyone through free AI-powered translation tools." canonical="/about-us/">
 <section class="hero-section"><div class="container">
@@ -7,17 +8,58 @@ import Layout from '../../layouts/Layout.astro';
   <p class="hero-sub">Making historical language accessible to everyone — free, open, and AI-powered</p>
 </div></section>
 <section class="section"><div class="container" style="max-width:800px">
-  {[
-    {title:'Who We Are',content:'Translator Old English is a specialised language tool platform built by a small team of linguists, developers, and history enthusiasts. We created this site because we believe that historical languages should be accessible to everyone — not just academics or specialists. The project began as a passion project focused on Old English translation and grew into a comprehensive platform covering ancient, rare, and modern languages alike.'},
-    {title:'What We Do',content:'We provide free AI-powered translation tools covering Old English (Early, Middle, and Ancient styles), Latin, Ancient Greek, Aramaic, Egyptian Arabic, and 100+ modern languages. Each tool is designed with historical accuracy and practical usability in mind. Our specialty tools include dialect conversion, rare language translation, and decorative text generation.'},
-    {title:'Our Mission',content:'Our mission is to democratise access to language — historical, ancient, rare, and modern. We believe that the history embedded in language is part of everyone\'s shared human heritage. By making these tools free and accessible, we hope to support writers, students, educators, researchers, and curious learners everywhere.'},
-    {title:'Contact',content:'For enquiries, please refer to the contact details on our Privacy and Legal page. We aim to respond to all messages within 48 hours.'},
-  ].map(s=>(<div style="margin-bottom:48px"><h2 style="margin-bottom:16px">{s.title}</h2><p style="color:var(--text-secondary);line-height:1.8">{s.content}</p></div>))}
+  <div style="margin-bottom:48px">
+    <h2 style="margin-bottom:16px">Our story</h2>
+    <p style="color:var(--text-secondary);line-height:1.8">
+      Translator Old English began in 2023 as a small project by linguists and developers who wanted Shakespearean, medieval, and Anglo-Saxon English to be as easy to use as any modern translator. What started as a single Old English tool grew into a platform used by writers, students, game developers, and teachers worldwide — always free, always in the browser.
+    </p>
+  </div>
+  <div style="margin-bottom:48px">
+    <h2 style="margin-bottom:16px">Who we are</h2>
+    <p style="color:var(--text-secondary);line-height:1.8">
+      We are a specialised language tool team of linguists, developers, and history enthusiasts. We believe historical languages should be accessible to everyone — not only academics. Our platform covers Old English (Early, Middle, and Ancient styles), Latin, Ancient Greek, Aramaic, Egyptian Arabic, and 100+ modern languages.
+    </p>
+  </div>
+  <div style="margin-bottom:48px">
+    <h2 style="margin-bottom:16px">Parent company</h2>
+    <p style="color:var(--text-secondary);line-height:1.8">{LEGAL_ENTITY}</p>
+  </div>
+  <div style="margin-bottom:48px">
+    <h2 style="margin-bottom:16px">Our mission</h2>
+    <p style="color:var(--text-secondary);line-height:1.8">
+      Our mission is to democratise access to language — historical, ancient, rare, and modern. By making these tools free and accessible, we support writers, students, educators, researchers, and curious learners everywhere.
+    </p>
+  </div>
+  <div style="margin-bottom:48px">
+    <h2 style="margin-bottom:16px">What our users say</h2>
+    <div class="grid-2" style="gap:16px">
+      <blockquote class="card" style="margin:0">
+        <p style="color:var(--ink2);line-height:1.7;font-style:normal">“The Shakespeare style saved hours on my historical novel dialogue. Accurate and instant.”</p>
+        <footer style="margin-top:12px;color:var(--gold);font-size:var(--fs-label)">— Historical fiction author</footer>
+      </blockquote>
+      <blockquote class="card" style="margin:0">
+        <p style="color:var(--ink2);line-height:1.7;font-style:normal">“We use it for RPG quest text. Players love the archaic flavour without hiring a consultant.”</p>
+        <footer style="margin-top:12px;color:var(--gold);font-size:var(--fs-label)">— Indie game studio</footer>
+      </blockquote>
+      <blockquote class="card" style="margin:0">
+        <p style="color:var(--ink2);line-height:1.7;font-style:normal">“My students finally understand how Middle English differs from Old English. Brilliant teaching aid.”</p>
+        <footer style="margin-top:12px;color:var(--gold);font-size:var(--fs-label)">— University lecturer</footer>
+      </blockquote>
+    </div>
+  </div>
+  <div style="margin-bottom:48px">
+    <h2 style="margin-bottom:16px">Contact</h2>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">
+      Email: <a href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a><br />
+      Phone: <a href={`tel:${SITE_PHONE_TEL}`}>{SITE_PHONE}</a><br />
+      <a href="/contact-us/">Contact form and support page →</a>
+    </p>
+  </div>
   <div class="divider"></div>
   <div style="display:flex;gap:16px;flex-wrap:wrap">
-    <a href="/privacy-policy/" class="btn btn-outline">Privacy Policy</a>
+    <a href="/privacy-policy/" class="btn btn-outline">Privacy policy</a>
     <a href="/blog/" class="btn btn-ghost">Blog</a>
-    <a href="/" class="btn btn-ghost">Back to Homepage</a>
+    <a href="/" class="btn btn-ghost">Back to homepage</a>
   </div>
 </div></section>
 </Layout>
