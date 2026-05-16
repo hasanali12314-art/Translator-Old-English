@@ -46,6 +46,18 @@ function check(file, html) {
   if (!html.includes('name="referrer"')) {
     errors.push(`${rel}: missing referrer meta`);
   }
+  const titleMatch = html.match(/<title>([^<]*)<\/title>/);
+  if (titleMatch) {
+    const titleText = titleMatch[1]
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'");
+    if (titleText.length > 60) {
+      errors.push(`${rel}: title too long (${titleText.length} chars): ${titleText.slice(0, 50)}…`);
+    }
+  }
   const canon = html.match(/rel="canonical"\s+href="([^"]+)"/);
   if (canon && !canon[1].startsWith('https://translatoroldenglish.com')) {
     errors.push(`${rel}: canonical must use https://translatoroldenglish.com (got ${canon[1]})`);
