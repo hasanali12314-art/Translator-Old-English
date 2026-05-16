@@ -91,9 +91,26 @@ export const NAV_ITEMS = [
   { name: 'Contact us', url: '/contact-us/' },
 ];
 
-export const BLOG_POSTS = [
+/** Footer blog column — first three posts only, then “All articles”. */
+export const FOOTER_BLOG_SLUGS = [
+  'what-is-old-english',
+  'middle-english-vs-old-english',
+  'shakespearean-language-guide',
+] as const;
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  desc: string;
+  date: string;
+  keywords: string;
+  footerLabel?: string;
+};
+
+export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'what-is-old-english',
+    footerLabel: 'What is old english',
     title: 'What Is Old English? A Complete Guide to Anglo-Saxon Language',
     desc: 'Discover the origins, structure, and legacy of Old English.',
     date: '2024-05-12',
@@ -101,6 +118,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'middle-english-vs-old-english',
+    footerLabel: 'Middle english vs old english',
     title: 'Middle English vs Old English: Key Differences Explained',
     desc: 'A clear comparison of Old English and Middle English.',
     date: '2024-05-08',
@@ -108,6 +126,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'shakespearean-language-guide',
+    footerLabel: 'The complete guide to shakespearean language',
     title: 'The Complete Guide to Shakespearean Language',
     desc: 'Learn Early Modern English as used by Shakespeare.',
     date: '2024-05-04',
