@@ -1,0 +1,26 @@
+---
+import { BLOG_POSTS } from '../data/siteConfig';
+import { BLOG_RELATED } from '../data/blogRelated';
+
+export interface Props {
+  currentSlug: string;
+}
+
+const { currentSlug } = Astro.props;
+const slugs = BLOG_RELATED[currentSlug] ?? BLOG_POSTS.map((p) => p.slug).filter((s) => s !== currentSlug).slice(0, 4);
+
+const posts = slugs
+  .map((slug) => BLOG_POSTS.find((p) => p.slug === slug))
+  .filter(Boolean);
+---
+
+<div class="divider"></div>
+<h3 style="margin-bottom:20px;color:var(--gold)">Related articles</h3>
+<div class="grid-2 blog-related-grid">
+  {posts.map((p) => (
+    <a href={`/blog/${p!.slug}/`} class="card" style="text-decoration:none">
+      <div style="color:var(--text-muted);margin-bottom:6px">{p!.date}</div>
+      <p class="blog-related-title" style="margin:0;font-weight:600;line-height:1.4">{p!.title}</p>
+    </a>
+  ))}
+</div>

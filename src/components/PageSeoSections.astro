@@ -11,7 +11,7 @@ const { heading = 'Learn more', sections } = Astro.props;
 ---
 
 <div class="info-block page-seo-sections">
-  <h2>{heading}</h2>
+  <p class="page-seo-heading">{heading}</p>
   {sections.map((s) => (
     <div class="page-seo-section">
       <h3>{s.title}</h3>
@@ -23,8 +23,12 @@ const { heading = 'Learn more', sections } = Astro.props;
 </div>
 
 <style>
-  .page-seo-sections h2 {
+  .page-seo-heading {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3-h4);
+    font-weight: 600;
     margin-bottom: 20px;
+    color: var(--text-primary);
   }
   .page-seo-section {
     margin-bottom: 28px;

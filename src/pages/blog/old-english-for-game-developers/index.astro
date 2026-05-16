@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import BlogRelatedGrid from '../../../components/BlogRelatedGrid.astro';
 ---
 <Layout title="Old English for Game Developers — Names & Lore" description="Old English for Game Developers: Names, Spells, and Lore — read the full article on Translator Old English blog." canonical="/blog/old-english-for-game-developers/">
 <section class="section-sm"><div class="container" style="max-width:820px">
@@ -17,16 +18,12 @@ import Layout from '../../../layouts/Layout.astro';
     {title:'Key Features and Characteristics',body:'Several distinctive features define this area of English language history. The grammatical structures, vocabulary patterns, and stylistic conventions of each period reflect the social and cultural conditions in which the language evolved. Writers and scholars of each era contributed to the standardisation and spread of the language.'},
     {title:'Practical Applications',body:'This knowledge has immediate practical value. Writers of historical fiction, game developers, screenwriters, and language learners can all benefit from understanding how English was spoken and written in different periods. Translator Old English makes these historical styles accessible without requiring years of academic study.'},
     {title:'Further Study',body:'For those wishing to explore further, primary sources such as the Anglo-Saxon Chronicle, Chaucer\'s Canterbury Tales, and the works of Shakespeare provide rich material. Modern academic works on historical linguistics and etymology offer deeper scholarly analysis. The blog articles on this site cover many related topics in accessible depth.'},
-  ].map(s=>(<div style="margin-bottom:36px"><h2 style="margin-bottom:12px">{s.title}</h2><p style="color:var(--text-secondary);line-height:1.8">{s.body}</p></div>))}
+  ].map(s=>(<div style="margin-bottom:36px"><h3 style="margin-bottom:12px">{s.title}</h3><p style="color:var(--text-secondary);line-height:1.8">{s.body}</p></div>))}
   <div style="background:var(--surface-2);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:28px;margin:40px 0;text-align:center">
     <p style="font-weight:600;margin-bottom:12px">Explore Old English translation yourself</p>
     <a href="/" class="btn btn-primary">✦ Use the Translator</a>
   </div>
   <div class="divider"></div>
-  <h3 style="margin-bottom:20px;color:var(--gold)">Related articles</h3>
-  <div class="grid-2">
-    <a href="/blog/what-is-old-english/" class="card" style="text-decoration:none"><div style="color:var(--text-muted);margin-bottom:6px">6 min read</div><h3>What Is Old English?</h3></a>
-    <a href="/blog/history-of-english-language/" class="card" style="text-decoration:none"><div style="color:var(--text-muted);margin-bottom:6px">8 min read</div><h3>History of the English Language</h3></a>
-  </div>
+  <BlogRelatedGrid currentSlug="old-english-for-game-developers" />
 </div></section>
 </Layout>

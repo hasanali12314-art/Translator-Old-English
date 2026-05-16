@@ -10,14 +10,17 @@ import {
   SOCIAL_LINKS,
   DMCA_URL,
   NAV_ITEMS,
+  BLOG_POSTS,
   DEFAULT_OG_IMAGE,
   OG_IMAGE_WIDTH,
   OG_IMAGE_HEIGHT,
 } from '../data/siteConfig';
+import { getPageKeywords } from '../data/pageKeywords';
 
 export interface Props {
   title: string;
   description?: string;
+  keywords?: string;
   canonical?: string;
   ogImage?: string;
   noindex?: boolean;
@@ -25,6 +28,7 @@ export interface Props {
 const {
   title,
   description = 'Translator Old English — translate modern English to Old English using AI. Early, Middle, Ancient, or Simple styles. Free, instant, and historically accurate.',
+  keywords: keywordsProp,
   canonical,
   ogImage = DEFAULT_OG_IMAGE,
   noindex = false,
@@ -42,6 +46,7 @@ const homeActiveClass = () => (isHome ? 'active' : '');
 
 const canonicalPath = canonical ? normPath(canonical) : currentPath;
 const canonicalUrl = `${SITE_URL}${canonicalPath === '/' ? '/' : canonicalPath}`;
+const metaKeywords = keywordsProp ?? getPageKeywords(canonicalPath, title);
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`;
 const hasQueryParams = Astro.url.search.length > 0;
 const isIndexable = !noindex && !hasQueryParams;
@@ -99,8 +104,11 @@ const orgLayoutSchema = {
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/favicon.png" />
   <meta name="description" content={description} />
+  <meta name="keywords" content={metaKeywords} />
   <title>{title}</title>
   <link rel="canonical" href={canonicalUrl} />
+  <link rel="alternate" hreflang="en" href={canonicalUrl} />
+  <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
   <meta name="robots" content={robotsContent} />
   <meta name="googlebot" content={robotsContent} />
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
@@ -185,7 +193,7 @@ const orgLayoutSchema = {
 <header class="site-header" role="banner">
   <div class="header-inner">
     <a href="/" class="site-logo" id="site-logo">
-      <img src="/logo-icon.png" alt="Translator Old English logo" class="logo-img" width="36" height="36" />
+      <img src="/logo-icon.png" alt="Translator Old English" class="logo-img" width="36" height="36" decoding="async" fetchpriority="high" />
       <span class="logo-main logo-mobile logo-desktop">
         <span class="logo-line1">Translator</span>
         <span class="logo-line2"><em>Old English</em></span>
@@ -360,12 +368,28 @@ const orgLayoutSchema = {
           <li><a href="/tools-resources/" class:list={[activeClass('/tools-resources/')]} aria-current={isActive('/tools-resources/') ? 'page' : undefined}>See All Tools →</a></li>
         </ul>
       </div>
+      <div class="footer-col footer-col--blog">
+        <p class="footer-col-title">Blog</p>
+        <ul>
+          {BLOG_POSTS.slice(0, 6).map((post) => (
+            <li>
+              <a
+                href={`/blog/${post.slug}/`}
+                class:list={[activeClass(`/blog/${post.slug}/`)]}
+                aria-current={isActive(`/blog/${post.slug}/`) ? 'page' : undefined}
+              >
+                {post.title.split(/[—:?]/)[0].trim().slice(0, 40)}
+              </a>
+            </li>
+          ))}
+          <li><a href="/blog/" class:list={[activeClass('/blog/')]}>All articles →</a></li>
+        </ul>
+      </div>
       <div class="footer-col">
         <p class="footer-col-title">Legal</p>
         <ul>
           <li><a href="/about-us/" class:list={[activeClass('/about-us/')]} aria-current={isActive('/about-us/') ? 'page' : undefined}>About Us</a></li>
           <li><a href="/contact-us/" class:list={[activeClass('/contact-us/')]} aria-current={isActive('/contact-us/') ? 'page' : undefined}>Contact Us</a></li>
-          <li><a href="/blog/" class:list={[activeClass('/blog/')]} aria-current={isActive('/blog/') ? 'page' : undefined}>Blog</a></li>
           <li><a href="/sitemap/" class:list={[activeClass('/sitemap/')]} aria-current={isActive('/sitemap/') ? 'page' : undefined}>Sitemap</a></li>
         </ul>
       </div>

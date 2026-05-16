@@ -46,6 +46,12 @@ function check(file, html) {
   if (!html.includes('name="referrer"')) {
     errors.push(`${rel}: missing referrer meta`);
   }
+  if (!html.includes('name="keywords"')) {
+    errors.push(`${rel}: missing meta keywords`);
+  }
+  if (!html.includes('hreflang="en"')) {
+    errors.push(`${rel}: missing hreflang en`);
+  }
   const descMatch = html.match(/name="description"\s+content="([^"]*)"/);
   if (descMatch && descMatch[1].length > 155) {
     errors.push(`${rel}: meta description too long (${descMatch[1].length} chars)`);
