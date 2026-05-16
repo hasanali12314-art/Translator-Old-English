@@ -19,9 +19,9 @@ import BlogRelatedGrid from '../../../components/BlogRelatedGrid.astro';
     {title:'The Norman Conquest and the Death of Old English',body:'In 1066, William the Conqueror\'s Norman invasion transformed England. French became the language of the ruling class, Latin the language of the Church, and Old English was demoted to the speech of the peasantry. Over the next century, it underwent radical change — losing most of its inflectional endings and absorbing thousands of French and Latin words — to become Middle English.'},
     {title:'Old English\'s Legacy in Modern English',body:'Despite its apparent distance, Old English forms the core of modern English. The most common words in English — "the", "be", "to", "and", "a", "in", "is", "it", "of", "that" — are all Old English in origin. Function words, basic nouns (water, earth, fire, air), and many verbs (go, come, see, hear, speak) descend directly from Old English.',points:['Over 4,000 Old English words survived into modern English','Weekday names are all Old English (Monday = Mōnandæg)','Most English place names in England have Old English roots']},
     {title:'Using Old English Today',body:'Old English is studied in university linguistics and literature departments worldwide. It appears in fantasy fiction, video games, and film as a marker of authenticity. Translator Old English offers four historical styles — from the accessible Early Modern style to the deeply archaic Ancient style — making Old English accessible to writers, game developers, and curious learners.'},
-  ].map(s=>(
+  ].map((s,i)=>(
     <div style="margin-bottom:40px">
-      <h2 style="margin-bottom:14px">{s.title}</h2>
+      {i===0?<h2 style="margin-bottom:12px">{s.title}</h2>:<h3 style="margin-bottom:12px">{s.title}</h3>}
       <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">{s.body}</p>
       {s.points && <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px">{s.points.map(p=>(<li style="color:var(--text-secondary)">{p}</li>))}</ul>}
     </div>

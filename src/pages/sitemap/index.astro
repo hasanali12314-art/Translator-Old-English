@@ -55,11 +55,15 @@ const groups=[
   <p class="hero-sub">All pages on Translator Old English — organised by section</p>
 </div></section>
 <section class="section"><div class="container" style="max-width:900px">
+  <p style="margin-bottom:16px;color:var(--text-secondary);line-height:1.8">
+    Use this page to browse every major section of Translator Old English — from the flagship Old English translator to modern language pages, ancient scripts, specialty tools, blog articles, and legal information. Search engines should also read the machine-readable XML sitemap linked below.
+  </p>
   <p style="margin-bottom:24px;color:var(--muted)">XML sitemap for crawlers: <a href="/sitemap.xml">/sitemap.xml</a></p>
+  <h2 style="margin-bottom:24px">Browse by <span class="gold-text">section</span></h2>
   <div class="grid-3">
     {groups.map(g=>(
       <div class="card">
-        <h2 style="letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">{g.title}</h2>
+        <h3 style="letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">{g.title}</h3>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
           {g.pages.map(p=>(<li><a href={p.href} style="color:var(--text-secondary);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s"><span style="color:var(--gold)">→</span>{p.name}</a></li>))}
         </ul>
