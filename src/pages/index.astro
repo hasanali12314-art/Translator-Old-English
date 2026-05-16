@@ -154,51 +154,51 @@ const orgSchema = {
 
   <ToolModeTabs homeLayout>
     <div slot="intro" class="hero hero-section">
-      <div class="hero-tag">Free · <span>AI-Powered</span> · Instant · No Signup</div>
-      <h1 id="main-heading">Translator <em>Old English</em></h1>
-      <p class="hero-sub">The free <strong>english to old english translator</strong> with four historical styles — Early Modern, Middle English, Anglo-Saxon &amp; Simplified. Translate sentences, words, and full texts instantly.</p>
+      <div class="hero-tag" data-i18n="hero.tag">Free · AI-Powered · Instant · No Signup</div>
+      <h1 id="main-heading"><span data-i18n="hero.h1.pre">Translator</span> <em data-i18n="hero.h1.em">Old English</em></h1>
+      <p class="hero-sub" data-i18n="hero.sub">The free english to old english translator with four historical styles — Early Modern, Middle English, Anglo-Saxon &amp; Simplified. Translate sentences, words, and full texts instantly.</p>
       <div class="hero-line"></div>
     </div>
   <div class="tool-card tool-area" id="tool-area">
     <div class="style-row">
       <div class="field-wrap">
-        <label class="field-label" for="style-select">Translation Style</label>
+        <label class="field-label" for="style-select" data-i18n="tool.styleLabel">Translation Style</label>
         <select class="select" id="style-select">
-          <option value="early" title="Shakespeare Style — Early Modern English (1500s–1600s)">🎭 Early Modern (1500s–1600s)</option>
-          <option value="middle" title="Medieval Style — Middle English (1300s–1400s)">📜 Middle English (1300s–1400s)</option>
-          <option value="ancient" title="Anglo-Saxon — True Old English (800s–1000s)">⚔️ Anglo-Saxon (800s–1000s)</option>
-          <option value="simple" title="Archaic Simplified — Easy thee/thou style">✨ Archaic Simplified</option>
+          <option value="early" title="Shakespeare Style — Early Modern English (1500s–1600s)" data-i18n="tool.opt.early">🎭 Early Modern (1500s–1600s)</option>
+          <option value="middle" title="Medieval Style — Middle English (1300s–1400s)" data-i18n="tool.opt.middle">📜 Middle English (1300s–1400s)</option>
+          <option value="ancient" title="Anglo-Saxon — True Old English (800s–1000s)" data-i18n="tool.opt.ancient">⚔️ Anglo-Saxon (800s–1000s)</option>
+          <option value="simple" title="Archaic Simplified — Easy thee/thou style" data-i18n="tool.opt.simple">✨ Archaic Simplified</option>
         </select>
       </div>
       <button type="button" class="adv-btn" id="advancedToggle" aria-expanded="false">
-        ⚙ Advanced <span class="adv-chevron" id="advancedArrow">›</span>
+        ⚙ <span data-i18n="tool.advanced">Advanced</span> <span class="adv-chevron" id="advancedArrow">›</span>
       </button>
     </div>
 
     <div class="adv-panel advanced-content" id="advancedContent">
       <div class="adv-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
         <div class="adv-item">
-          <label>Formality Level</label>
+          <label data-i18n="tool.adv.formality">Formality Level</label>
           <input type="range" class="range-slider" id="formalitySlider" min="1" max="5" value="3" style="width:100%;margin-top:8px">
           <div class="range-labels" style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted-lt);margin-top:3px">
-            <span>Casual</span><span>Ceremonial</span>
+            <span data-i18n="tool.adv.casual">Casual</span><span data-i18n="tool.adv.ceremonial">Ceremonial</span>
           </div>
         </div>
         <div class="adv-item">
           <div class="adv-row">
-            <label>Old Pronouns (thee/thou)</label>
+            <label data-i18n="tool.adv.pronouns">Old Pronouns (thee/thou)</label>
             <button type="button" class="toggle active" id="pronounToggle" role="switch" aria-checked="true"></button>
           </div>
         </div>
         <div class="adv-item">
           <div class="adv-row">
-            <label>Old Verb Endings (-eth, -hath)</label>
+            <label data-i18n="tool.adv.verbs">Old Verb Endings (-eth, -hath)</label>
             <button type="button" class="toggle active" id="verbToggle" role="switch" aria-checked="true"></button>
           </div>
         </div>
         <div class="adv-item">
           <div class="adv-row">
-            <label>Archaic Vocabulary</label>
+            <label data-i18n="tool.adv.vocab">Archaic Vocabulary</label>
             <button type="button" class="toggle active" id="vocabToggle" role="switch" aria-checked="true"></button>
           </div>
         </div>
@@ -209,11 +209,11 @@ const orgSchema = {
       <div class="trans-row" style="display:contents">
         <div class="trans-side">
           <div class="trans-top">
-            <span class="trans-lang" id="inLabel">Modern English</span>
+            <span class="trans-lang" id="inLabel" data-i18n="tool.inLabel">Modern English</span>
             <span class="char-ct"><span id="charCount">0</span> / 5000</span>
           </div>
           <div class="textarea-wrap">
-            <textarea id="input-text" placeholder="Enter your modern text here..." maxlength="5000" aria-label="Input text"></textarea>
+            <textarea id="input-text" placeholder="Enter your modern text here..." maxlength="5000" aria-label="Input text" data-i18n="tool.inputPh"></textarea>
             <button type="button" class="mic-btn" data-speech-btn data-speech-for="input-text" aria-label="Start voice input" title="Speak to type">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg>
             </button>
@@ -221,63 +221,63 @@ const orgSchema = {
         </div>
         <div class="trans-mid">
           <button type="button" class="swap-btn" id="flipBtn" title="Flip direction" aria-label="Flip translation direction">⇄</button>
-          <span class="flip-lbl">Flip</span>
+          <span class="flip-lbl" data-i18n="tool.flip">Flip</span>
         </div>
         <div class="trans-side trans-out">
           <div class="trans-top">
-            <span class="trans-lang" id="outLabel">Old English</span>
+            <span class="trans-lang" id="outLabel" data-i18n="tool.outLabel">Old English</span>
             <div class="trans-actions">
-              <button type="button" class="copy-btn" id="copyBtn" style="opacity:0">⎘ Copy</button>
-              <button type="button" class="download-btn" id="downloadBtn" style="opacity:0">↓ Download</button>
+              <button type="button" class="copy-btn" id="copyBtn" style="opacity:0"><span data-i18n="tool.copy">⎘ Copy</span></button>
+              <button type="button" class="download-btn" id="downloadBtn" style="opacity:0"><span data-i18n="tool.download">↓ Download</span></button>
             </div>
           </div>
-          <textarea id="output-text" readonly placeholder="Thy translation shalt appear here..." aria-label="Translation output" aria-live="polite"></textarea>
+          <textarea id="output-text" readonly placeholder="Thy translation shalt appear here..." aria-label="Translation output" aria-live="polite" data-i18n="tool.outputPh"></textarea>
         </div>
       </div>
     </div>
 
     <div class="actions">
-      <button type="button" class="btn-clear" id="clearBtn">✕ Clear</button>
-      <button type="button" class="btn-translate" id="translateBtn">✦ Translate</button>
+      <button type="button" class="btn-clear" id="clearBtn"><span data-i18n="tool.clear">✕ Clear</span></button>
+      <button type="button" class="btn-translate" id="translateBtn"><span data-i18n="tool.translate">✦ Translate</span></button>
     </div>
   </div>
   </ToolModeTabs>
 
   <section class="page-section page-section--examples">
-  <div class="sec-head"><h2 class="sec-title">Quick Examples</h2><div class="sec-line"></div></div>
-  <p class="sec-sub">Click any card to load it into the <strong>old english sentence translator</strong></p>
+  <div class="sec-head"><h2 class="sec-title" data-i18n="examples.title">Quick Examples</h2><div class="sec-line"></div></div>
+  <p class="sec-sub" data-i18n="examples.sub">Click any card to load it into the old english sentence translator</p>
   <div class="ex-grid grid-3">
     {[
       {m:'Hello, how are you today?',o:'Hail, how farest thou this day?'},
       {m:"I don't understand what you're saying.",o:'I comprehend not thy words, good fellow.'},
       {m:'Thank you for your help.',o:'I thank thee most heartily for thy aid.'},
-    ].map(ex => (
+    ].map((ex, i) => (
       <div class="ex-card example-card" data-modern={ex.m} data-old={ex.o} role="button" tabindex="0">
-        <div class="ex-tag example-label">Modern</div>
-        <div class="ex-modern example-text">{ex.m}</div>
+        <div class="ex-tag example-label" data-i18n="examples.modern">Modern</div>
+        <div class="ex-modern example-text" data-i18n={`examples.ex${i}.m`}>{ex.m}</div>
         <div class="ex-hr"></div>
-        <div class="ex-tag example-label">Old English</div>
-        <div class="ex-old example-text">{ex.o}</div>
+        <div class="ex-tag example-label" data-i18n="examples.old">Old English</div>
+        <div class="ex-old example-text" data-i18n={`examples.ex${i}.o`}>{ex.o}</div>
       </div>
     ))}
   </div>
   </section>
 
   <section class="page-section page-section--styles">
-  <div class="sec-head"><h2 class="sec-title">Choose Your Translation Style</h2><div class="sec-line"></div></div>
-  <p class="sec-sub">Four distinct historical periods — each with its own character. Whether you need an <strong>early modern english translator</strong> or a <strong>middle english translator</strong>, we have you covered.</p>
+  <div class="sec-head"><h2 class="sec-title" data-i18n="styles.title">Choose Your Translation Style</h2><div class="sec-line"></div></div>
+  <p class="sec-sub" data-i18n="styles.sub">Four distinct historical periods — each with its own character. Whether you need an early modern english translator or a middle english translator, we have you covered.</p>
   <div class="sc-grid grid-4">
     {[
       {icon:'🎭',name:'Shakespeare Style',period:'1500s – 1600s',desc:'Early Modern English. Thee, thou, dost, hath. Most readable and widely recognised archaic style.'},
       {icon:'📜',name:'Medieval Style',period:'1300s – 1400s',desc:"Chaucer's era. Older spelling and grammar. Ideal for historical fiction and academic work."},
       {icon:'⚔️',name:'Anglo-Saxon',period:'800s – 1000s',desc:'True Old English. Deeply Germanic, most authentic. Used in Beowulf-era literature.'},
       {icon:'✨',name:'Archaic Simplified',period:'Casual Archaic',desc:'Easy old-timey style. Great for social media, memes, games, and casual use.'},
-    ].map(s => (
+    ].map((s, si) => (
       <div class="sc-card card">
         <div class="sc-icon">{s.icon}</div>
-        <div class="sc-name">{s.name}</div>
-        <div class="sc-period">{s.period}</div>
-        <div class="sc-desc">{s.desc}</div>
+        <div class="sc-name" data-i18n={`styles.${si}.name`}>{s.name}</div>
+        <div class="sc-period" data-i18n={`styles.${si}.period`}>{s.period}</div>
+        <div class="sc-desc" data-i18n={`styles.${si}.desc`}>{s.desc}</div>
       </div>
     ))}
   </div>
@@ -285,49 +285,49 @@ const orgSchema = {
 
   <section class="page-section page-section--guide">
   <div class="info-block">
-    <h2>Old English Translator — Complete Guide</h2>
-    <p>Our <strong>old english translator</strong> is the most advanced free AI tool for converting modern English into authentic archaic language styles spanning over a thousand years of English history. Whether you need an <strong>english to old english translator</strong> for a creative project, an <strong>old english text translator</strong> for academic research, or an <strong>old english words translator</strong> for quick lookups, this tool delivers historically grounded results in seconds.</p>
+    <h2 data-i18n="guide.title">Old English Translator — Complete Guide</h2>
+    <p data-i18n="guide.p">Our old english translator is the most advanced free AI tool for converting modern English into authentic archaic language styles spanning over a thousand years of English history. Whether you need an english to old english translator for a creative project, an old english text translator for academic research, or an old english words translator for quick lookups, this tool delivers historically grounded results in seconds.</p>
     <div class="feat-grid grid-2">
       {[
         {icon:'🔄',name:'Bidirectional Translation',desc:'Modern to old, or old to modern — works as both an english to old english translator and an old english to modern english converter'},
         {icon:'📚',name:'4 Historical Styles',desc:'Early modern english translator, middle english translator, Anglo-Saxon, and Simplified'},
         {icon:'🤖',name:'AI-Powered Accuracy',desc:'Context-aware old english sentence translator — not word-for-word replacement'},
         {icon:'⚙️',name:'Customisable Output',desc:'Formality, pronouns, endings, vocabulary — fine-tune your old english text translator'},
-      ].map(f => (
+      ].map((f, fi) => (
         <div class="feat">
           <div class="feat-icon">{f.icon}</div>
-          <div><div class="feat-name">{f.name}</div><div class="feat-desc">{f.desc}</div></div>
+          <div><div class="feat-name" data-i18n={`feat.${fi}.name`}>{f.name}</div><div class="feat-desc" data-i18n={`feat.${fi}.desc`}>{f.desc}</div></div>
         </div>
       ))}
     </div>
   </div>
 
   <div class="info-block">
-    <h3>How to Translate English to Old English in 3 Steps</h3>
-    <p>Learning how to <strong>translate english to old english</strong> is simple with our tool. Follow these three steps to <strong>translate from english to old english</strong> — no expertise required.</p>
+    <h3 data-i18n="steps.title">How to Translate English to Old English in 3 Steps</h3>
+    <p data-i18n="steps.p">Learning how to translate english to old english is simple with our tool. Follow these three steps to translate from english to old english — no expertise required.</p>
     <div class="steps">
       {[
         {n:'1',title:'Choose a translation style from the dropdown',desc:'Select Early Modern English (1500s Shakespeare style), Middle English (1300s Chaucer style), Anglo-Saxon Old English (800s Beowulf style), or Archaic Simplified.'},
         {n:'2',title:'Type or paste text into the input box',desc:'Our old english text translator accepts up to 5,000 characters — roughly 800 words. Works for individual old english words or complete old english sentences.'},
         {n:'3',title:'Click Translate — copy the result',desc:'Result appears instantly. Use History for past translations. Copy, download, or share your translated text.'},
-      ].map(s => (
+      ].map((s, si) => (
         <div class="step">
           <div class="step-num">{s.n}</div>
-          <div><div class="step-title">{s.title}</div><div class="step-desc">{s.desc}</div></div>
+          <div><div class="step-title" data-i18n={`step.${si}.title`}>{s.title}</div><div class="step-desc" data-i18n={`step.${si}.desc`}>{s.desc}</div></div>
         </div>
       ))}
     </div>
   </div>
 
   <div class="info-block">
-    <h3>Middle English to Modern English Translator</h3>
-    <p>Our tool doubles as a powerful <strong>middle english to modern english translator</strong>. Select the "Middle English" style, flip the direction with the ⇄ button, and paste your medieval text to <strong>translate middle english to modern english</strong> instantly. Whether you're deciphering Chaucer's <em>Canterbury Tales</em> or studying 14th-century manuscripts, our <strong>medieval english to modern english translator</strong> makes it effortless.</p>
-    <p>You can also use it as an <strong>english to middle english translator</strong> — simply type modern English and select the Medieval style to generate authentic Middle English output. This bidirectional capability makes it the most versatile <strong>middle english translator</strong> available online.</p>
+    <h3 data-i18n="middle.title">Middle English to Modern English Translator</h3>
+    <p data-i18n="middle.p1">Our tool doubles as a powerful middle english to modern english translator. Select the "Middle English" style, flip the direction with the ⇄ button, and paste your medieval text to <strong>translate middle english to modern english</strong> instantly. Whether you're deciphering Chaucer's <em>Canterbury Tales</em> or studying 14th-century manuscripts, our <strong>medieval english to modern english translator</strong> makes it effortless.</p>
+    <p data-i18n="middle.p2">You can also use it as an english to middle english translator — simply type modern English and select the Medieval style to generate authentic Middle English output. This bidirectional capability makes it the most versatile middle english translator available online.</p>
   </div>
 
   <div class="info-block">
-    <h3>Old Norse, Latin &amp; Ancient Language Translators</h3>
-    <p>Interested in languages beyond Old English? Our platform is expanding to cover more ancient and historical languages:</p>
+    <h3 data-i18n="norse.title">Old Norse, Latin &amp; Ancient Language Translators</h3>
+    <p data-i18n="norse.p">Interested in languages beyond Old English? Our platform is expanding to cover more ancient and historical languages:</p>
     <ul>
       <li><strong>Old Norse translator</strong> — Explore the Viking language that shaped modern English. Our guide on <a href="/blog/viking-old-norse-influence/">Viking and Old Norse influence on English</a> covers key vocabulary, runes, and grammar. A dedicated <strong>english to old norse translator</strong> and <strong>old norse to english translator</strong> is coming soon.</li>
       <li><strong>Old Latin to English translator</strong> — Use our dedicated <a href="/latin-translator/">Latin Translator</a> for Classical, Vulgar, and Medieval Latin conversion.</li>
@@ -336,24 +336,24 @@ const orgSchema = {
   </div>
 
   <div class="info-block">
-    <h3>Why Use Our Old English Translator?</h3>
+    <h3 data-i18n="why.title">Why Use Our Old English Translator?</h3>
     <div class="benefit-row grid-3">
       {[
         {icon:'⚡',name:'Instant',desc:'Results appear in seconds — no waiting.'},
         {icon:'🎯',name:'Accurate',desc:'Trained on authentic historical texts.'},
         {icon:'♾️',name:'Free Forever',desc:'No account, no limits, no fees.'},
-      ].map(b => (
+      ].map((b, bi) => (
         <div class="benefit">
           <div class="benefit-icon">{b.icon}</div>
-          <div class="benefit-name">{b.name}</div>
-          <div class="benefit-desc">{b.desc}</div>
+          <div class="benefit-name" data-i18n={`benefit.${bi}.name`}>{b.name}</div>
+          <div class="benefit-desc" data-i18n={`benefit.${bi}.desc`}>{b.desc}</div>
         </div>
       ))}
     </div>
   </div>
 
   <div class="info-block">
-    <h3>Who Uses Translator Old English?</h3>
+    <h3 data-i18n="who.title">Who Uses Translator Old English?</h3>
     <div class="users-grid grid-2">
       {[
         {title:'✍️ Writers & Authors',desc:'Authentic dialogue for historical fiction and fantasy novels.'},
@@ -362,23 +362,23 @@ const orgSchema = {
         {title:'🎭 Theatre & Film',desc:'Period-accurate scripts and production materials.'},
         {title:'📱 Social Media',desc:'Humorous archaic posts, memes, and content.'},
         {title:'🔍 Curious Users',desc:'Explore a thousand years of English language history.'},
-      ].map(u => (
+      ].map((u, ui) => (
         <div class="user-item">
-          <div class="user-title">{u.title}</div>
-          <div class="user-desc">{u.desc}</div>
+          <div class="user-title" data-i18n={`user.${ui}.title`}>{u.title}</div>
+          <div class="user-desc" data-i18n={`user.${ui}.desc`}>{u.desc}</div>
         </div>
       ))}
     </div>
   </div>
 
   <div class="info-block">
-    <h2>Old English Translator — Frequently Asked Questions</h2>
+    <h2 data-i18n="faq.title">Old English Translator — Frequently Asked Questions</h2>
     <div class="faq">
-      {faqItems.map(f => (
+      {faqItems.map((f, i) => (
         <div class="faq-item">
-          <button type="button" class="faq-question faq-q">{f.q} <span class="faq-icon">+</span></button>
+          <button type="button" class="faq-question faq-q" data-i18n={`faq.${i}.q`}>{f.q} <span class="faq-icon">+</span></button>
           <div class="faq-answer faq-a">
-            <span>{f.a}</span>
+            <span data-i18n={`faq.${i}.a`}>{f.a}</span>
           </div>
         </div>
       ))}
@@ -387,13 +387,13 @@ const orgSchema = {
 
   <div class="cta cta-banner">
     <div class="cta-top"></div>
-    <h2>Begin Thy Translation</h2>
-    <p>Free, instant, AI-powered — no signup required</p>
-    <a href="#tool-area" class="cta-btn btn btn-primary btn-lg">Start Translating Now</a>
+    <h2 data-i18n="cta.title">Begin Thy Translation</h2>
+    <p data-i18n="cta.p">Free, instant, AI-powered — no signup required</p>
+    <a href="#tool-area" class="cta-btn btn btn-primary btn-lg" data-i18n="cta.btn">Start Translating Now</a>
     <div class="trust-badges">
-      <div class="badge"><span>♾️</span> Free forever</div>
-      <div class="badge"><span>⚡</span> Instant results</div>
-      <div class="badge"><span>🎯</span> AI-powered accuracy</div>
+      <div class="badge" data-i18n="cta.badge0"><span>♾️</span> Free forever</div>
+      <div class="badge" data-i18n="cta.badge1"><span>⚡</span> Instant results</div>
+      <div class="badge" data-i18n="cta.badge2"><span>🎯</span> AI-powered accuracy</div>
     </div>
   </div>
   </section>
