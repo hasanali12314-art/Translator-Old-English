@@ -1,34 +1,159 @@
 /**
- * English typography: label case (nav/footer/UI) and sentence case (body).
- * Hero section is excluded.
+ * Site-wide English casing.
+ * Rule: first visible word starts with a capital letter; the rest is lowercase.
  */
 (function () {
   'use strict';
 
-  var HERO = '.hero-section';
-  var CHROME = '.site-header, .mobile-nav, .site-footer';
+  var running = false;
+  var pending = false;
 
-  function firstLetterIndex(str) {
-    var m = str.match(/[a-zA-Z\u00C0-\u024F]/);
-    return m ? m.index : -1;
+  var SKIP_SELECTOR = [
+    'script',
+    'style',
+    'noscript',
+    'template',
+    'input',
+    'textarea',
+    'select',
+    'svg',
+    'code',
+    'pre',
+    'kbd',
+    'samp',
+    '.visually-hidden',
+    '.format-icon',
+    '.format-badge',
+    '.footer-locale-select'
+  ].join(',');
+
+  var LABEL_SELECTORS = [
+    '.site-header a.nav-link',
+    '.site-header .logo-main',
+    '.site-header .logo-sub',
+    '.site-header .nav-dropdown-btn',
+    '.site-header .dropdown-item',
+    '.mobile-nav .mobile-nav-link',
+    '.mobile-nav .mobile-nav-sub',
+    '.mobile-nav .mobile-nav-label',
+    '.site-footer .footer-col-title',
+    '.site-footer .logo-main',
+    '.site-footer .footer-col ul a',
+    '.site-footer .footer-social a',
+    '.site-footer .footer-meta-row a',
+    '.site-footer .footer-meta-link',
+    '.hdr-btn .hdr-label',
+    '.breadcrumb a',
+    '.breadcrumb span:not([aria-hidden])',
+    '.tool-page-back',
+    '.field-label',
+    '.control-label',
+    '.tool-box label',
+    '.upload-extract-block label',
+    '.upload-result-block label',
+    '.trans-lang',
+    '.flip-lbl',
+    '.tool-mode-tab',
+    '.speech-bridge-label',
+    '.advanced-toggle',
+    '.adv-btn',
+    '.adv-item label',
+    '.range-labels span',
+    '.example-label',
+    '.ex-tag',
+    '.sc-name',
+    '.sc-period',
+    '.feat-name',
+    '.benefit-name',
+    '.user-title',
+    '.step-title',
+    '.badge',
+    '.btn',
+    '.btn-clear',
+    '.btn-translate',
+    '.copy-btn',
+    '.download-btn',
+    '.upload-download-btn',
+    '.cta-btn',
+    '.related-card',
+    '.history-panel-title',
+    '.history-item-style',
+    'main .card > div:last-child',
+    'main .card footer',
+    'main .card span:not(.format-badge):not(.gold-text)',
+    'select option'
+  ];
+  var CHROME_LABEL_COUNT = 15;
+
+  var SENTENCE_SELECTORS = [
+    'main h1',
+    'main h2',
+    'main h3',
+    'main h4',
+    'main h5',
+    'main h6',
+    'main p',
+    'main li',
+    '.hero-tag',
+    '.hero-sub',
+    '.sec-title',
+    '.sec-sub',
+    '.section-heading h2',
+    '.section-heading h3',
+    '.info-block h2',
+    '.info-block h3',
+    '.info-block p',
+    '.info-block li',
+    '.page-seo-heading',
+    '.page-seo-section h3',
+    '.example-text',
+    '.ex-modern',
+    '.ex-old',
+    '.sc-desc',
+    '.feat-desc',
+    '.benefit-desc',
+    '.user-desc',
+    '.step-desc',
+    '.faq-question',
+    '.faq-answer',
+    '.faq-answer span',
+    '.upload-title',
+    '.upload-hint',
+    '.speech-bridge-hint',
+    '.blog-related-title',
+    '.related-card-title',
+    '.cta h2',
+    '.cta h3',
+    '.cta-title',
+    '.cta p',
+    '.footer-tagline',
+    '.footer-copy',
+    '.history-empty p',
+    '.comp-error',
+    '.upload-note',
+    '.locale-toast',
+    '.site-search-results h2',
+    '.site-search-results p',
+    '.site-search-results li'
+  ];
+
+  var ATTRIBUTE_SELECTORS = [
+    '[placeholder]',
+    '[title]',
+    '[aria-label]'
+  ];
+
+  function isLatinLetter(ch) {
+    return /[A-Za-z\u00C0-\u024F]/.test(ch);
   }
 
-  function labelCase(str) {
-    var s = String(str || '').replace(/\s+/g, ' ').trim();
-    if (!s) return s;
-    var i = firstLetterIndex(s);
-    if (i < 0) return s;
-    return s.slice(0, i) + s.charAt(i).toUpperCase() + s.slice(i + 1).toLowerCase();
+  function isDigit(ch) {
+    return /[0-9]/.test(ch);
   }
 
-  function sentenceCase(str) {
-    var s = String(str || '').replace(/\s+/g, ' ').trim();
-    if (!s) return s;
-    return s
-      .toLowerCase()
-      .replace(/(^\s*\S|[.!?…]+\s+\S|:\s+\S)/g, function (m) {
-        return m.toUpperCase();
-      });
+  function isEnglishDocument() {
+    var lang = document.documentElement.getAttribute('lang') || 'en';
+    return !lang || /^en\b/i.test(lang);
   }
 
   function isEnglishHome() {
@@ -41,147 +166,153 @@
     }
   }
 
-  function setVisibleText(el, text) {
-    if (!el) return;
-    var icon = el.querySelector('.faq-icon, .nav-arrow, .adv-chevron, .tab-icon');
-    if (icon && (el.tagName === 'BUTTON' || el.classList.contains('faq-question'))) {
-      el.childNodes.forEach(function (n) {
-        if (n.nodeType === Node.TEXT_NODE) el.removeChild(n);
-      });
-      var lead = el.querySelector('.nav-label');
-      if (lead) {
-        lead.textContent = text;
-      } else {
-        var first = el.firstChild;
-        if (first && first.nodeType === Node.TEXT_NODE) first.textContent = text;
-        else el.insertBefore(document.createTextNode(text), icon);
+  function canTouchElement(el) {
+    if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
+    if (el.tagName === 'OPTION') return true;
+    return !el.closest(SKIP_SELECTOR);
+  }
+
+  function transformString(value, mode) {
+    var state = mode === 'sentence'
+      ? { capitalizeNext: true }
+      : { seenStart: false };
+    return transformText(value, mode, state);
+  }
+
+  function transformText(value, mode, state) {
+    var out = '';
+    Array.from(String(value || '')).forEach(function (raw) {
+      var ch = raw.toLowerCase();
+      if (isLatinLetter(ch)) {
+        if (mode === 'sentence') {
+          if (state.capitalizeNext) {
+            out += ch.toUpperCase();
+            state.capitalizeNext = false;
+          } else {
+            out += ch;
+          }
+        } else if (!state.seenStart) {
+          out += ch.toUpperCase();
+          state.seenStart = true;
+        } else {
+          out += ch;
+        }
+        return;
       }
-      return;
-    }
-    var badgeIcon = el.querySelector(':scope > span');
-    if (badgeIcon && el.classList.contains('badge')) {
-      el.childNodes.forEach(function (n) {
-        if (n.nodeType === Node.TEXT_NODE) el.removeChild(n);
-      });
-      el.appendChild(document.createTextNode(' ' + text.replace(/^\S+\s*/, '').trim()));
-      return;
-    }
-    var btnIcon = el.querySelector(':scope > span');
-    if (btnIcon && (el.classList.contains('btn-clear') || el.classList.contains('btn-translate') || el.classList.contains('copy-btn') || el.classList.contains('download-btn'))) {
-      var sym = btnIcon.textContent.trim();
-      el.textContent = sym + ' ' + labelCase(text.replace(sym, '').trim());
-      return;
-    }
-    el.textContent = text;
-  }
 
-  var CHROME_SELECTORS = [
-    '.site-header a.nav-link',
-    '.site-header .nav-dropdown-btn',
-    '.site-header .dropdown-item',
-    '.mobile-nav .mobile-nav-link',
-    '.mobile-nav .mobile-nav-sub',
-    '.mobile-nav .mobile-nav-label',
-    '.site-footer .footer-col h4',
-    '.site-footer .footer-col ul a',
-    '.site-footer .footer-meta-link',
-    '.hdr-btn .hdr-label',
-  ];
-
-  var LABEL_SELECTORS = [
-    '.page-home .field-label',
-    '.page-home .tool-box label',
-    '.page-home .trans-lang',
-    '.page-home .tool-mode-tab span',
-    '.page-home .flip-lbl',
-    '.page-home .example-label',
-    '.page-home .ex-tag',
-    '.page-home .speech-bridge-label',
-    '.page-home .adv-item label',
-    '.page-home .feat-name',
-    '.page-home .benefit-name',
-    '.page-home .user-title',
-    '.page-home .step-title',
-    '.page-home .sc-name',
-    '.page-home .sc-period',
-    '.page-home .btn-clear',
-    '.page-home .btn-translate',
-    '.page-home .copy-btn',
-    '.page-home .download-btn',
-    '.page-home .cta-btn',
-    '.page-home .badge',
-    '.page-home .advanced-toggle',
-    '.page-home .adv-btn',
-    '.page-home select option',
-  ];
-
-  var SENTENCE_SELECTORS = [
-    '.page-home .sec-title',
-    '.page-home .sec-sub',
-    '.page-home .info-block h2',
-    '.page-home .info-block h3',
-    '.page-home .info-block p',
-    '.page-home .info-block li',
-    '.page-home .feat-desc',
-    '.page-home .step-desc',
-    '.page-home .benefit-desc',
-    '.page-home .user-desc',
-    '.page-home .sc-desc',
-    '.page-home .ex-modern',
-    '.page-home .ex-old',
-    '.page-home .faq-question',
-    '.page-home .faq-answer',
-    '.page-home .faq-answer span',
-    '.page-home .cta-banner p',
-    '.page-home .cta p',
-    '.page-home .cta h2',
-    '.page-home .upload-hint',
-    '.page-home .upload-title',
-    '.page-home .speech-bridge-hint',
-  ];
-
-  function applyLabel(el) {
-    if (el.closest(HERO)) return;
-    var t = el.textContent;
-    if (!t || !t.trim()) return;
-    setVisibleText(el, labelCase(t));
-  }
-
-  function applySentence(el) {
-    if (el.closest(HERO) || el.closest(CHROME)) return;
-    var t = el.textContent;
-    if (!t || !t.trim()) return;
-    if (el.classList.contains('faq-question')) {
-      var q = t.replace(/\s*\+\s*$/, '').trim();
-      setVisibleText(el, sentenceCase(q) + ' ');
-      return;
-    }
-    setVisibleText(el, sentenceCase(t));
-  }
-
-  function applyAll() {
-    CHROME_SELECTORS.forEach(function (sel) {
-      document.querySelectorAll(sel).forEach(applyLabel);
+      out += ch;
+      if (isDigit(ch)) {
+        if (mode === 'sentence' && state.capitalizeNext) state.capitalizeNext = false;
+        if (mode !== 'sentence') state.seenStart = true;
+      }
+      if (mode === 'sentence' && /[.!?…]/.test(raw)) {
+        state.capitalizeNext = true;
+      }
     });
+    return out;
+  }
+
+  function textNodeFilter(node) {
+    var parent = node.parentElement;
+    if (!parent || !canTouchElement(parent)) return NodeFilter.FILTER_REJECT;
+    if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_SKIP;
+    return NodeFilter.FILTER_ACCEPT;
+  }
+
+  function applyElementCase(el, mode) {
+    if (!canTouchElement(el)) return;
+
+    var state = mode === 'sentence'
+      ? { capitalizeNext: true }
+      : { seenStart: false };
+    var nodes = [];
+    var walker = document.createTreeWalker(
+      el,
+      NodeFilter.SHOW_TEXT,
+      { acceptNode: textNodeFilter }
+    );
+
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      var next = transformText(node.nodeValue, mode, state);
+      if (next !== node.nodeValue) node.nodeValue = next;
+    });
+  }
+
+  function applyAttributeCase(el, attr) {
+    if (!el || !el.hasAttribute(attr)) return;
+    var value = el.getAttribute(attr);
+    if (!value || !value.trim()) return;
+    var next = transformString(value, 'label');
+    if (next !== value) el.setAttribute(attr, next);
+  }
+
+  function applySelectorList(selectors, mode) {
+    selectors.forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (el) {
+        applyElementCase(el, mode);
+      });
+    });
+  }
+
+  function applyChrome() {
+    applySelectorList(LABEL_SELECTORS.slice(0, CHROME_LABEL_COUNT), 'label');
   }
 
   function applyEnglishContent() {
-    if (!isEnglishHome()) return;
-    LABEL_SELECTORS.forEach(function (sel) {
-      document.querySelectorAll(sel).forEach(applyLabel);
-    });
-    SENTENCE_SELECTORS.forEach(function (sel) {
-      document.querySelectorAll(sel).forEach(applySentence);
+    if (!isEnglishDocument() || !isEnglishHome()) return;
+    applySelectorList(SENTENCE_SELECTORS, 'sentence');
+    applySelectorList(LABEL_SELECTORS, 'label');
+    ATTRIBUTE_SELECTORS.forEach(function (sel) {
+      document.querySelectorAll(sel).forEach(function (el) {
+        applyAttributeCase(el, 'placeholder');
+        applyAttributeCase(el, 'title');
+        applyAttributeCase(el, 'aria-label');
+      });
     });
   }
 
-  window.applySiteSentenceCase = function () {
-    applyAll();
-    applyEnglishContent();
-  };
+  function applyAll() {
+    if (running) return;
+    running = true;
+    try {
+      applyChrome();
+      applyEnglishContent();
+    } finally {
+      running = false;
+    }
+  }
+
+  function scheduleApply() {
+    if (running || pending) return;
+    pending = true;
+    requestAnimationFrame(function () {
+      pending = false;
+      applyAll();
+    });
+  }
+
+  window.applySiteSentenceCase = applyAll;
 
   function boot() {
-    window.applySiteSentenceCase();
+    applyAll();
+    if (window.__siteSentenceCaseObserver) return;
+    window.__siteSentenceCaseObserver = new MutationObserver(function (mutations) {
+      if (running) return;
+      var shouldRun = mutations.some(function (m) {
+        if (m.type === 'characterData') return true;
+        return Array.from(m.addedNodes || []).some(function (node) {
+          return node.nodeType === Node.TEXT_NODE ||
+            (node.nodeType === Node.ELEMENT_NODE && !node.matches(SKIP_SELECTOR));
+        });
+      });
+      if (shouldRun) scheduleApply();
+    });
+    window.__siteSentenceCaseObserver.observe(document.body, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
   }
 
   if (document.readyState === 'loading') {
@@ -189,5 +320,5 @@
   } else {
     boot();
   }
-  window.addEventListener('load', boot);
+  window.addEventListener('load', applyAll);
 })();

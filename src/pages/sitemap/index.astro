@@ -63,7 +63,7 @@ const groups=[
   <div class="grid-3">
     {groups.map(g=>(
       <div class="card">
-        <h3 style="letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">{g.title}</h3>
+        <h3 style="letter-spacing:0.08em;text-transform:lowercase;color:var(--gold);margin-bottom:16px">{g.title}</h3>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
           {g.pages.map(p=>(<li><a href={p.href} style="color:var(--text-secondary);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s"><span style="color:var(--gold)">→</span>{p.name}</a></li>))}
         </ul>
