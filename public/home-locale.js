@@ -5,7 +5,7 @@
   'use strict';
 
   const STORAGE_KEY = 'oe-site-locale';
-  const CACHE_VER = '1';
+  const CACHE_VER = '2';
   const BASE = (document.querySelector('script[src*="home-locale"]')?.getAttribute('src') || '/home-locale.js').replace(/home-locale\.js.*$/, '');
   const LOCALES = [
     { code: 'en', label: 'English' },
@@ -67,7 +67,7 @@
     const res = await fetch(url);
     const data = await res.json();
     const out = data && data.responseData && data.responseData.translatedText;
-    if (!out || out === '-' || String(out).includes('MYMEMORY WARNING')) return text;
+    if (!out || out === '-' || String(out).toUpperCase().includes('MYMEMORY WARNING')) return text;
     return out;
   }
 
@@ -113,23 +113,70 @@
       const val = strings[key];
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
         el.placeholder = val;
-      } else if (el.tagName === 'OPTION') {
+        return;
+      }
+      if (el.tagName === 'OPTION') {
         el.textContent = val;
-      } else if (el.querySelector('span, em')) {
-        const span = el.querySelector('span, em');
-        if (span && el.childNodes.length <= 3) {
-          const prefix = el.textContent.replace(span.textContent, '').trim();
-          if (prefix && val.startsWith(prefix.slice(0, 2))) {
-            span.textContent = val;
-          } else {
-            el.textContent = val;
-          }
+        return;
+      }
+      if (el.id === 'main-heading') {
+        const em = el.querySelector('em');
+        const pre = strings['hero.h1.pre'];
+        const emVal = strings['hero.h1.em'];
+        if (pre != null && emVal != null && em) {
+          el.textContent = '';
+          el.appendChild(document.createTextNode(pre + ' '));
+          const emEl = document.createElement('em');
+          emEl.setAttribute('data-i18n', 'hero.h1.em');
+          emEl.textContent = emVal;
+          el.appendChild(emEl);
         } else {
           el.textContent = val;
         }
-      } else {
-        el.textContent = val;
+        return;
       }
+      if (el.classList.contains('badge')) {
+        const icon = el.querySelector(':scope > span');
+        el.textContent = '';
+        if (icon) el.appendChild(icon);
+        el.appendChild(document.createTextNode(' ' + val));
+        return;
+      }
+      if (el.classList.contains('faq-question')) {
+        const icon = el.querySelector('.faq-icon');
+        el.textContent = val + ' ';
+        if (icon) el.appendChild(icon);
+        return;
+      }
+      const em = el.querySelector(':scope > em');
+      const spanOnly = el.querySelector(':scope > span');
+      if (em && el.childNodes.length <= 3) {
+        const parts = val.split(/\s+/);
+        const emText = strings['hero.h1.em'];
+        if (emText && val.indexOf(emText) >= 0) {
+          el.textContent = '';
+          el.appendChild(document.createTextNode(val.replace(emText, '').trim() + ' '));
+          const emEl = document.createElement('em');
+          emEl.setAttribute('data-i18n', 'hero.h1.em');
+          emEl.textContent = emText;
+          el.appendChild(emEl);
+        } else {
+          el.textContent = val;
+        }
+        return;
+      }
+      if (
+        spanOnly &&
+        (el.classList.contains('btn-translate') ||
+          el.classList.contains('btn-clear') ||
+          el.classList.contains('copy-btn') ||
+          el.classList.contains('download-btn'))
+      ) {
+        const sym = spanOnly.textContent.trim();
+        el.textContent = sym + ' ' + val.replace(sym, '').trim();
+        return;
+      }
+      el.textContent = val;
     });
   }
 
@@ -191,7 +238,6 @@
         });
       }
       applyStrings(strings);
-      if (typeof window.applySiteSentenceCase === 'function') window.applySiteSentenceCase();
       const label = LOCALES.find(function (l) { return l.code === code; });
       showToast((label && label.label) || code);
     } catch (err) {
@@ -224,6 +270,7 @@
     } else {
       select.value = 'en';
       collectDefaults();
+      if (typeof window.applySiteSentenceCase === 'function') window.applySiteSentenceCase();
     }
   }
 

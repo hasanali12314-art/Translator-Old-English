@@ -85,7 +85,7 @@ const homeActiveClass = () => (isHome ? 'active' : '');
         <li><a href="/all-languages/" class:list={['nav-link', activeClass('/all-languages/')]} aria-current={isActive('/all-languages/') ? 'page' : undefined}>All Languages</a></li>
         <li class="nav-dropdown">
           <button type="button" class="nav-link nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-            Languages <span class="nav-arrow">▾</span>
+            <span class="nav-label">Languages</span> <span class="nav-arrow">▾</span>
           </button>
           <div class="dropdown-menu" role="menu">
             <a href="/chinese-translator/" class:list={['dropdown-item', activeClass('/chinese-translator/')]} role="menuitem" aria-current={isActive('/chinese-translator/') ? 'page' : undefined}>🀄 Chinese Translator</a>
@@ -97,7 +97,7 @@ const homeActiveClass = () => (isHome ? 'active' : '');
         </li>
         <li class="nav-dropdown">
           <button type="button" class="nav-link nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-            Ancient <span class="nav-arrow">▾</span>
+            <span class="nav-label">Ancient</span> <span class="nav-arrow">▾</span>
           </button>
           <div class="dropdown-menu" role="menu">
             <a href="/latin-translator/" class:list={['dropdown-item', activeClass('/latin-translator/')]} role="menuitem" aria-current={isActive('/latin-translator/') ? 'page' : undefined}>🏛 Latin Translator</a>
@@ -109,7 +109,7 @@ const homeActiveClass = () => (isHome ? 'active' : '');
         </li>
         <li class="nav-dropdown">
           <button type="button" class="nav-link nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-            Tools <span class="nav-arrow">▾</span>
+            <span class="nav-label">Tools</span> <span class="nav-arrow">▾</span>
           </button>
           <div class="dropdown-menu" role="menu">
             <a href="/dialect-translator/" class:list={['dropdown-item', activeClass('/dialect-translator/')]} role="menuitem" aria-current={isActive('/dialect-translator/') ? 'page' : undefined}>🗣 Dialect Converter</a>
