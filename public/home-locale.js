@@ -176,6 +176,7 @@
 
       if (code === 'en') {
         restoreEnglish();
+        if (typeof window.applySiteSentenceCase === 'function') window.applySiteSentenceCase();
         showToast('English');
         return;
       }
@@ -190,6 +191,7 @@
         });
       }
       applyStrings(strings);
+      if (typeof window.applySiteSentenceCase === 'function') window.applySiteSentenceCase();
       const label = LOCALES.find(function (l) { return l.code === code; });
       showToast((label && label.label) || code);
     } catch (err) {

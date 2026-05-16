@@ -384,6 +384,7 @@ const homeActiveClass = () => (isHome ? 'active' : '');
     });
   });
 </script>
+<script src={`${import.meta.env.BASE_URL}sentence-case.js`} defer></script>
 <script src={`${import.meta.env.BASE_URL}translator.js`} defer></script>
 <script src={`${import.meta.env.BASE_URL}speech-input.js`} defer></script>
 {isHome && <script src={`${import.meta.env.BASE_URL}home-locale.js`} defer></script>}
