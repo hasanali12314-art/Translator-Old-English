@@ -1,3 +1,12 @@
+# Security headers (auto-generated)
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.mymemory.translated.net https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com blob:; worker-src 'self' blob: https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; child-src 'self' blob:; media-src 'self' blob:; manifest-src 'self'"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(self), geolocation=(), payment=(), usb=()"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+</IfModule>
 # Apache / cPanel — trailing slash, index.php, and sitemap
 <IfModule mod_rewrite.c>
   RewriteEngine On

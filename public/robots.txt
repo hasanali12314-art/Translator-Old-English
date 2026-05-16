@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /all-languages?to=
+Disallow: /search?
 
 Sitemap: https://translatoroldenglish.com/sitemap.xml
