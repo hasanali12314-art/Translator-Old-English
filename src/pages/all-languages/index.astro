@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import TranslatorTool from '../../components/TranslatorTool.astro';
+import PageSeoSections from '../../components/PageSeoSections.astro';
 
 const languages = [
   'Afrikaans','Albanian','Amharic','Arabic','Armenian','Azerbaijani','Basque','Belarusian','Bengali',
@@ -106,6 +107,7 @@ function langHref(name: string): string {
       <div class="grid-auto">
         {languages.filter(l => l !== 'English').map(l => (
           <a
+            id={`lang-${langSlug(l)}`}
             href={langHref(l)}
             class="card lang-card"
             data-lang={l}
@@ -121,13 +123,14 @@ function langHref(name: string): string {
 
     <section class="page-section page-section--guide">
       <div class="info-block">
-        <h2>Translate Any Language <span class="gold-text">to English</span></h2>
+        <h2>How to use the <span class="gold-text">all language translator</span></h2>
+        <h3>Translate any language <span class="gold-text">to English</span></h3>
         <p>Select the source language (or Auto-detect), choose English as the target, paste your text, and click Translate. The tool detects many scripts automatically when Auto-detect is selected.</p>
 
-        <h2>English to All Languages — <span class="gold-text">Free Online Translator</span></h2>
+        <h3>English to all languages — <span class="gold-text">free online</span></h3>
         <p>Click any language above to open the translator with that target pre-selected, or use the dropdowns. This free online translator covers Germanic, Romance, Slavic, Asian, Semitic, and many other language families.</p>
 
-        <h2>How to Use the <span class="gold-text">All Language Translator</span></h2>
+        <h3>Step-by-step</h3>
         {['Select your source language or leave it on Auto-detect','Select your target language — or click a language card below','Type or paste your text into the input box (up to 5000 characters)','Click Translate — the result appears instantly','Use the flip button to reverse source and target languages'].map((s, i) => (
           <div style="display:flex;gap:16px;margin-bottom:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md)">
             <span style="font-weight:700;color:var(--gold);opacity:0.5;min-width:28px">0{i + 1}</span>
@@ -137,21 +140,34 @@ function langHref(name: string): string {
       </div>
 
       <div class="info-block">
-        <h3>Related Pages</h3>
+        <h3>Related pages</h3>
         <div class="grid-3 related-grid">
           {related.map(r => (
             <a href={r.href} class="card card-gold related-card" style="text-decoration:none;display:block">
               <span style="display:block;margin-bottom:10px">{r.icon}</span>
-              <h3 style="margin-bottom:6px">{r.title}</h3>
+              <p class="related-card-title" style="margin-bottom:6px;font-weight:600">{r.title}</p>
               <p style="color:var(--text-secondary)">{r.desc}</p>
             </a>
           ))}
         </div>
       </div>
 
+      <PageSeoSections
+        heading="100+ languages in one tool"
+        sections={[
+          {
+            title: 'When to use all-languages mode',
+            paragraphs: [
+              'Use this page when you need a language that does not yet have its own dedicated translator page. Dedicated pages for Chinese, Spanish, Arabic, and others include extra examples and notes.',
+              'Bookmark frequent targets using the language grid links. Each link selects that language in the tool without creating duplicate URLs in search indexes.',
+            ],
+          },
+        ]}
+      />
+
       <div class="cta cta-banner">
         <div class="cta-top"></div>
-        <h2>Translate <span class="gold-text">Any Language</span> Now</h2>
+        <h3 class="cta-title">Translate <span class="gold-text">any language</span> now</h3>
         <p>Free, instant — no account needed</p>
         <a href="#tool-area" class="cta-btn btn btn-primary btn-lg">✦ Start Translating</a>
         <div class="trust-badges">

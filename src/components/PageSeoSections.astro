@@ -1,0 +1,40 @@
+---
+import type { Section } from '../data/pageSeoContent';
+export type { Section };
+
+export interface Props {
+  heading?: string;
+  sections: Section[];
+}
+
+const { heading = 'Learn more', sections } = Astro.props;
+---
+
+<div class="info-block page-seo-sections">
+  <h2>{heading}</h2>
+  {sections.map((s) => (
+    <div class="page-seo-section">
+      <h3>{s.title}</h3>
+      {s.paragraphs.map((p) => (
+        <p>{p}</p>
+      ))}
+    </div>
+  ))}
+</div>
+
+<style>
+  .page-seo-sections h2 {
+    margin-bottom: 20px;
+  }
+  .page-seo-section {
+    margin-bottom: 28px;
+  }
+  .page-seo-section h3 {
+    margin-bottom: 12px;
+  }
+  .page-seo-section p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+</style>

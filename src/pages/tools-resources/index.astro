@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageSeoSections from '../../components/PageSeoSections.astro';
+import { PAGE_SEO_CONTENT } from '../../data/pageSeoContent';
 const sections=[
   {href:'/translation-tools/',icon:'🔧',name:'Translation Tools',desc:'Overview of all translation tools available on the site — 17 targeted keywords'},
   {href:'/blog/',icon:'📖',name:'Blog',desc:'Articles on Old English history, grammar, translation tips, and linguistics'},
@@ -22,7 +24,7 @@ const sections=[
   </div>
 </div></section>
 <section class="section-sm"><div class="container" style="max-width:800px">
-  <h2 style="margin-bottom:16px">About Our <span class="gold-text">Resources</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8">This section brings together all the supporting resources available alongside the translation tools. Whether you want to understand how the tools work or explore articles on language history, you'll find everything here. <a href="/">Return to the homepage</a>.</p>
+  <PageSeoSections {...PAGE_SEO_CONTENT['tools-resources']} />
+  <p style="color:var(--text-secondary);line-height:1.8;margin-top:8px"><a href="/">Return to the homepage</a>.</p>
 </div></section>
 </Layout>

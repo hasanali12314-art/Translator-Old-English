@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageSeoSections from '../../components/PageSeoSections.astro';
+import { PAGE_SEO_CONTENT } from '../../data/pageSeoContent';
 import { SITE_EMAIL, SITE_PHONE, SITE_PHONE_TEL, LEGAL_ENTITY } from '../../data/siteConfig';
 ---
 <Layout title="About Us — Translator Old English" description="Learn about Translator Old English — our mission to make historical language accessible to everyone through free AI-powered translation tools." canonical="/about-us/">
@@ -55,6 +57,7 @@ import { SITE_EMAIL, SITE_PHONE, SITE_PHONE_TEL, LEGAL_ENTITY } from '../../data
       <a href="/contact-us/">Contact form and support page →</a>
     </p>
   </div>
+  <PageSeoSections {...PAGE_SEO_CONTENT['about-us']} />
   <div class="divider"></div>
   <div style="display:flex;gap:16px;flex-wrap:wrap">
     <a href="/privacy-policy/" class="btn btn-outline">Privacy policy</a>

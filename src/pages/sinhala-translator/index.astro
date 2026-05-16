@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageSeoSections from '../../components/PageSeoSections.astro';
+import { PAGE_SEO_CONTENT } from '../../data/pageSeoContent';
 import ToolPageLayout from '../../components/ToolPageLayout.astro';
 import TranslatorTool from '../../components/TranslatorTool.astro';
 
@@ -27,8 +29,8 @@ const titleHtml = 'Sinhala <span class="gold-text">Translator</span>';
     ]}
     backLink={{ href: '/specialty-translators/', label: '← Back to Specialty Translators' }}
     titleHtml={titleHtml}
+    toolLabel="Sinhala"
     heroSub="Translate English to Sinhala (සිංහල) or Sinhala to English — free, instant, AI-powered"
-    examplesTitle="Translation Examples"
     examplesSub="Click any card to load it into the translator"
     examples={examples}
     related={related}
@@ -48,8 +50,9 @@ const titleHtml = 'Sinhala <span class="gold-text">Translator</span>';
       outputPlaceholder="ඔබේ සිංහල පරිවර්තනය මෙහි දිස්වේ..."
     />
     <div class="info-block">
-      <h2>About <span class="gold-text">Sinhala</span></h2>
+      <h3>About <span class="gold-text">Sinhala</span></h3>
       <p>Sinhala (සිංහල) is an Indo-Aryan language spoken by approximately 17 million people, primarily in Sri Lanka where it is one of the official languages alongside Tamil. It has its own unique script derived from the ancient Brahmi alphabet and has been written for over 2,000 years. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
     </div>
+    <PageSeoSections {...PAGE_SEO_CONTENT['sinhala-translator']} />
   </ToolPageLayout>
 </Layout>

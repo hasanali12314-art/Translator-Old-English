@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageSeoSections from '../../components/PageSeoSections.astro';
+import { PAGE_SEO_CONTENT } from '../../data/pageSeoContent';
 const featured = [
   {href:'/chinese-translator/',name:'Chinese Translator',vol:'246k/mo',kw:'62 keywords'},
   {href:'/spanish-translator/',name:'Spanish Translator',vol:'High volume',kw:'59 keywords'},
@@ -52,7 +54,7 @@ const all = [
 </div></section>
 
 <section class="section-sm"><div class="container" style="max-width:800px">
-  <h2 style="margin-bottom:16px">About <span class="gold-text">Language Translation</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8">Each language page on this site is dedicated to a specific language, providing tailored translation tools, examples, FAQs, and background information. Whether you need to translate to Chinese, Spanish, Arabic, or any other language, you'll find a dedicated, optimised tool here. <a href="/">Return to the homepage</a> for the Translator Old English.</p>
+  <PageSeoSections {...PAGE_SEO_CONTENT['language-translators']} />
+  <p style="color:var(--text-secondary);line-height:1.8;margin-top:8px"><a href="/">Return to the homepage</a> for the Old English translator.</p>
 </div></section>
 </Layout>

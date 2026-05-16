@@ -23,6 +23,8 @@ export interface Props {
   titleHtml: string;
   heroSub: string;
   examplesTitle?: string;
+  /** Short label for unique example section heading, e.g. "Chinese" → "Chinese translation examples" */
+  toolLabel?: string;
   examplesSub?: string;
   examples?: Example[];
   relatedTitle?: string;
@@ -39,7 +41,8 @@ const {
   backLink,
   titleHtml,
   heroSub,
-  examplesTitle = 'Quick Examples',
+  examplesTitle,
+  toolLabel,
   examplesSub,
   examples = [],
   relatedTitle = 'Related Translators',
@@ -52,6 +55,9 @@ const {
 
 const hasExamples = examples.length > 0;
 const hasRelated = related.length > 0;
+const resolvedExamplesTitle =
+  examplesTitle ?? (toolLabel ? `${toolLabel} translation examples` : 'Quick examples');
+const ctaHeadingLevel = hasRelated ? 'h3' : 'h2';
 ---
 
 <div class="container container--page tool-page">
@@ -84,7 +90,7 @@ const hasRelated = related.length > 0;
   {hasExamples && (
     <section class="page-section page-section--examples">
       <div class="sec-head">
-        <h2 class="sec-title">{examplesTitle}</h2>
+        <h2 class="sec-title">{resolvedExamplesTitle}</h2>
         <div class="sec-line"></div>
       </div>
       {examplesSub && <p class="sec-sub">{examplesSub}</p>}
@@ -129,7 +135,11 @@ const hasRelated = related.length > 0;
 
     <div class="cta cta-banner">
       <div class="cta-top"></div>
-      <h2 set:html={ctaTitle} />
+      {ctaHeadingLevel === 'h3' ? (
+        <h3 class="cta-title" set:html={ctaTitle} />
+      ) : (
+        <h2 class="cta-title" set:html={ctaTitle} />
+      )}
       {ctaSub && <p>{ctaSub}</p>}
       <a href="#tool-area" class="cta-btn btn btn-primary btn-lg">{ctaBtn}</a>
       <div class="trust-badges">

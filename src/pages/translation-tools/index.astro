@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageSeoSections from '../../components/PageSeoSections.astro';
+import { PAGE_SEO_CONTENT } from '../../data/pageSeoContent';
 const tools=[
   {href:'/',icon:'⚜️',name:'Translator Old English',desc:'Translate modern English to Early, Middle, Ancient, or Simple Old English styles'},
   {href:'/all-languages/',icon:'🌍',name:'All Languages Translator',desc:'Translate between any language and English — 100+ languages supported'},
@@ -31,8 +33,8 @@ const tools=[
   </div>
 </div></section>
 <section class="section-sm"><div class="container" style="max-width:800px">
-  <h2 style="margin-bottom:16px">Why These <span class="gold-text">Tools?</span></h2>
-  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:20px">Every tool on this site is designed to be genuinely useful, historically informed, and completely free. From mainstream language pairs to rare and ancient languages, the focus is on quality, accuracy, and accessibility. All tools store history locally and never require an account.</p>
+  <PageSeoSections {...PAGE_SEO_CONTENT['translation-tools']} />
+  <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:20px">Every tool on this site is designed to be genuinely useful, historically informed, and completely free. All tools store history locally and never require an account. Pick a card above to jump straight to the translator you need, or read the blog for guides on historical English and translation tips.</p>
   <div style="display:flex;gap:16px;flex-wrap:wrap">
     <a href="/blog/" class="btn btn-outline">Read the Blog</a>
     <a href="/" class="btn btn-ghost">Try Old English Tool</a>

@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageSeoSections from '../../components/PageSeoSections.astro';
+import { PAGE_SEO_CONTENT } from '../../data/pageSeoContent';
 import ToolPageLayout from '../../components/ToolPageLayout.astro';
 import TranslatorTool from '../../components/TranslatorTool.astro';
 
@@ -28,8 +30,8 @@ const titleHtml = 'Rare Language <span class="gold-text">Converter</span>';
     ]}
     backLink={{ href: '/specialty-translators/', label: '← Back to Specialty Translators' }}
     titleHtml={titleHtml}
+    examplesTitle="Rare language conversion examples"
     heroSub="Translate to minority, endangered, and rare languages — free, AI-powered, preserving linguistic diversity"
-    examplesTitle="Conversion Examples"
     examplesSub="Click any card to load it into the translator"
     examples={examples}
     related={related}
@@ -49,8 +51,9 @@ const titleHtml = 'Rare Language <span class="gold-text">Converter</span>';
       outputPlaceholder="Your rare language translation will appear here..."
     />
     <div class="info-block">
-      <h2>About <span class="gold-text">Rare Languages</span></h2>
+      <h3>About <span class="gold-text">Rare Languages</span></h3>
       <p>The Rare Language Converter provides access to minority, endangered, and lesser-known languages that are underrepresented in standard translation tools. These include indigenous languages, regional languages, and languages with fewer than a million speakers. Preserving access to these languages helps maintain cultural heritage and linguistic diversity. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
     </div>
+    <PageSeoSections {...PAGE_SEO_CONTENT['rare-languages']} />
   </ToolPageLayout>
 </Layout>

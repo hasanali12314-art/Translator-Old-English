@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageSeoSections from '../../components/PageSeoSections.astro';
+import { PAGE_SEO_CONTENT } from '../../data/pageSeoContent';
 import ToolPageLayout from '../../components/ToolPageLayout.astro';
 import TranslatorTool from '../../components/TranslatorTool.astro';
 
@@ -27,8 +29,8 @@ const titleHtml = 'Fancy Text <span class="gold-text">Converter</span>';
     ]}
     backLink={{ href: '/specialty-translators/', label: '← Back to Specialty Translators' }}
     titleHtml={titleHtml}
+    examplesTitle="Fancy text style examples"
     heroSub="Transform normal text into stylised, decorative, and fancy Unicode styles — perfect for social media"
-    examplesTitle="Style Examples"
     examplesSub="Click any card to load it into the translator"
     examples={examples}
     related={related}
@@ -50,8 +52,9 @@ const titleHtml = 'Fancy Text <span class="gold-text">Converter</span>';
       outputPlaceholder="Your fancy text will appear here..."
     />
     <div class="info-block">
-      <h2>About <span class="gold-text">Fancy Text</span></h2>
+      <h3>About <span class="gold-text">Fancy Text</span></h3>
       <p>The Fancy Text Converter uses Unicode character sets to transform standard text into decorative styles. These work across social media platforms like Instagram, Twitter, TikTok, and Discord. Styles include cursive, bold serif, hollow, strikethrough, and many more. Return to <a href="/specialty-translators/">Specialty Translators</a>.</p>
     </div>
+    <PageSeoSections {...PAGE_SEO_CONTENT['fancy-translator']} />
   </ToolPageLayout>
 </Layout>

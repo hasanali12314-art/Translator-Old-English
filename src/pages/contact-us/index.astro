@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageSeoSections from '../../components/PageSeoSections.astro';
+import { PAGE_SEO_CONTENT } from '../../data/pageSeoContent';
 import { SITE_EMAIL, SITE_PHONE, SITE_PHONE_TEL } from '../../data/siteConfig';
 ---
 <Layout
@@ -17,6 +19,9 @@ import { SITE_EMAIL, SITE_PHONE, SITE_PHONE_TEL } from '../../data/siteConfig';
     <p style="color:var(--ink2);line-height:1.8;margin-bottom:20px">
       For general enquiries about our Old English translator, technical issues, or suggestions to improve the site, use the email below. We aim to reply within 48 hours on business days.
     </p>
+    <p style="color:var(--ink2);line-height:1.8;margin-bottom:20px">
+      We read every message. Helpful reports include the page URL, your browser, and what you expected versus what happened. Praise and feature ideas are welcome too — many tools on this site started as user requests.
+    </p>
     <p style="color:var(--ink2);line-height:1.8;margin-bottom:12px">
       <strong>Email:</strong>
       <a href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a>
@@ -30,6 +35,7 @@ import { SITE_EMAIL, SITE_PHONE, SITE_PHONE_TEL } from '../../data/siteConfig';
       <a href="/privacy-policy/">Privacy Policy</a>.
     </p>
   </div>
+  <PageSeoSections {...PAGE_SEO_CONTENT['contact-us']} />
   <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:24px">
     <a href="/about-us/" class="btn btn-ghost">About Us</a>
     <a href="/" class="btn btn-primary">Back to Translator</a>

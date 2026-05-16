@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageSeoSections from '../../components/PageSeoSections.astro';
+import { PAGE_SEO_CONTENT } from '../../data/pageSeoContent';
 const groups=[
   {title:'Main Pages',pages:[
     {name:'Translator Old English',href:'/'},
@@ -63,6 +65,9 @@ const groups=[
         </ul>
       </div>
     ))}
+  </div>
+  <div style="max-width:800px;margin:48px auto 0">
+    <PageSeoSections {...PAGE_SEO_CONTENT.sitemap} />
   </div>
 </div></section>
 </Layout>
