@@ -199,6 +199,14 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── Global sentence-case enforcement ──────────────────────
+   No element should render ALL CAPS unless explicitly overridden.
+   Elements using the lowercase + ::first-letter pattern keep
+   their sentence case. Raw uppercase is stripped here globally. */
+*:not(input):not(textarea):not(code):not(pre) {
+  text-transform: none;
+}
+
 html {
   font-size: 16px;
   scroll-behavior: smooth;
@@ -934,9 +942,11 @@ main { max-width: 920px; margin: 0 auto; }
   border-radius: 99px;
   font-family: var(--font-display);
   font-size: 12px; color: var(--muted);
-  letter-spacing: 0.1em; text-transform: uppercase; background: var(--card2);
+  letter-spacing: 0.04em; text-transform: lowercase; background: var(--card2);
   max-width: 100%; line-height: 1.5;
 }
+.hero-badge .badge, .hero-tag { }
+.hero-badge .badge::first-letter, .hero-tag::first-letter { text-transform: uppercase; }
 .hero-badge .badge-gold, .hero-tag span { color: var(--gold); background: transparent; border: none; }
 .hero-section h1 { margin: 0 0 18px; font-weight: 600; }
 .hero-section h1 em, .hero-section h1 .gold-text {
