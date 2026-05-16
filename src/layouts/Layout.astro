@@ -12,6 +12,7 @@ import {
   NAV_ITEMS,
   BLOG_POSTS,
   FOOTER_BLOG_SLUGS,
+  FOOTER_TOOL_LINKS,
   DEFAULT_OG_IMAGE,
   OG_IMAGE_WIDTH,
   OG_IMAGE_HEIGHT,
@@ -317,22 +318,22 @@ const orgLayoutSchema = {
 </main>
 
 <footer class="site-footer">
-  <div class="footer-inner container">
+  <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="site-logo footer-logo">
           <span class="logo-main">
             <span class="logo-line1">Translator</span>
-            <span class="logo-line2"><em>old english</em></span>
+            <span class="logo-line2"><em>Old English</em></span>
           </span>
         </a>
-        <p class="text-sm footer-tagline">
-          Free AI-powered translation between modern english and historical styles — early, middle, ancient, and more.
+        <p class="footer-tagline">
+          Free AI-powered translation between modern English and historical styles — early, middle, ancient, and more.
         </p>
-        <p class="text-sm footer-contact" style="margin-top:14px;line-height:1.7">
-          <a href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a><br />
-          <a href={`tel:${SITE_PHONE_TEL}`}>{SITE_PHONE}</a>
-        </p>
+        <div class="footer-contact">
+          <a class="footer-contact-link" href={`mailto:${SITE_EMAIL}`}>{SITE_EMAIL}</a>
+          <a class="footer-contact-link" href={`tel:${SITE_PHONE_TEL}`}>{SITE_PHONE}</a>
+        </div>
         <nav class="footer-social" aria-label="Social media">
           <a href={SOCIAL_LINKS.twitter} rel="noopener noreferrer" target="_blank" aria-label="X (Twitter)">X</a>
           <a href={SOCIAL_LINKS.facebook} rel="noopener noreferrer" target="_blank" aria-label="Facebook">Facebook</a>
@@ -342,45 +343,53 @@ const orgLayoutSchema = {
           <a href={SOCIAL_LINKS.pinterest} rel="noopener noreferrer" target="_blank" aria-label="Pinterest">Pinterest</a>
           <a href={SOCIAL_LINKS.tiktok} rel="noopener noreferrer" target="_blank" aria-label="TikTok">TikTok</a>
         </nav>
-        <p class="text-sm" style="margin-top:12px">
+        <p class="footer-meta-row">
           <a href="/rss.xml" rel="alternate">RSS feed</a>
-          ·
+          <span class="footer-meta-sep" aria-hidden="true">·</span>
           <a href={DMCA_URL} rel="noopener noreferrer" target="_blank">DMCA</a>
         </p>
       </div>
       <div class="footer-col">
-        <p class="footer-col-title">languages</p>
-        <ul>
-          <li><a href="/chinese-translator/" class:list={[activeClass('/chinese-translator/')]} aria-current={isActive('/chinese-translator/') ? 'page' : undefined}>chinese translator</a></li>
-          <li><a href="/spanish-translator/" class:list={[activeClass('/spanish-translator/')]} aria-current={isActive('/spanish-translator/') ? 'page' : undefined}>spanish translator</a></li>
-          <li><a href="/arabic-translator/" class:list={[activeClass('/arabic-translator/')]} aria-current={isActive('/arabic-translator/') ? 'page' : undefined}>arabic translator</a></li>
-          <li><a href="/language-translators/" class:list={[activeClass('/language-translators/'), 'footer-see-all']} aria-current={isActive('/language-translators/') ? 'page' : undefined}>see all languages →</a></li>
+        <p class="footer-col-title">Languages</p>
+        <ul class="footer-links">
+          <li><a href="/chinese-translator/" class:list={[activeClass('/chinese-translator/')]} aria-current={isActive('/chinese-translator/') ? 'page' : undefined}>Chinese translator</a></li>
+          <li><a href="/spanish-translator/" class:list={[activeClass('/spanish-translator/')]} aria-current={isActive('/spanish-translator/') ? 'page' : undefined}>Spanish translator</a></li>
+          <li><a href="/arabic-translator/" class:list={[activeClass('/arabic-translator/')]} aria-current={isActive('/arabic-translator/') ? 'page' : undefined}>Arabic translator</a></li>
+          <li><a href="/language-translators/" class:list={[activeClass('/language-translators/'), 'footer-see-all']} aria-current={isActive('/language-translators/') ? 'page' : undefined}>See all languages →</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <p class="footer-col-title">ancient</p>
-        <ul>
-          <li><a href="/latin-translator/" class:list={[activeClass('/latin-translator/')]} aria-current={isActive('/latin-translator/') ? 'page' : undefined}>latin translator</a></li>
-          <li><a href="/old-english/" class:list={[activeClass('/old-english/')]} aria-current={isActive('/old-english/') ? 'page' : undefined}>old english</a></li>
-          <li><a href="/ancient-greek/" class:list={[activeClass('/ancient-greek/')]} aria-current={isActive('/ancient-greek/') ? 'page' : undefined}>ancient greek</a></li>
-          <li><a href="/ancient-languages/" class:list={[activeClass('/ancient-languages/'), 'footer-see-all']} aria-current={isActive('/ancient-languages/') ? 'page' : undefined}>see all ancient →</a></li>
+        <p class="footer-col-title">Ancient</p>
+        <ul class="footer-links">
+          <li><a href="/latin-translator/" class:list={[activeClass('/latin-translator/')]} aria-current={isActive('/latin-translator/') ? 'page' : undefined}>Latin translator</a></li>
+          <li><a href="/old-english/" class:list={[activeClass('/old-english/')]} aria-current={isActive('/old-english/') ? 'page' : undefined}>Old english</a></li>
+          <li><a href="/ancient-greek/" class:list={[activeClass('/ancient-greek/')]} aria-current={isActive('/ancient-greek/') ? 'page' : undefined}>Ancient greek</a></li>
+          <li><a href="/ancient-languages/" class:list={[activeClass('/ancient-languages/'), 'footer-see-all']} aria-current={isActive('/ancient-languages/') ? 'page' : undefined}>See all ancient →</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <p class="footer-col-title">tools</p>
-        <ul>
-          <li><a href="/dialect-translator/" class:list={[activeClass('/dialect-translator/')]} aria-current={isActive('/dialect-translator/') ? 'page' : undefined}>dialect converter</a></li>
-          <li><a href="/fancy-translator/" class:list={[activeClass('/fancy-translator/')]} aria-current={isActive('/fancy-translator/') ? 'page' : undefined}>fancy text</a></li>
-          <li><a href="/speak-translate/" class:list={[activeClass('/speak-translate/')]} aria-current={isActive('/speak-translate/') ? 'page' : undefined}>speak translator</a></li>
-          <li><a href="/sinhala-translator/" class:list={[activeClass('/sinhala-translator/')]} aria-current={isActive('/sinhala-translator/') ? 'page' : undefined}>sinhala translator</a></li>
-          <li><a href="/rare-languages/" class:list={[activeClass('/rare-languages/')]} aria-current={isActive('/rare-languages/') ? 'page' : undefined}>rare languages</a></li>
-          <li><a href="/navajo-translator/" class:list={[activeClass('/navajo-translator/')]} aria-current={isActive('/navajo-translator/') ? 'page' : undefined}>navajo translator</a></li>
-          <li><a href="/tools-resources/" class:list={[activeClass('/tools-resources/'), 'footer-see-all']} aria-current={isActive('/tools-resources/') ? 'page' : undefined}>see all tools →</a></li>
+        <p class="footer-col-title">Tools</p>
+        <ul class="footer-links">
+          {FOOTER_TOOL_LINKS.map((tool) => (
+            <li>
+              <a
+                href={tool.href}
+                class:list={[activeClass(tool.href)]}
+                aria-current={isActive(tool.href) ? 'page' : undefined}
+              >
+                {tool.label}
+              </a>
+            </li>
+          ))}
+          <li><a href="/tools-resources/" class:list={[activeClass('/tools-resources/'), 'footer-see-all']} aria-current={isActive('/tools-resources/') ? 'page' : undefined}>See all tools →</a></li>
         </ul>
       </div>
-      <div class="footer-col footer-col--blog">
-        <p class="footer-col-title">blog</p>
-        <ul>
+      <div class="footer-col">
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="/about-us/" class:list={[activeClass('/about-us/')]} aria-current={isActive('/about-us/') ? 'page' : undefined}>About us</a></li>
+          <li><a href="/contact-us/" class:list={[activeClass('/contact-us/')]} aria-current={isActive('/contact-us/') ? 'page' : undefined}>Contact us</a></li>
+          <li><a href="/sitemap/" class:list={[activeClass('/sitemap/')]} aria-current={isActive('/sitemap/') ? 'page' : undefined}>Sitemap</a></li>
           {footerBlogLinks.map((post) => (
             <li>
               <a
@@ -392,21 +401,13 @@ const orgLayoutSchema = {
               </a>
             </li>
           ))}
-          <li><a href="/blog/" class:list={[activeClass('/blog/'), 'footer-see-all']} aria-current={isActive('/blog/') ? 'page' : undefined}>all articles →</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <p class="footer-col-title">legal</p>
-        <ul>
-          <li><a href="/about-us/" class:list={[activeClass('/about-us/')]} aria-current={isActive('/about-us/') ? 'page' : undefined}>about us</a></li>
-          <li><a href="/contact-us/" class:list={[activeClass('/contact-us/')]} aria-current={isActive('/contact-us/') ? 'page' : undefined}>contact us</a></li>
-          <li><a href="/sitemap/" class:list={[activeClass('/sitemap/')]} aria-current={isActive('/sitemap/') ? 'page' : undefined}>sitemap</a></li>
+          <li><a href="/blog/" class:list={[activeClass('/blog/'), 'footer-see-all']} aria-current={isActive('/blog/') ? 'page' : undefined}>All articles →</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="text-sm footer-copy">© 2026 translator old english. free for personal and commercial use.</p>
-      <div class="footer-bottom-links text-sm">
+      <p class="footer-copy">© 2026 Translator Old English. Free for personal and commercial use.</p>
+      <div class="footer-bottom-links">
         <div class="footer-locale" id="siteLocaleWrap">
           <button type="button" class="footer-locale-btn" id="siteLocaleBtn" aria-label="Website language" title="Website language">
             <svg class="footer-locale-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
@@ -419,9 +420,9 @@ const orgLayoutSchema = {
             ))}
           </select>
         </div>
-        <a href="/privacy-policy/" class:list={['footer-meta-link', activeClass('/privacy-policy/')]}>privacy</a>
-        <a href="/terms-and-conditions/" class:list={['footer-meta-link', activeClass('/terms-and-conditions/')]}>terms</a>
-        <a href="/cookies/" class:list={['footer-meta-link', activeClass('/cookies/')]}>cookies</a>
+        <a href="/privacy-policy/" class:list={['footer-meta-link', activeClass('/privacy-policy/')]}>Privacy</a>
+        <a href="/terms-and-conditions/" class:list={['footer-meta-link', activeClass('/terms-and-conditions/')]}>Terms</a>
+        <a href="/cookies/" class:list={['footer-meta-link', activeClass('/cookies/')]}>Cookies</a>
       </div>
     </div>
   </div>

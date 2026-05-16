@@ -91,11 +91,18 @@ export const NAV_ITEMS = [
   { name: 'Contact us', url: '/contact-us/' },
 ];
 
-/** Footer blog column — first three posts only, then “All articles”. */
+/** Footer blog links (shown under Company, not a separate column). */
 export const FOOTER_BLOG_SLUGS = [
   'what-is-old-english',
   'middle-english-vs-old-english',
   'shakespearean-language-guide',
+] as const;
+
+/** Footer tools column — three tools, then “See all tools”. */
+export const FOOTER_TOOL_LINKS = [
+  { href: '/dialect-translator/', label: 'Dialect converter' },
+  { href: '/fancy-translator/', label: 'Fancy text' },
+  { href: '/speak-translate/', label: 'Speak translator' },
 ] as const;
 
 export type BlogPost = {
