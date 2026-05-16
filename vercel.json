@@ -22,6 +22,17 @@
       "permanent": true
     },
     {
+      "source": "/all-languages/",
+      "has": [
+        {
+          "type": "query",
+          "key": "to"
+        }
+      ],
+      "destination": "/all-languages/",
+      "permanent": true
+    },
+    {
       "source": "/blog",
       "destination": "/blog/",
       "permanent": true

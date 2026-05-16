@@ -41,13 +41,20 @@ const related = [
   { href: '/translation-tools/', icon: '🛠️', title: 'Translation Tools', desc: 'Browse all free translation tools' },
 ];
 
+function langSlug(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
 function langHref(name: string): string {
   const page = dedicatedPages[name];
   if (page) return `/${page}/`;
-  return `/all-languages/?to=${encodeURIComponent(name)}`;
+  return `/all-languages/#lang-${langSlug(name)}`;
 }
 ---
 <Layout title="All Language Translator — Translate Any Language Online Free" description="Translate English to any language or any language to English — instant, free, AI-powered. 100+ languages supported." canonical="/all-languages/">
+  <Fragment slot="head">
+    <script src="/all-languages-lang.js" defer></script>
+  </Fragment>
   <div class="container container--page tool-page">
     <div class="hero hero-section">
       <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -98,7 +105,14 @@ function langHref(name: string): string {
       <p class="sec-sub">Click a language to translate English into that language</p>
       <div class="grid-auto">
         {languages.filter(l => l !== 'English').map(l => (
-          <a href={langHref(l)} class="card lang-card" style="text-align:center;padding:16px;font-weight:500;text-decoration:none;color:var(--text-secondary)" aria-label={`Translate to ${l}`}>
+          <a
+            href={langHref(l)}
+            class="card lang-card"
+            data-lang={l}
+            data-lang-slug={langSlug(l)}
+            style="text-align:center;padding:16px;font-weight:500;text-decoration:none;color:var(--text-secondary)"
+            aria-label={`Translate to ${l}`}
+          >
             {l}
           </a>
         ))}

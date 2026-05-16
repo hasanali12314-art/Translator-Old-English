@@ -40,6 +40,12 @@ function check(file, html) {
   if (!html.includes('name="robots"')) {
     errors.push(`${rel}: missing robots meta`);
   }
+  if (!html.includes('http-equiv="X-Frame-Options"')) {
+    errors.push(`${rel}: missing X-Frame-Options meta`);
+  }
+  if (!html.includes('name="referrer"')) {
+    errors.push(`${rel}: missing referrer meta`);
+  }
   const canon = html.match(/rel="canonical"\s+href="([^"]+)"/);
   if (canon && !canon[1].startsWith('https://translatoroldenglish.com')) {
     errors.push(`${rel}: canonical must use https://translatoroldenglish.com (got ${canon[1]})`);

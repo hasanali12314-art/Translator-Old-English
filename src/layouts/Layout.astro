@@ -103,6 +103,8 @@ const orgLayoutSchema = {
   <link rel="canonical" href={canonicalUrl} />
   <meta name="robots" content={robotsContent} />
   <meta name="googlebot" content={robotsContent} />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <!-- Open Graph (property + name for broad crawler support) -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content={SITE_NAME} />
