@@ -337,12 +337,12 @@ main { max-width: 1080px; margin: 0 auto; }
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: var(--gradient-brand);
+  background: #6C3AED;
   color: #fff;
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 20px;
   flex-shrink: 0;
-  box-shadow: 0 4px 14px var(--purple-glow);
+  text-transform: lowercase;
 }
 .logo-mark--sm {
   width: 32px;
