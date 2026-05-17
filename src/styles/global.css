@@ -291,9 +291,9 @@ a { color: var(--gold); text-decoration: none; transition: var(--transition); }
 a:hover { color: var(--gold-lt); }
 
 /* Layout */
-.container { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 .container--page { padding-top: 48px; padding-bottom: 96px; }
-main { max-width: 920px; margin: 0 auto; }
+main { max-width: 1080px; margin: 0 auto; }
 .section { padding: 56px 0; }
 .section-sm { padding: 44px 0; }
 
@@ -1038,6 +1038,7 @@ main { max-width: 920px; margin: 0 auto; }
 
 .tool-controls, .style-row { display: flex; align-items: flex-end; gap: 14px; margin-bottom: 24px; flex-wrap: wrap; }
 .control-group, .field-wrap { flex: 1; min-width: 200px; }
+.field-wrap--meaning { flex: 0 1 220px; min-width: 160px; }
 .control-label, .field-label, .tool-box label,
 .trans-lang, .char-count, .char-ct, .footer-col-title,
 .hero-tag, .hero-badge .badge, .example-label, .ex-tag {

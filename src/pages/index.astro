@@ -179,7 +179,7 @@ const orgSchema = {
           <option value="simple" title="Archaic Simplified — Easy thee/thou style" data-i18n="tool.opt.simple">✨ Archaic Simplified</option>
         </select>
       </div>
-      <div class="field-wrap">
+      <div class="field-wrap field-wrap--meaning">
         <label class="field-label" for="meaning-lang-select">Also show meaning in</label>
         <select class="select" id="meaning-lang-select" aria-label="Show translation meaning in another language">
           <option value="">— None —</option>
@@ -457,7 +457,7 @@ const orgSchema = {
     if (inLabel) inLabel.textContent = swapped ? 'Old English' : 'Modern English';
     if (outLabel) outLabel.textContent = swapped ? 'Modern English' : 'Old English';
     inp.placeholder = swapped ? 'Enter Old English text here...' : 'Enter your modern text here...';
-    out.placeholder = swapped ? 'Modern translation shalt appear...' : 'Thy translation shalt appear here...';
+    out.placeholder = swapped ? 'Modern translation shall appear...' : 'Thy translation shalt appear here...';
     const tmp = inp.value; inp.value = out.value; out.value = tmp;
     if (charCount) charCount.textContent = String(inp.value.length);
   });
