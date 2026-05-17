@@ -227,11 +227,11 @@ const orgSchema = {
       <div class="trans-row" style="display:contents">
         <div class="trans-side">
           <div class="trans-top">
-            <span class="trans-lang" id="inLabel" data-i18n="tool.inLabel">Modern English</span>
+            <span class="trans-lang" id="inLabel" data-i18n="tool.inLabel">Old English</span>
             <span class="char-ct"><span id="charCount">0</span> / 5000</span>
           </div>
           <div class="textarea-wrap">
-            <textarea id="input-text" placeholder="Enter your modern text here..." maxlength="5000" aria-label="Input text" data-i18n="tool.inputPh"></textarea>
+            <textarea id="input-text" placeholder="Enter Old English text here..." maxlength="5000" aria-label="Input text" data-i18n="tool.inputPh"></textarea>
             <button type="button" class="mic-btn" data-speech-btn data-speech-for="input-text" aria-label="Start voice input" title="Speak to type">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg>
             </button>
@@ -243,13 +243,13 @@ const orgSchema = {
         </div>
         <div class="trans-side trans-out">
           <div class="trans-top">
-            <span class="trans-lang" id="outLabel" data-i18n="tool.outLabel">Old English</span>
+            <span class="trans-lang" id="outLabel" data-i18n="tool.outLabel">Modern English</span>
             <div class="trans-actions">
               <button type="button" class="copy-btn" id="copyBtn" style="opacity:0"><span data-i18n="tool.copy">⎘ Copy</span></button>
               <button type="button" class="download-btn" id="downloadBtn" style="opacity:0"><span data-i18n="tool.download">↓ Download</span></button>
             </div>
           </div>
-          <textarea id="output-text" readonly placeholder="Thy translation shalt appear here..." aria-label="Translation output" aria-live="polite" data-i18n="tool.outputPh"></textarea>
+          <textarea id="output-text" readonly placeholder="Modern translation shall appear here..." aria-label="Translation output" aria-live="polite" data-i18n="tool.outputPh"></textarea>
         </div>
       </div>
     </div>
@@ -454,10 +454,10 @@ const orgSchema = {
     const out = document.getElementById('output-text') as HTMLTextAreaElement;
     const inLabel = document.getElementById('inLabel');
     const outLabel = document.getElementById('outLabel');
-    if (inLabel) inLabel.textContent = swapped ? 'Old English' : 'Modern English';
-    if (outLabel) outLabel.textContent = swapped ? 'Modern English' : 'Old English';
-    inp.placeholder = swapped ? 'Enter Old English text here...' : 'Enter your modern text here...';
-    out.placeholder = swapped ? 'Modern translation shall appear...' : 'Thy translation shalt appear here...';
+    if (inLabel) inLabel.textContent = swapped ? 'Modern English' : 'Old English';
+    if (outLabel) outLabel.textContent = swapped ? 'Old English' : 'Modern English';
+    inp.placeholder = swapped ? 'Enter your modern text here...' : 'Enter Old English text here...';
+    out.placeholder = swapped ? 'Thy translation shalt appear here...' : 'Modern translation shall appear here...';
     const tmp = inp.value; inp.value = out.value; out.value = tmp;
     if (charCount) charCount.textContent = String(inp.value.length);
   });

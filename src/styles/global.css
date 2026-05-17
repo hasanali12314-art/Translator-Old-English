@@ -996,11 +996,10 @@ main { max-width: 1080px; margin: 0 auto; }
   border-radius: 99px;
   font-family: var(--font-display);
   font-size: 12px; color: var(--muted);
-  letter-spacing: 0.04em; text-transform: lowercase; background: var(--card2);
+  letter-spacing: 0.04em; text-transform: none; background: var(--card2);
   max-width: 100%; line-height: 1.5;
 }
 .hero-badge .badge, .hero-tag { }
-.hero-badge .badge::first-letter, .hero-tag::first-letter { text-transform: uppercase; }
 .hero-badge .badge-gold, .hero-tag span { color: var(--gold); background: transparent; border: none; }
 .hero-section h1 { margin: 0 0 18px; font-weight: 600; }
 .hero-section h1 em, .hero-section h1 .gold-text {
@@ -1154,10 +1153,9 @@ main { max-width: 1080px; margin: 0 auto; }
 .trans-lang {
   font-family: var(--font-display);
   letter-spacing: 0.02em;
-  text-transform: lowercase;
+  text-transform: none;
   color: var(--gold);
 }
-.trans-lang::first-letter { text-transform: uppercase; }
 .char-count, .char-ct { font-size: var(--fs-label); color: var(--muted-lt); }
 
 .tool-boxes > div:nth-child(2), .trans-mid {
@@ -1942,18 +1940,20 @@ main { max-width: 1080px; margin: 0 auto; }
 
   .tool-area, .tool-card { padding: 12px; margin-bottom: 0; }
   .style-row, .tool-controls {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-end;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
     gap: 8px;
     margin-bottom: 12px;
   }
-  .style-row .field-wrap, .control-group { min-width: 0; flex: 1 1 calc(100% - 108px); }
+  .style-row .field-wrap, .control-group { min-width: 0; flex: 1 1 100%; width: 100%; }
+  .style-row .field-wrap--meaning { flex: 1 1 100%; min-width: 0; width: 100%; }
   .style-row .adv-btn, .advanced-toggle {
     width: auto;
     flex: 0 0 auto;
     padding: 9px 12px;
     font-size: var(--fs-label);
+    align-self: flex-start;
   }
   .field-label, .control-label { margin-bottom: 6px; font-size: var(--fs-label); }
   .select, select { font-size: var(--fs-base); padding: 8px 32px 8px 10px; }

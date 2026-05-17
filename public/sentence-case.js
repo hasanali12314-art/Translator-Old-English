@@ -1,6 +1,7 @@
 /**
  * Site-wide visible-text casing.
  * Rule: only the first word's first letter is capitalized; everything else is lowercase.
+ * PRESERVE elements: certain elements keep their original casing (logos, labels, hero tags).
  */
 (function () {
   'use strict';
@@ -28,8 +29,42 @@
     '.footer-locale-select'
   ].join(',');
 
-  var BLOCK_TEXT_SELECTOR = [
+  /** Elements whose text content should NEVER be lowercased */
+  var PRESERVE_SELECTOR = [
+    '.logo-main',
+    '.logo-line1',
+    '.logo-line2',
+    '.logo-accent',
+    '.logo-sub',
+    '.hero-tag',
+    '.trans-lang',
+    '.badge',
+    '.hero-badge',
     'h1',
+    'h1 *',
+    '.sec-title',
+    '.section-heading h2',
+    '.info-block h2',
+    '.info-block h3',
+    '.cta-banner h2',
+    '.cta-banner h3',
+    '.cta h2',
+    '.cta h3',
+    '.sc-name',
+    '.feat-name',
+    '.benefit-name',
+    '.step-title',
+    '.user-title',
+    '.field-label',
+    '.control-label',
+    '.upload-title',
+    '.speech-bridge-label',
+    '.meaning-block-label',
+    '.footer-col-title',
+    '.history-panel-title'
+  ].join(',');
+
+  var BLOCK_TEXT_SELECTOR = [
     'h2',
     'h3',
     'h4',
@@ -70,6 +105,12 @@
     return !el.closest(SKIP_SELECTOR);
   }
 
+  /** Check if an element or its parent is in the preserve list */
+  function shouldPreserve(el) {
+    if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
+    return el.matches(PRESERVE_SELECTOR) || (el.closest && el.closest(PRESERVE_SELECTOR));
+  }
+
   function transformWithState(value, state) {
     var out = '';
     Array.from(String(value || '')).forEach(function (raw) {
@@ -103,6 +144,8 @@
 
   function applyGroupedElement(el) {
     if (!canTouchElement(el)) return;
+    /* Skip elements that should preserve their original casing */
+    if (shouldPreserve(el)) return;
     var nodes = [];
     var state = { seenStart: false };
     var walker = document.createTreeWalker(
@@ -113,6 +156,11 @@
 
     while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(function (node) {
+      /* Skip text nodes inside preserved elements */
+      if (node.parentElement && shouldPreserve(node.parentElement)) {
+        processedNodes.add(node);
+        return;
+      }
       var next = transformWithState(node.nodeValue, state);
       processedNodes.add(node);
       if (next !== node.nodeValue) node.nodeValue = next;
@@ -130,6 +178,8 @@
       if (!canTouchElement(el)) return;
       if (el.closest(BLOCK_TEXT_SELECTOR)) return;
       if (el.querySelector(COMPACT_LINK_BLOCKERS)) return;
+      /* Skip preserved links (logo, etc.) */
+      if (shouldPreserve(el)) return;
       applyGroupedElement(el);
     });
   }
@@ -145,6 +195,11 @@
     while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(function (node) {
       if (processedNodes.has(node)) return;
+      /* Skip text nodes inside preserved elements */
+      if (node.parentElement && shouldPreserve(node.parentElement)) {
+        processedNodes.add(node);
+        return;
+      }
       var next = transformString(node.nodeValue);
       processedNodes.add(node);
       if (next !== node.nodeValue) node.nodeValue = next;
