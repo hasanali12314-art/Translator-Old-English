@@ -1,5 +1,5 @@
-/* Translator Old English — medieval manuscript theme */
-/* Cinzel = hero "Translator" chunky serif | IMFellEnglish = script accents */
+/* Translator Old English — modern purple precision toolkit theme */
+/* Inter = UI font | clean SaaS-style brand */
 @font-face {
   font-family: CinzelFont;
   font-style: normal;
@@ -44,30 +44,39 @@
 }
 
 :root {
+  /* ── Core Palette ─────────────────────────────── */
   --bg: #F4F6FB;
   --bg2: #FFFFFF;
   --card: #FFFFFF;
   --card2: #F8F9FC;
-  --border: #E5E7EB;
-  --border-lt: #D1D5DB;
-  --purple: #7C3AED;
-  --purple-dark: #5B21B6;
-  --purple-light: #A78BFA;
-  --purple-glow: rgba(124, 58, 237, 0.14);
-  --purple-glow2: rgba(124, 58, 237, 0.08);
+  --border: #E8EAF0;
+  --border-lt: #D4D7E0;
+  /* ── Brand Purple / Blue ─────────────────────── */
+  --purple: #6C3AED;
+  --purple-dark: #5521C6;
+  --purple-light: #8B5CF6;
+  --purple-glow: rgba(108, 58, 237, 0.14);
+  --purple-glow2: rgba(108, 58, 237, 0.08);
+  --blue: #2563EB;
+  --blue-light: #3B82F6;
   --gradient-brand: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+  --gradient-brand-hover: linear-gradient(135deg, #1D4ED8 0%, #6D28D9 100%);
+  /* ── Semantic Aliases ("gold" → purple) ───────── */
   --gold: var(--purple);
   --gold-lt: var(--purple-light);
   --gold-pale: #EDE9FE;
   --gold-dim: var(--purple-dark);
   --gold-glow: var(--purple-glow);
   --gold-glow2: var(--purple-glow2);
+  /* ── Text ────────────────────────────────────── */
   --ink: #111827;
   --ink2: #374151;
   --muted: #6B7280;
   --muted-lt: #9CA3AF;
-  --shadow: rgba(15, 23, 42, 0.08);
-  --shadow-gold: rgba(124, 58, 237, 0.22);
+  /* ── Shadows ─────────────────────────────────── */
+  --shadow: rgba(15, 23, 42, 0.06);
+  --shadow-gold: rgba(108, 58, 237, 0.20);
+  /* ── Typography ──────────────────────────────── */
   --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-script: IMFellEnglish, Georgia, serif;
   --font-body: var(--font-display);
@@ -85,11 +94,13 @@
   --ink-3: var(--card2);
   --ink-4: var(--card2);
   --border-strong: var(--border-lt);
+  /* ── Radii ───────────────────────────────────── */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 12px;
   --radius-xl: 14px;
-  --shadow-card: 0 8px 32px rgba(15, 23, 42, 0.08), 0 0 0 1px var(--border);
+  /* ── Layout ──────────────────────────────────── */
+  --shadow-card: 0 8px 32px rgba(15, 23, 42, 0.06), 0 0 0 1px var(--border);
   --transition: all 0.25s ease;
   --header-h: 58px;
   --home-section-gap: 80px;
@@ -113,32 +124,7 @@
   --lh-base: 1.75;
 }
 
-/* Light mode (day) */
-[data-theme="light"] {
-  --bg: #F5F0E8;
-  --bg2: #EDE8DE;
-  --card: #FAF7F2;
-  --card2: #F2EDE4;
-  --border: #D8D0C2;
-  --border-lt: #C8BEA8;
-  --gold: #A07830;
-  --gold-lt: #8A6A20;
-  --gold-pale: #6B5220;
-  --gold-dim: #7A6030;
-  --gold-glow: rgba(160,120,48,0.12);
-  --gold-glow2: rgba(160,120,48,0.06);
-  --ink: #1A1510;
-  --ink2: #3A3028;
-  --muted: #6A6050;
-  --muted-lt: #8A8070;
-  --shadow: rgba(0,0,0,0.08);
-  --shadow-gold: rgba(160,120,48,0.15);
-  --shadow-card: 0 8px 32px rgba(0,0,0,0.08), 0 0 0 1px var(--border);
-}
-
-[data-theme="light"] body::after {
-  opacity: 0.4;
-}
+/* Light mode — uses the default :root purple palette above */
 
 /* Dark mode: homepage / guide marketing copy — pure white (tool UI labels unchanged) */
 [data-theme="dark"] main .hero-section .hero-tag,
@@ -234,7 +220,7 @@ body {
 body::after {
   content: '';
   position: fixed; inset: 0; z-index: 9999; pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
 }
 
 /* Typography — no italic site-wide */
@@ -322,11 +308,12 @@ main { max-width: 920px; margin: 0 auto; }
 
 .site-header {
   position: sticky; top: 0; z-index: 200;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04), 0 4px 24px rgba(124, 58, 237, 0.06);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04), 0 4px 24px rgba(108, 58, 237, 0.06);
   min-height: var(--header-h);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
   overflow: visible;
 }
 .header-inner {
@@ -682,7 +669,7 @@ main { max-width: 920px; margin: 0 auto; }
   background: var(--card); border-left: 1px solid var(--border-lt);
   z-index: 500; transition: right 0.3s ease;
   display: flex; flex-direction: column; overflow: hidden;
-  box-shadow: -12px 0 48px rgba(0,0,0,0.6);
+  box-shadow: -12px 0 48px rgba(108, 58, 237, 0.12);
 }
 .history-panel.open { right: 0; }
 .history-header {
@@ -958,11 +945,12 @@ main { max-width: 920px; margin: 0 auto; }
 .format-srt { background: #f3e5f5; }
 .format-srt .format-badge { background: #6a1b9a; }
 
-/* Homepage — modern purple marketing shell */
+/* Homepage — modern purple precision toolkit shell */
 .page-home {
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 58, 237, 0.12), transparent 55%),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(37, 99, 235, 0.08), transparent 50%),
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(108, 58, 237, 0.10), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(37, 99, 235, 0.07), transparent 50%),
+    radial-gradient(ellipse 50% 30% at 0% 20%, rgba(139, 92, 246, 0.05), transparent 50%),
     var(--bg);
 }
 .page-home .hero-section {
@@ -982,13 +970,14 @@ main { max-width: 920px; margin: 0 auto; }
 }
 .page-home .hero-tag {
   background: #fff;
-  border-color: rgba(124, 58, 237, 0.2);
+  border-color: rgba(108, 58, 237, 0.18);
   color: var(--purple-dark);
   font-weight: 500;
+  box-shadow: 0 2px 12px rgba(108, 58, 237, 0.06);
 }
 .page-home .tool-card.tool-area {
-  border-color: rgba(124, 58, 237, 0.12);
-  box-shadow: 0 12px 48px rgba(124, 58, 237, 0.1), 0 0 0 1px rgba(124, 58, 237, 0.06);
+  border-color: rgba(108, 58, 237, 0.10);
+  box-shadow: 0 12px 48px rgba(108, 58, 237, 0.10), 0 0 0 1px rgba(108, 58, 237, 0.06);
 }
 .page-home .tool-card.tool-area::before {
   background: linear-gradient(90deg, transparent, var(--purple-light), transparent);
@@ -1314,8 +1303,8 @@ main { max-width: 920px; margin: 0 auto; }
   font-size: var(--fs-secondary); color: var(--muted); line-height: 1.65;
 }
 .card:hover, .sc-card:hover, .ex-card:hover, .example-card:hover {
-  border-color: var(--border-lt);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  border-color: rgba(108, 58, 237, 0.18);
+  box-shadow: 0 8px 32px rgba(108, 58, 237, 0.12), 0 0 0 1px rgba(108, 58, 237, 0.08);
   transform: translateY(-2px);
 }
 .card-gold::before, .sc-card::before {
@@ -1734,7 +1723,7 @@ main { max-width: 920px; margin: 0 auto; }
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease, transform 0.25s ease;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  box-shadow: 0 8px 32px rgba(108, 58, 237, 0.10);
 }
 .locale-toast.show {
   opacity: 1;
@@ -1905,7 +1894,7 @@ main { max-width: 920px; margin: 0 auto; }
     margin-right: -24px;
     padding: 6px 24px 8px;
     border-bottom: 1px solid var(--border-lt);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 8px 24px rgba(108, 58, 237, 0.10);
   }
   .tool-stack--home .home-intro .hero-section {
     padding: 0 0 4px;
