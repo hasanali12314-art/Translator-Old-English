@@ -2,27 +2,63 @@
 import Layout from '../../../layouts/Layout.astro';
 import BlogRelatedGrid from '../../../components/BlogRelatedGrid.astro';
 ---
-<Layout title="Old English in Fantasy Writing — How-To Guide" description="How to Use Old English in Fantasy Writing — read the full article on Translator Old English blog." canonical="/blog/old-english-in-fantasy-writing/">
+<Layout title="Old English in Fantasy Writing — How-To Guide" description="How to authentically use Old English in fantasy writing: naming characters, places, spells, and world-building with Anglo-Saxon language. A practical guide for writers." canonical="/blog/old-english-in-fantasy-writing/">
 <section class="section-sm"><div class="container" style="max-width:820px">
   <a href="/blog/" style="color:var(--text-muted);text-decoration:none">← All articles</a>
   <div style="margin-top:24px;margin-bottom:8px"><span class="badge badge-gold">Writing</span></div>
   <div style="color:var(--text-muted);margin-bottom:8px">29 Apr 2024 · 5 min read</div>
   <h1 id="main-heading" style="margin-bottom:20px">How to Use Old English in Fantasy Writing</h1>
-  <p class="serif" style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px">Explore this in-depth guide covering the history, grammar, and practical use of Old English and related historical language forms. Written for writers, students, and language enthusiasts.</p>
+  <p class="serif" style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px">Old English gives fantasy worlds an authentic, historically grounded weight that invented languages rarely achieve. Tolkien knew this — much of his Rohirric language was directly derived from Old English. Here is how to use it effectively in your own writing.</p>
   <div class="divider"></div>
 </div></section>
 <section class="section"><div class="container" style="max-width:820px">
-  {[
-    {title:'Introduction',body:'The history of the English language is a fascinating journey spanning over 1,500 years. From its Germanic roots in Anglo-Saxon Britain to the global lingua franca of today, English has absorbed influences from Latin, French, Norse, and dozens of other languages. This article explores key aspects of How to Use Old English in Fantasy Writing in detail.'},
-    {title:'Historical Context',body:'Understanding How to Use Old English in Fantasy Writing requires placing it in its proper historical context. The English language has undergone dramatic transformations driven by migration, invasion, religious change, and trade. Each era left permanent marks on vocabulary, grammar, and pronunciation that can still be traced today.'},
-    {title:'Key Features and Characteristics',body:'Several distinctive features define this area of English language history. The grammatical structures, vocabulary patterns, and stylistic conventions of each period reflect the social and cultural conditions in which the language evolved. Writers and scholars of each era contributed to the standardisation and spread of the language.'},
-    {title:'Practical Applications',body:'This knowledge has immediate practical value. Writers of historical fiction, game developers, screenwriters, and language learners can all benefit from understanding how English was spoken and written in different periods. Translator Old English makes these historical styles accessible without requiring years of academic study.'},
-    {title:'Further Study',body:'For those wishing to explore further, primary sources such as the Anglo-Saxon Chronicle, Chaucer\'s Canterbury Tales, and the works of Shakespeare provide rich material. Modern academic works on historical linguistics and etymology offer deeper scholarly analysis. The blog articles on this site cover many related topics in accessible depth.'},
-  ].map((s,i)=>(<div style="margin-bottom:36px">{i===0?<h2 style="margin-bottom:12px">{s.title}</h2>:<h3 style="margin-bottom:12px">{s.title}</h3>}<p style="color:var(--text-secondary);line-height:1.8">{s.body}</p></div>))}
+
+  <div style="margin-bottom:40px">
+    <h2 style="margin-bottom:12px">Why Old English Works So Well in Fantasy Worlds</h2>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:16px">Old English has a quality that feels simultaneously ancient and recognisable to English-speaking readers. Its compound words — called kennings — are particularly powerful for fantasy: "hwæl-weg" (whale-road = the sea), "bān-hūs" (bone-house = the body), "beado-leoma" (battle-gleam = a sword). These constructions give names and descriptions an evocative, mythic quality that generic fantasy language cannot match.</p>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Naming Fantasy Characters with Old English</h3>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">Old English personal names were typically compound words with meaningful elements. Learning common name-elements lets you create authentic-sounding character names:</p>
+    <ul style="padding-left:20px;display:flex;flex-direction:column;gap:8px">
+      <li style="color:var(--text-secondary)"><strong>Æthel</strong> (noble) — as in Æthelred, Æthelstan</li>
+      <li style="color:var(--text-secondary)"><strong>Wulf</strong> (wolf) — as in Wulfric, Wulfstan</li>
+      <li style="color:var(--text-secondary)"><strong>Beorn</strong> (warrior/bear) — powerful, heroic male name</li>
+      <li style="color:var(--text-secondary)"><strong>Wyn</strong> (joy, friend) — common in female names like Wynflæd</li>
+      <li style="color:var(--text-secondary)"><strong>Helm</strong> (protection, helmet) — used in warrior names</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Creating Fantasy Place Names from Old English</h3>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">Many real English place names are Old English compounds — and the same method works brilliantly for fictional world-building. Key Old English place-name elements include:</p>
+    <ul style="padding-left:20px;display:flex;flex-direction:column;gap:8px">
+      <li style="color:var(--text-secondary)"><strong>-feld</strong> (open land) → Ashfield, Darkfeld</li>
+      <li style="color:var(--text-secondary)"><strong>-burg / -burh</strong> (fortified settlement) → Ironburh, Stormburg</li>
+      <li style="color:var(--text-secondary)"><strong>-dun</strong> (hill) → Mōrdun, Emberdun</li>
+      <li style="color:var(--text-secondary)"><strong>-mōr</strong> (moor, marsh) → Grimsmōr, Ashmōr</li>
+      <li style="color:var(--text-secondary)"><strong>-wudu</strong> (wood, forest) → Ēowudu (yew-wood), Thornwudu</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Writing Spells, Oaths, and Ancient Texts in Old English</h3>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">Nothing adds atmosphere to a fantasy scene like an incantation or inscription in a genuine ancient language. Old English works perfectly for this. For authentic effect, use alliteration — the primary poetic technique of Old English verse — which ties together words beginning with the same sound, as in the Beowulf poet's style.</p>
+    <p style="color:var(--text-secondary);line-height:1.8">Use the Translator Old English tool to convert modern phrases into authentic Old English styles, then adapt them for your story. The Anglo-Saxon style is most archaic; Early Modern style suits Tolkien-esque epic fantasy.</p>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Tolkien's Use of Old English as a Model</h3>
+    <p style="color:var(--text-secondary);line-height:1.8">J.R.R. Tolkien was a professor of Old English at Oxford and used the language as a direct foundation for his fictional Rohirric language (the language of Rohan in Lord of the Rings). Names like Théoden, Éowyn, and Shadowfax are all derived from Old English roots. Tolkien's method — taking real Old English words and adapting them — is the cleanest and most effective approach for fantasy writers.</p>
+  </div>
+
+  <!-- Inset CTA -->
   <div style="background:var(--surface-2);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:28px;margin:40px 0;text-align:center">
-    <p style="font-weight:600;margin-bottom:12px">Explore Old English translation yourself</p>
+    <p style="font-weight:600;margin-bottom:12px">Generate authentic Old English names and phrases</p>
     <a href="/" class="btn btn-primary">✦ Use the Translator</a>
   </div>
+
   <div class="divider"></div>
   <BlogRelatedGrid currentSlug="old-english-in-fantasy-writing" />
 </div></section>

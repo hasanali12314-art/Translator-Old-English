@@ -2,27 +2,60 @@
 import Layout from '../../../layouts/Layout.astro';
 import BlogRelatedGrid from '../../../components/BlogRelatedGrid.astro';
 ---
-<Layout title="History of English — Anglo-Saxon to Today" description="The History of the English Language: From Anglo-Saxon to Today — read the full article on Translator Old English blog." canonical="/blog/history-of-english-language/">
+<Layout title="History of English — Anglo-Saxon to Today" description="The complete history of the English language from Anglo-Saxon Old English through Middle English, Early Modern, and Modern English — with key dates and turning points." canonical="/blog/history-of-english-language/">
 <section class="section-sm"><div class="container" style="max-width:820px">
   <a href="/blog/" style="color:var(--text-muted);text-decoration:none">← All articles</a>
   <div style="margin-top:24px;margin-bottom:8px"><span class="badge badge-gold">History</span></div>
   <div style="color:var(--text-muted);margin-bottom:8px">24 Apr 2024 · 8 min read</div>
   <h1 id="main-heading" style="margin-bottom:20px">The History of the English Language: From Anglo-Saxon to Today</h1>
-  <p class="serif" style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px">Explore this in-depth guide covering the history, grammar, and practical use of Old English and related historical language forms. Written for writers, students, and language enthusiasts.</p>
+  <p class="serif" style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px">English has no single origin — it is a layered accretion of Germanic, Norse, French, and Latin over 1,500 years. Understanding its history reveals why English is simultaneously the most borrowed and most borrowable language in the world.</p>
   <div class="divider"></div>
 </div></section>
 <section class="section"><div class="container" style="max-width:820px">
-  {[
-    {title:'Introduction',body:'The history of the English language is a fascinating journey spanning over 1,500 years. From its Germanic roots in Anglo-Saxon Britain to the global lingua franca of today, English has absorbed influences from Latin, French, Norse, and dozens of other languages. This article explores key aspects of The History of the English Language: From Anglo-Saxon to Today in detail.'},
-    {title:'Historical Context',body:'Understanding The History of the English Language: From Anglo-Saxon to Today requires placing it in its proper historical context. The English language has undergone dramatic transformations driven by migration, invasion, religious change, and trade. Each era left permanent marks on vocabulary, grammar, and pronunciation that can still be traced today.'},
-    {title:'Key Features and Characteristics',body:'Several distinctive features define this area of English language history. The grammatical structures, vocabulary patterns, and stylistic conventions of each period reflect the social and cultural conditions in which the language evolved. Writers and scholars of each era contributed to the standardisation and spread of the language.'},
-    {title:'Practical Applications',body:'This knowledge has immediate practical value. Writers of historical fiction, game developers, screenwriters, and language learners can all benefit from understanding how English was spoken and written in different periods. Translator Old English makes these historical styles accessible without requiring years of academic study.'},
-    {title:'Further Study',body:'For those wishing to explore further, primary sources such as the Anglo-Saxon Chronicle, Chaucer\'s Canterbury Tales, and the works of Shakespeare provide rich material. Modern academic works on historical linguistics and etymology offer deeper scholarly analysis. The blog articles on this site cover many related topics in accessible depth.'},
-  ].map((s,i)=>(<div style="margin-bottom:36px">{i===0?<h2 style="margin-bottom:12px">{s.title}</h2>:<h3 style="margin-bottom:12px">{s.title}</h3>}<p style="color:var(--text-secondary);line-height:1.8">{s.body}</p></div>))}
+
+  <div style="margin-bottom:40px">
+    <h2 style="margin-bottom:12px">Phase 1 — Old English (450–1100 AD): The Germanic Foundation</h2>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">English began with the arrival of Germanic tribes — the Angles, Saxons, and Jutes — in Britain from around 450 AD. Their closely related West Germanic dialects merged into what we now call Old English or Anglo-Saxon. It was a fully inflected language, written in a runic alphabet (Futhorc) and later in the Latin alphabet after Christianisation.</p>
+    <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px">
+      <li style="color:var(--text-secondary)">450 AD — Germanic tribes begin settling Britain</li>
+      <li style="color:var(--text-secondary)">597 AD — Augustine arrives; Latin influence grows via the Church</li>
+      <li style="color:var(--text-secondary)">793–866 AD — Viking raids introduce hundreds of Old Norse words</li>
+      <li style="color:var(--text-secondary)">c. 1000 AD — Beowulf manuscript written down</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Phase 2 — Middle English (1100–1500 AD): The Norman Revolution</h3>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">The Norman Conquest of 1066 was the single most transformative event in English language history. French became the language of the court, law, and nobility — while English was demoted to the peasantry. Over the next 300 years, English absorbed approximately 10,000 French words and shed most of its complex inflectional endings. Geoffrey Chaucer (c. 1343–1400) wrote The Canterbury Tales in this transitional Middle English.</p>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Phase 3 — Early Modern English (1500–1700 AD): Shakespeare and the Printing Press</h3>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">William Caxton introduced the printing press to England in 1476, which began standardising spelling and grammar. William Shakespeare (1564–1616) wrote in Early Modern English — a period of extraordinary vocabulary expansion, with thousands of new words coined from Latin and Greek. The King James Bible (1611) cemented Early Modern English as the literary standard.</p>
+    <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px">
+      <li style="color:var(--text-secondary)">1476 — Caxton's printing press arrives in England</li>
+      <li style="color:var(--text-secondary)">1590s–1613 — Shakespeare's plays written</li>
+      <li style="color:var(--text-secondary)">1611 — King James Bible published</li>
+      <li style="color:var(--text-secondary)">1500–1700 — Great Vowel Shift transforms English pronunciation</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Phase 4 — Modern English (1700–Present): Globalisation and Standardisation</h3>
+    <p style="color:var(--text-secondary);line-height:1.8">Samuel Johnson's Dictionary (1755) and later Noah Webster's American Dictionary (1828) standardised spelling on both sides of the Atlantic. The British Empire spread English globally; the 20th century established American English as the world's dominant dialect. Today English has over 1.5 billion speakers and continues absorbing vocabulary from every language it contacts.</p>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Old English Words That Survived into Modern English</h3>
+    <p style="color:var(--text-secondary);line-height:1.8">Despite 1,500 years of change, Old English forms the bedrock of everyday English. The 100 most common English words — the, be, to, of, and, a, in, that, have, it — are almost entirely Old English in origin. Weekday names (Monday from Mōnandæg, Friday from Frīgedæg) are wholly Anglo-Saxon. Basic nouns — water, fire, earth, house, man, woman, child — have never been replaced.</p>
+  </div>
+
+  <!-- Inset CTA -->
   <div style="background:var(--surface-2);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:28px;margin:40px 0;text-align:center">
-    <p style="font-weight:600;margin-bottom:12px">Explore Old English translation yourself</p>
+    <p style="font-weight:600;margin-bottom:12px">Explore how Old English translates today</p>
     <a href="/" class="btn btn-primary">✦ Use the Translator</a>
   </div>
+
   <div class="divider"></div>
   <BlogRelatedGrid currentSlug="history-of-english-language" />
 </div></section>

@@ -2,27 +2,53 @@
 import Layout from '../../../layouts/Layout.astro';
 import BlogRelatedGrid from '../../../components/BlogRelatedGrid.astro';
 ---
-<Layout title="Middle English vs Old English — Key Differences" description="Middle English vs Old English: Key Differences Explained — read the full article on Translator Old English blog." canonical="/blog/middle-english-vs-old-english/">
+<Layout title="Middle English vs Old English — Key Differences" description="A clear, detailed comparison of Middle English vs Old English: grammar, vocabulary, pronunciation, and historical causes. Learn what changed after 1066." canonical="/blog/middle-english-vs-old-english/">
 <section class="section-sm"><div class="container" style="max-width:820px">
   <a href="/blog/" style="color:var(--text-muted);text-decoration:none">← All articles</a>
   <div style="margin-top:24px;margin-bottom:8px"><span class="badge badge-gold">Grammar</span></div>
   <div style="color:var(--text-muted);margin-bottom:8px">8 May 2024 · 5 min read</div>
   <h1 id="main-heading" style="margin-bottom:20px">Middle English vs Old English: Key Differences Explained</h1>
-  <p class="serif" style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px">Explore this in-depth guide covering the history, grammar, and practical use of Old English and related historical language forms. Written for writers, students, and language enthusiasts.</p>
+  <p class="serif" style="color:var(--text-secondary);line-height:1.8;margin-bottom:40px">Old English and Middle English are two distinct phases of the same language — separated by invasion, political upheaval, and 600 years of change. Here is a clear breakdown of their key differences.</p>
   <div class="divider"></div>
 </div></section>
 <section class="section"><div class="container" style="max-width:820px">
-  {[
-    {title:'Introduction',body:'The history of the English language is a fascinating journey spanning over 1,500 years. From its Germanic roots in Anglo-Saxon Britain to the global lingua franca of today, English has absorbed influences from Latin, French, Norse, and dozens of other languages. This article explores key aspects of Middle English vs Old English: Key Differences Explained in detail.'},
-    {title:'Historical Context',body:'Understanding Middle English vs Old English: Key Differences Explained requires placing it in its proper historical context. The English language has undergone dramatic transformations driven by migration, invasion, religious change, and trade. Each era left permanent marks on vocabulary, grammar, and pronunciation that can still be traced today.'},
-    {title:'Key Features and Characteristics',body:'Several distinctive features define this area of English language history. The grammatical structures, vocabulary patterns, and stylistic conventions of each period reflect the social and cultural conditions in which the language evolved. Writers and scholars of each era contributed to the standardisation and spread of the language.'},
-    {title:'Practical Applications',body:'This knowledge has immediate practical value. Writers of historical fiction, game developers, screenwriters, and language learners can all benefit from understanding how English was spoken and written in different periods. Translator Old English makes these historical styles accessible without requiring years of academic study.'},
-    {title:'Further Study',body:'For those wishing to explore further, primary sources such as the Anglo-Saxon Chronicle, Chaucer\'s Canterbury Tales, and the works of Shakespeare provide rich material. Modern academic works on historical linguistics and etymology offer deeper scholarly analysis. The blog articles on this site cover many related topics in accessible depth.'},
-  ].map((s,i)=>(<div style="margin-bottom:36px">{i===0?<h2 style="margin-bottom:12px">{s.title}</h2>:<h3 style="margin-bottom:12px">{s.title}</h3>}<p style="color:var(--text-secondary);line-height:1.8">{s.body}</p></div>))}
+
+  <div style="margin-bottom:40px">
+    <h2 style="margin-bottom:12px">What Separates Old English from Middle English?</h2>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:16px">Old English (Anglo-Saxon) was spoken in Britain from approximately 450 to 1100 AD. It was a fully inflected Germanic language — meaning word endings changed to show grammatical function, much like modern German. Middle English followed from roughly 1100 to 1500 AD, emerging after the Norman Conquest of 1066 dramatically reshaped the language's vocabulary and simplified its grammar.</p>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Grammar: Inflection vs. Word Order</h3>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">Old English relied on four grammatical cases (nominative, accusative, dative, genitive) and three genders (masculine, feminine, neuter). Word order was flexible because endings conveyed meaning. Middle English progressively lost most inflectional endings — by Chaucer's era, word order had become the primary signal of grammatical role, much closer to modern English.</p>
+    <ul style="padding-left:20px;display:flex;flex-direction:column;gap:6px">
+      <li style="color:var(--text-secondary)">Old English: "Þæs cyninges hus" (the king's house) — genitive case ending</li>
+      <li style="color:var(--text-secondary)">Middle English: "the kinges hous" — apostrophe-'s emerging</li>
+      <li style="color:var(--text-secondary)">Verb conjugations also simplified dramatically across the transition</li>
+    </ul>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Vocabulary: Germanic Roots vs. French Influence</h3>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:12px">Old English vocabulary was almost entirely Germanic. After 1066, Norman French became the language of the ruling class and legal system, flooding Middle English with thousands of French and Latin loanwords. Law, government, cuisine, and religion were especially impacted — which is why English today has pairs like "ask/question", "begin/commence", and "house/mansion".</p>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Pronunciation and the Great Vowel Shift</h3>
+    <p style="color:var(--text-secondary);line-height:1.8">Old English vowels were pronounced as written — short and pure. Middle English pronunciation was more varied, and by its later period, the Great Vowel Shift was beginning, eventually transforming long vowels entirely by 1700. Middle English as spoken by Chaucer would sound closer to modern German or Dutch than to today's English.</p>
+  </div>
+
+  <div style="margin-bottom:40px">
+    <h3 style="margin-bottom:12px">Reading Old vs Middle English Today</h3>
+    <p style="color:var(--text-secondary);line-height:1.8">Modern readers find Old English almost entirely unrecognisable without training — it resembles a foreign language. Middle English, especially late Middle English like Chaucer's Canterbury Tales, is difficult but partially readable with effort. Both forms can be explored using the Translator Old English tool, which covers multiple historical styles from Anglo-Saxon to Early Modern.</p>
+  </div>
+
+  <!-- Inset CTA -->
   <div style="background:var(--surface-2);border:1px solid var(--border-strong);border-radius:var(--radius-lg);padding:28px;margin:40px 0;text-align:center">
-    <p style="font-weight:600;margin-bottom:12px">Explore Old English translation yourself</p>
+    <p style="font-weight:600;margin-bottom:12px">Try translating between Old and Modern English</p>
     <a href="/" class="btn btn-primary">✦ Use the Translator</a>
   </div>
+
   <div class="divider"></div>
   <BlogRelatedGrid currentSlug="middle-english-vs-old-english" />
 </div></section>
