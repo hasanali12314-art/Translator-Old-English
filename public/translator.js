@@ -419,6 +419,56 @@
     }
   }
 
+  function getMeaningLangCode() {
+    const sel = document.getElementById('meaning-lang-select');
+    return sel && sel.value ? String(sel.value) : '';
+  }
+
+  function getMeaningLangLabel() {
+    const sel = document.getElementById('meaning-lang-select');
+    if (!sel || !sel.value) return '';
+    const opt = sel.options[sel.selectedIndex];
+    return opt ? String(opt.textContent || '').trim() : '';
+  }
+
+  function hideMeaningBlock() {
+    const block = document.getElementById('meaning-block');
+    const textEl = document.getElementById('meaning-block-text');
+    if (block) block.hidden = true;
+    if (textEl) textEl.textContent = '';
+  }
+
+  async function updateMeaningBlock(modernText) {
+    const code = getMeaningLangCode();
+    const block = document.getElementById('meaning-block');
+    const labelEl = document.getElementById('meaning-block-label');
+    const textEl = document.getElementById('meaning-block-text');
+    if (!block || !textEl) return;
+
+    if (!code) {
+      hideMeaningBlock();
+      return;
+    }
+
+    const label = getMeaningLangLabel() || code;
+    if (labelEl) labelEl.textContent = 'In ' + label + ' (what it says)';
+
+    const modern = String(modernText || '').trim();
+    if (!modern) {
+      hideMeaningBlock();
+      return;
+    }
+
+    block.hidden = false;
+    textEl.textContent = 'Translating…';
+    try {
+      const meaning = await translateApi(modern, 'en', code);
+      textEl.textContent = meaning;
+    } catch (e) {
+      textEl.textContent = (e && e.message) ? e.message : 'Could not load meaning in ' + label + '.';
+    }
+  }
+
   async function runHomepageTranslation(optionalText) {
     const inp = document.getElementById('input-text');
     const out = document.getElementById('output-text');
@@ -456,11 +506,14 @@
       const downloadBtn = document.getElementById('downloadBtn');
       showOutActions(copyBtn, downloadBtn);
       if (window.saveToHistory) window.saveToHistory(style, text, result);
+      const flipped = document.body.dataset.homeFlipped === '1';
+      await updateMeaningBlock(flipped ? out.value : text);
       return result;
     } catch (e) {
       out.value = '';
       out.placeholder = (e && e.message) || 'Translation failed';
       hideOutActions(document.getElementById('copyBtn'), document.getElementById('downloadBtn'));
+      hideMeaningBlock();
       throw e;
     } finally {
       if (btn) {
@@ -504,6 +557,18 @@
 
     btn.addEventListener('click', function () {
       runHomepageTranslation().catch(function () {});
+    });
+
+    const meaningSel = document.getElementById('meaning-lang-select');
+    meaningSel?.addEventListener('change', function () {
+      const inp = document.getElementById('input-text');
+      const out = document.getElementById('output-text');
+      if (!inp || !out || !out.value.trim()) {
+        hideMeaningBlock();
+        return;
+      }
+      const flipped = document.body.dataset.homeFlipped === '1';
+      updateMeaningBlock(flipped ? out.value : inp.value).catch(function () {});
     });
 
     const copyBtn = document.getElementById('copyBtn');

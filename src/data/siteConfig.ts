@@ -78,9 +78,15 @@ export const REMOVED_PATHS: string[] = [
 
 export const NAV_ITEMS = [
   { name: 'Home', url: '/' },
-  { name: 'Blog', url: '/blog/' },
   { name: 'About us', url: '/about-us/' },
+  { name: 'Blog', url: '/blog/' },
 ];
+
+export const FOOTER_QUICK_LINKS = [
+  { name: 'Home', url: '/' },
+  { name: 'About us', url: '/about-us/' },
+  { name: 'Sitemap', url: '/sitemap/' },
+] as const;
 
 /** Footer blog links under Company */
 export const FOOTER_BLOG_SLUGS = [

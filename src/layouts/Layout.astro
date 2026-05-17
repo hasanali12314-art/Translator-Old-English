@@ -10,6 +10,7 @@ import {
   SOCIAL_LINKS,
   DMCA_URL,
   NAV_ITEMS,
+  FOOTER_QUICK_LINKS,
   BLOG_POSTS,
   FOOTER_BLOG_SLUGS,
   DEFAULT_OG_IMAGE,
@@ -96,10 +97,13 @@ const orgLayoutSchema = {
 };
 ---
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/favicon.png" />
   <meta name="description" content={description} />
@@ -192,19 +196,29 @@ const orgLayoutSchema = {
 <header class="site-header" role="banner">
   <div class="header-inner">
     <a href="/" class="site-logo" id="site-logo">
-      <img src="/logo-icon.png" alt="Translator Old English" class="logo-img" width="36" height="36" decoding="async" fetchpriority="high" />
-      <span class="logo-main logo-mobile logo-desktop">
-        <span class="logo-line1">Translator</span>
-        <span class="logo-line2"><em>Old English</em></span>
+      <span class="logo-mark" aria-hidden="true">T</span>
+      <span class="logo-text-wrap">
+        <span class="logo-main logo-mobile logo-desktop">
+          <span class="logo-line1">Translator</span>
+          <span class="logo-line2"><span class="logo-accent">Old English</span></span>
+        </span>
+        <span class="logo-sub">Archaic language precision toolkit</span>
       </span>
-      <span class="logo-sub">Free AI-powered archaic language tool</span>
     </a>
 
     <nav class="desktop-nav" role="navigation" aria-label="Main navigation">
       <ul class="nav-list">
-        <li><a href="/" class:list={['nav-link', homeActiveClass()]} aria-current={isHome ? 'page' : undefined}>Home</a></li>
-        <li><a href="/blog/" class:list={['nav-link', activeClass('/blog/')]} aria-current={isActive('/blog/') ? 'page' : undefined}>Blog</a></li>
-        <li><a href="/about-us/" class:list={['nav-link', activeClass('/about-us/')]} aria-current={isActive('/about-us/') ? 'page' : undefined}>About us</a></li>
+        {NAV_ITEMS.map((item) => (
+          <li>
+            <a
+              href={item.url}
+              class:list={['nav-link', item.url === '/' ? homeActiveClass() : activeClass(item.url)]}
+              aria-current={item.url === '/' ? (isHome ? 'page' : undefined) : (isActive(item.url) ? 'page' : undefined)}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
       </ul>
     </nav>
 
@@ -216,18 +230,19 @@ const orgLayoutSchema = {
         <span class="hdr-icon">📜</span>
         <span class="hdr-label">History</span>
       </button>
-      <button class="icon-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle light/dark mode">
-        <span class="theme-icon">🌙</span>
-      </button>
     </div>
   </div>
 
   <div class="mobile-nav" id="mobileNav">
     <nav>
-      <a href="/" class:list={['mobile-nav-link', homeActiveClass()]}>Home</a>
-      <a href="/blog/" class:list={['mobile-nav-link', activeClass('/blog/')]}>Blog</a>
-      <a href="/about-us/" class:list={['mobile-nav-link', activeClass('/about-us/')]}>About us</a>
-      <a href="/sitemap/" class:list={['mobile-nav-link', activeClass('/sitemap/')]}>Sitemap</a>
+      {NAV_ITEMS.map((item) => (
+        <a
+          href={item.url}
+          class:list={['mobile-nav-link', item.url === '/' ? homeActiveClass() : activeClass(item.url)]}
+        >
+          {item.name}
+        </a>
+      ))}
     </nav>
   </div>
 </header>
@@ -241,9 +256,10 @@ const orgLayoutSchema = {
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="/" class="site-logo footer-logo">
+          <span class="logo-mark logo-mark--sm" aria-hidden="true">T</span>
           <span class="logo-main">
             <span class="logo-line1">Translator</span>
-            <span class="logo-line2"><em>Old English</em></span>
+            <span class="logo-line2"><span class="logo-accent">Old English</span></span>
           </span>
         </a>
         <p class="footer-tagline">
@@ -269,16 +285,23 @@ const orgLayoutSchema = {
         </p>
       </div>
       <div class="footer-col">
-        <p class="footer-col-title">Site</p>
+        <p class="footer-col-title">Quick links</p>
         <ul class="footer-links">
-          <li><a href="/" class:list={[homeActiveClass()]} aria-current={isHome ? 'page' : undefined}>Translator</a></li>
-          <li><a href="/blog/" class:list={[activeClass('/blog/')]} aria-current={isActive('/blog/') ? 'page' : undefined}>Blog</a></li>
-          <li><a href="/about-us/" class:list={[activeClass('/about-us/')]} aria-current={isActive('/about-us/') ? 'page' : undefined}>About us</a></li>
-          <li><a href="/sitemap/" class:list={[activeClass('/sitemap/')]} aria-current={isActive('/sitemap/') ? 'page' : undefined}>Sitemap</a></li>
+          {FOOTER_QUICK_LINKS.map((item) => (
+            <li>
+              <a
+                href={item.url}
+                class:list={[item.url === '/' ? homeActiveClass() : activeClass(item.url)]}
+                aria-current={item.url === '/' ? (isHome ? 'page' : undefined) : (isActive(item.url) ? 'page' : undefined)}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
       <div class="footer-col">
-        <p class="footer-col-title">Articles</p>
+        <p class="footer-col-title">Blog</p>
         <ul class="footer-links">
           {footerBlogLinks.map((post) => (
             <li>
@@ -340,19 +363,6 @@ const orgLayoutSchema = {
     setTimeout(scrollHomeTop, 400);
     window.addEventListener('pageshow', (e) => { if (e.persisted) scrollHomeTop(); });
   }
-
-  const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = themeToggle?.querySelector('.theme-icon');
-  const html = document.documentElement;
-  let theme = localStorage.getItem('oe-theme') || 'dark';
-  html.setAttribute('data-theme', theme);
-  if (themeIcon) themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
-  themeToggle?.addEventListener('click', () => {
-    theme = theme === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', theme);
-    localStorage.setItem('oe-theme', theme);
-    if (themeIcon) themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
-  });
 
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const mobileNav = document.getElementById('mobileNav');

@@ -113,16 +113,50 @@
     });
   }
 
-  function enhanceContrast(ctx, w, h) {
+  function enhanceContrast(ctx, w, h, strength) {
     const id = ctx.getImageData(0, 0, w, h);
     const d = id.data;
+    const mul = strength == null ? 1.55 : strength;
     for (let i = 0; i < d.length; i += 4) {
       const gray = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
-      const v = Math.min(255, Math.max(0, (gray - 128) * 1.55 + 128));
+      const v = Math.min(255, Math.max(0, (gray - 128) * mul + 128));
       d[i] = d[i + 1] = d[i + 2] = v;
       d[i + 3] = 255;
     }
     ctx.putImageData(id, 0, 0);
+  }
+
+  function sharpenCanvas(sourceCanvas) {
+    const w = sourceCanvas.width;
+    const h = sourceCanvas.height;
+    const sctx = sourceCanvas.getContext('2d');
+    const id = sctx.getImageData(0, 0, w, h);
+    const src = id.data;
+    const out = sctx.createImageData(w, h);
+    const dst = out.data;
+    const kernel = [0, -1, 0, -1, 5, -1, 0, -1, 0];
+    for (let y = 1; y < h - 1; y++) {
+      for (let x = 1; x < w - 1; x++) {
+        let sum = 0;
+        let ki = 0;
+        for (let ky = -1; ky <= 1; ky++) {
+          for (let kx = -1; kx <= 1; kx++) {
+            const px = ((y + ky) * w + (x + kx)) * 4;
+            const g = 0.299 * src[px] + 0.587 * src[px + 1] + 0.114 * src[px + 2];
+            sum += g * kernel[ki++];
+          }
+        }
+        const o = (y * w + x) * 4;
+        const v = Math.min(255, Math.max(0, sum));
+        dst[o] = dst[o + 1] = dst[o + 2] = v;
+        dst[o + 3] = 255;
+      }
+    }
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    canvas.getContext('2d').putImageData(out, 0, 0);
+    return canvas;
   }
 
   function otsuThreshold(histogram, total) {
@@ -179,8 +213,8 @@
   function buildOcrCanvas(img) {
     let scale = 1;
     const maxSide = Math.max(img.width, img.height);
-    if (maxSide < 1600) scale = 1600 / maxSide;
-    if (maxSide > 3200) scale = 3200 / maxSide;
+    if (maxSide < 1800) scale = 1800 / maxSide;
+    if (maxSide > 3600) scale = 3600 / maxSide;
 
     const w = Math.round(img.width * scale);
     const h = Math.round(img.height * scale);
@@ -199,9 +233,19 @@
 
   function buildOcrVariants(img) {
     const base = buildOcrCanvas(img);
+    const sharp = sharpenCanvas(base.canvas);
+    const hiContrast = document.createElement('canvas');
+    hiContrast.width = base.canvas.width;
+    hiContrast.height = base.canvas.height;
+    const hctx = hiContrast.getContext('2d');
+    hctx.drawImage(base.canvas, 0, 0);
+    enhanceContrast(hctx, hiContrast.width, hiContrast.height, 2.1);
     return [
       { canvas: base.canvas, scale: base.scale, label: 'enhanced' },
+      { canvas: sharp, scale: base.scale, label: 'sharp' },
+      { canvas: hiContrast, scale: base.scale, label: 'contrast' },
       { canvas: binarizeCanvas(base.canvas), scale: base.scale, label: 'binary' },
+      { canvas: binarizeCanvas(sharp), scale: base.scale, label: 'binary-sharp' },
     ];
   }
 
@@ -221,7 +265,7 @@
     const words = (data && data.words) ? data.words : [];
     const usable = words.filter(function (w) {
       const t = String(w.text || '').trim();
-      return t && (w.confidence == null || w.confidence > 15);
+      return t && (w.confidence == null || w.confidence > 8);
     });
     if (!usable.length) return [];
 
@@ -302,12 +346,20 @@
     const avg = confs.length
       ? confs.reduce(function (a, b) { return a + b; }, 0) / confs.length
       : (text.length > 8 ? 45 : 0);
-    return avg + Math.min(text.length, 400) * 0.05;
+    const alpha = (text.match(/[A-Za-z0-9\u00C0-\u024F]/g) || []).length;
+    const garbage = (text.match(/[^A-Za-z0-9\s.,!?;:'"()\-–—\u00C0-\u024F]/g) || []).length;
+    return avg + Math.min(text.length, 500) * 0.06 + alpha * 0.08 - garbage * 2.5;
   }
 
   function cleanOcrText(text) {
     return String(text || '')
       .replace(/[|¦]/g, 'I')
+      .replace(/\bl\b/g, 'I')
+      .replace(/(\w)rn(\w)/g, '$1m$2')
+      .replace(/(\w)vv(\w)/g, '$1w$2')
+      .replace(/0(?=[a-z])/gi, 'O')
+      .replace(/([a-z])0/gi, '$1o')
+      .replace(/\s+([,.;:!?])/g, '$1')
       .replace(/\s+\n/g, '\n')
       .replace(/\n{3,}/g, '\n\n')
       .replace(/[^\S\n]+/g, ' ')
@@ -320,8 +372,13 @@
       throw new Error('OCR library failed to load. Check your internet connection.');
     }
     if (!ocrWorkerPromise) {
-      ocrWorkerPromise = window.Tesseract.createWorker('eng').then(async function (worker) {
-        await worker.setParameters({ preserve_interword_spaces: '1' });
+      ocrWorkerPromise = window.Tesseract.createWorker('eng', 1, {
+        logger: function () {},
+      }).then(async function (worker) {
+        await worker.setParameters({
+          preserve_interword_spaces: '1',
+          tessedit_char_blacklist: '{}[]<>',
+        });
         return worker;
       });
     }
@@ -337,13 +394,22 @@
   async function runBestOcr(worker, variants) {
     const tries = [
       { v: 0, psm: 3 },
+      { v: 2, psm: 3 },
       { v: 1, psm: 6 },
       { v: 0, psm: 6 },
+      { v: 3, psm: 6 },
+      { v: 2, psm: 6 },
       { v: 1, psm: 11 },
+      { v: 4, psm: 11 },
       { v: 1, psm: 3 },
+      { v: 3, psm: 3 },
       { v: 0, psm: 11 },
+      { v: 2, psm: 11 },
       { v: 0, psm: 4 },
       { v: 1, psm: 4 },
+      { v: 2, psm: 4 },
+      { v: 3, psm: 4 },
+      { v: 4, psm: 4 },
     ];
     let best = null;
 
@@ -354,10 +420,15 @@
       try {
         const data = await recognizeCanvas(worker, variant.canvas, t.psm);
         const score = scoreOcrResult(data);
+        const lines = normalizeLines(data);
+        const merged = Object.assign({}, data, {
+          text: lines.map(function (l) { return l.text; }).join('\n') || data.text,
+          lines: lines,
+        });
         if (!best || score > best.score) {
-          best = { score: score, data: data, scale: variant.scale };
+          best = { score: score, data: merged, scale: variant.scale };
         }
-        if (best.score >= 78) break;
+        if (best.score >= 85) break;
       } catch (e) { /* try next */ }
     }
 

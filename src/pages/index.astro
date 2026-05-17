@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ToolModeTabs from '../components/ToolModeTabs.astro';
+import { MEANING_LANGUAGES } from '../data/meaningLanguages';
 
 const siteUrl = 'https://translatoroldenglish.com';
 const pageUrl = `${siteUrl}/`;
@@ -168,14 +169,23 @@ const orgSchema = {
       <div class="hero-line"></div>
     </div>
   <div class="tool-card tool-area" id="tool-area">
-    <div class="style-row">
+    <div class="style-row style-row--tool">
       <div class="field-wrap">
-        <label class="field-label" for="style-select" data-i18n="tool.styleLabel">Translation Style</label>
+        <label class="field-label" for="style-select" data-i18n="tool.styleLabel">Translation style</label>
         <select class="select" id="style-select">
           <option value="early" title="Shakespeare Style — Early Modern English (1500s–1600s)" data-i18n="tool.opt.early">🎭 Early Modern (1500s–1600s)</option>
           <option value="middle" title="Medieval Style — Middle English (1300s–1400s)" data-i18n="tool.opt.middle">📜 Middle English (1300s–1400s)</option>
           <option value="ancient" title="Anglo-Saxon — True Old English (800s–1000s)" data-i18n="tool.opt.ancient">⚔️ Anglo-Saxon (800s–1000s)</option>
           <option value="simple" title="Archaic Simplified — Easy thee/thou style" data-i18n="tool.opt.simple">✨ Archaic Simplified</option>
+        </select>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label" for="meaning-lang-select">Also show meaning in</label>
+        <select class="select" id="meaning-lang-select" aria-label="Show translation meaning in another language">
+          <option value="">— None —</option>
+          {MEANING_LANGUAGES.map((lang) => (
+            <option value={lang.code}>{lang.label}</option>
+          ))}
         </select>
       </div>
       <button type="button" class="adv-btn" id="advancedToggle" aria-expanded="false">
@@ -244,6 +254,11 @@ const orgSchema = {
       </div>
     </div>
 
+
+    <div id="meaning-block" class="meaning-block" hidden>
+      <p class="meaning-block-label" id="meaning-block-label">Meaning</p>
+      <p class="meaning-block-text" id="meaning-block-text"></p>
+    </div>
     <div class="actions">
       <button type="button" class="btn-clear" id="clearBtn"><span data-i18n="tool.clear">✕ Clear</span></button>
       <button type="button" class="btn-translate" id="translateBtn"><span data-i18n="tool.translate">✦ Translate</span></button>
@@ -434,6 +449,7 @@ const orgSchema = {
   let swapped = false;
   document.getElementById('flipBtn')?.addEventListener('click', () => {
     swapped = !swapped;
+    document.body.dataset.homeFlipped = swapped ? '1' : '0';
     const inp = document.getElementById('input-text') as HTMLTextAreaElement;
     const out = document.getElementById('output-text') as HTMLTextAreaElement;
     const inLabel = document.getElementById('inLabel');
@@ -454,6 +470,10 @@ const orgSchema = {
     const downloadBtn = document.getElementById('downloadBtn');
     if (copyBtn) { copyBtn.style.opacity = '0'; copyBtn.classList.remove('show'); }
     if (downloadBtn) { downloadBtn.style.opacity = '0'; downloadBtn.classList.remove('show'); }
+    const meaningBlock = document.getElementById('meaning-block');
+    if (meaningBlock) meaningBlock.hidden = true;
+    const meaningText = document.getElementById('meaning-block-text');
+    if (meaningText) meaningText.textContent = '';
   });
 
   document.querySelectorAll('.ex-card').forEach(card => {
