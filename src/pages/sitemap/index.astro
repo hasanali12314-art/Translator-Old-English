@@ -1,77 +1,60 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import PageSeoSections from '../../components/PageSeoSections.astro';
-import { PAGE_SEO_CONTENT } from '../../data/pageSeoContent';
-const groups=[
-  {title:'Main Pages',pages:[
-    {name:'Translator Old English',href:'/'},
-    {name:'All Languages',href:'/all-languages/'},
-  ]},
-  {title:'Language Translators',pages:[
-    {name:'Language Translators',href:'/language-translators/'},
-    {name:'Chinese Translator',href:'/chinese-translator/'},
-    {name:'Greek Translator',href:'/greek-translator/'},
-    {name:'Arabic Translator',href:'/arabic-translator/'},
-    {name:'Spanish Translator',href:'/spanish-translator/'},
-    {name:'German Translator',href:'/german-translator/'},
-    {name:'French Translator',href:'/french-translator/'},
-    {name:'Creole Translator',href:'/creole-translator/'},
-  ]},
-  {title:'Ancient Languages',pages:[
-    {name:'Ancient Languages',href:'/ancient-languages/'},
-    {name:'Latin Translator',href:'/latin-translator/'},
-    {name:'Anglo-Saxon Old English',href:'/old-english/'},
-    {name:'Aramaic Translator',href:'/aramaic-translator/'},
-    {name:'Egyptian Arabic Translator',href:'/egyptian-arabic/'},
-    {name:'Ancient Greek Translator',href:'/ancient-greek/'},
-  ]},
-  {title:'Specialty Translators',pages:[
-    {name:'Specialty Translators',href:'/specialty-translators/'},
-    {name:'Dialect Converter',href:'/dialect-translator/'},
-    {name:'Speak Translator',href:'/speak-translate/'},
-    {name:'Fancy Text Converter',href:'/fancy-translator/'},
-    {name:'Sinhala Translator',href:'/sinhala-translator/'},
-    {name:'Rare Language Converter',href:'/rare-languages/'},
-    {name:'Navajo Converter',href:'/navajo-translator/'},
-  ]},
-  {title:'Tools and Resources',pages:[
-    {name:'Tools and Resources',href:'/tools-resources/'},
-    {name:'Translation Tools',href:'/translation-tools/'},
-    {name:'Blog',href:'/blog/'},
-  ]},
-  {title:'Legal and Information',pages:[
-    {name:'About Us',href:'/about-us/'},
-    {name:'Contact Us',href:'/contact-us/'},
-    {name:'Privacy and Legal',href:'/privacy-policy/'},
-    {name:'Terms and Conditions',href:'/terms-and-conditions/'},
-    {name:'Cookies Policy',href:'/cookies/'},
-    {name:'Sitemap',href:'/sitemap/'},
-  ]},
+import { BLOG_POSTS } from '../../data/siteConfig';
+
+const mainPages = [
+  { name: 'Old English translator', href: '/' },
+  { name: 'Blog', href: '/blog/' },
+  { name: 'About us', href: '/about-us/' },
+  { name: 'Sitemap', href: '/sitemap/' },
 ];
+
+const legalPages = [
+  { name: 'Privacy policy', href: '/privacy-policy/' },
+  { name: 'Terms and conditions', href: '/terms-and-conditions/' },
+  { name: 'Cookies policy', href: '/cookies/' },
+];
+
+const blogPages = BLOG_POSTS.map((p) => ({
+  name: p.title.split(/[—:?]/)[0].trim(),
+  href: `/blog/${p.slug}/`,
+}));
 ---
-<Layout title="Sitemap — Translator Old English" description="Complete sitemap of all pages on Translator Old English including language pages, ancient languages, specialty tools, blog, and legal pages." canonical="/sitemap/">
+<Layout title="Sitemap — Translator Old English" description="Sitemap for Translator Old English — translator, blog articles, and legal pages." canonical="/sitemap/">
 <section class="hero-section"><div class="container">
-  <h1 id="main-heading">Site <span class="gold-text">Map</span></h1>
-  <p class="hero-sub">All pages on Translator Old English — organised by section</p>
+  <h1 id="main-heading">Site <span class="gold-text">map</span></h1>
+  <p class="hero-sub">All pages on Translator Old English</p>
 </div></section>
 <section class="section"><div class="container" style="max-width:900px">
-  <p style="margin-bottom:16px;color:var(--text-secondary);line-height:1.8">
-    Use this page to browse every major section of Translator Old English — from the flagship Old English translator to modern language pages, ancient scripts, specialty tools, blog articles, and legal information. Search engines should also read the machine-readable XML sitemap linked below.
+  <p style="margin-bottom:24px;color:var(--text-secondary);line-height:1.8">
+    XML sitemap for search engines: <a href="/sitemap.xml">/sitemap.xml</a>
   </p>
-  <p style="margin-bottom:24px;color:var(--muted)">XML sitemap for crawlers: <a href="/sitemap.xml">/sitemap.xml</a></p>
   <h2 style="margin-bottom:24px">Browse by <span class="gold-text">section</span></h2>
   <div class="grid-3">
-    {groups.map(g=>(
-      <div class="card">
-        <h3 style="letter-spacing:0.08em;color:var(--gold);margin-bottom:16px">{g.title}</h3>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
-          {g.pages.map(p=>(<li><a href={p.href} style="color:var(--text-secondary);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color 0.2s"><span style="color:var(--gold)">→</span>{p.name}</a></li>))}
-        </ul>
-      </div>
-    ))}
-  </div>
-  <div style="max-width:800px;margin:48px auto 0">
-    <PageSeoSections {...PAGE_SEO_CONTENT.sitemap} />
+    <div class="card">
+      <h3 style="color:var(--gold);margin-bottom:16px">Main</h3>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+        {mainPages.map((p) => (
+          <li><a href={p.href} style="color:var(--text-secondary);text-decoration:none">{p.name}</a></li>
+        ))}
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--gold);margin-bottom:16px">Blog</h3>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+        {blogPages.map((p) => (
+          <li><a href={p.href} style="color:var(--text-secondary);text-decoration:none">{p.name}</a></li>
+        ))}
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--gold);margin-bottom:16px">Legal</h3>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px">
+        {legalPages.map((p) => (
+          <li><a href={p.href} style="color:var(--text-secondary);text-decoration:none">{p.name}</a></li>
+        ))}
+      </ul>
+    </div>
   </div>
 </div></section>
 </Layout>

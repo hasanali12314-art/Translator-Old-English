@@ -5,14 +5,12 @@ const DEFAULT_KEYWORDS =
 
 const PATH_KEYWORDS: Record<string, string> = {
   '/': 'old english translator, shakespeare translator, middle english, anglo saxon, free AI translation',
-  '/all-languages/': 'all language translator, translate any language, free online translator, multilingual',
-  '/language-translators/': 'language translator, english translation, free online languages',
   '/blog/': 'old english blog, english language history, anglo saxon grammar, translation guides',
-  '/old-english/': 'anglo saxon translator, old norse, historical english translation',
-  '/ancient-languages/': 'latin translator, ancient greek, aramaic, old english, ancient languages',
-  '/specialty-translators/': 'dialect translator, fancy text, rare languages, navajo translator',
-  '/translation-tools/': 'translation tools, free translator, language tools online',
-  '/tools-resources/': 'translation resources, language guides, old english help',
+  '/about-us/': 'about translator old english, old english tool, free historical translator',
+  '/sitemap/': 'sitemap translator old english',
+  '/privacy-policy/': 'privacy policy translator old english',
+  '/terms-and-conditions/': 'terms translator old english',
+  '/cookies/': 'cookies policy translator old english',
 };
 
 export function getPageKeywords(pathname: string, title: string): string {

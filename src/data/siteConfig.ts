@@ -24,34 +24,9 @@ export const SOCIAL_LINKS = {
 
 export const DMCA_URL = 'https://www.dmca.com/Protection/Status.aspx?r=translatoroldenglish.com';
 
-/** All public indexable paths (trailing slash) */
+/** Public indexable paths (trailing slash) */
 export const SITEMAP_PATHS: { path: string; priority: string; changefreq?: string }[] = [
   { path: '/', priority: '1.0', changefreq: 'weekly' },
-  { path: '/all-languages/', priority: '0.9', changefreq: 'monthly' },
-  { path: '/language-translators/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/chinese-translator/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/spanish-translator/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/arabic-translator/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/german-translator/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/french-translator/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/greek-translator/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/creole-translator/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/ancient-languages/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/latin-translator/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/old-english/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/ancient-greek/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/aramaic-translator/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/egyptian-arabic/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/specialty-translators/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/tools-resources/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/translation-tools/', priority: '0.8', changefreq: 'monthly' },
-  { path: '/dialect-translator/', priority: '0.7', changefreq: 'monthly' },
-  { path: '/fancy-translator/', priority: '0.7', changefreq: 'monthly' },
-  { path: '/speak-translate/', priority: '0.7', changefreq: 'monthly' },
-  { path: '/sinhala-translator/', priority: '0.7', changefreq: 'monthly' },
-  { path: '/rare-languages/', priority: '0.7', changefreq: 'monthly' },
-  { path: '/navajo-translator/', priority: '0.7', changefreq: 'monthly' },
-  { path: '/translator-old-english/', priority: '0.8', changefreq: 'monthly' },
   { path: '/blog/', priority: '0.7', changefreq: 'weekly' },
   { path: '/blog/what-is-old-english/', priority: '0.6', changefreq: 'yearly' },
   { path: '/blog/middle-english-vs-old-english/', priority: '0.6', changefreq: 'yearly' },
@@ -64,45 +39,54 @@ export const SITEMAP_PATHS: { path: string; priority: string; changefreq?: strin
   { path: '/blog/old-english-for-game-developers/', priority: '0.6', changefreq: 'yearly' },
   { path: '/blog/viking-old-norse-influence/', priority: '0.6', changefreq: 'yearly' },
   { path: '/about-us/', priority: '0.5', changefreq: 'yearly' },
-  { path: '/contact-us/', priority: '0.5', changefreq: 'yearly' },
-  { path: '/search/', priority: '0.4', changefreq: 'monthly' },
   { path: '/sitemap/', priority: '0.4', changefreq: 'monthly' },
   { path: '/privacy-policy/', priority: '0.3', changefreq: 'yearly' },
   { path: '/terms-and-conditions/', priority: '0.3', changefreq: 'yearly' },
   { path: '/cookies/', priority: '0.3', changefreq: 'yearly' },
 ];
 
-export const NAV_ITEMS = [
-  { name: 'Home', url: '/' },
-  { name: 'All languages', url: '/all-languages/' },
-  { name: 'Chinese translator', url: '/chinese-translator/' },
-  { name: 'Spanish translator', url: '/spanish-translator/' },
-  { name: 'Arabic translator', url: '/arabic-translator/' },
-  { name: 'Language translators', url: '/language-translators/' },
-  { name: 'Latin translator', url: '/latin-translator/' },
-  { name: 'Old English', url: '/old-english/' },
-  { name: 'Ancient Greek', url: '/ancient-greek/' },
-  { name: 'Ancient languages', url: '/ancient-languages/' },
-  { name: 'Dialect converter', url: '/dialect-translator/' },
-  { name: 'Fancy text', url: '/fancy-translator/' },
-  { name: 'Speak translator', url: '/speak-translate/' },
-  { name: 'Blog', url: '/blog/' },
-  { name: 'About us', url: '/about-us/' },
-  { name: 'Contact us', url: '/contact-us/' },
+/** Retired URLs — 301 to homepage (no 404) */
+export const REMOVED_PATHS: string[] = [
+  '/all-languages/',
+  '/language-translators/',
+  '/chinese-translator/',
+  '/spanish-translator/',
+  '/arabic-translator/',
+  '/german-translator/',
+  '/french-translator/',
+  '/greek-translator/',
+  '/creole-translator/',
+  '/ancient-languages/',
+  '/latin-translator/',
+  '/old-english/',
+  '/ancient-greek/',
+  '/aramaic-translator/',
+  '/egyptian-arabic/',
+  '/specialty-translators/',
+  '/tools-resources/',
+  '/translation-tools/',
+  '/dialect-translator/',
+  '/fancy-translator/',
+  '/speak-translate/',
+  '/sinhala-translator/',
+  '/rare-languages/',
+  '/navajo-translator/',
+  '/translator-old-english/',
+  '/contact-us/',
+  '/search/',
 ];
 
-/** Footer blog links (shown under Company, not a separate column). */
+export const NAV_ITEMS = [
+  { name: 'Home', url: '/' },
+  { name: 'Blog', url: '/blog/' },
+  { name: 'About us', url: '/about-us/' },
+];
+
+/** Footer blog links under Company */
 export const FOOTER_BLOG_SLUGS = [
   'what-is-old-english',
   'middle-english-vs-old-english',
   'shakespearean-language-guide',
-] as const;
-
-/** Footer tools column — three tools, then “See all tools”. */
-export const FOOTER_TOOL_LINKS = [
-  { href: '/dialect-translator/', label: 'Dialect converter' },
-  { href: '/fancy-translator/', label: 'Fancy text' },
-  { href: '/speak-translate/', label: 'Speak translator' },
 ] as const;
 
 export type BlogPost = {

@@ -7,44 +7,68 @@
       "permanent": true
     },
     {
-      "source": "/about-us",
-      "destination": "/about-us/",
-      "permanent": true
-    },
-    {
-      "source": "/contact-us",
-      "destination": "/contact-us/",
-      "permanent": true
-    },
-    {
-      "source": "/all-languages",
-      "destination": "/all-languages/",
-      "permanent": true
-    },
-    {
-      "source": "/all-languages/",
-      "has": [
-        {
-          "type": "query",
-          "key": "to"
-        }
-      ],
-      "destination": "/all-languages/",
-      "permanent": true
-    },
-    {
       "source": "/blog",
       "destination": "/blog/",
       "permanent": true
     },
     {
-      "source": "/sitemap",
-      "destination": "/sitemap/",
+      "source": "/blog/what-is-old-english",
+      "destination": "/blog/what-is-old-english/",
       "permanent": true
     },
     {
-      "source": "/search",
-      "destination": "/search/",
+      "source": "/blog/middle-english-vs-old-english",
+      "destination": "/blog/middle-english-vs-old-english/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/shakespearean-language-guide",
+      "destination": "/blog/shakespearean-language-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/old-english-in-fantasy-writing",
+      "destination": "/blog/old-english-in-fantasy-writing/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/history-of-english-language",
+      "destination": "/blog/history-of-english-language/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/old-english-vocabulary",
+      "destination": "/blog/old-english-vocabulary/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/beowulf-language-analysis",
+      "destination": "/blog/beowulf-language-analysis/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/old-english-grammar-basics",
+      "destination": "/blog/old-english-grammar-basics/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/old-english-for-game-developers",
+      "destination": "/blog/old-english-for-game-developers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/viking-old-norse-influence",
+      "destination": "/blog/viking-old-norse-influence/",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about-us/",
+      "permanent": true
+    },
+    {
+      "source": "/sitemap",
+      "destination": "/sitemap/",
       "permanent": true
     },
     {
@@ -60,6 +84,276 @@
     {
       "source": "/cookies",
       "destination": "/cookies/",
+      "permanent": true
+    },
+    {
+      "source": "/all-languages",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/all-languages/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/language-translators",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/language-translators/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/chinese-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/chinese-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/spanish-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/spanish-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/arabic-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/arabic-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/german-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/german-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/french-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/french-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/greek-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/greek-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/creole-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/creole-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ancient-languages",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ancient-languages/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/latin-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/latin-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/old-english",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/old-english/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ancient-greek",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ancient-greek/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/aramaic-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/aramaic-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/egyptian-arabic",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/egyptian-arabic/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/specialty-translators",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/specialty-translators/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tools-resources",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tools-resources/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/translation-tools",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/translation-tools/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/dialect-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/dialect-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/fancy-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/fancy-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/speak-translate",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/speak-translate/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sinhala-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sinhala-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/rare-languages",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/rare-languages/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/navajo-translator",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/navajo-translator/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/translator-old-english",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/translator-old-english/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/search",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/search/",
+      "destination": "/",
       "permanent": true
     }
   ],
