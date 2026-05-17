@@ -344,6 +344,9 @@ const orgLayoutSchema = {
 <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
 
 <script>
+  try { localStorage.removeItem('oe-theme'); } catch (e) { /* ignore */ }
+  document.documentElement.setAttribute('data-theme', 'light');
+
   if (document.body.classList.contains('is-home')) {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     const scrollHomeTop = () => {
